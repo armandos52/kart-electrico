@@ -2,7 +2,6 @@
 
 ## Próximas
 
-- [ ] Publicar la base documental en GitHub y habilitar espacios de revisión.
 - [ ] Recibir la ubicación exacta de los archivos del kart. Terminado cuando la carpeta de origen esté identificada.
 - [ ] Preparar el primer inventario. Terminado cuando haya recuentos por formato, tamaños y posibles duplicados, sin borrar fuentes.
 - [ ] Definir y comprobar una copia de seguridad independiente.
@@ -11,6 +10,7 @@
 
 ## Completadas
 
+- [x] Publicar la base documental en [GitHub](https://github.com/armandos52/kart-electrico), habilitar Issues y Discussions y añadir una plantilla de revisión académica (2026-09-28).
 - [x] Preparar estructura, mapa del proyecto y plantillas iniciales (2026-09-28).
 - [x] Instalar Obsidian 1.13.7 y verificar su registro en Windows (2026-09-28).
 

@@ -16,7 +16,8 @@
 - Configuración técnica vigente: pendiente de identificar.
 - Resúmenes técnicos verificados: ninguno.
 - Copia de seguridad: pendiente de definir y configurar.
-- Publicación en GitHub: en preparación en la cuenta `armandos52`, repositorio `kart-electrico`.
+- Repositorio público: [armandos52/kart-electrico](https://github.com/armandos52/kart-electrico), con Issues y Discussions habilitados.
+- Publicación mediante commits y push; no hay sincronización automática con Obsidian. Los ajustes locales y los índices generados quedan fuera de Git.
 
 ## Próximo paso
 
