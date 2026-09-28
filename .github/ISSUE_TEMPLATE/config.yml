@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Preguntas e ideas generales
+    url: https://github.com/armandos52/kart-electrico/discussions
+    about: Conversaciones abiertas y orientación sobre el proyecto.

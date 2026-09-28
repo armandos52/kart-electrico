@@ -1,0 +1,25 @@
+# Configuración local de Obsidian y archivos del sistema
+.obsidian/
+.trash/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Credenciales y configuración privada
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Archivos temporales
+~$*
+*.tmp
+*.bak
+__pycache__/
+.venv/
+node_modules/
+
+# Índices regenerables; conservar solo la carpeta
+/08_INDICE_GENERADO/*
+!/08_INDICE_GENERADO/.gitkeep
