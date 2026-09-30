@@ -182,6 +182,10 @@ Están ordenadas por impacto. Son puntos de partida para el análisis, no decisi
 5. **El arranque del ESP32 se bloquea si el MCP2515 no responde [V `E`:240].**
 6. **No hay frenado eléctrico.** Las salidas de freno a los Kelly están siempre a 0.
 
+Añadida el 30-09:
+
+24. **Un fallo del acelerador se lee como acelerador a fondo [V `M`:401-403].** Cualquier lectura por encima de 1861 (por ejemplo, un cortocircuito a 3,3 V) se recorta al máximo y se envía como 100 %. No se comprueba si la señal está fuera de rango ni se corta el par cuando se pisan acelerador y freno a la vez. Ver la idea 4 tomada de Formula Student en [[06_TRABAJO/IDEAS|ideas]].
+
 **Control y diferencial**
 
 7. **La rampa de par se calcula pero no se aplica [V `E`:473-482].** Los tres modos recalculan su propio PWM.
@@ -190,6 +194,7 @@ Están ordenadas por impacto. Son puntos de partida para el análisis, no decisi
 10. **El STM32 lee los Hall delanteros por sondeo cada 5 ms o más.** A 600 rpm el error llega al ±20 %. En 2024/25 se usaba captura por timer.
 11. **La salida a los controladores no tiene calibración por lado.** En 2023/24 había polinomios, y DOC-0013 muestra que el lado derecho responde menos.
 12. **El registro no guarda datos de batería [V `M`:369-383].** Sin SOC, tensión, corriente ni temperatura no se puede hacer el ensayo de autonomía de la propuesta 2026/27.
+    - **Hipótesis a comprobar:** si el BMS usa el formato CAN de tipo Pylontech, el mensaje `0x356` trae también la tensión y la corriente del pack en los bytes 0–3. Hoy el STM32 solo lee la temperatura de los bytes 4–5. Serían datos disponibles sin hardware nuevo.
 
 **Robustez del software**
 

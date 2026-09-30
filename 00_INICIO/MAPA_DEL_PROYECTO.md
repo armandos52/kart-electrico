@@ -15,7 +15,7 @@ Esta base reúne el conocimiento y el trabajo del kart. La entrega de los profes
 - [Repasar en Obsidian](REPASO_EN_OBSIDIAN.md): cómo abrir fichas, resúmenes y originales, reconocer formatos y registrar tu repaso.
 - [Índice de los 42 documentos](../03_CATALOGO/INDICE_DOCUMENTOS.md): acceso a originales, fichas y cobertura de lectura.
 - [Datos, código y diseños](../03_CATALOGO/DATOS_Y_PROYECTOS.md): entradas a los proyectos completos y al registro de pruebas.
-- [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|Inventario del código]] (vigente, 30-09): sistemas y últimas versiones (STM32 y ESP32 2025/26), estructura, evolución desde 2023/24 y 23 mejoras candidatas.
+- [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|Inventario del código]] (vigente, 30-09): sistemas y últimas versiones (STM32 y ESP32 2025/26), estructura, evolución desde 2023/24 y 24 mejoras candidatas.
 - [Resultado de la recepción](../03_CATALOGO/RECEPCION_2026-09-28.md): inventario, descompresión y pendientes de extracción.
 - [Plan de lectura por lotes](../06_TRABAJO/PLAN_DE_LECTURA.md): orden y criterio de finalización.
 - [Síntesis inicial de 2025/26](../04_CONOCIMIENTO/integracion_del_kart/ESTADO_DOCUMENTADO_2025-26.md): arquitectura y pendientes según el último informe identificado.

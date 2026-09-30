@@ -17,6 +17,9 @@ resumen: Tareas próximas y completadas del proyecto del kart.
 - [ ] Revisar planos y las cuatro capturas restantes de DOC-0015; analizar valores y fórmulas de los Excel cuando corresponda a L3.
 - [ ] Abrir o exportar el archivo Loop desde su aplicación de origen para incorporarlo a la lectura.
 - [ ] Leer las tablas en imagen de DOC-0042: 12–18 (CAN), 19–21 (BMS), 22–30 (cableado) y 31–32 (ensayos); ver [auditoría](AUDITORIA_2026-09-29.md).
+- [ ] La próxima vez que el ESP32 no active el contactor al encender, hacer las pruebas 1–3 de [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender|PROB-0002]] antes de sacarlo de la placa. Revisar después la PCB trasera: alimentación, GPIO12, IO35 y módulo CAN.
+- [ ] Crear la copia de trabajo `v0` del firmware y `VERSIONES.md` según [[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_ensayos|DEC-0001]].
+- [ ] Incorporar la investigación de Armando sobre giroscopios y sensores de dirección, y definir los requisitos de sensores antes de la nueva PCB; ver [ideas](IDEAS.md).
 - [ ] Analizar el código siguiendo el orden del [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|inventario]] (sección 9): CAN y vigilancia de fallos, temporización, diferencial, registro en SD y estructura.
 - [ ] Averiguar qué versión de firmware generó KART_LOG.CSV y a qué ensayo corresponde. Se sabe que fue una versión del STM32 anterior al 10-07-2026; el archivo es del 04-07-2026.
 - [ ] Comprobar si el `.elf` de CubeIDE del 10-07-2026 corresponde al `main.c` entregado y si es lo que está grabado en la placa.

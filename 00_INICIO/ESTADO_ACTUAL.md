@@ -29,7 +29,10 @@ resumen: Lo conocido, lo pendiente y el siguiente paso del proyecto; traspaso en
 - Configuración documental de referencia inicial: informe de julio de 2026 (DOC-0042), con STM32 + ESP32 y CAN. Montaje físico y parámetros todavía por verificar.
 - Síntesis inicial de resumen y conclusiones guardada; lectura integral de los informes pendiente. Word de configuración y planos requieren lectura visual.
 - Auditoría del 2026-09-29: se revisaron el código de 2023–2026, los Excel, las capturas Kelly, la presentación y el texto de los 9 informes. Hay tabla de evolución por curso, protocolo CAN, calibraciones y tres hipótesis de diagnóstico; ver [auditoría](../06_TRABAJO/AUDITORIA_2026-09-29.md). No sustituye la lectura integral por lotes. Los datos sin marca [V] están pendientes de comprobar.
-- Inventario del código (30-09): [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|inventario]]. Hay tres programas propios. La última versión del STM32 es del 10-07-2026 (con su `.elf` compilado el mismo día) y la del ESP32, del 21-07-2026. Anteriores: STM32 2024/25 y Arduino 2023/24. No hay código de 2008–2019. Se identifican 23 mejoras candidatas; nada se ha compilado.
+- Inventario del código (30-09): [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|inventario]]. Hay tres programas propios. La última versión del STM32 es del 10-07-2026 (con su `.elf` compilado el mismo día) y la del ESP32, del 21-07-2026. Anteriores: STM32 2024/25 y Arduino 2023/24. No hay código de 2008–2019. Se identifican 24 mejoras candidatas; nada se ha compilado.
+- Decisión [[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_ensayos|DEC-0001]] (30-09):
+  - el firmware se desarrolla desde una copia `v0` de 2025/26, con Git y un número de versión en cada grabación;
+  - cada ensayo se documenta con la [[09_PLANTILLAS/ENSAYO|plantilla de ensayo]], diciendo qué salió bien y qué salió mal.
 - KART_LOG.CSV (04-07-2026) lo escribió una versión anterior del STM32, no el ESP32: el firmware entregado usa las mismas columnas, pero con comas y cada 200 ms.
 - Copia de seguridad: pendiente de definir y configurar.
 - Repositorio público: [armandos52/kart-electrico](https://github.com/armandos52/kart-electrico), con Issues y Discussions habilitados.
@@ -38,7 +41,13 @@ resumen: Lo conocido, lo pendiente y el siguiente paso del proyecto; traspaso en
 
 ## Próximo paso
 
-Analizar el código en el orden del [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|inventario]] (sección 9): primero el protocolo CAN y la vigilancia de fallos entre STM32 y ESP32.
+Traspaso del 30-09 para la siguiente sesión de código:
+
+1. Incorporar la investigación de Armando sobre giroscopios y sensores de dirección. Contrastarla con la idea de sensores de dinámica de [[06_TRABAJO/IDEAS|ideas]].
+2. Crear la copia de trabajo `v0` del firmware y `VERSIONES.md` según [[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_ensayos|DEC-0001]].
+3. Analizar el código en el orden del [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|inventario]] (sección 9). Empezar por el protocolo CAN, la vigilancia de fallos entre STM32 y ESP32 y la plausibilidad del acelerador (mejora 24).
+4. Hardware: la próxima vez que falle el arranque, hacer las pruebas de [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender|PROB-0002]]. La nueva PCB trasera y el lazo de seguridad del contactor son ideas, todavía no decisiones.
+5. Pendiente de Armando: decidir si se hace push al repositorio público. Contiene su cronograma y la propuesta Word.
 
 En paralelo, continuar con L1 del [plan de lectura](../06_TRABAJO/PLAN_DE_LECTURA.md): analizar el informe DOC-0042 por secciones y vincular sus resultados a las fuentes. Ya se revisaron portada, resumen, índice y conclusiones; no repetir esa lectura sin necesidad.
 
@@ -49,5 +58,6 @@ Entradas principales: [índice documental](../03_CATALOGO/INDICE_DOCUMENTOS.md),
 - Aclarar versiones de 2023/24, fecha contradictoria del informe 24/25 y distintos relatos sobre el inicio; ver [PROB-0001](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0001_versiones_documentales.md).
 - La propuesta fija diferencial electrónico inteligente y estimación de autonomía hasta febrero de 2027; falta concretar la aportación propia, condiciones y criterios de aceptación con los orientadores.
 - ¿Qué documentación describe el montaje realmente existente?
+- Fallo declarado el 30-09: al encender, a veces el ESP32 no activa el contactor y solo se recupera sacándolo de la placa. Hipótesis, pruebas e ideas para una nueva PCB en [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender|PROB-0002]].
 
 Ver [tareas](../06_TRABAJO/TAREAS.md).
