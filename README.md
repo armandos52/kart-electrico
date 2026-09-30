@@ -2,10 +2,13 @@
 
 Documentación, evolución y seguimiento de un proyecto de kart eléctrico con historia desde 2008. Este repositorio permite compartir el trabajo con profesores y recibir observaciones vinculadas a documentos y cambios concretos.
 
-**Estado:** base documental inicial. Los informes históricos, las fichas técnicas y los datos de pruebas todavía no se han incorporado. La configuración técnica actual está pendiente de verificar.
+**Estado local:** entrega de los profesores organizada, con 42 documentos catalogados y texto extraído de 1.007 páginas PDF. La lectura técnica exhaustiva sigue el [plan por lotes](06_TRABAJO/PLAN_DE_LECTURA.md). Los originales de esta recepción permanecen locales; la versión pública se actualizará al preparar su publicación.
 
 ## Consultar el proyecto
 
+- [Índice documental](03_CATALOGO/INDICE_DOCUMENTOS.md)
+- [Balance de recepción y descompresión](03_CATALOGO/RECEPCION_2026-09-28.md)
+- [Síntesis inicial del informe 2025/26](04_CONOCIMIENTO/integracion_del_kart/ESTADO_DOCUMENTADO_2025-26.md)
 - [Mapa de la documentación](00_INICIO/MAPA_DEL_PROYECTO.md)
 - [Estado actual y preguntas pendientes](00_INICIO/ESTADO_ACTUAL.md)
 - [Tareas](06_TRABAJO/TAREAS.md)
