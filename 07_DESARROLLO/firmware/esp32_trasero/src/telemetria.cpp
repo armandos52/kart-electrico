@@ -147,7 +147,12 @@ void telemetria_iniciar() {
         return;
     }
     // Núcleo 0 (el de la pila Wi-Fi), prioridad baja; loop() corre en el núcleo 1.
-    xTaskCreatePinnedToCore(tarea_red, "telemetria", 6144, nullptr, 1, nullptr, 0);
+    if (xTaskCreatePinnedToCore(tarea_red, "telemetria", 6144, nullptr, 1, nullptr, 0) != pdPASS) {
+        vQueueDelete(cola);
+        cola = nullptr;
+        Serial.println("Telemetria: no se pudo crear tarea de red; desactivada");
+        return;
+    }
     Serial.printf("Telemetria: AP \"%s\" -> TCP %s:%d (solo lectura)\n",
                   KART_WIFI_SSID, IP_AP.toString().c_str(), TELEMETRIA_PUERTO_TCP);
 }
@@ -164,14 +169,24 @@ bool telemetria_toca(uint32_t ahora_ms) {
     return true;
 }
 
+void telemetria_control_iniciado() {
+    ultimo_us = 0;
+    periodo_max_us = 0;
+    publicar_max_us = 0;
+}
+
 void telemetria_publicar(const MuestraKart &m) {
     uint32_t t0 = micros();
     Linea l;
     l.len = 0;
     seq++;
     agregar(l, "{\"v\":1,\"type\":\"telemetry\",\"node\":\"esp32\",\"session\":\"%s\",\"seq\":%lu,"
-               "\"tick_ms\":%lu,\"fw\":\"%s\",\"signals\":{",
-            sesion, (unsigned long)seq, (unsigned long)m.tick_ms, FW_VERSION);
+               "\"tick_ms\":%lu,\"fw\":\"%s\",\"reset_reason\":\"%s\",\"signals\":{",
+            sesion, (unsigned long)seq, (unsigned long)m.tick_ms, FW_VERSION, motivo_reset());
+    agregar(l, "\"control_ready\":%d,\"can_init_ok\":%d,\"can_init_attempts\":%lu,"
+               "\"control_state\":\"%s\",\"drive_inhibit\":\"%s\",\"start_requested\":%d,",
+            m.control_ready ? 1 : 0, m.can_init_ok ? 1 : 0, (unsigned long)m.can_init_attempts,
+            m.control_state, m.drive_inhibit, m.start_requested ? 1 : 0);
 
     // Mandos recibidos por CAN (0x100): solo tras la primera orden válida.
     if (m.mandos_validos) {
@@ -184,15 +199,19 @@ void telemetria_publicar(const MuestraKart &m) {
                 marcha, modo, (unsigned long)m.can_rx_age_ms);
     }
     // Sin MPU en el arranque, yaw_rate es (0 - offset)/131: no es una medida y no se publica.
-    if (m.mpu_ok && isfinite(m.yaw_rate)) agregar(l, "\"yaw_dps\":%.1f,", m.yaw_rate);
-    agregar(l, "\"pwm_left_raw\":%d,\"pwm_right_raw\":%d,\"rpm_rl\":%d,\"rpm_rr\":%d,"
-               "\"relay1\":%d,\"relay2\":%d,\"relay_seq\":%u,\"charger_connected\":%d,"
-               "\"emergency_stop\":%d,\"can_rx_count\":%lu,\"mpu_ok\":%d,\"loop_max_us\":%lu,"
+    if (m.control_ready && m.mpu_ok && isfinite(m.yaw_rate)) agregar(l, "\"yaw_dps\":%.1f,", m.yaw_rate);
+    if (m.control_ready) {
+        agregar(l, "\"pwm_left_raw\":%d,\"pwm_right_raw\":%d,\"rpm_rl\":%d,\"rpm_rr\":%d,"
+                   "\"drive_direction\":\"%s\",\"loop_max_us\":%lu,",
+                m.motor_esq_speed, m.motor_dir_speed, m.rpm_esq, m.rpm_dir, m.drive_direction,
+                (unsigned long)periodo_max_us);
+    }
+    agregar(l, "\"relay1\":%d,\"relay2\":%d,\"relay_seq\":%u,\"charger_connected\":%d,"
+               "\"emergency_stop\":%d,\"can_rx_count\":%lu,\"mpu_ok\":%d,"
                "\"telemetry_us_max\":%lu,\"telemetry_dropped\":%lu,\"wifi_ap\":%u,\"wifi_clients\":%u}}\n",
-            m.motor_esq_speed, m.motor_dir_speed, m.rpm_esq, m.rpm_dir,
             m.relay1 ? 1 : 0, m.relay2 ? 1 : 0, m.estado_relays, m.carregador ? 1 : 0,
             m.emergency_stop ? 1 : 0, (unsigned long)m.can_rx_count, m.mpu_ok ? 1 : 0,
-            (unsigned long)periodo_max_us, (unsigned long)publicar_max_us,
+            (unsigned long)publicar_max_us,
             (unsigned long)(descartadas_cola + descartadas_red), estado_ap, clientes_activos);
 
     periodo_max_us = 0;

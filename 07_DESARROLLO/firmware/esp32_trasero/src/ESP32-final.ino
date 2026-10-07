@@ -67,6 +67,12 @@ bool command_received = false;
 bool emergency_stop = false;
 uint32_t can_rx_count = 0;  // v1: órdenes 0x100 válidas recibidas (diagnóstico)
 bool mpu_ok = false;        // v1.1: resultado de testConnection(), para no publicar guiñada sin MPU
+bool control_ready = false;
+bool can_init_ok = false;
+uint32_t can_init_attempts = 0;
+bool start_requested = false;
+const char *control_state = "can_wait";
+const char *drive_inhibit = "can_init";
 
 volatile uint32_t pulsos_esq = 0;
 volatile uint32_t pulsos_dir = 0;
@@ -102,6 +108,7 @@ void ativarDirecao(bool frente, bool re);
 void atualizarRPM();
 void enviarRPM();
 void processarSequenciaRelays(bool start_pressed);
+void tomarMuestra(unsigned long current_time);
 void IRAM_ATTR hall_esq_isr();
 void IRAM_ATTR hall_dir_isr();
 
@@ -237,17 +244,29 @@ void setup() {
   digitalWrite(RELAY1_PIN, LOW); 
   digitalWrite(RELAY2_PIN, LOW);
 
-  Serial.setTxBufferSize(1024);  // v1: escritura serie sin esperar (antes de begin)
+  Serial.setTxBufferSize(2048);  // cabe la muestra completa incluso con mandos y diagnóstico
   Serial.begin(115200);
+  telemetria_iniciar();  // v1.2: visible también sin MCP2515; no activa el control
   SPI.begin(SPI_SCK, SPI_MISO, SPI_MOSI, CAN_CS_PIN);
 
-  while (CAN.begin(MCP_ANY, CAN_500KBPS, MCP_8MHZ) != CAN_OK) {
-    Serial.println("CAN init failed, retrying...");
-    delay(500);
+  while (!can_init_ok) {
+    can_init_attempts++;
+    can_init_ok = CAN.begin(MCP_ANY, CAN_500KBPS, MCP_8MHZ) == CAN_OK;
+    if (can_init_ok) can_init_ok = CAN.setMode(MCP_NORMAL) == CAN_OK;
+    if (!can_init_ok) {
+      Serial.println("CAN init failed, retrying...");
+      unsigned long espera = millis();
+      do {
+        if (telemetria_toca(millis())) tomarMuestra(millis());
+        delay(10);
+      } while (millis() - espera < 500);
+    }
   }
   Serial.println("CAN OK!");
-  CAN.setMode(MCP_NORMAL);
 
+  control_state = "mpu_init";
+  drive_inhibit = "initializing";
+  tomarMuestra(millis());
   Wire.begin(MPU_SDA, MPU_SCL);
   mpu.initialize();
   mpu_ok = mpu.testConnection();  // v1.1: misma llamada, resultado guardado
@@ -255,13 +274,13 @@ void setup() {
 
   Serial.println("A calibrar giroscopio...");
   float soma_z = 0;
-  for (int i = 0; i < 500; i++) {
-    int16_t gx, gy, gz;
+  for (int i = 0; mpu_ok && i < 500; i++) {
+    int16_t gx = 0, gy = 0, gz = 0;
     mpu.getRotation(&gx, &gy, &gz);
     soma_z += gz;
     delay(2);
   }
-  gyro_offset_z = soma_z / 500.0;
+  gyro_offset_z = mpu_ok ? soma_z / 500.0 : 0.0;
 
   pinMode(MOTOR_PWM_ESQ, OUTPUT);
   pinMode(SW_DIR_F_ESQ, OUTPUT); 
@@ -299,7 +318,10 @@ void setup() {
   pararMotores();
   last_ramp_time = millis();
   Serial.println("KART ELÉTRICO - DIF | ESC | BLQ");
-  telemetria_iniciar();  // v1
+  control_ready = true;
+  control_state = "running";
+  drive_inhibit = "no_command";
+  telemetria_control_iniciado();
 }
 
 void loop() {
@@ -356,9 +378,9 @@ void loop() {
 
   if (CAN.checkReceive() == CAN_MSGAVAIL) {
     unsigned long id; byte len = 0; byte buf[8];
-    CAN.readMsgBuf(&id, &len, buf);
+    byte lectura_ok = CAN.readMsgBuf(&id, &len, buf);
 
-    if (id == 0x100 && len == 8) {
+    if (lectura_ok == CAN_OK && id == 0x100 && len == 8) {
       acelerador_raw = (buf[0] << 8) | buf[1];
       direcao_raw    = (buf[2] << 8) | buf[3];
       travao         = buf[4];
@@ -366,6 +388,7 @@ void loop() {
       modo_r         = buf[6];
       modo_controlo  = buf[7] & 0x03;
       uint8_t start_stop = (buf[7] >> 2) & 0x01;
+      start_requested = start_stop == 1;
 
       processarSequenciaRelays(start_stop == 1);
       command_received = true; emergency_stop = false;
@@ -376,14 +399,16 @@ void loop() {
   }
 
   if (command_received && (current_time - last_command_time > COMMAND_TIMEOUT)) {
-    pararMotores(); emergency_stop = true;
+    pararMotores(); emergency_stop = true; drive_inhibit = "can_timeout";
   }
 
   atualizarRPM();
 
-  int16_t gx, gy, gz;
-  mpu.getRotation(&gx, &gy, &gz);
-  yaw_rate = (gz - gyro_offset_z) / 131.0;
+  if (mpu_ok) {
+    int16_t gx = 0, gy = 0, gz = 0;
+    mpu.getRotation(&gx, &gy, &gz);
+    yaw_rate = (gz - gyro_offset_z) / 131.0;
+  }
 
   static unsigned long last_tx_time = 0;
   if (current_time - last_tx_time >= 200) {
@@ -396,7 +421,7 @@ void loop() {
 
 // v1: copia de variables para la telemetría; no escribe ninguna variable del control.
 void tomarMuestra(unsigned long current_time) {
-  MuestraKart m;
+  MuestraKart m{};
   m.tick_ms = current_time;
   m.mandos_validos = command_received;
   m.acelerador_raw = acelerador_raw;
@@ -418,6 +443,14 @@ void tomarMuestra(unsigned long current_time) {
   m.can_rx_age_ms = command_received ? (uint32_t)(current_time - last_command_time) : 0;
   m.can_rx_count = can_rx_count;
   m.mpu_ok = mpu_ok;
+  m.control_ready = control_ready;
+  m.can_init_ok = can_init_ok;
+  m.can_init_attempts = can_init_attempts;
+  m.start_requested = start_requested;
+  m.control_state = control_state;
+  m.drive_inhibit = drive_inhibit;
+  m.drive_direction = control_ready && digitalRead(SW_DIR_F_DIR) == HIGH ? "D" :
+                      (control_ready && digitalRead(SW_DIR_MT_DIR) == HIGH ? "R" : "N");
   telemetria_publicar(m);
 }
 
@@ -489,14 +522,16 @@ void pararMotor() {
 }
 
 void processarComando() {
-  if (estado_relays != LIGOU_RELE2 && estado_relays != PRONTO) { pararMotores(); return; }
+  if (estado_relays != LIGOU_RELE2 && estado_relays != PRONTO) { drive_inhibit = "relays"; pararMotores(); return; }
   bool rpm_zero = (rpm_medio == 0);
-  if (travao == 1) { pararMotores(); return; }
+  if (travao == 1) { drive_inhibit = "brake"; pararMotores(); return; }
 
   int acelerador_pct = map(acelerador_raw, 0, ADC_MAX, 0, 100);
   acelerador_pct = constrain(acelerador_pct, 0, 100);
 
-  if (acelerador_pct <= 0) { pararMotor(); return; }
+  if (acelerador_pct <= 0) { drive_inhibit = "pedal_zero"; pararMotor(); return; }
+  if (modo_controlo == 1 && !mpu_ok) { drive_inhibit = "mpu_unavailable"; pararMotores(); return; }
+  drive_inhibit = "none";
 
   float pwm_alvo = map(acelerador_pct, 0, 100, PWM_MAX, 0);
   
@@ -531,14 +566,14 @@ void processarComando() {
   if (modo_d == 1) {
     if (rpm_zero || modo_anterior == 0) {
       modo_anterior = 0; ativarDirecao(true, false);
-    } else { pararMotores(); }
+    } else { drive_inhibit = "direction_change"; pararMotores(); }
   }
   else if (modo_r == 1) {
     if (rpm_zero || modo_anterior == 1) {
       modo_anterior = 1; ativarDirecao(false, true);
-    } else { pararMotores(); }
+    } else { drive_inhibit = "direction_change"; pararMotores(); }
   }
-  else { modo_anterior = 2; pararMotores(); }
+  else { drive_inhibit = "neutral"; modo_anterior = 2; pararMotores(); }
 }
 
 void pararMotores() {

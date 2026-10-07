@@ -9,7 +9,7 @@
 
 #define TELEMETRIA_PUERTO_TCP   3333
 #define TELEMETRIA_PERIODO_MS   200
-#define TELEMETRIA_LINEA_MAX    640
+#define TELEMETRIA_LINEA_MAX    1536
 #define TELEMETRIA_COLA         4
 
 // Copia de las variables del control en un instante. Los mandos CAN solo son válidos
@@ -36,10 +36,18 @@ struct MuestraKart {
     uint32_t can_rx_age_ms;
     uint32_t can_rx_count;
     bool mpu_ok;  // resultado de mpu.testConnection() en setup()
+    bool control_ready;
+    bool can_init_ok;
+    uint32_t can_init_attempts;
+    bool start_requested;
+    const char *control_state;
+    const char *drive_inhibit;
+    const char *drive_direction;
 };
 
 // Arranca la tarea de red (no bloquea: el punto de acceso se crea dentro de la tarea).
 void telemetria_iniciar();
+void telemetria_control_iniciado();
 
 // Llamar una vez por vuelta de loop(); mide el periodo del bucle y, cada
 // TELEMETRIA_PERIODO_MS, devuelve true para que el bucle tome una muestra.

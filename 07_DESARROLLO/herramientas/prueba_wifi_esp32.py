@@ -12,6 +12,7 @@ perfil_xml, puerto, salida = sys.argv[1], sys.argv[2], sys.argv[3]
 AP, PUERTO_TCP, PERFIL_VUELTA = "192.168.4.1", 3333, "eduroam"
 t0 = time.time()
 eventos, usb, tcp = [], [], []
+invalidas = {"usb": 0, "tcp": 0}
 
 
 def ev(texto):
@@ -54,7 +55,7 @@ def lector_usb():
                 try:
                     usb.append([round(time.time() - t0, 2), json.loads(l)])
                 except ValueError:
-                    pass
+                    invalidas["usb"] += 1
     s.close()
 
 
@@ -82,7 +83,10 @@ def leer_tcp(fase, segundos):
         *lineas, buf = buf.split(b"\n")
         for l in lineas:
             if l.startswith(b"{"):
-                tcp.append([fase, round(time.time() - t0, 2), json.loads(l)])
+                try:
+                    tcp.append([fase, round(time.time() - t0, 2), json.loads(l)])
+                except ValueError:
+                    invalidas["tcp"] += 1
             elif l.strip():
                 ev(f"{fase}: texto TCP: {l.decode(errors='replace')[:160]}")
     c.close()
@@ -92,7 +96,8 @@ def leer_tcp(fase, segundos):
 hilo = threading.Thread(target=lector_usb, daemon=True)
 hilo.start()
 try:
-    netsh("add", "profile", f"filename={perfil_xml}", "user=current")
+    if perfil_xml != "-":
+        netsh("add", "profile", f"filename={perfil_xml}", "user=current")
     netsh("connect", "name=kart-esp32")
     ev("IP 192.168.4.x: " + str(esperar(ip_kart, 25)))
     time.sleep(2)
@@ -112,5 +117,5 @@ finally:
     ev("Internet tras volver a eduroam: " + str(ok))
     parar_usb.set()
     hilo.join(timeout=3)
-    json.dump({"eventos": eventos, "usb": usb, "tcp": tcp}, open(salida, "w", encoding="utf-8"), ensure_ascii=False)
+    json.dump({"eventos": eventos, "usb": usb, "tcp": tcp, "invalidas":invalidas}, open(salida, "w", encoding="utf-8"), ensure_ascii=False)
     print("\n".join(f"{t:7.1f}  {e}" for t, e in eventos))

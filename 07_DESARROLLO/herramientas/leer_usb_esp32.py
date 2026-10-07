@@ -17,6 +17,9 @@ with open(salida, "wb") as f:
         buf += d
 s.close()
 lineas = buf.decode("utf-8", "replace").splitlines()
+if buf and not buf.endswith(b"\n"):
+    lineas = lineas[:-1]
+    print("Fragmento final incompleto al cerrar la captura: omitido")
 tramas = []
 for l in lineas:
     if l.startswith("{"):
@@ -32,7 +35,7 @@ if tramas:
     print("última: ", json.dumps(tramas[-1], ensure_ascii=False))
     seqs = [t["seq"] for t in tramas]
     print("seq:", seqs[0], "->", seqs[-1], "| saltos:", sum(b - a - 1 for a, b in zip(seqs, seqs[1:])))
-    lm = [t["signals"].get("loop_max_us") for t in tramas]
-    tu = [t["signals"].get("telemetry_us_max") for t in tramas]
-    print("loop_max_us: min", min(lm), "max", max(lm), "| telemetry_us_max: max", max(tu))
+    lm = [t["signals"]["loop_max_us"] for t in tramas if "loop_max_us" in t["signals"]]
+    tu = [t["signals"].get("telemetry_us_max", 0) for t in tramas]
+    print("loop_max_us:", (min(lm), max(lm)) if lm else "no disponible durante inicialización", "| telemetry_us_max: max", max(tu))
     print("ticks entre tramas (ms):", sorted({b["tick_ms"] - a["tick_ms"] for a, b in zip(tramas, tramas[1:])}))
