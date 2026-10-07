@@ -14,7 +14,19 @@ Abrir `http://127.0.0.1:8765/` en el navegador. Se muestra sin conexión y no se
 
 La fuente `socket://192.168.4.1:3333` aparece por defecto sin argumentos adicionales. Para leer por Wi-Fi, conectar Windows a `kart-esp32`, elegir «Wi-Fi directo ESP32», confirmar la preparación del banco y pulsar «Leer por Wi-Fi». La versión v1.1 crea la red después de inicializar CAN; el respaldo original no incluye esta telemetría ni esta red. COM de Intel Active Management Technology queda excluido del selector. La vista inicial muestra el ESP32 y su diagnóstico CAN.
 
-**Sesión actual: http://127.0.0.1:8766/**, `-Puerto 8766`, conectado a COM4 para diagnóstico del módulo ESP32 solo. v1.2 inicia Wi-Fi antes del CAN y reporta su espera sin inventar medidas de motores. Usar esta instancia actualizada; la anterior en 8765 queda desconectada.
+**Sesión actual: http://127.0.0.1:8766/**, `-Puerto 8766`, actualmente desconectada tras el diagnóstico por COM4 del módulo ESP32 solo. v1.2 inicia Wi-Fi antes del CAN y reporta su espera sin inventar medidas de motores. Usar esta instancia actualizada; la anterior en 8765 queda desconectada.
+
+## Conexión con el ESP32 instalado en el kart
+
+Armando indica que el USB no es accesible con el módulo instalado. Las pruebas integradas se registran por Wi-Fi; grabación, respaldo y recuperación por USB se hacen con el módulo fuera del kart.
+
+1. Preparar el primer ensayo estático con tracción inhabilitada y alimentar la electrónica del kart.
+2. Conectar el Wi-Fi de Windows a `kart-esp32` con la contraseña configurada en `secretos.h`. El panel funciona sin Internet.
+3. Abrir `http://127.0.0.1:8766/` en el portátil. Esta es la dirección del panel; `192.168.4.1:3333` es el destino TCP del ESP32, no una página web.
+4. Elegir «Wi-Fi directo ESP32», confirmar la preparación del banco y pulsar «Leer por Wi-Fi». Mantener desactivada la demostración visual.
+5. Comprobar versión, estado CAN/control y recepción de mandos; conservar el JSONL. `can_wait` indica que CAN todavía no inicializa. Una red visible por sí sola no valida el control ni los motores.
+
+v1.2 todavía necesita este ensayo integrado. Si el panel estaba conectado por USB, desconectarlo antes de retirar el módulo; no conectar ambas fuentes simultáneamente.
 
 ## Leer el panel
 
@@ -36,11 +48,11 @@ python server.py
 
 No necesita servicios de IA ni Internet al funcionar. Interfaz, scripts y estilos son locales.
 
-## Primera conexión física, pendiente
+## Conexión USB de banco, con el módulo fuera del kart
 
 1. Identificar la placa y preparar alimentación/cableado en laboratorio con tracción inhabilitada; conservar condiciones de USB y alimentación para comparar los fallos existentes. Abrir un puerto puede producir un reset por DTR/RTS incluso desactivados según el driver; no se promete captura pasiva eléctricamente inocua.
 2. Conectar la placa al portátil, actualizar puertos e identificar el que corresponde al USB. COM3 observado el 07-10-2026 es **Intel Active Management Technology SOL**, no el kart. No seleccionarlo como ESP32/STM32.
-3. Confirmar la condición del banco en la interfaz y elegir **Leer por cable**. Configuración inicial ESP32: 115200 bit/s, 8N1, DTR/RTS desactivados; estas condiciones vienen del fuente 2025/26 y de la propuesta, no de una captura actual.
+3. Confirmar la condición del banco en la interfaz y elegir **Leer por cable**. Configuración ESP32 utilizada en ENS-0003: 115200 bit/s, 8N1, DTR/RTS desactivados.
 4. El código ESP32 entregado imprime mensajes de diagnóstico. Se conservan en consola y JSONL; no se convierten en rpm/PWM inventados. Las variables gráficas necesitan tramas de telemetría compatibles con [PROTOCOLO.md](PROTOCOLO.md), disponibles en v1.1, pero ausentes en el respaldo original. STM32 necesita preparar su canal de diagnóstico.
 5. Desconectar desde el panel y conservar la sesión. `sesiones/*.jsonl` contiene eventos y tramas válidas, con tiempo de recepción del PC y tick de origen cuando existe. No equivale a sincronización entre relojes ni captura de flancos físicos.
 

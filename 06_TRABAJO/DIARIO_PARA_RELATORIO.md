@@ -17,6 +17,12 @@ Regla permanente en [AGENTS.md](../AGENTS.md): documentar cambios y ensayos con 
 
 ## Cómo utilizar las evidencias al redactar
 
+### Restricción de acceso durante el montaje · 07-10-2026
+
+Armando indica que no puede conectar USB cuando el ESP32 está instalado en el kart. Por ello, el ensayo integrado pendiente de v1.2 utilizará Wi-Fi directo y el registro JSONL del panel local. El USB se utiliza con el módulo fuera para grabar, respaldar, recuperar y comprobar en banco. Se incorpora esta condición a AGENTS y al procedimiento del panel. Es una declaración sobre el montaje, no un nuevo ensayo ni una confirmación de funcionamiento de los motores con v1.2.
+
+### Criterios de redacción
+
 - Explicar por qué se hizo cada cambio, qué se esperaba y qué ocurrió, incluyendo los intentos fallidos.
 - Referenciar versiones en [VERSIONES](../07_DESARROLLO/firmware/VERSIONES.md), ensayos en `ensayos/`, problemas y decisiones en `05_DECISIONES_Y_PROBLEMAS/`.
 - Conservar unidades, configuración y condiciones. Separar tiempos del firmware y del PC; capturas sintéticas sirven para evaluar interfaz, no dinámica del kart.
