@@ -1,0 +1,63 @@
+const { chromium } = require('C:/Users/nandi/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs = require('node:fs');
+const path = require('node:path');
+const url = process.argv[2] || process.env.KART_PANEL_URL || 'http://127.0.0.1:8765/';
+(async()=>{
+  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+  try{
+    const page=await browser.newPage({viewport:{width:1280,height:960}});
+    const errors=[];page.on('pageerror',error=>errors.push(error.message));
+    await page.goto(url);
+    await page.waitForFunction(()=>document.querySelector('#port').options.length>=2);
+    if((await page.locator('#mode-badge').innerText())!=='Sin conexión')throw new Error('Arranque no desconectado');
+    if(!(await page.locator('#connect').isDisabled()))throw new Error('Conexión habilitada sin preparación');
+    await page.locator('[data-part="rear_left"]').click();
+    if((await page.locator('#selection-title').innerText())!=='Rueda trasera I')throw new Error('Selección sin actualización');
+    if(!(await page.locator('#signals').innerText()).includes('Sin señal recibida'))throw new Error('Valores ausentes presentados como reales');
+    await page.locator('#demo').click();
+    await page.waitForFunction(()=>document.querySelector('#mode-badge').textContent.includes('DEMO'));
+    await page.locator('#demo-pedal').fill('65');
+    await page.locator('#demo-steer').fill('-12');
+    await page.waitForFunction(()=>document.querySelector('#rpm-rl').textContent!=='— rpm');
+    if(!(await page.locator('#connect').isDisabled()))throw new Error('Demo permite conectar hardware');
+    const first=await page.locator('#rim-rl').getAttribute('style');
+    await page.waitForFunction(first=>document.querySelector('#rim-rl').getAttribute('style')!==first,first);
+    await page.screenshot({path:path.join(__dirname,'panel-animado.png'),fullPage:true});
+    await page.locator('#demo').click();
+    if((await page.locator('#rpm-rl').textContent())!=='— rpm')throw new Error('Quedan valores de demo al salir');
+    await page.screenshot({path:path.join(__dirname,'panel-desconectado.png'),fullPage:true});
+    const actual=await (await page.request.get(url+'api/state')).json();
+    if(actual.status!=='disconnected')throw new Error('La prueba abrió un puerto');
+    const csrf=await page.request.post(url+'api/connect',{data:{port:'COM3',bench_ready:true}});
+    if(csrf.status()!==403)throw new Error('POST sin token no bloqueado');
+    const write=await page.request.post(url+'api/actuate',{headers:{'X-Kart-Token':actual.token},data:{}});
+    if(write.status()!==404)throw new Error('Hay una ruta de actuación inesperada');
+    const fixture=JSON.parse(JSON.stringify(actual));fixture.status='connected';fixture.port='PUERTO-FALSO-QA';fixture.stats.valid_frames=1;
+    fixture.signals.rpm_rl={...fixture.signals.rpm_rl,quality:'fresh',value:120,node:'esp32',age_ms:5,sample_id:100};
+    fixture.signals.pwm_left_raw={...fixture.signals.pwm_left_raw,quality:'fresh',value:200,node:'esp32',age_ms:5,sample_id:100};
+    await page.route('**/api/state',route=>route.fulfill({json:fixture}));
+    await page.waitForFunction(()=>document.querySelector('#rpm-rl').textContent==='120 rpm');
+    fixture.signals.rpm_rl.quality='stale';fixture.signals.rpm_rl.age_ms=2500;
+    await page.waitForFunction(()=>document.querySelector('#rpm-rl').textContent==='— rpm');
+    if(!(await page.locator('#signals').innerText()).includes('DATOS ANTIGUOS'))throw new Error('Edad antigua no rotulada');
+    fixture.signals.rpm_rl.quality='fresh';fixture.signals.rpm_rl.age_ms=0;
+    await page.waitForFunction(()=>document.querySelector('#rpm-rl').textContent==='120 rpm');
+    await page.unroute('**/api/state');
+    await page.route('**/api/state',route=>route.abort());
+    await page.waitForFunction(()=>document.querySelector('#mode-badge').textContent==='Servicio no disponible');
+    if((await page.locator('#rpm-rl').textContent())!=='— rpm')throw new Error('Datos vigentes tras perder el servicio');
+    await page.unroute('**/api/state');
+    await page.waitForFunction(()=>document.querySelector('#mode-badge').textContent==='Sin conexión');
+    const sizes=[];
+    for(const width of [1280,1024,760,375]){
+      await page.setViewportSize({width,height:960});
+      const geometry=await page.evaluate(()=>({client:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
+      if(geometry.scroll>geometry.client+1)throw new Error('Desborde a '+width);
+      sizes.push({width,...geometry});
+    }
+    if(errors.length)throw new Error(errors.join('\n'));
+    const result={result:'PASS',hardware:'No abierto; fixture interceptada solo en navegador',checks:['arranque desconectado','selección de kart','demostración animada explícita','separación demo/USB','ausencia/antigüedad de señales','POST local protegido','sin ruta de actuación','sin errores JS','diseño adaptable'],sizes};
+    fs.writeFileSync(path.join(__dirname,'resultados.json'),JSON.stringify(result,null,2));
+    console.log(JSON.stringify(result,null,2));
+  }finally{await browser.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});
