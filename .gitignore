@@ -24,5 +24,11 @@ node_modules/
 /08_INDICE_GENERADO/*
 !/08_INDICE_GENERADO/.gitkeep
 
+# Imágenes de flash extraídas: locales (repo público). Se versionan logs, hashes y documentación.
+/07_DESARROLLO/respaldos/**/*.bin
+
+# Compilación PlatformIO
+.pio/
+
 # Recepción local; preparar por separado la publicación de originales grandes.
 /02_ORIGINALES/entrega_2026-09-28/
