@@ -1,6 +1,6 @@
 # Telemetría de lectura propuesta · versión 1
 
-Este formato está implementado en el lector del PC. **Aún no está implementado ni verificado en los micros del kart.** El firmware existente sigue siendo fuente de referencia sin cambios.
+Formato implementado en el lector del PC y en el ESP32 de trabajo. v1.1 pasó USB/Wi-Fi en banco sin CAN real; v1.2 pasó diagnóstico USB/Wi-Fi con el módulo solo y CAN ausente ([ENS-0003](../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md)). El binario original restaurado recuperó marcha según el usuario; v1.2 todavía no está validada con motores en el kart. STM32/BMS no emiten aquí este protocolo todavía.
 
 Una línea UTF-8 JSON completa por muestra, terminada con LF. Máximo 8192 bytes por línea. La lectura conserva fragmentos entre timeouts y descarta líneas excesivas hasta el siguiente LF. El texto que no empieza por `{` se registra como mensaje de consola.
 
@@ -15,6 +15,7 @@ Ejemplo sintético de una muestra, no medición del kart:
 - `seq`: contador uint32 creciente. Se admite rollover; duplicados/orden anterior se rechazan; saltos se cuentan. No es garantía de integridad ni autenticación.
 - `tick_ms`: tick uint32 de adquisición declarado, no hora del PC. Su resolución no demuestra precisión de detección. Firmware, adquisición y reloj físico pendientes de contraste.
 - `fw`: versión opcional, hasta 100 caracteres. Hasta recibirla no hay versión verificada. Antes de comparar ensayos debe fijarse y leerse la versión compatible.
+- `reset_reason`: texto opcional de hasta 64 caracteres, motivo ESP32 leído al arrancar. Se conserva por nodo/sesión y se muestra en el panel; no sustituye el registro de alimentación ni un coredump.
 - `signals`: solo las señales presentes. Una trama parcial no refresca las demás. Valores desconocidos no se inventan; el lector cuenta nombres no soportados. Una trama sin señales conocidas se rechaza.
 
 | Señal | Unidad / significado |
@@ -33,12 +34,18 @@ Ejemplo sintético de una muestra, no medición del kart:
 | `can_rx_count` | órdenes 0x100 válidas recibidas desde el arranque |
 | `loop_max_us`, `telemetry_us_max` | periodo máximo de `loop()` y coste de publicar la telemetría dentro de él (µs) |
 | `telemetry_dropped`, `wifi_clients` | tramas descartadas (cola llena o cliente lento) y clientes TCP conectados |
+| `wifi_ap`, `mpu_ok` | 0/1: AP creado y respuesta del MPU al arrancar; no vigilancia continua del sensor |
+| `control_ready`, `can_init_ok`, `can_init_attempts` | control configurado, inicio CAN válido e intentos acumulados |
+| `control_state` | `can_wait`, `mpu_init`, `running`: fase; el control no está activo durante la espera CAN |
+| `drive_inhibit` | `can_init`, `initializing`, `no_command`, `relays`, `brake`, `pedal_zero`, `neutral`, `direction_change`, `can_timeout`, `mpu_unavailable`, `none`: razón software de la última orden de parada |
+| `start_requested` | 0/1, START recibido en bit 2 del byte 7 de CAN 0x100 |
+| `drive_direction` | N/D/R según salidas ordenadas al Kelly derecho, no sentido físico medido |
 
 **Transportes:**
 - **USB serie (115200):** el de siempre.
 - **TCP:** el ESP32 trasero v1 actúa como punto de acceso y escucha en `socket://192.168.4.1:3333`. El panel la añade con `--wifi socket://IP:PUERTO`, solo con IP privada, y la lee como un puerto más, sin transmitir.
 
-Primer emisor implementado en `07_DESARROLLO/firmware/esp32_trasero` (v1). Está **compilado y pendiente de ensayo en la placa**.
+Emisor implementado en `07_DESARROLLO/firmware/esp32_trasero`. v1.2 usa un máximo de 1536 bytes por línea; trama completa evaluada de 808 bytes con extremos de representación. El periodo objetivo es 200 ms; en espera CAN se observaron 200/306 ms por los reintentos. No publica RPM, PWM, marcha ordenada ni periodo de control antes de terminar la inicialización, y omite guiñada si el MPU no respondió. Las mediciones del bucle con CAN real siguen pendientes.
 
 Los rangos en `server.py` solo validan representación de datos. No autorizan actuaciones ni son límites seguros del kart. Se rechazan valores no finitos, fuera de representación o booleanos donde se exige entero.
 

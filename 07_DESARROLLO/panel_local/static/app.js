@@ -2,7 +2,7 @@
 const $ = id => document.getElementById(id);
 const parts = {
   stm32: {title:'STM32',tag:'UNIDAD FRONTAL',note:'Mandos, pantalla táctil y microSD. Franja blanca superior declarada; extensión pendiente.',keys:['accelerator_pct','steer_deg','brake','gear','mode','sd_ready']},
-  esp32: {title:'ESP32',tag:'UNIDAD TRASERA',note:'Diferencial, PWM, relés y retorno de sensores. Señales software reportadas por la placa.',keys:['mode','pwm_left_raw','pwm_right_raw','relay1','relay2','relay_seq','emergency_stop','can_rx_age_ms','loop_max_us','telemetry_us_max','telemetry_dropped','wifi_ap','wifi_clients']},
+  esp32: {title:'ESP32',tag:'UNIDAD TRASERA',note:'Diferencial, PWM, relés y retorno de sensores. Señales software reportadas por la placa.',keys:['can_rx_count','can_rx_age_ms','mode','pwm_left_raw','pwm_right_raw','relay1','relay2','relay_seq','charger_connected','emergency_stop','mpu_ok','loop_max_us','telemetry_us_max','telemetry_dropped','wifi_ap','wifi_clients']},
   front_left: {title:'Rueda delantera I',tag:'SENSOR HALL',note:'Velocidad medida por el controlador frontal; pulsos y calibración física por contrastar.',keys:['rpm_fl','steer_deg']},
   front_right: {title:'Rueda delantera D',tag:'SENSOR HALL',note:'Velocidad medida por el controlador frontal; pulsos y calibración física por contrastar.',keys:['rpm_fr','steer_deg']},
   rear_left: {title:'Rueda trasera I',tag:'TRACCIÓN IZQUIERDA',note:'RPM reportadas y orden PWM. Reducir par no equivale a frenado regenerativo.',keys:['rpm_rl','pwm_left_raw','gear']},
@@ -14,24 +14,31 @@ const parts = {
   power: {title:'Relés / contactor',tag:'SALIDAS ORDENADAS',note:'GPIO16/17 en la fuente. Relé ordenado no confirma cierre físico del contactor. Energía residual pendiente de diagnóstico.',keys:['relay1','relay2','charger_connected']},
   imu: {title:'Giroscopio',tag:'DINÁMICA',note:'Guiñada reportada en °/s. El modo ESC no se considera validado físicamente por esta visualización.',keys:['yaw_dps','mpu_ok','steer_deg','mode']},
 };
-let state = null, token = '', selected = 'stm32', demo = false, backendOK = false, stateReceivedAt = 0;
+let state = null, token = '', selected = 'esp32', demo = false, backendOK = false, stateReceivedAt = 0;
 let history = [], lastSample = null, lastMessage = 0, demoSeq = 0, demoTime = performance.now(), apiBusy = false;
-let angles = {fl:0,fr:0,rl:0,rr:0}, demoFrame = null;
+let angles = {fl:0,fr:0,rl:0,rr:0}, demoFrame = null, motionPaused = false, steerAngle = 0, steerTarget = 0;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const words = {can_wait:'Esperando CAN',mpu_init:'Inicializando sensores',running:'Control inicializado',can_init:'CAN sin inicializar',initializing:'Inicialización pendiente',no_command:'Sin órdenes del STM32',relays:'Secuencia de relés pendiente',brake:'Freno activo',pedal_zero:'Pedal en cero',neutral:'Marcha neutra',direction_change:'Cambio de marcha bloqueado por RPM',can_timeout:'Orden CAN caducada',mpu_unavailable:'ESC sin giroscopio disponible',none:'Sin bloqueo reportado',D:'Adelante',R:'Atrás',N:'Neutro',DIF:'Diferencial',ESC:'ESC',BLQ:'Bloqueado'};
 
 function f(value, digits=1) { return Number(value).toLocaleString('es-ES',{maximumFractionDigits:digits}); }
 function fresh(key) { const s = activeSignals()[key]; return s?.quality === 'fresh' ? s.value : null; }
 function activeSignals() {
   if(demo)return demoFrame?.signals || {};
   const elapsed=Date.now()-stateReceivedAt;
-  return Object.fromEntries(Object.entries(state?.signals || {}).map(([key,s])=>{
+  const signals=Object.fromEntries(Object.entries(state?.signals || {}).map(([key,s])=>{
     const age=s.age_ms===null?null:s.age_ms+elapsed;
     return [key,{...s,age_ms:age,quality:s.quality==='fresh'&&age>(s.stale_after_ms||1500)?'stale':s.quality}];
   }));
+  if(signals.can_rx_age_ms?.quality==='fresh' && signals.can_rx_age_ms.value>100) {
+    for(const key of ['accelerator_raw','accelerator_pct','steer_raw','steer_deg','brake','gear','mode']) {
+      if(signals[key]?.node==='esp32' && signals[key].quality==='fresh')signals[key]={...signals[key],quality:'stale',age_ms:Math.max(signals[key].age_ms,signals.can_rx_age_ms.value)};
+    }
+  }
+  return signals;
 }
 function display(s) {
   if (!s || s.quality !== 'fresh') return '—';
-  if (typeof s.value === 'string') return s.value;
+  if (typeof s.value === 'string') return words[s.value] || s.value;
   if (['Freno leído','Relé 1 ordenado','Relé 2 ordenado','Cargador detectado','SD disponible'].includes(s.label)) return s.value ? 'Sí / 1' : 'No / 0';
   return f(s.value) + (s.unit ? ' ' + s.unit : '');
 }
@@ -61,14 +68,69 @@ function renderMap() {
   for (const side of ['fl','fr','rl','rr']) $('rpm-'+side).textContent=fresh('rpm_'+side) === null ? '— rpm' : f(fresh('rpm_'+side),0)+' rpm';
   const voltage = fresh('battery_v'), soc = fresh('soc_pct');
   $('battery-value').textContent=(voltage===null?'—':f(voltage))+' V · '+(soc===null?'—':f(soc,0))+' %';
-  const steer = Math.max(-25, Math.min(25, fresh('steer_deg') || 0));
-  $('steer-left').setAttribute('transform',`rotate(${steer} 179 132)`);
-  $('steer-right').setAttribute('transform',`rotate(${steer} 501 132)`);
+  const steering = steeringPresentation();
+  steerTarget = steering.angle || 0;
+  $('steering-map').textContent = steering.angle === null ? 'DIRECCIÓN SIN DATOS' : `${f(steering.angle)}° · ${steering.estimated ? 'ESTIMADOS' : 'REPORTADOS'}`;
+  const direction = fresh('drive_direction') || fresh('gear');
+  $('travel-map').textContent = direction ? `MARCHA ${words[direction].toUpperCase()} · ORDENADA` : 'MARCHA SIN DATOS';
+  $('animation-note').textContent = 'Giro ilustrativo según RPM; sentido según marcha ordenada. Los Hall traseros no miden el sentido. Dirección del mando sin calibrar cuando se indica estimada.';
+}
+function steeringPresentation() {
+  const degrees = fresh('steer_deg'), raw = fresh('steer_raw');
+  if(degrees !== null)return {angle:Math.max(-25,Math.min(25,degrees)),estimated:false};
+  if(raw !== null)return {angle:Math.max(-20,Math.min(20,(raw-2047)/47.9)),estimated:true};
+  return {angle:null,estimated:false};
+}
+function renderOverview() {
+  const signals = activeSignals(), steering = steeringPresentation();
+  $('overview-cards').replaceChildren();
+  const cards = [['rpm_rl','RPM izquierda'],['rpm_rr','RPM derecha'],['accelerator_pct','Pedal'],['steering','Dirección'],['gear','Marcha solicitada'],['pwm_left_raw','PWM izquierdo'],['pwm_right_raw','PWM derecho'],['yaw_dps','Guiñada']];
+  for(const [key,label] of cards) {
+    const s = key==='steering' ? (signals.steer_deg?.quality==='fresh'?signals.steer_deg:signals.steer_raw) : signals[key];
+    const card=document.createElement('div');card.className='overview-card '+(s?.quality || 'missing');
+    const name=document.createElement('div');name.className='label';name.textContent=label;
+    const value=document.createElement('div');value.className='value';value.textContent=key==='steering'?(steering.angle===null?'—':f(steering.angle)+'°'):display(s);
+    const note=document.createElement('div');note.className='meta';note.textContent=demo?'Ejemplo sintético':key==='steering'&&steering.estimated?'Estimación del mando · sin calibrar':!s||s.quality!=='fresh'?'Sin datos vigentes':key.startsWith('pwm_')?'Orden software · 255 = parada':key==='gear'?'Orden CAN · no sentido medido':`${s.node} · ${s.age_ms} ms`;
+    card.append(name,value,note);$('overview-cards').appendChild(card);
+  }
+  let message='Conecta una fuente para ver el diagnóstico.', severity='idle';
+  const inhibit=fresh('drive_inhibit'), phase=fresh('control_state');
+  if(demo){message='Demostración visual: todas las señales son sintéticas.';severity='demo';}
+  else if(!backendOK){message='El servicio local no responde. Las señales dejan de mostrarse como vigentes.';severity='warning';}
+  else if(state?.status==='connected') {
+    if(!state.stats.valid_frames){message=(state.messages||[]).some(m=>m.text.includes('CAN init failed'))?'CAN no inicializa. Revisa la consola; con el ESP32 solo, sin módulo CAN, estos reintentos son esperables.':'Conexión abierta. Esperando telemetría; el firmware original solo ofrece mensajes de consola.';severity='warning';}
+    else if(!Object.values(signals).some(s=>s.quality==='fresh')){message='No llegan muestras recientes. El estado actual del kart es desconocido.';severity='warning';}
+    else if(phase==='can_wait'){message=`CAN sin inicializar · ${f(fresh('can_init_attempts')||0,0)} intentos. Wi-Fi disponible para diagnóstico; el control sigue esperando al CAN.`;severity='warning';}
+    else if(phase==='mpu_init'){message='Inicializando el giroscopio. Espera a que termine el arranque.';severity='warning';}
+    else if(fresh('emergency_stop')===1 || inhibit==='can_timeout'){message='Parada por timeout CAN: han dejado de llegar órdenes válidas del STM32.';severity='warning';}
+    else if(fresh('charger_connected')===1){message='Entrada de cargador activa. Comprueba si hay cargador conectado o una lectura inesperada de la entrada.';severity='warning';}
+    else if(fresh('can_rx_count')===0){message='CAN inicializado, pero todavía no llegan órdenes del STM32.';severity='warning';}
+    else if(inhibit && !['none','pedal_zero','neutral'].includes(inhibit)){message='Control: '+words[inhibit]+'.';severity='warning';}
+    else {message=inhibit?`Control: ${words[inhibit]}. Relés mostrados como órdenes, sin confirmar el contacto físico.`:'Telemetría recibida. Selecciona una pieza o consulta todas las señales.';severity='ok';}
+  }
+  $('diagnostic').textContent=message;$('diagnostic').className='diagnostic '+severity;
+  const node=state?.nodes?.esp32;
+  $('firmware-info').textContent=demo?'Modo de ejemplo · no es una prueba del kart':node?`Firmware: ${node.fw || 'sin versión'} · Reinicio: ${node.reset_reason || 'consulta la consola'} · Sesión: ${node.session}`:'Versión y motivo de reinicio: pendientes de recibir.';
+}
+function renderAllSignals() {
+  const query=$('signal-search').value.trim().toLocaleLowerCase('es'), signals=activeSignals();
+  $('all-signal-rows').replaceChildren();
+  for(const [key,s] of Object.entries(signals)) {
+    if(!$('show-missing').checked && s.quality==='missing')continue;
+    if(query && !`${key} ${s.label}`.toLocaleLowerCase('es').includes(query))continue;
+    const row=document.createElement('tr');row.className=s.quality;
+    const values=[s.label || key,display(s),s.node || '—',s.quality==='fresh'?`Vigente · ${s.age_ms} ms`:s.quality==='stale'?'Datos antiguos':'Sin datos'];
+    for(const text of values){const cell=document.createElement('td');cell.textContent=text;row.appendChild(cell);}
+    row.title=key;$('all-signal-rows').appendChild(row);
+  }
 }
 function renderHeader() {
   const connected = state?.status === 'connected';
+  const wifi = (connected ? state?.port : $('port').value)?.startsWith('socket://');
+  const transport = wifi ? 'Wi-Fi' : 'USB';
+  $('connect').textContent = wifi ? 'Leer por Wi-Fi' : 'Leer por cable';
   $('mode-badge').className=demo?'demo':'';
-  $('mode-badge').textContent=demo?'DEMO · sin hardware':!backendOK?'Servicio no disponible':connected?(state?.stats.valid_frames?'USB · lectura':'Puerto abierto · sin telemetría'):'Sin conexión';
+  $('mode-badge').textContent=demo?'DEMO · sin hardware':!backendOK?'Servicio no disponible':connected?(state?.stats.valid_frames?`${transport} · lectura`:'Conexión abierta · sin telemetría'):'Sin conexión';
   $('frame-count').textContent=demo?'Animación con valores sintéticos':`${state?.stats.valid_frames || 0} tramas de telemetría`;
   $('connect').disabled=demo||connected||!backendOK||!$('port').value||!$('bench').checked||!state?.serial_available;
   $('disconnect').disabled=!connected;
@@ -82,8 +144,8 @@ function renderHeader() {
   $('download').hidden=!state?.session_file;
   if (demo) $('connection-info').textContent='Demostración aislada en el navegador. Ningún puerto abierto; no se registra como ensayo real.';
   else if (!backendOK) $('connection-info').textContent='No se recibe el servicio local; se han retirado los valores vigentes.';
-  else $('connection-info').textContent=state?.error || (connected ? `Lectura de ${state.port} a 115200 bit/s. ${state.stats.valid_frames ? 'Telemetría estructurada recibida.' : 'Los mensajes de texto no contienen todas las variables; instrumentación pendiente.'}`:'No hay ningún puerto abierto. Esta versión no envía comandos al micro.');
-  $('session-info').textContent=state?.log_error?'Error de registro: '+state.log_error:state?.session_file?`Sesión USB: ${state.session_file} · Tramas rechazadas: ${state.stats.invalid_frames} · Saltos de secuencia: ${state.stats.sequence_gaps}`:'Sin sesión registrada. Regeneración y ajustes de control: pendientes de análisis e implementación.';
+  else $('connection-info').textContent=state?.error || (connected ? `Lectura de ${state.port}${wifi ? ' por TCP' : ' a 115200 bit/s'}. ${state.stats.valid_frames ? 'Telemetría estructurada recibida.' : 'Todavía no llegan tramas. Revisa los mensajes de arranque en la consola.'}`:wifi?'Conecta el portátil a la red kart-esp32, marca la preparación del banco y pulsa Leer por Wi-Fi.': 'Selecciona el USB del ESP32 o Wi-Fi directo. Si no aparece el USB, revisa el cable de datos y pulsa Actualizar puertos.');
+  $('session-info').textContent=state?.log_error?'Error de registro: '+state.log_error:state?.session_file?`Sesión: ${state.session_file} · Tramas rechazadas: ${state.stats.invalid_frames} · Saltos de secuencia: ${state.stats.sequence_gaps}`:'Sin sesión registrada.';
 }
 function renderLog() {
   const messages=state?.messages || [];
@@ -93,7 +155,7 @@ function renderLog() {
   $('log').replaceChildren();
   for (const msg of messages.slice(-80)) {
     const line=document.createElement('div'); line.className='log-line '+msg.kind;
-    line.textContent=`${msg.time.slice(11,23)} · ${msg.text}`; $('log').appendChild(line);
+    line.textContent=`${new Date(msg.time).toLocaleTimeString('es-ES',{timeZone:'Europe/Lisbon',hour12:false,fractionalSecondDigits:3})} · ${msg.text}`; $('log').appendChild(line);
   }
 }
 function sampleTrace() {
@@ -123,7 +185,17 @@ function drawTrace() {
   $('trace-info').textContent=(demo?'EJEMPLO SINTÉTICO · ':'')+(s?.quality==='fresh'?`${s.label}: ${display(s)}`:'Sin muestras vigentes de la señal seleccionada.');
   canvas.setAttribute('aria-label',$('trace-info').textContent);
 }
-function render(){renderHeader();renderInspector();renderMap();renderLog();sampleTrace();}
+let traceOptionsKey='';
+function renderTraceOptions() {
+  const numeric=Object.entries(state?.signals || {}).filter(([key])=>!['gear','mode','control_state','drive_direction','drive_inhibit'].includes(key));
+  const stamp=numeric.map(([key])=>key).join(',');
+  if(!stamp || stamp===traceOptionsKey)return;
+  traceOptionsKey=stamp;const previous=$('trace-signal').value;
+  $('trace-signal').replaceChildren();
+  for(const [key,s] of numeric){const option=document.createElement('option');option.value=key;option.textContent=s.label;$('trace-signal').appendChild(option);}
+  if(numeric.some(([key])=>key===previous))$('trace-signal').value=previous;
+}
+function render(){renderHeader();renderOverview();renderInspector();renderMap();renderAllSignals();renderLog();renderTraceOptions();sampleTrace();}
 async function poll(){
   if(apiBusy)return;apiBusy=true;
   const abort=new AbortController(), timeout=setTimeout(()=>abort.abort(),2000);
@@ -141,7 +213,9 @@ async function ports(){
     const response=await fetch('/api/ports');if(!response.ok)throw new Error();const data=await response.json();
     $('port').replaceChildren();const empty=document.createElement('option');empty.value='';empty.textContent=data.ports.length?'Selecciona la placa conectada':'Sin puertos detectados';$('port').appendChild(empty);
     for(const p of data.ports){const option=document.createElement('option');option.value=p.device;option.textContent=`${p.device} · ${p.description}`;$('port').appendChild(option);}
-    if(data.ports.some(p=>p.device===old))$('port').value=old;
+    const preferred=state?.status==='connected'?state.port:old;
+    if(data.ports.some(p=>p.device===preferred))$('port').value=preferred;
+    else $('port').value=data.ports.find(p=>p.hwid.includes('10C4:EA60'))?.device || '';
   }catch{$('connection-info').textContent='No se pudo consultar el inventario de puertos.';}
   renderHeader();
 }
@@ -167,17 +241,23 @@ function animate(now){
   if(demo&&now-lastDemoRender>180){makeDemo();render();lastDemoRender=now;}
   for(const side of ['fl','fr','rl','rr']){
     const rpm=fresh('rpm_'+side);
-    if(rpm!==null&&!reducedMotion.matches)angles[side]=(angles[side]+Math.sign(rpm)*Math.min(Math.abs(rpm)*6,240)*dt)%360;
-    $('rim-'+side).style.transform=`rotate(${angles[side]}deg)`;
+    const direction=fresh('drive_direction') || fresh('gear');
+    if(rpm!==null&&!reducedMotion.matches&&!motionPaused)angles[side]=(angles[side]+(direction==='R'?-1:1)*Math.min(Math.abs(rpm)*.18,100)*dt)%18;
+    $('rim-'+side).style.transform=`translateY(${angles[side]}px)`;
   }
+  steerAngle = reducedMotion.matches || motionPaused ? steerTarget : steerAngle+(steerTarget-steerAngle)*(1-Math.exp(-12*dt));
+  $('steer-left').setAttribute('transform',`rotate(${steerAngle} 179 132)`);
+  $('steer-right').setAttribute('transform',`rotate(${steerAngle} 501 132)`);
   requestAnimationFrame(animate);
 }
 document.querySelectorAll('[data-part]').forEach(el=>{el.addEventListener('click',()=>selectPart(el.dataset.part));el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPart(el.dataset.part);}});});
 $('demo').addEventListener('click',()=>{if(state?.status==='connected')return;demo=!demo;demoTime=performance.now();history=[];lastSample=null;if(demo)makeDemo();else demoFrame=null;render();});
 $('demo-pedal').addEventListener('input',()=>{makeDemo();render();});$('demo-steer').addEventListener('input',()=>{makeDemo();render();});
 $('refresh').addEventListener('click',ports);$('port').addEventListener('change',renderHeader);$('bench').addEventListener('change',renderHeader);
+$('motion').addEventListener('click',()=>{motionPaused=!motionPaused;$('motion').setAttribute('aria-pressed',String(motionPaused));$('motion').textContent=motionPaused?'Reanudar animación':'Pausar animación';});
+$('signal-search').addEventListener('input',renderAllSignals);$('show-missing').addEventListener('change',renderAllSignals);
 $('connect').addEventListener('click',()=>post('/api/connect',{port:$('port').value,bench_ready:$('bench').checked}));
 $('disconnect').addEventListener('click',()=>post('/api/disconnect',{}));
 $('trace-signal').addEventListener('change',()=>{history=[];lastSample=null;sampleTrace();});
 new ResizeObserver(drawTrace).observe($('trace'));
-selectPart('stm32');poll().then(ports);setInterval(poll,300);requestAnimationFrame(animate);
+selectPart('esp32');poll().then(ports);setInterval(poll,300);requestAnimationFrame(animate);

@@ -1,6 +1,6 @@
-# Panel local del kart · 0.1
+# Panel local del kart · diagnóstico y telemetría
 
-Aplicación para el portátil, con mapa interactivo del kart, señales por elemento, animaciones cualitativas, traza temporal y captura serie. Escucha únicamente en `127.0.0.1`; iPad y Wi-Fi aplazados por el usuario. No envía bytes al micro, no tiene comandos de motor/calibración y no modifica ni graba firmware.
+Aplicación para el portátil, con mapa interactivo del kart, señales por elemento, animaciones cualitativas, traza temporal y captura USB o TCP por Wi-Fi directo. Escucha únicamente en `127.0.0.1`. No envía bytes al micro, no tiene comandos de motor/calibración y no modifica ni graba firmware.
 
 ## Arrancar
 
@@ -11,6 +11,21 @@ En PowerShell, desde esta carpeta:
 ```
 
 Abrir `http://127.0.0.1:8765/` en el navegador. Se muestra sin conexión y no se abre automáticamente ningún puerto. El script emplea el Python disponible en este portátil; admite `-Python C:\ruta\python.exe` y `-Puerto 8766`.
+
+La fuente `socket://192.168.4.1:3333` aparece por defecto sin argumentos adicionales. Para leer por Wi-Fi, conectar Windows a `kart-esp32`, elegir «Wi-Fi directo ESP32», confirmar la preparación del banco y pulsar «Leer por Wi-Fi». La versión v1.1 crea la red después de inicializar CAN; el respaldo original no incluye esta telemetría ni esta red. COM de Intel Active Management Technology queda excluido del selector. La vista inicial muestra el ESP32 y su diagnóstico CAN.
+
+**Sesión actual: http://127.0.0.1:8766/**, `-Puerto 8766`, conectado a COM4 para diagnóstico del módulo ESP32 solo. v1.2 inicia Wi-Fi antes del CAN y reporta su espera sin inventar medidas de motores. Usar esta instancia actualizada; la anterior en 8765 queda desconectada.
+
+## Leer el panel
+
+- Resumen superior: RPM I/D, pedal, dirección, marcha solicitada, PWM I/D y guiñada. Diagnóstico destacado y firmware/motivo de reinicio/sesión.
+- Mapa: selecciona piezas para detalles. Bandas de rodadura animadas por RPM, con sentido ilustrativo según marcha ordenada; no es medida de sentido de los Hall. Sin RPM delanteras, las delanteras no ruedan.
+- Dirección: grados reportados si existen; en ESP32, ADC convertido con la fórmula del fuente y rotulado «estimación del mando · sin calibrar». No se presenta como ángulo físico validado de cada rueda. Si el CAN reporta mando caducado (>100 ms), no se representa como dirección vigente.
+- Tabla de todas las señales con buscador, origen, estado y antigüedad. Gráfica de cada señal numérica. Señales ausentes o antiguas no se muestran como mediciones actuales.
+- Pausar animación detiene rodadura; dirección cambia sin transición. Se respeta movimiento reducido. La demo genera únicamente datos sintéticos y mantiene bloqueada la lectura del micro.
+- El panel guarda JSONL de lectura real. Horas visuales Europe/Lisbon; datos originales UTC. Los GPIO/relés/PWM son órdenes software, no prueba de tensión ni contacto físico.
+
+Validación: 13 tests Python, QA de Chrome y captura con placa real en `can_wait`. [ENS-0003](../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md) conserva datos, capturas y límites. El diagnóstico de v1.2 aún requiere integración estática con CAN/STM32 en el kart.
 
 La dependencia pySerial 3.5 se ha instalado localmente en `.vendor/` (fuera de Git). Para otro ordenador, instalarla con el Python elegido:
 
@@ -26,7 +41,7 @@ No necesita servicios de IA ni Internet al funcionar. Interfaz, scripts y estilo
 1. Identificar la placa y preparar alimentación/cableado en laboratorio con tracción inhabilitada; conservar condiciones de USB y alimentación para comparar los fallos existentes. Abrir un puerto puede producir un reset por DTR/RTS incluso desactivados según el driver; no se promete captura pasiva eléctricamente inocua.
 2. Conectar la placa al portátil, actualizar puertos e identificar el que corresponde al USB. COM3 observado el 07-10-2026 es **Intel Active Management Technology SOL**, no el kart. No seleccionarlo como ESP32/STM32.
 3. Confirmar la condición del banco en la interfaz y elegir **Leer por cable**. Configuración inicial ESP32: 115200 bit/s, 8N1, DTR/RTS desactivados; estas condiciones vienen del fuente 2025/26 y de la propuesta, no de una captura actual.
-4. El código ESP32 entregado imprime mensajes de diagnóstico. Se conservan en consola y JSONL; no se convierten en rpm/PWM inventados. Las variables gráficas necesitan tramas de telemetría compatibles con [PROTOCOLO.md](PROTOCOLO.md), todavía no añadidas al firmware del kart. STM32 necesita preparar su canal de diagnóstico.
+4. El código ESP32 entregado imprime mensajes de diagnóstico. Se conservan en consola y JSONL; no se convierten en rpm/PWM inventados. Las variables gráficas necesitan tramas de telemetría compatibles con [PROTOCOLO.md](PROTOCOLO.md), disponibles en v1.1, pero ausentes en el respaldo original. STM32 necesita preparar su canal de diagnóstico.
 5. Desconectar desde el panel y conservar la sesión. `sesiones/*.jsonl` contiene eventos y tramas válidas, con tiempo de recepción del PC y tick de origen cuando existe. No equivale a sincronización entre relojes ni captura de flancos físicos.
 
 El panel permite revisar qué datos reportan los micros. Formas de onda, tensiones, ruido y fallos eléctricos puntuales se comprueban con el osciloscopio disponible en el laboratorio. La disposición gráfica es esquemática; cableado y posición de componentes pendientes de confirmar físicamente.

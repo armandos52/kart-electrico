@@ -2,12 +2,18 @@
 <html lang="es">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kart · Panel de laboratorio</title><link rel="stylesheet" href="/style.css"></head>
 <body>
-<header class="top"><div><div class="eyebrow">SMART ELECTRIC KART · LABORATORIO</div><h1>El kart, a la vista.</h1><p>Placas reales · lectura por cable · panel local 0.1</p></div><div class="status"><span id="mode-badge">Sin conexión</span><span id="frame-count">0 tramas de telemetría</span></div></header>
+<header class="top"><div><div class="eyebrow">SMART ELECTRIC KART · LABORATORIO</div><h1>El kart, a la vista.</h1><p>Placas reales · lectura por USB o Wi-Fi directo</p></div><div class="status"><span id="mode-badge">Sin conexión</span><span id="frame-count">0 tramas de telemetría</span></div></header>
 <main>
 <section class="connection" aria-label="Conexión al microcontrolador">
   <div class="port-controls"><label>Puerto <select id="port"><option value="">Buscando puertos…</option></select></label><button id="refresh" type="button">Actualizar puertos</button><button id="connect" type="button" class="primary" disabled>Leer por cable</button><button id="disconnect" type="button" disabled>Desconectar</button></div>
   <label class="ready"><input id="bench" type="checkbox"> Banco preparado con tracción inhabilitada. Abrir el puerto puede reiniciar la placa.</label>
   <div id="connection-info" role="status">No hay ningún puerto abierto. Esta versión no envía comandos al micro.</div>
+</section>
+<section class="overview" aria-label="Resumen del kart">
+  <div class="section-head"><div><div class="eyebrow">LECTURA EN DIRECTO</div><h2>Lo esencial, de un vistazo</h2></div><button id="motion" type="button" aria-pressed="false">Pausar animación</button></div>
+  <div id="diagnostic" class="diagnostic" role="status">Conecta una fuente para ver el diagnóstico.</div>
+  <div id="overview-cards" class="overview-cards"></div>
+  <div id="firmware-info" class="firmware-info">Versión y motivo de reinicio: pendientes de recibir.</div>
 </section>
 <div class="workspace">
   <section class="kart-view" aria-label="Mapa interactivo del kart">
@@ -15,17 +21,24 @@
     <div id="demo-banner" hidden>DEMOSTRACIÓN VISUAL · Valores sintéticos · Sin conexión ni órdenes al hardware</div>
     <svg id="kart" viewBox="0 0 680 560" role="img" aria-labelledby="kart-title kart-desc">
       <title id="kart-title">Kart visto desde arriba</title><desc id="kart-desc">Selecciona ruedas, placas, batería, bus CAN o motores para inspeccionar sus señales. Animaciones solo con datos vigentes o en demostración explícita.</desc>
-      <defs><linearGradient id="floor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#243343"/><stop offset="1" stop-color="#131e2a"/></linearGradient></defs>
+      <defs><linearGradient id="floor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#243343"/><stop offset="1" stop-color="#131e2a"/></linearGradient>
+        <clipPath id="clip-fl"><rect x="156" y="89" width="45" height="86" rx="12"/></clipPath>
+        <clipPath id="clip-fr"><rect x="479" y="89" width="45" height="86" rx="12"/></clipPath>
+        <clipPath id="clip-rl"><rect x="146" y="386" width="58" height="98" rx="12"/></clipPath>
+        <clipPath id="clip-rr"><rect x="476" y="386" width="58" height="98" rx="12"/></clipPath>
+      </defs>
       <text x="340" y="26" text-anchor="middle" class="orient">FRONTAL ↑</text>
       <path class="chassis" d="M246 100 L434 100 L472 165 L464 442 L428 479 L252 479 L216 442 L208 165 Z"/>
       <path class="frame" d="M246 130L434 130L442 428L405 452L275 452L238 428Z M246 130L442 428 M434 130L238 428"/>
       <path class="axle" d="M176 129H505 M176 429H505"/>
       <path class="wire can-wire" d="M340 179V342"/>
       <path class="wire power-wire" d="M340 303V410 M308 386H223 M372 386H457"/>
-      <g class="part" data-part="front_left" role="button" tabindex="0" aria-label="Rueda delantera izquierda"><g id="steer-left"><rect x="153" y="86" width="51" height="92" rx="15" class="tire"/><g id="rim-fl" class="rim"><path d="M161 108H196 M161 130H196 M161 152H196"/></g></g><text x="136" y="201" text-anchor="middle" id="rpm-fl">— rpm</text></g>
-      <g class="part" data-part="front_right" role="button" tabindex="0" aria-label="Rueda delantera derecha"><g id="steer-right"><rect x="476" y="86" width="51" height="92" rx="15" class="tire"/><g id="rim-fr" class="rim"><path d="M484 108H519 M484 130H519 M484 152H519"/></g></g><text x="548" y="201" text-anchor="middle" id="rpm-fr">— rpm</text></g>
-      <g class="part" data-part="rear_left" role="button" tabindex="0" aria-label="Rueda trasera izquierda"><rect x="143" y="383" width="64" height="104" rx="16" class="tire"/><g id="rim-rl" class="rim"><path d="M152 404H199 M152 435H199 M152 465H199"/></g><text x="133" y="515" text-anchor="middle" id="rpm-rl">— rpm</text></g>
-      <g class="part" data-part="rear_right" role="button" tabindex="0" aria-label="Rueda trasera derecha"><rect x="473" y="383" width="64" height="104" rx="16" class="tire"/><g id="rim-rr" class="rim"><path d="M481 404H529 M481 435H529 M481 465H529"/></g><text x="547" y="515" text-anchor="middle" id="rpm-rr">— rpm</text></g>
+      <g class="part" data-part="front_left" role="button" tabindex="0" aria-label="Rueda delantera izquierda"><g id="steer-left"><rect x="153" y="86" width="51" height="92" rx="15" class="tire"/><g clip-path="url(#clip-fl)"><g id="rim-fl" class="rim"><path d="M161 72H196 M161 90H196 M161 108H196 M161 126H196 M161 144H196 M161 162H196 M161 180H196 M161 198H196"/></g></g></g><text x="136" y="201" text-anchor="middle" id="rpm-fl">— rpm</text></g>
+      <g class="part" data-part="front_right" role="button" tabindex="0" aria-label="Rueda delantera derecha"><g id="steer-right"><rect x="476" y="86" width="51" height="92" rx="15" class="tire"/><g clip-path="url(#clip-fr)"><g id="rim-fr" class="rim"><path d="M484 72H519 M484 90H519 M484 108H519 M484 126H519 M484 144H519 M484 162H519 M484 180H519 M484 198H519"/></g></g></g><text x="548" y="201" text-anchor="middle" id="rpm-fr">— rpm</text></g>
+      <g class="part" data-part="rear_left" role="button" tabindex="0" aria-label="Rueda trasera izquierda"><rect x="143" y="383" width="64" height="104" rx="16" class="tire"/><g clip-path="url(#clip-rl)"><g id="rim-rl" class="rim"><path d="M152 366H199 M152 384H199 M152 402H199 M152 420H199 M152 438H199 M152 456H199 M152 474H199 M152 492H199 M152 510H199"/></g></g><text x="133" y="515" text-anchor="middle" id="rpm-rl">— rpm</text></g>
+      <g class="part" data-part="rear_right" role="button" tabindex="0" aria-label="Rueda trasera derecha"><rect x="473" y="383" width="64" height="104" rx="16" class="tire"/><g clip-path="url(#clip-rr)"><g id="rim-rr" class="rim"><path d="M481 366H529 M481 384H529 M481 402H529 M481 420H529 M481 438H529 M481 456H529 M481 474H529 M481 492H529 M481 510H529"/></g></g><text x="547" y="515" text-anchor="middle" id="rpm-rr">— rpm</text></g>
+      <text id="steering-map" x="340" y="76" text-anchor="middle" class="orient">DIRECCIÓN SIN DATOS</text>
+      <text id="travel-map" x="340" y="531" text-anchor="middle" class="orient">MARCHA SIN DATOS</text>
       <g class="part" data-part="stm32" role="button" tabindex="0" aria-label="STM32 frontal"><rect x="282" y="130" width="116" height="57" rx="8" class="board"/><rect x="294" y="140" width="92" height="24" rx="3" class="screen"/><path d="M294 145H386" class="damaged-strip"/><text x="340" y="177" text-anchor="middle" class="part-name">STM32</text></g>
       <g class="part" data-part="battery" role="button" tabindex="0" aria-label="Batería y BMS"><rect x="271" y="224" width="138" height="80" rx="9" class="battery"/><path d="M298 238V288 M325 238V288 M352 238V288 M379 238V288" class="cells"/><text x="340" y="272" text-anchor="middle" class="part-name">BATERÍA / BMS</text><text x="340" y="324" text-anchor="middle" id="battery-value">— V · — %</text></g>
       <g class="part" data-part="esp32" role="button" tabindex="0" aria-label="ESP32 trasero"><rect x="282" y="345" width="116" height="59" rx="9" class="board"/><rect x="294" y="356" width="28" height="28" rx="4" class="chip"/><text x="356" y="380" text-anchor="middle" class="part-name">ESP32</text></g>
@@ -35,7 +48,7 @@
       <g class="part" data-part="power" role="button" tabindex="0" aria-label="Relés y contactor"><rect x="293" y="461" width="94" height="35" rx="7" class="controller"/><text x="340" y="484" text-anchor="middle" class="part-name">RELÉS</text></g>
       <g class="part" data-part="imu" role="button" tabindex="0" aria-label="Giroscopio"><rect x="426" y="349" width="70" height="33" rx="7" class="bus"/><text x="461" y="371" text-anchor="middle" class="part-name">IMU</text></g>
     </svg>
-    <div class="map-notes"><span><i class="dot"></i>Seleccionable · movimiento cualitativo</span><span>Franja blanca de pantalla: declaración del usuario; tamaño pendiente.</span></div>
+    <div class="map-notes"><span><i class="dot"></i>Seleccionable · movimiento cualitativo</span><span id="animation-note">Animación ilustrativa según RPM. Sin datos, las ruedas no se animan.</span></div>
     <div id="demo-controls" hidden><label>Pedal de ejemplo <input id="demo-pedal" type="range" min="0" max="100" value="32"><output id="demo-pedal-value">32 %</output></label><label>Dirección de ejemplo <input id="demo-steer" type="range" min="-20" max="20" value="8"><output id="demo-steer-value">8°</output></label></div>
   </section>
   <aside class="inspector" aria-label="Datos de la parte seleccionada">
@@ -43,8 +56,12 @@
     <div id="signals" class="signal-list"></div><div class="inspector-foot">Datos reportados por el micro. Una orden de GPIO/PWM no confirma la tensión física ni el cierre del contactor.</div>
   </aside>
 </div>
+<section class="all-signals" aria-label="Todas las señales">
+  <div class="section-head"><div><h2>Todas las señales</h2><p>Valores, origen y antigüedad en una sola vista.</p></div><div class="signal-filters"><input id="signal-search" type="search" placeholder="Buscar señal…" aria-label="Buscar señal"><label><input id="show-missing" type="checkbox" checked> Mostrar sin datos</label></div></div>
+  <div class="table-scroll"><table><thead><tr><th>Señal</th><th>Valor</th><th>Origen</th><th>Estado</th></tr></thead><tbody id="all-signal-rows"></tbody></table></div>
+</section>
 <section class="traces"><div class="section-head"><div><h2>Traza de una señal</h2><p>Los huecos indican datos ausentes o antiguos.</p></div><label>Señal <select id="trace-signal"><option value="rpm_rl">RPM trasera izquierda</option><option value="rpm_rr">RPM trasera derecha</option><option value="accelerator_pct">Pedal procesado</option><option value="yaw_dps">Guiñada</option><option value="pwm_left_raw">PWM bruto izquierdo</option><option value="battery_v">Tensión BMS</option></select></label></div><canvas id="trace" height="190" role="img" aria-label="Gráfica temporal de la señal seleccionada"></canvas><div id="trace-info">Sin muestras de telemetría.</div></section>
-<section class="console"><div class="section-head"><div><h2>Mensajes y sesión</h2><p>Texto del firmware existente y diagnóstico del lector.</p></div><a id="download" href="/api/download" download="sesion-kart.jsonl" hidden>Descargar sesión USB</a></div><div id="log" role="log" aria-live="off">Sin mensajes.</div><div id="session-info">Sin sesión registrada. Regeneración y ajustes de control: pendientes de análisis e implementación.</div></section>
-</main><footer>Solo portátil / 127.0.0.1 · Sin acceso iPad, Wi‑Fi ni nube · Los datos del osciloscopio complementan este panel.</footer>
+<section class="console"><div class="section-head"><div><h2>Mensajes y sesión</h2><p>Texto del firmware existente y diagnóstico del lector.</p></div><a id="download" href="/api/download" download="sesion-kart.jsonl" hidden>Descargar sesión</a></div><div id="log" role="log" aria-live="off">Sin mensajes.</div><div id="session-info">Sin sesión registrada.</div></section>
+</main><footer>Panel local en el portátil · USB o Wi-Fi directo al ESP32 · Solo lectura, sin órdenes a los motores.</footer>
 <script src="/app.js"></script>
 </body></html>

@@ -9,6 +9,9 @@ const url = process.argv[2] || process.env.KART_PANEL_URL || 'http://127.0.0.1:8
     const errors=[];page.on('pageerror',error=>errors.push(error.message));
     await page.goto(url);
     await page.waitForFunction(()=>document.querySelector('#port').options.length>=2);
+    if((await page.locator('#selection-title').innerText())!=='ESP32')throw new Error('El diagnóstico inicial no muestra ESP32');
+    await page.locator('#port').selectOption('socket://192.168.4.1:3333');
+    if((await page.locator('#connect').innerText())!=='Leer por Wi-Fi')throw new Error('Wi-Fi no disponible por defecto o mal rotulado');
     if((await page.locator('#mode-badge').innerText())!=='Sin conexión')throw new Error('Arranque no desconectado');
     if(!(await page.locator('#connect').isDisabled()))throw new Error('Conexión habilitada sin preparación');
     await page.locator('[data-part="rear_left"]').click();
@@ -22,6 +25,11 @@ const url = process.argv[2] || process.env.KART_PANEL_URL || 'http://127.0.0.1:8
     if(!(await page.locator('#connect').isDisabled()))throw new Error('Demo permite conectar hardware');
     const first=await page.locator('#rim-rl').getAttribute('style');
     await page.waitForFunction(first=>document.querySelector('#rim-rl').getAttribute('style')!==first,first);
+    await page.locator('#motion').click();
+    const paused=await page.locator('#rim-rl').getAttribute('style');
+    await page.evaluate(()=>new Promise(resolve=>setTimeout(resolve,350)));
+    if((await page.locator('#rim-rl').getAttribute('style'))!==paused)throw new Error('Pausa no detiene ruedas');
+    await page.locator('#motion').click();
     await page.screenshot({path:path.join(__dirname,'panel-animado.png'),fullPage:true});
     await page.locator('#demo').click();
     if((await page.locator('#rpm-rl').textContent())!=='— rpm')throw new Error('Quedan valores de demo al salir');
@@ -35,8 +43,28 @@ const url = process.argv[2] || process.env.KART_PANEL_URL || 'http://127.0.0.1:8
     const fixture=JSON.parse(JSON.stringify(actual));fixture.status='connected';fixture.port='PUERTO-FALSO-QA';fixture.stats.valid_frames=1;
     fixture.signals.rpm_rl={...fixture.signals.rpm_rl,quality:'fresh',value:120,node:'esp32',age_ms:5,sample_id:100};
     fixture.signals.pwm_left_raw={...fixture.signals.pwm_left_raw,quality:'fresh',value:200,node:'esp32',age_ms:5,sample_id:100};
+    fixture.signals.steer_raw={...fixture.signals.steer_raw,quality:'fresh',value:2600,node:'esp32',age_ms:5,sample_id:100};
     await page.route('**/api/state',route=>route.fulfill({json:fixture}));
     await page.waitForFunction(()=>document.querySelector('#rpm-rl').textContent==='120 rpm');
+    await page.waitForFunction(()=>document.querySelector('#steering-map').textContent.includes('ESTIMADOS'));
+    if(!(await page.locator('#overview-cards').innerText()).includes('Estimación del mando'))throw new Error('Ángulo del ADC presentado como medida calibrada');
+    const front=await page.locator('#rim-fl').getAttribute('style');
+    await page.evaluate(()=>new Promise(resolve=>setTimeout(resolve,350)));
+    if((await page.locator('#rim-fl').getAttribute('style'))!==front)throw new Error('Rueda delantera animada sin RPM');
+    await page.locator('#signal-search').fill('giroscopio');
+    // La búsqueda usa nombre y clave, sin inventar señales ausentes.
+    await page.locator('#signal-search').fill('can');
+    if(await page.locator('#all-signal-rows tr').count()===0)throw new Error('Buscador de señales no encuentra CAN');
+    await page.locator('#signal-search').fill('');
+    fixture.signals.can_rx_age_ms={...fixture.signals.can_rx_age_ms,quality:'fresh',value:220,node:'esp32',age_ms:5,sample_id:100};
+    await page.waitForFunction(()=>document.querySelector('#steering-map').textContent==='DIRECCIÓN SIN DATOS');
+    fixture.signals.can_rx_age_ms.value=12;
+    await page.waitForFunction(()=>document.querySelector('#steering-map').textContent.includes('ESTIMADOS'));
+    fixture.signals.steer_raw.quality='stale';
+    await page.waitForFunction(()=>document.querySelector('#steering-map').textContent==='DIRECCIÓN SIN DATOS');
+    fixture.port='socket://192.168.4.1:3333';
+    await page.waitForFunction(()=>document.querySelector('#mode-badge').textContent==='Wi-Fi · lectura');
+    if((await page.locator('#connection-info').innerText()).includes('115200'))throw new Error('TCP rotulado como serie USB');
     fixture.signals.rpm_rl.quality='stale';fixture.signals.rpm_rl.age_ms=2500;
     await page.waitForFunction(()=>document.querySelector('#rpm-rl').textContent==='— rpm');
     if(!(await page.locator('#signals').innerText()).includes('DATOS ANTIGUOS'))throw new Error('Edad antigua no rotulada');
@@ -56,7 +84,7 @@ const url = process.argv[2] || process.env.KART_PANEL_URL || 'http://127.0.0.1:8
       sizes.push({width,...geometry});
     }
     if(errors.length)throw new Error(errors.join('\n'));
-    const result={result:'PASS',hardware:'No abierto; fixture interceptada solo en navegador',checks:['arranque desconectado','selección de kart','demostración animada explícita','separación demo/USB','ausencia/antigüedad de señales','POST local protegido','sin ruta de actuación','sin errores JS','diseño adaptable'],sizes};
+    const result={result:'PASS',hardware:'No abierto; fixture interceptada solo en navegador',checks:['arranque desconectado','diagnóstico ESP32 inicial','Wi-Fi por defecto y rótulos TCP','resumen y buscador de todas las señales','dirección del ADC rotulada como estimada','ausencia de animación delantera sin RPM','pausa de animación','selección de kart','demostración animada explícita','separación demo/USB','ausencia/antigüedad de señales','POST local protegido','sin ruta de actuación','sin errores JS','diseño adaptable'],sizes};
     fs.writeFileSync(path.join(__dirname,'resultados.json'),JSON.stringify(result,null,2));
     console.log(JSON.stringify(result,null,2));
   }finally{await browser.close();}

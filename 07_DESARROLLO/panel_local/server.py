@@ -60,13 +60,22 @@ SIGNALS = {
     "wifi_clients": ("Clientes Wi-Fi conectados", "", 0, 8, 1500),
     "wifi_ap": ("Punto de acceso Wi-Fi creado", "", 0, 1, 1500),
     "mpu_ok": ("MPU6050 respondió al arrancar", "", 0, 1, 1500),
+    "control_ready": ("Control inicializado", "", 0, 1, 1500),
+    "can_init_ok": ("CAN inicializado", "", 0, 1, 1500),
+    "can_init_attempts": ("Intentos de inicio CAN", "", 0, 4294967295, 1500),
+    "start_requested": ("START recibido", "", 0, 1, 1500),
+    "control_state": ("Fase del programa", "", {"can_wait", "mpu_init", "running"}, None, 1500),
+    "drive_direction": ("Marcha ordenada a los Kelly", "", {"N", "D", "R"}, None, 1500),
+    "drive_inhibit": ("Motivo de parada del control", "", {"can_init", "initializing", "no_command", "relays", "brake", "pedal_zero", "neutral", "direction_change", "can_timeout", "mpu_unavailable", "none"}, None, 1500),
 }
 DISCRETE = {"brake", "relay1", "relay2", "charger_connected", "sd_ready", "pwm_left_raw", "pwm_right_raw", "can_rx_age_ms",
             "accelerator_raw", "steer_raw", "relay_seq", "emergency_stop", "can_rx_count", "loop_max_us",
-            "telemetry_us_max", "telemetry_dropped", "wifi_clients", "wifi_ap", "mpu_ok"}
+            "telemetry_us_max", "telemetry_dropped", "wifi_clients", "wifi_ap", "mpu_ok",
+            "control_ready", "can_init_ok", "can_init_attempts", "start_requested"}
 
 # Fuentes TCP (Wi-Fi directo con el ESP32) añadidas con --wifi; solo direcciones privadas.
 WIFI_URLS = []
+DEFAULT_WIFI_URL = "socket://192.168.4.1:3333"
 WIFI_URL = re.compile(r"^socket://(\d{1,3}(?:\.\d{1,3}){3}):(\d{1,5})$")
 
 
@@ -83,7 +92,8 @@ def port_inventory():
     if list_ports is None:
         return []
     return [{"device": p.device, "description": p.description, "hwid": p.hwid}
-            for p in list_ports.comports()] + \
+            for p in list_ports.comports()
+            if "Active Management Technology" not in p.description] + \
            [{"device": url, "description": "Wi-Fi directo ESP32 (TCP, solo lectura)", "hwid": "socket"}
             for url in WIFI_URLS]
 
@@ -177,6 +187,9 @@ class Monitor:
                 fw = data.get("fw")
                 if fw is not None and (not isinstance(fw, str) or len(fw) > 100):
                     raise ValueError("Versión de firmware inválida")
+                reset_reason = data.get("reset_reason")
+                if reset_reason is not None and (not isinstance(reset_reason, str) or len(reset_reason) > 64):
+                    raise ValueError("Motivo de reinicio inválido")
                 previous = self.nodes.get(node)
                 delta = None
                 if previous and previous["session"] == session:
@@ -192,6 +205,7 @@ class Monitor:
                     self.samples[key] = {"value": value, "node": node, "tick_ms": tick,
                                          "received": now, "session": session, "seq": seq, "sample_id": self.frame_id}
                 self.nodes[node] = {"session": session, "seq": seq, "tick_ms": tick,
+                                    "reset_reason": reset_reason or (previous.get("reset_reason") if previous and previous["session"] == session else None),
                                     "fw": fw or (previous.get("fw") if previous and previous["session"] == session else None), "received": now}
                 self.stats["valid_frames"] += 1
                 self.stats["unknown_signals"] += unknown
@@ -392,7 +406,7 @@ def main():
     parser.add_argument("--wifi", type=wifi_url, action="append", default=[], metavar="socket://IP:PUERTO",
                         help="Añade una fuente TCP del ESP32 (p. ej. socket://192.168.4.1:3333)")
     args = parser.parse_args()
-    WIFI_URLS.extend(args.wifi)
+    WIFI_URLS.extend(args.wifi or [DEFAULT_WIFI_URL])
     if args.list_ports:
         print(json.dumps({"ports": port_inventory(), "serial_available": serial is not None}, ensure_ascii=False))
         return

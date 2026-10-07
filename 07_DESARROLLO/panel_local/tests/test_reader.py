@@ -163,5 +163,38 @@ class WifiTests(unittest.TestCase):
         listener.close()
 
 
+class DiagnosticTests(unittest.TestCase):
+    def test_new_boot_waiting_for_can_does_not_keep_motor_measurements(self):
+        monitor = Monitor(clock=lambda: 0)
+        monitor.status = "connected"
+        monitor.ingest(frame(session="running", rpm_rl=123, pwm_left_raw=150))
+        monitor.ingest(frame(session="new-boot", control_ready=0, can_init_ok=0,
+                             control_state="can_wait", drive_inhibit="can_init", can_init_attempts=2))
+        snapshot = monitor.snapshot()
+        self.assertEqual(snapshot["signals"]["rpm_rl"]["quality"], "missing")
+        self.assertEqual(snapshot["signals"]["pwm_left_raw"]["quality"], "missing")
+        self.assertEqual(snapshot["signals"]["control_state"]["value"], "can_wait")
+
+    def test_diagnostic_fields_and_reset_are_preserved(self):
+        monitor = Monitor(clock=lambda: 0)
+        sample = json.loads(frame(control_ready=1, can_init_ok=1, can_init_attempts=3,
+                                  control_state="running", drive_inhibit="direction_change",
+                                  drive_direction="N", start_requested=1))
+        sample["reset_reason"] = "brownout_tension"
+        monitor.ingest(json.dumps(sample))
+        self.assertEqual(monitor.stats["unknown_signals"], 0)
+        self.assertEqual(monitor.nodes["esp32"]["reset_reason"], "brownout_tension")
+        self.assertEqual(monitor.samples["drive_inhibit"]["value"], "direction_change")
+
+    def test_invalid_reset_metadata_cannot_invalidate_previous_boot(self):
+        monitor = Monitor(clock=lambda: 0)
+        monitor.ingest(frame(session="boot-a", rpm_rl=123))
+        malformed = json.loads(frame(session="boot-b", control_state="can_wait"))
+        malformed["reset_reason"] = ["bad"]
+        monitor.ingest(json.dumps(malformed))
+        self.assertEqual(monitor.nodes["esp32"]["session"], "boot-a")
+        self.assertEqual(monitor.samples["rpm_rl"]["value"], 123)
+
+
 if __name__ == "__main__":
     unittest.main()
