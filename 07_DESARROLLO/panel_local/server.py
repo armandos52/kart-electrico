@@ -58,10 +58,12 @@ SIGNALS = {
     "telemetry_us_max": ("Coste de telemetría en loop()", "µs", 0, 4294967295, 1500),
     "telemetry_dropped": ("Tramas de telemetría descartadas", "", 0, 4294967295, 1500),
     "wifi_clients": ("Clientes Wi-Fi conectados", "", 0, 8, 1500),
+    "wifi_ap": ("Punto de acceso Wi-Fi creado", "", 0, 1, 1500),
+    "mpu_ok": ("MPU6050 respondió al arrancar", "", 0, 1, 1500),
 }
 DISCRETE = {"brake", "relay1", "relay2", "charger_connected", "sd_ready", "pwm_left_raw", "pwm_right_raw", "can_rx_age_ms",
             "accelerator_raw", "steer_raw", "relay_seq", "emergency_stop", "can_rx_count", "loop_max_us",
-            "telemetry_us_max", "telemetry_dropped", "wifi_clients"}
+            "telemetry_us_max", "telemetry_dropped", "wifi_clients", "wifi_ap", "mpu_ok"}
 
 # Fuentes TCP (Wi-Fi directo con el ESP32) añadidas con --wifi; solo direcciones privadas.
 WIFI_URLS = []

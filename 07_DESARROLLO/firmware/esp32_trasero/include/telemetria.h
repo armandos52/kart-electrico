@@ -35,6 +35,7 @@ struct MuestraKart {
     bool emergency_stop;
     uint32_t can_rx_age_ms;
     uint32_t can_rx_count;
+    bool mpu_ok;  // resultado de mpu.testConnection() en setup()
 };
 
 // Arranca la tarea de red (no bloquea: el punto de acceso se crea dentro de la tarea).

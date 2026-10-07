@@ -23,7 +23,18 @@ Rama `firmware/esp32-telemetria-wifi`. Commits locales, sin push.
   - v0 = fuente entregado (etiqueta `esp32-trasero-v0`) y compila.
   - v1 = telemetría de solo lectura (SoftAP WPA2 + TCP 3333 + USB). Compila, **no grabada ni ensayada**.
 - **Panel:** acepta `--wifi socket://192.168.4.1:3333`. 10 tests en verde.
-- **Siguiente:** grabar v1 por USB con el banco preparado. Ensayar la telemetría por USB y luego por Wi-Fi, incluida pérdida y reconexión, y medir `loop_max_us`. El portátil solo tiene Internet por Wi-Fi (eduroam): para la prueba Wi-Fi hace falta otra vía de Internet o aceptar quedar desconectado.
+- **Grabado ahora: v1.1** (etiqueta `esp32-trasero-v1.1`). [[06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi|ENS-0001]] en banco:
+  - USB y Wi-Fi sin saltos; pérdida y reconexión correctas.
+  - `loop()` ≤ 3,7 ms con cliente TCP.
+- **La v1 se colgaba** por un fallo previo de mcp_can con DLC > 8: [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0005_mcp_can_desborda_con_dlc_mayor_8|PROB-0005]], corregido en v1.1.
+- **El MCP2515 tarda entre 19 y 77 s o más en responder al arrancar,** lo que reproduce la hipótesis 3 de PROB-0002.
+- **Entradas al aire:** RPM fantasma y GPIO35 a 1 con el kart quieto.
+- **Siguiente:**
+  - Osciloscopio en la alimentación, MISO, CS y cristal del MCP2515.
+  - Ensayo con el STM32 transmitiendo 0x100.
+  - Revisar los Hall y GPIO35.
+  - Segunda copia del respaldo en otro soporte.
+- **Wi-Fi sin perder Internet:** el iPhone se detecta por USB, pero falta el driver de red (app «Dispositivos Apple»). Perfil Windows `kart-esp32` creado en modo manual.
 
 ## Estudio y montaje · 07-10-2026
 

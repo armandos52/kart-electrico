@@ -2,7 +2,7 @@
 const $ = id => document.getElementById(id);
 const parts = {
   stm32: {title:'STM32',tag:'UNIDAD FRONTAL',note:'Mandos, pantalla táctil y microSD. Franja blanca superior declarada; extensión pendiente.',keys:['accelerator_pct','steer_deg','brake','gear','mode','sd_ready']},
-  esp32: {title:'ESP32',tag:'UNIDAD TRASERA',note:'Diferencial, PWM, relés y retorno de sensores. Señales software reportadas por la placa.',keys:['mode','pwm_left_raw','pwm_right_raw','relay1','relay2','relay_seq','emergency_stop','can_rx_age_ms','loop_max_us','telemetry_us_max','telemetry_dropped','wifi_clients']},
+  esp32: {title:'ESP32',tag:'UNIDAD TRASERA',note:'Diferencial, PWM, relés y retorno de sensores. Señales software reportadas por la placa.',keys:['mode','pwm_left_raw','pwm_right_raw','relay1','relay2','relay_seq','emergency_stop','can_rx_age_ms','loop_max_us','telemetry_us_max','telemetry_dropped','wifi_ap','wifi_clients']},
   front_left: {title:'Rueda delantera I',tag:'SENSOR HALL',note:'Velocidad medida por el controlador frontal; pulsos y calibración física por contrastar.',keys:['rpm_fl','steer_deg']},
   front_right: {title:'Rueda delantera D',tag:'SENSOR HALL',note:'Velocidad medida por el controlador frontal; pulsos y calibración física por contrastar.',keys:['rpm_fr','steer_deg']},
   rear_left: {title:'Rueda trasera I',tag:'TRACCIÓN IZQUIERDA',note:'RPM reportadas y orden PWM. Reducir par no equivale a frenado regenerativo.',keys:['rpm_rl','pwm_left_raw','gear']},
@@ -12,7 +12,7 @@ const parts = {
   battery: {title:'Batería / BMS',tag:'ENERGÍA',note:'16 celdas declaradas por el usuario. Conexión activa, protocolo BMS y regeneración por verificar.',keys:['battery_v','battery_a','soc_pct','battery_temp_c']},
   can: {title:'Bus CAN',tag:'COMUNICACIÓN',note:'0x100: mandos. 0x123: retorno. El panel necesita diagnóstico para observar señales adicionales.',keys:['can_rx_age_ms','can_rx_count','accelerator_raw','steer_raw','gear','mode']},
   power: {title:'Relés / contactor',tag:'SALIDAS ORDENADAS',note:'GPIO16/17 en la fuente. Relé ordenado no confirma cierre físico del contactor. Energía residual pendiente de diagnóstico.',keys:['relay1','relay2','charger_connected']},
-  imu: {title:'Giroscopio',tag:'DINÁMICA',note:'Guiñada reportada en °/s. El modo ESC no se considera validado físicamente por esta visualización.',keys:['yaw_dps','steer_deg','mode']},
+  imu: {title:'Giroscopio',tag:'DINÁMICA',note:'Guiñada reportada en °/s. El modo ESC no se considera validado físicamente por esta visualización.',keys:['yaw_dps','mpu_ok','steer_deg','mode']},
 };
 let state = null, token = '', selected = 'stm32', demo = false, backendOK = false, stateReceivedAt = 0;
 let history = [], lastSample = null, lastMessage = 0, demoSeq = 0, demoTime = performance.now(), apiBusy = false;

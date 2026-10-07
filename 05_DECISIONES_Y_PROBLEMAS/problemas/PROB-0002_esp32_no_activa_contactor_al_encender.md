@@ -1,6 +1,6 @@
 ---
 estado: vigente
-actualizado: 2026-09-30
+actualizado: 2026-10-07
 resumen: Al encender, a veces el ESP32 no activa el contactor y solo se recupera sacándolo de la placa. Hipótesis, pruebas para distinguirlas e ideas para una nueva PCB trasera.
 ---
 
@@ -11,6 +11,8 @@ Estado: abierto.
 Configuración: kart 2025/26 ([[03_CATALOGO/fichas/DOC-0042|DOC-0042]]). El ESP32-WROOM-32D está en la PCB de la unidad trasera (DOC-0042 p. 50). Se supone cargado `ESP32-final.ino` del 21-07-2026, pero no se ha comprobado qué versión está grabada.
 
 ## Síntoma y condiciones de la prueba
+
+**Actualización 07-10-2026:** Armando declara energía residual al abrir el contactor que afecta al programa y la atribuye a los variadores. Se abre [PROB-0003](PROB-0003_energia_residual_al_abrir_contactor.md) para distinguir rutas y secuencia; no se confirma causa común. Se consultó ahora el texto completo de PDF 90–91 de DOC-0042; figuras/esquemas y montaje siguen pendientes.
 
 **Declaración de Armando (30-09-2026):**
 - Al encender el kart, a veces el ESP32 no da la señal al contactor.
@@ -78,7 +80,9 @@ Ninguna causa está confirmada. Las hipótesis van ordenadas por lo bien que exp
 
 ## Pruebas para distinguir las hipótesis
 
-No hace falta cambiar código. La próxima vez que falle, **antes de sacar el ESP32**:
+**Revisión del plan 07-10:** primero registrar secuencia, síntomas, tiempos y fuentes conectadas según PROB-0003. La lista siguiente es un plan preliminar, no un procedimiento para ejecutar sin preparar el montaje. Evitar movimiento del kart y órdenes de tracción; mediciones, conexiones de USB y cambios de cableado requieren comprobar referencias/alimentaciones. No retirar módulos ni manipular conectores energizados. Las respuestas de cada prueba orientan, pero no prueban una causa única.
+
+Comprobaciones candidatas, una vez preparado el ensayo:
 
 1. **Pulsar el botón EN (reset) del módulo.**
    - Si se recupera: problema de arranque o del programa (hipótesis 2, o la 3 si el MCP2515 no responde).
@@ -94,8 +98,8 @@ No hace falta cambiar código. La próxima vez que falle, **antes de sacar el ES
    - GPIO12 justo al encender.
    - GPIO19 y la alimentación del módulo CAN.
    - IO35 con el cargador desconectado.
-5. **Desconectar solo el conector de los Kelly, o solo el módulo CAN, en lugar del ESP32.** Si así se recupera, localiza por dónde entra el problema.
-6. **Con el kart encendido, mover suavemente el ESP32 en su zócalo** (hipótesis 5).
+5. **Comparar interfaces conectadas o aisladas en ensayos preparados.** Cambiar conexiones únicamente con alimentación aislada y energía residual verificada. La recuperación puede orientar sobre una ruta; no demuestra por sí sola el mecanismo.
+6. **Inspeccionar fijación y zócalo con alimentación aislada y energía residual verificada** (hipótesis 5); evitar mover la placa en funcionamiento.
 7. **Anotar cada vez:**
    - si es el primer encendido del día;
    - la tensión de la batería;
@@ -141,7 +145,17 @@ Firmware relacionado, para cuando se trabaje el código: registrar y enviar el m
 
 ## Intentos y resultados
 
-Todavía ninguno. El único recurso conocido es sacar el ESP32 de la placa.
+**07-10-2026, banco ([[06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi|ENS-0001]]):** ESP32 en su placa, alimentado por USB.
+
+- **Hipótesis 3 reproducida en parte.** En cuatro arranques, el MCP2515 respondió tras 19 s, ~35 s y ~77 s de «Entering Configuration Mode Failure / CAN init failed», y en uno no respondió en 40 s. Mientras tanto el programa sigue en el bucle de la línea 240: no se calibra el giróscopo ni se pueden activar los relés.
+- **Grabado del chip:** «Flash voltage set by a strapping pin: 3.3V», es decir, GPIO12 estaba bajo al arrancar en ese banco.
+- **Respaldo de la flash original:** contenía un **coredump**, así que el ESP32 se colgó alguna vez.
+  - Hay un mecanismo de cuelgue confirmado al leer mensajes CAN con DLC > 8 o lecturas SPI corruptas: [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0005_mcp_can_desborda_con_dlc_mayor_8|PROB-0005]], corregido en firmware v1.1.
+  - Un cuelgue así se recupera con un reset; no explica por sí solo la necesidad de sacar el ESP32.
+
+**Siguiente:** con el osciloscopio y mientras se reintenta, medir la alimentación del módulo CAN, GPIO19 (MISO), GPIO5 (CS), SCK y el cristal del MCP2515.
+
+Antes de esta fecha, el único recurso conocido era sacar el ESP32 de la placa.
 
 ## Solución y prueba de verificación
 
@@ -151,4 +165,4 @@ Pendiente de identificar la causa.
 
 - Hacer las pruebas 1–3 la próxima vez que ocurra y anotar el resultado aquí.
 - Revisar el esquemático y la PCB de la unidad trasera: prueba 7 y la lista que la sigue.
-- Leer completas las p. 90-91 y 97 de DOC-0042.
+- Texto de PDF 90–91 consultado el 07-10; revisar esquemas/figuras y completar contexto de PDF 97 cuando corresponda a L1.

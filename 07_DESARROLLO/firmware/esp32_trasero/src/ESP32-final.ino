@@ -66,6 +66,7 @@ int motor_dir_speed = 255;
 bool command_received = false;
 bool emergency_stop = false;
 uint32_t can_rx_count = 0;  // v1: órdenes 0x100 válidas recibidas (diagnóstico)
+bool mpu_ok = false;        // v1.1: resultado de testConnection(), para no publicar guiñada sin MPU
 
 volatile uint32_t pulsos_esq = 0;
 volatile uint32_t pulsos_dir = 0;
@@ -249,7 +250,8 @@ void setup() {
 
   Wire.begin(MPU_SDA, MPU_SCL);
   mpu.initialize();
-  Serial.println(mpu.testConnection() ? "MPU-6050 OK!" : "MPU-6050 FALHOU!");
+  mpu_ok = mpu.testConnection();  // v1.1: misma llamada, resultado guardado
+  Serial.println(mpu_ok ? "MPU-6050 OK!" : "MPU-6050 FALHOU!");
 
   Serial.println("A calibrar giroscopio...");
   float soma_z = 0;
@@ -415,6 +417,7 @@ void tomarMuestra(unsigned long current_time) {
   m.emergency_stop = emergency_stop;
   m.can_rx_age_ms = command_received ? (uint32_t)(current_time - last_command_time) : 0;
   m.can_rx_count = can_rx_count;
+  m.mpu_ok = mpu_ok;
   telemetria_publicar(m);
 }
 

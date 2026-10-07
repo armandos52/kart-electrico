@@ -36,6 +36,7 @@ uint32_t seq = 0;
 uint32_t descartadas_cola = 0;          // loop(): cola llena
 volatile uint32_t descartadas_red = 0;  // tarea de red: escritura incompleta a un cliente
 volatile uint8_t clientes_activos = 0;
+volatile uint8_t estado_ap = 0;         // 1 = punto de acceso creado sin error
 
 uint32_t ultimo_us = 0;
 uint32_t periodo_max_us = 0;   // periodo máximo de loop() desde la última muestra
@@ -83,17 +84,21 @@ void enviar_cabecera(NetworkClient &c) {
 void tarea_red(void *) {
     // No guardar la configuración del punto de acceso en NVS: la flash no se escribe.
     WiFi.persistent(false);
-    WiFi.mode(WIFI_AP);
-    WiFi.softAPConfig(IP_AP, IP_AP, MASCARA);
+    bool modo_ok = WiFi.mode(WIFI_AP);
     bool ap_ok = WiFi.softAP(KART_WIFI_SSID, KART_WIFI_PASSWORD, 6, 0, MAX_CLIENTES);
+    bool ip_ok = WiFi.softAPConfig(IP_AP, IP_AP, MASCARA);
     // Potencia reducida: alcance de banco y menos picos de corriente (riesgo de brownout).
-    WiFi.setTxPower(WIFI_POWER_8_5dBm);
+    bool tx_ok = WiFi.setTxPower(WIFI_POWER_8_5dBm);
+    estado_ap = (modo_ok && ap_ok && ip_ok) ? 1 : 0;
 
     NetworkServer servidor(TELEMETRIA_PUERTO_TCP);
     servidor.begin();
     servidor.setNoDelay(true);
     NetworkClient clientes[MAX_CLIENTES];
-    log_i("AP %s: %s, TCP %u", KART_WIFI_SSID, ap_ok ? "activo" : "FALLO", TELEMETRIA_PUERTO_TCP);
+    // Una sola línea de diagnóstico; se imprime desde esta tarea (puede intercalarse con loop()).
+    Serial.printf("Telemetria AP: modo=%d softAP=%d ip=%d tx=%d -> %s %s canal %d\n",
+                  modo_ok, ap_ok, ip_ok, tx_ok, WiFi.softAPIP().toString().c_str(),
+                  WiFi.softAPmacAddress().c_str(), WiFi.channel());
 
     Linea l;
     for (;;) {
@@ -178,16 +183,17 @@ void telemetria_publicar(const MuestraKart &m) {
                 m.acelerador_raw, acelerador_pct, m.direcao_raw, m.travao == 1 ? 1 : 0,
                 marcha, modo, (unsigned long)m.can_rx_age_ms);
     }
-    if (isfinite(m.yaw_rate)) agregar(l, "\"yaw_dps\":%.1f,", m.yaw_rate);
+    // Sin MPU en el arranque, yaw_rate es (0 - offset)/131: no es una medida y no se publica.
+    if (m.mpu_ok && isfinite(m.yaw_rate)) agregar(l, "\"yaw_dps\":%.1f,", m.yaw_rate);
     agregar(l, "\"pwm_left_raw\":%d,\"pwm_right_raw\":%d,\"rpm_rl\":%d,\"rpm_rr\":%d,"
                "\"relay1\":%d,\"relay2\":%d,\"relay_seq\":%u,\"charger_connected\":%d,"
-               "\"emergency_stop\":%d,\"can_rx_count\":%lu,\"loop_max_us\":%lu,"
-               "\"telemetry_us_max\":%lu,\"telemetry_dropped\":%lu,\"wifi_clients\":%u}}\n",
+               "\"emergency_stop\":%d,\"can_rx_count\":%lu,\"mpu_ok\":%d,\"loop_max_us\":%lu,"
+               "\"telemetry_us_max\":%lu,\"telemetry_dropped\":%lu,\"wifi_ap\":%u,\"wifi_clients\":%u}}\n",
             m.motor_esq_speed, m.motor_dir_speed, m.rpm_esq, m.rpm_dir,
             m.relay1 ? 1 : 0, m.relay2 ? 1 : 0, m.estado_relays, m.carregador ? 1 : 0,
-            m.emergency_stop ? 1 : 0, (unsigned long)m.can_rx_count, (unsigned long)periodo_max_us,
-            (unsigned long)publicar_max_us, (unsigned long)(descartadas_cola + descartadas_red),
-            clientes_activos);
+            m.emergency_stop ? 1 : 0, (unsigned long)m.can_rx_count, m.mpu_ok ? 1 : 0,
+            (unsigned long)periodo_max_us, (unsigned long)publicar_max_us,
+            (unsigned long)(descartadas_cola + descartadas_red), estado_ap, clientes_activos);
 
     periodo_max_us = 0;
     publicar_max_us = 0;

@@ -105,7 +105,7 @@ FIRMWARE_V1 = ('{"v":1,"type":"telemetry","node":"esp32","session":"1a2b3c4d5e6f
                '"brake":0,"gear":"N","mode":"DIF","can_rx_age_ms":12,"yaw_dps":-0.3,"pwm_left_raw":255,'
                '"pwm_right_raw":255,"rpm_rl":0,"rpm_rr":0,"relay1":0,"relay2":0,"relay_seq":0,'
                '"charger_connected":0,"emergency_stop":0,"can_rx_count":53,"loop_max_us":1180,'
-               '"telemetry_us_max":95,"telemetry_dropped":0,"wifi_clients":1}}')
+               '"mpu_ok":1,"telemetry_us_max":95,"telemetry_dropped":0,"wifi_ap":1,"wifi_clients":1}}')
 
 
 class WifiTests(unittest.TestCase):

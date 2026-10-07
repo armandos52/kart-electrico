@@ -23,7 +23,11 @@ Copia de trabajo según [[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versione
 ## Entorno fijado
 
 - **Plataforma:** pioarduino `55.03.311` (core Arduino-ESP32 **3.3.11**, ESP-IDF 5.5), placa `esp32dev`, flash DIO 80 MHz 4 MB, particiones `default.csv`. Coincide con la imagen grabada.
-- **Bibliotecas:** `coryjfowler/mcp_can@1.5.1` y `electroniccats/MPU6050@1.4.5`. La entrega no incluía bibliotecas; se eligieron por la API usada (`MCP_ANY`, `MCP_8MHZ`, `getRotation`).
+- **Bibliotecas:**
+  - `coryjfowler/mcp_can` 1.5.1, **copiada en `lib/mcp_can`** con el DLC limitado a 8 ([[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0005_mcp_can_desborda_con_dlc_mayor_8|PROB-0005]]).
+  - `electroniccats/MPU6050@1.4.5`.
+  - La entrega no incluía bibliotecas; se eligieron por la API usada (`MCP_ANY`, `MCP_8MHZ`, `getRotation`).
+- **`CORE_DEBUG_LEVEL=0`**, igual que la imagen original: sin registros de error del core por el puerto serie.
 - **Herramientas:** PlatformIO 6.2.0 y esptool 5.4.0 en `%USERPROFILE%\.venvs\kart-esp32` (Python 3.12).
 - **Diferencia con lo grabado:** lo grabado se hizo con core 3.3.10 desde Arduino IDE. pioarduino no tiene versión 3.3.10.
 
@@ -75,4 +79,8 @@ Panel existente por Wi-Fi: `..\..\panel_local\iniciar.ps1 -Python <python> -Wifi
 
 - La red no demuestra el estado del kart: **perder la telemetría no significa que el kart se haya parado.**
 - Wi-Fi añade consumo, con picos de cientos de mA. Si la alimentación del ESP32 es justa, puede haber resets por *brownout*; la cabecera TCP lo indicaría como `reset=brownout_tension`.
-- Compila; **no está probado en la placa** hasta el ensayo registrado en VERSIONES.
+- **v1.1 probada en banco** ([[06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi|ENS-0001]]): USB y Wi-Fi sin saltos, pérdida y reconexión correctas.
+  - `loop()` sin cliente: mediana 1,15 ms.
+  - Con cliente TCP: mediana 2,7 ms y máximo 3,7 ms.
+  - Todavía **sin tráfico CAN real ni MPU**: los mandos no se han visto llegar.
+- Señales `wifi_ap` (AP creado) y `mpu_ok` (MPU respondió al arrancar). Sin MPU no se publica `yaw_dps`.
