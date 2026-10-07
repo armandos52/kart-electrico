@@ -1,0 +1,9 @@
+{
+  "v11_full_frame_bytes": 601,
+  "v11_capacity": 640,
+  "v11_would_drop": false,
+  "v12_full_frame_bytes": 808,
+  "v12_capacity": 1536,
+  "panel_accepts_all_signals": true,
+  "scope": "Literales de formato del fuente; extremos de representación. No prueba CAN físico."
+}

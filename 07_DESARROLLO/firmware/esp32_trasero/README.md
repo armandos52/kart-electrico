@@ -6,6 +6,16 @@ resumen: Proyecto PlatformIO del ESP32 trasero — partes, entorno fijado, coman
 
 # ESP32 trasero — proyecto de trabajo
 
+**Estado actual: v1.2 de diagnóstico grabada y probada solo con el módulo fuera del kart**, [ENS-0003](../../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md). La imagen original restaurada recuperó el funcionamiento según Armando ([ENS-0002](../../../06_TRABAJO/ensayos/ENS-0002_recuperacion_esp32_tras_prueba_kart.md)); permanece respaldada. Este fuente reconstruido no equivale de forma demostrada al binario original. La causa de la regresión de marcha de v1.1 permanece en [PROB-0006](../../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md).
+
+## Cambios de v1.2 y límites
+
+Wi-Fi/diagnóstico se inician antes de esperar al CAN: fase, intentos y relés visibles incluso sin MCP2515. El control sigue esperando a que CAN inicie correctamente; RPM/PWM no se publican antes de terminar su configuración. Trama con `control_ready`, `can_init_ok`, `can_init_attempts`, `control_state`, `drive_inhibit`, `start_requested`, `drive_direction` y `reset_reason`. Buffer 1536 y TX USB 2048. La trama completa evaluada ocupa 808 B y el panel reconoce todas sus señales.
+
+Lecturas CAN con resultado de error no se interpretan como mandos. Si el MPU no respondió al arrancar, se omiten sus lecturas/calibración y guiñada de telemetría; ESC ordena parada, sin sustituirlo automáticamente por otro modo. `mpu_ok` no detecta desconexiones posteriores. Se conservan PWM, geometría, secuencia de relés y timeout CAN 100 ms. La trama CAN 0x123 conserva su formato y todavía carece de bandera de validez del MPU.
+
+USB/Wi-Fi con CAN ausente: 321 muestras USB y 129/43/43 TCP, sin saltos, JSON inválidos ni reinicios. Cadencia observada durante espera: 200/306 ms. **CAN real, periodo del control, MPU, alimentación del kart y motores pendientes.** Fuente/ELF/binario, resultados y recuperación documentados en ENS-0003. Usar el panel actualizado de esta sesión en `http://127.0.0.1:8766/`.
+
 Copia de trabajo según [[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_ensayos|DEC-0001]].
 - Historial: [[07_DESARROLLO/firmware/VERSIONES|VERSIONES]].
 - Respaldo previo de la placa: [[07_DESARROLLO/respaldos/esp32/2026-10-07_180133/RESPALDO|2026-10-07]].

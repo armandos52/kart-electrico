@@ -8,6 +8,23 @@ resumen: Lo conocido, lo pendiente y el siguiente paso del proyecto; traspaso en
 
 Última actualización: 2026-10-07.
 
+## v1.2 de diagnóstico, panel y regla del relatório · 07-10-2026 (noche)
+
+- Armando confirma que **la imagen original restaurada recuperó la marcha del kart**. Comparación declarada por el usuario; causa de la regresión v1.1 abierta en [PROB-0006](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md).
+- **Grabado ahora: `esp32_trasero-v1.2-diagnostico`**, commit `905b09e`, etiqueta `esp32-trasero-v1.2-diagnostico`. Solo módulo ESP32 fuera del kart por USB. La imagen original estable confirmada sigue respaldada.
+- [ENS-0003](../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md): red y diagnóstico disponibles incluso sin CAN; USB 321 tramas y TCP 129/43/43, sin saltos, JSON inválidos ni reinicios. Relés ordenados apagados; no se publican RPM/PWM antes de inicializar control. Integración y motores de v1.2 **pendientes**.
+- Panel actualizado: **http://127.0.0.1:8766/**, conectado a COM4 en lectura. Resumen de señales, diagnóstico, todas las señales/búsqueda, gráficas, rodadura y dirección estimada sin calibrar. 13 tests y QA Chrome pasados. La instancia anterior en 8765 queda desconectada; utilizar 8766. Desconectar desde el panel antes de grabar o trasladar el módulo.
+- Cambios de control acotados: validación de éxito CAN y parada de ESC si el MPU no respondió al arrancar; constantes, tiempos de relés y timeout 100 ms conservados. Revisar límites de ENS-0003 antes de integración.
+- Regla permanente en [AGENTS.md](../AGENTS.md), [DEC-0003](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0003_trazabilidad_para_relatorio.md) y [diario para el relatório](../06_TRABAJO/DIARIO_PARA_RELATORIO.md): documentar motivos, configuración, versiones, métodos, datos, resultados positivos/negativos, hipótesis y límites. Binario/ELF v1.2 preservados fuera del repo público; sin push.
+
+## Incidencia en el kart y recuperación · 07-10-2026 (noche)
+
+- Armando declara que, al probar v1.1 en el kart, los motores no funcionaron y no pudo ver el panel. Causa sin confirmar; no hay captura en el vehículo.
+- Ahora **solo el módulo ESP32 está fuera del kart, por USB**. El USB tuvo error de descriptor; volvió a aparecer como CP210x COM4. Repite `CAN init failed`, esperable al no tener conectado el MCP2515.
+- [ENS-0002](../06_TRABAJO/ensayos/ENS-0002_recuperacion_esp32_tras_prueba_kart.md): **grabada ahora la imagen original**, restauración de 4 MB verificada por `verify-flash`. Flash v1.1 previa preservada en dos lecturas idénticas (`2026-10-07_212814`). Motores pendientes de comprobación física; causa sin confirmar.
+- Panel corregido e iniciado en `http://127.0.0.1:8765/`: Wi-Fi disponible por defecto, Intel AMT excluido, diagnóstico ESP32 inicial y rótulos USB/TCP correctos. 10 tests y QA Chrome pasados. **COM4 abierto solo en lectura por el panel**, mostrando reintentos CAN sin el MCP2515. Desconectar en el panel antes de grabar o trasladar la placa.
+- **La imagen original no incluye la telemetría Wi-Fi de v1.1.** Prioridad: recuperar y comprobar funcionamiento anterior antes de volver a grabar telemetría.
+
 ## ESP32 trasero: respaldo, entorno y telemetría Wi-Fi · 07-10-2026 (tarde)
 
 Rama `firmware/esp32-telemetria-wifi`. Commits locales, sin push.
@@ -21,9 +38,9 @@ Rama `firmware/esp32-telemetria-wifi`. Commits locales, sin push.
 - **Firmware:**
   - [[07_DESARROLLO/firmware/esp32_trasero/README|PlatformIO]] (pioarduino 55.03.311, core 3.3.11, bibliotecas fijadas). Abierto en VS Code.
   - v0 = fuente entregado (etiqueta `esp32-trasero-v0`) y compila.
-  - v1 = telemetría de solo lectura (SoftAP WPA2 + TCP 3333 + USB). Compila, **no grabada ni ensayada**.
+  - v1 = telemetría de solo lectura (SoftAP WPA2 + TCP 3333 + USB). Se grabó en ENS-0001 y sufrió panic; corregido el desbordamiento en v1.1.
 - **Panel:** acepta `--wifi socket://192.168.4.1:3333`. 10 tests en verde.
-- **Grabado ahora: v1.1** (etiqueta `esp32-trasero-v1.1`). [[06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi|ENS-0001]] en banco:
+- **Grabado durante el ensayo: v1.1** (etiqueta `esp32-trasero-v1.1`; restaurada después la imagen original en ENS-0002). [[06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi|ENS-0001]] en banco:
   - USB y Wi-Fi sin saltos; pérdida y reconexión correctas.
   - `loop()` ≤ 3,7 ms con cliente TCP.
 - **La v1 se colgaba** por un fallo previo de mcp_can con DLC > 8: [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0005_mcp_can_desborda_con_dlc_mayor_8|PROB-0005]], corregido en v1.1.
