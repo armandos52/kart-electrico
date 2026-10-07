@@ -16,7 +16,7 @@ Regla ([[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_e
 | Versión | Fecha | Cambios | Compila | Grabada en el kart | Ensayo |
 |---|---|---|---|---|---|
 | v0 | 2026-10-07 | Fuente entregado sin cambios (SHA-256 `fab150ea…b0a32e`, igual a `02_ORIGINALES/.../ESP32-final.ino`) + `platformio.ini` | Sí: pioarduino 55.03.311, core 3.3.11, mcp_can 1.5.1, MPU6050 1.4.5. Imagen 346 544 B | No: lo que hay en la placa es la imagen del [[07_DESARROLLO/respaldos/esp32/2026-10-07_180133/RESPALDO\|respaldo 2026-10-07]] (core 3.3.10, 345 808 B), compatible con v0 pero no demostrado idéntico | — |
-| v1-telemetria | 2026-10-07 | Telemetría de solo lectura: SoftAP WPA2 + TCP 3333 + JSON por USB. Ver `esp32_trasero/README.md` | Pendiente | No | Pendiente |
+| v1-telemetria | 2026-10-07 | Telemetría de solo lectura: SoftAP WPA2 + TCP 3333 + JSON por USB; 6 enganches `// v1` en el `.ino`, control sin cambios. Ver `esp32_trasero/README.md` | Sí: imagen 993 680 B, SHA-256 `8c69929a…6fb95f9d` (con `secretos.h` local) | No | Pendiente: grabación por USB y ensayo en banco |
 
 **Imagen extraída frente a v0:**
 - La «imagen extraída» es el binario leído de la placa.
