@@ -2,6 +2,7 @@
 #include <mcp_can.h>
 #include <Wire.h>
 #include <MPU6050.h>
+#include "telemetria.h"  // v1: telemetría de solo lectura
 
 #define CAN_CS_PIN 5
 #define SPI_MOSI   23
@@ -64,6 +65,7 @@ int motor_dir_speed = 255;
 
 bool command_received = false;
 bool emergency_stop = false;
+uint32_t can_rx_count = 0;  // v1: órdenes 0x100 válidas recibidas (diagnóstico)
 
 volatile uint32_t pulsos_esq = 0;
 volatile uint32_t pulsos_dir = 0;
@@ -234,6 +236,7 @@ void setup() {
   digitalWrite(RELAY1_PIN, LOW); 
   digitalWrite(RELAY2_PIN, LOW);
 
+  Serial.setTxBufferSize(1024);  // v1: escritura serie sin esperar (antes de begin)
   Serial.begin(115200);
   SPI.begin(SPI_SCK, SPI_MISO, SPI_MOSI, CAN_CS_PIN);
 
@@ -294,6 +297,7 @@ void setup() {
   pararMotores();
   last_ramp_time = millis();
   Serial.println("KART ELÉTRICO - DIF | ESC | BLQ");
+  telemetria_iniciar();  // v1
 }
 
 void loop() {
@@ -363,6 +367,7 @@ void loop() {
 
       processarSequenciaRelays(start_stop == 1);
       command_received = true; emergency_stop = false;
+      can_rx_count++;  // v1
       last_command_time = current_time;
       processarComando();
     }
@@ -383,6 +388,34 @@ void loop() {
     last_tx_time = current_time;
     enviarRPM();
   }
+
+  if (telemetria_toca(current_time)) tomarMuestra(current_time);  // v1: solo lectura
+}
+
+// v1: copia de variables para la telemetría; no escribe ninguna variable del control.
+void tomarMuestra(unsigned long current_time) {
+  MuestraKart m;
+  m.tick_ms = current_time;
+  m.mandos_validos = command_received;
+  m.acelerador_raw = acelerador_raw;
+  m.direcao_raw = direcao_raw;
+  m.travao = travao;
+  m.modo_d = modo_d;
+  m.modo_r = modo_r;
+  m.modo_controlo = modo_controlo;
+  m.motor_esq_speed = motor_esq_speed;
+  m.motor_dir_speed = motor_dir_speed;
+  m.rpm_esq = rpm_esq;
+  m.rpm_dir = rpm_dir;
+  m.yaw_rate = yaw_rate;
+  m.relay1 = digitalRead(RELAY1_PIN) == HIGH;  // estado ordenado (salida), no medido
+  m.relay2 = digitalRead(RELAY2_PIN) == HIGH;
+  m.estado_relays = (uint8_t)estado_relays;
+  m.carregador = digitalRead(PIN_CARREGADOR) == HIGH;  // nivel del pin, como lo interpreta loop()
+  m.emergency_stop = emergency_stop;
+  m.can_rx_age_ms = command_received ? (uint32_t)(current_time - last_command_time) : 0;
+  m.can_rx_count = can_rx_count;
+  telemetria_publicar(m);
 }
 
 void processarSequenciaRelays(bool start_pressed) {

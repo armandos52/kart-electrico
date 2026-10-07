@@ -28,6 +28,17 @@ Ejemplo sintético de una muestra, no medición del kart:
 | `gear`, `mode` | N/D/R y DIF/ESC/BLQ |
 | `soc_pct`, `battery_v`, `battery_a`, `battery_temp_c` | %, V, A y °C reportados; protocolo BMS y signo de corriente por verificar |
 | `can_rx_age_ms` | milisegundos desde la última orden recibida según el micro |
+| `accelerator_raw`, `steer_raw` | cuentas recibidas en CAN 0x100 por el ESP32 (sin convertir) |
+| `relay_seq`, `emergency_stop` | estado 0–3 de la secuencia de relés del ESP32; 1 = parada por timeout CAN de 100 ms |
+| `can_rx_count` | órdenes 0x100 válidas recibidas desde el arranque |
+| `loop_max_us`, `telemetry_us_max` | periodo máximo de `loop()` y coste de publicar la telemetría dentro de él (µs) |
+| `telemetry_dropped`, `wifi_clients` | tramas descartadas (cola llena o cliente lento) y clientes TCP conectados |
+
+**Transportes:**
+- **USB serie (115200):** el de siempre.
+- **TCP:** el ESP32 trasero v1 actúa como punto de acceso y escucha en `socket://192.168.4.1:3333`. El panel la añade con `--wifi socket://IP:PUERTO`, solo con IP privada, y la lee como un puerto más, sin transmitir.
+
+Primer emisor implementado en `07_DESARROLLO/firmware/esp32_trasero` (v1). Está **compilado y pendiente de ensayo en la placa**.
 
 Los rangos en `server.py` solo validan representación de datos. No autorizan actuaciones ni son límites seguros del kart. Se rechazan valores no finitos, fuera de representación o booleanos donde se exige entero.
 

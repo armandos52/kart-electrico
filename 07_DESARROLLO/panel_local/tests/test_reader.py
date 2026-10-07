@@ -1,10 +1,14 @@
+import argparse
 import json
 from pathlib import Path
+import socket
 import sys
 import tempfile
+import threading
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import server
 from server import Monitor
 
 
@@ -94,6 +98,69 @@ class ReaderTests(unittest.TestCase):
             data=json.loads(target.read_text(encoding="utf-8").splitlines()[0])
             self.assertEqual(data["frame"]["tick_ms"],100)
             self.assertIn("received_utc",data)
+
+
+FIRMWARE_V1 = ('{"v":1,"type":"telemetry","node":"esp32","session":"1a2b3c4d5e6f7081","seq":7,"tick_ms":5400,'
+               '"fw":"esp32_trasero-v1-telemetria","signals":{"accelerator_raw":0,"accelerator_pct":0,"steer_raw":2047,'
+               '"brake":0,"gear":"N","mode":"DIF","can_rx_age_ms":12,"yaw_dps":-0.3,"pwm_left_raw":255,'
+               '"pwm_right_raw":255,"rpm_rl":0,"rpm_rr":0,"relay1":0,"relay2":0,"relay_seq":0,'
+               '"charger_connected":0,"emergency_stop":0,"can_rx_count":53,"loop_max_us":1180,'
+               '"telemetry_us_max":95,"telemetry_dropped":0,"wifi_clients":1}}')
+
+
+class WifiTests(unittest.TestCase):
+    def tearDown(self):
+        server.WIFI_URLS.clear()
+
+    def test_firmware_v1_frame_is_fully_known(self):
+        monitor = Monitor(clock=lambda: 0)
+        monitor.ingest(FIRMWARE_V1)
+        self.assertEqual(monitor.stats["valid_frames"], 1)
+        self.assertEqual(monitor.stats["unknown_signals"], 0)
+        self.assertEqual(monitor.samples["loop_max_us"]["value"], 1180)
+
+    def test_wifi_url_accepts_only_private_socket_addresses(self):
+        self.assertEqual(server.wifi_url("socket://192.168.4.1:3333"), "socket://192.168.4.1:3333")
+        for bad in ["socket://8.8.8.8:3333", "http://192.168.4.1:3333", "socket://192.168.4.1:0", "socket://kart:3333"]:
+            with self.assertRaises(argparse.ArgumentTypeError):
+                server.wifi_url(bad)
+
+    def test_tcp_source_reads_lines_never_transmits_and_detects_disconnection(self):
+        listener = socket.socket()
+        listener.bind(("127.0.0.1", 0))
+        listener.listen(1)
+        url = "socket://127.0.0.1:%d" % listener.getsockname()[1]
+        server.WIFI_URLS.append(url)
+        received = []
+
+        def esp32():
+            conn, _ = listener.accept()
+            conn.sendall(b"# kart esp32 fw=v1 reset=encendido\n" + FIRMWARE_V1.encode() + b"\n"
+                         + FIRMWARE_V1.replace('"seq":7', '"seq":8').encode() + b"\n")
+            conn.settimeout(0.5)
+            try:
+                while True:
+                    data = conn.recv(64)
+                    if not data:
+                        break
+                    received.append(data)
+            except socket.timeout:
+                pass
+            conn.close()
+
+        thread = threading.Thread(target=esp32)
+        thread.start()
+        with tempfile.TemporaryDirectory() as directory:
+            monitor = Monitor(session_dir=directory)
+            self.assertIn(url, [p["device"] for p in server.port_inventory()])
+            monitor.connect(url, True)
+            thread.join(timeout=3)
+            monitor.worker.join(timeout=3)
+            self.assertEqual(monitor.stats["valid_frames"], 2)
+            self.assertEqual(monitor.status, "disconnected")
+            self.assertEqual(received, [], "El lector no debe transmitir al ESP32")
+            self.assertTrue(any("reset=encendido" in m["text"] for m in monitor.messages))
+        listener.close()
 
 
 if __name__ == "__main__":

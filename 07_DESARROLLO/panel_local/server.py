@@ -5,9 +5,11 @@ import argparse
 from collections import deque
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import ipaddress
 import json
 import math
 from pathlib import Path
+import re
 import secrets
 import sys
 import threading
@@ -46,15 +48,42 @@ SIGNALS = {
     "can_rx_age_ms": ("Edad de orden CAN", "ms", 0, 4294967295, 1500),
     "gear": ("Marcha", "", {"N", "D", "R"}, None, 1500),
     "mode": ("Modo diferencial", "", {"DIF", "ESC", "BLQ"}, None, 1500),
+    # Diagnóstico del ESP32 trasero v1 (07_DESARROLLO/firmware/esp32_trasero).
+    "accelerator_raw": ("Acelerador recibido por CAN", "cuentas", 0, 65535, 1500),
+    "steer_raw": ("Dirección recibida por CAN", "cuentas", 0, 65535, 1500),
+    "relay_seq": ("Secuencia de relés (0 apagado … 3 listo)", "", 0, 3, 1500),
+    "emergency_stop": ("Parada por timeout CAN", "", 0, 1, 1500),
+    "can_rx_count": ("Órdenes CAN 0x100 recibidas", "", 0, 4294967295, 1500),
+    "loop_max_us": ("Periodo máximo de loop()", "µs", 0, 4294967295, 1500),
+    "telemetry_us_max": ("Coste de telemetría en loop()", "µs", 0, 4294967295, 1500),
+    "telemetry_dropped": ("Tramas de telemetría descartadas", "", 0, 4294967295, 1500),
+    "wifi_clients": ("Clientes Wi-Fi conectados", "", 0, 8, 1500),
 }
-DISCRETE = {"brake", "relay1", "relay2", "charger_connected", "sd_ready", "pwm_left_raw", "pwm_right_raw", "can_rx_age_ms"}
+DISCRETE = {"brake", "relay1", "relay2", "charger_connected", "sd_ready", "pwm_left_raw", "pwm_right_raw", "can_rx_age_ms",
+            "accelerator_raw", "steer_raw", "relay_seq", "emergency_stop", "can_rx_count", "loop_max_us",
+            "telemetry_us_max", "telemetry_dropped", "wifi_clients"}
+
+# Fuentes TCP (Wi-Fi directo con el ESP32) añadidas con --wifi; solo direcciones privadas.
+WIFI_URLS = []
+WIFI_URL = re.compile(r"^socket://(\d{1,3}(?:\.\d{1,3}){3}):(\d{1,5})$")
+
+
+def wifi_url(text):
+    match = WIFI_URL.match(text)
+    if not match or not 0 < int(match.group(2)) < 65536:
+        raise argparse.ArgumentTypeError("Formato: socket://IP:PUERTO, p. ej. socket://192.168.4.1:3333")
+    if not ipaddress.ip_address(match.group(1)).is_private:
+        raise argparse.ArgumentTypeError("Solo direcciones privadas (red directa del kart)")
+    return text
 
 
 def port_inventory():
     if list_ports is None:
         return []
     return [{"device": p.device, "description": p.description, "hwid": p.hwid}
-            for p in list_ports.comports()]
+            for p in list_ports.comports()] + \
+           [{"device": url, "description": "Wi-Fi directo ESP32 (TCP, solo lectura)", "hwid": "socket"}
+            for url in WIFI_URLS]
 
 
 class Monitor:
@@ -203,12 +232,18 @@ class Monitor:
         with self.connection_lock:
             if self.worker and self.worker.is_alive():
                 raise ValueError("Ya hay una lectura abierta; desconecta primero")
-            handle = serial.Serial(port=None, baudrate=115200, timeout=0.2, write_timeout=0.2,
-                                   xonxoff=False, rtscts=False, dsrdtr=False)
-            # No transmitir bytes; DTR/RTS desactivados antes de abrir. El driver puede generar un pulso.
-            handle.dtr = False
-            handle.rts = False
-            handle.port = port
+            if port in WIFI_URLS:
+                # TCP: mismo flujo de líneas JSON que por USB; no hay líneas DTR/RTS ni reset.
+                handle = serial.serial_for_url(port, do_not_open=True, timeout=0.2, write_timeout=0.2)
+                description = port + " (Wi-Fi)"
+            else:
+                handle = serial.Serial(port=None, baudrate=115200, timeout=0.2, write_timeout=0.2,
+                                       xonxoff=False, rtscts=False, dsrdtr=False)
+                # No transmitir bytes; DTR/RTS desactivados antes de abrir. El driver puede generar un pulso.
+                handle.dtr = False
+                handle.rts = False
+                handle.port = port
+                description = port + " a 115200 bit/s"
             try:
                 handle.open()
                 self.session_dir.mkdir(parents=True, exist_ok=True)
@@ -231,7 +266,7 @@ class Monitor:
                 self.log = log
                 self.session_file = session_name
                 self.stop.clear()
-            self.event("Lectura abierta en " + port + " a 115200 bit/s; sin TX al micro", "connection")
+            self.event("Lectura abierta en " + description + "; sin TX al micro", "connection")
             self.worker = threading.Thread(target=self._read_loop, args=(handle,), daemon=True)
             self.worker.start()
 
@@ -352,7 +387,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--list-ports", action="store_true")
+    parser.add_argument("--wifi", type=wifi_url, action="append", default=[], metavar="socket://IP:PUERTO",
+                        help="Añade una fuente TCP del ESP32 (p. ej. socket://192.168.4.1:3333)")
     args = parser.parse_args()
+    WIFI_URLS.extend(args.wifi)
     if args.list_ports:
         print(json.dumps({"ports": port_inventory(), "serial_available": serial is not None}, ensure_ascii=False))
         return

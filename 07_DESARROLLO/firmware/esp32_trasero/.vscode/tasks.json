@@ -1,0 +1,35 @@
+{
+  // Tareas con el PlatformIO del entorno aislado (%USERPROFILE%\.venvs\kart-esp32).
+  // Ctrl+Shift+P > "Tasks: Run Task". Grabar solo tras coordinar el banco.
+  "version": "2.0.0",
+  "options": { "env": { "PIO": "${env:USERPROFILE}\\.venvs\\kart-esp32\\Scripts\\pio.exe" } },
+  "tasks": [
+    {
+      "label": "Kart: compilar",
+      "type": "shell",
+      "command": "& $env:PIO run -e usb",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "Kart: grabar por USB (COM4)",
+      "type": "shell",
+      "command": "& $env:PIO run -e usb -t upload",
+      "problemMatcher": []
+    },
+    {
+      "label": "Kart: monitor USB",
+      "type": "shell",
+      "command": "& $env:PIO device monitor -e usb",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Kart: monitor Wi-Fi (socket://192.168.4.1:3333)",
+      "type": "shell",
+      "command": "& $env:PIO device monitor -e wifi",
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}
