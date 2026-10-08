@@ -6,7 +6,7 @@ resumen: Proyecto PlatformIO del ESP32 trasero — partes, entorno fijado, coman
 
 # ESP32 trasero — proyecto de trabajo
 
-**Estado actual: v1.2 de diagnóstico grabada y probada solo con el módulo fuera del kart**, [ENS-0003](../../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md). La imagen original restaurada recuperó el funcionamiento según Armando ([ENS-0002](../../../06_TRABAJO/ensayos/ENS-0002_recuperacion_esp32_tras_prueba_kart.md)); permanece respaldada. Este fuente reconstruido no equivale de forma demostrada al binario original. La causa de la regresión de marcha de v1.1 permanece en [PROB-0006](../../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md).
+**Estado actual: Armando confirma el 08-10-2026 una prueba real satisfactoria en el kart con motores**, [ENS-0004](../../../06_TRABAJO/ensayos/ENS-0004_prueba_real_motores_confirmada.md), tras la grabación de v1.2 de diagnóstico. La versión se vincula por continuidad de la sesión; no se recibieron identificación durante la prueba ni logs. Banco USB/Wi-Fi documentado en [ENS-0003](../../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md). La imagen original restaurada también recuperó el funcionamiento según Armando ([ENS-0002](../../../06_TRABAJO/ensayos/ENS-0002_recuperacion_esp32_tras_prueba_kart.md)); permanece respaldada. Este fuente reconstruido no equivale de forma demostrada al binario original. La causa de la regresión de marcha de v1.1 permanece en [PROB-0006](../../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md).
 
 ## Cambios de v1.2 y límites
 
@@ -14,7 +14,7 @@ Wi-Fi/diagnóstico se inician antes de esperar al CAN: fase, intentos y relés v
 
 Lecturas CAN con resultado de error no se interpretan como mandos. Si el MPU no respondió al arrancar, se omiten sus lecturas/calibración y guiñada de telemetría; ESC ordena parada, sin sustituirlo automáticamente por otro modo. `mpu_ok` no detecta desconexiones posteriores. Se conservan PWM, geometría, secuencia de relés y timeout CAN 100 ms. La trama CAN 0x123 conserva su formato y todavía carece de bandera de validez del MPU.
 
-USB/Wi-Fi con CAN ausente: 321 muestras USB y 129/43/43 TCP, sin saltos, JSON inválidos ni reinicios. Cadencia observada durante espera: 200/306 ms. **CAN real, periodo del control, MPU, alimentación del kart y motores pendientes.** Fuente/ELF/binario, resultados y recuperación documentados en ENS-0003. Usar el panel actualizado de esta sesión en `http://127.0.0.1:8766/`.
+USB/Wi-Fi con CAN ausente: 321 muestras USB y 129/43/43 TCP, sin saltos, JSON inválidos ni reinicios. Cadencia observada durante espera: 200/306 ms. **Funcionamiento de motores confirmado por el usuario en ENS-0004; mediciones de CAN, periodo del control, MPU y alimentación pendientes.** Fuente/ELF/binario, resultados y recuperación documentados en ENS-0003. Usar el panel actualizado de esta sesión en `http://127.0.0.1:8766/`.
 
 Copia de trabajo según [[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_ensayos|DEC-0001]].
 - Historial: [[07_DESARROLLO/firmware/VERSIONES|VERSIONES]].

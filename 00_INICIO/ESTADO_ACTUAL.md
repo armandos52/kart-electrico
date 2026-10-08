@@ -1,12 +1,20 @@
 ---
 estado: vigente
-actualizado: 2026-10-07
+actualizado: 2026-10-08
 resumen: Lo conocido, lo pendiente y el siguiente paso del proyecto; traspaso entre sesiones.
 ---
 
 # Estado actual
 
-Última actualización: 2026-10-07.
+Última actualización: 2026-10-08.
+
+## Prueba real con motores satisfactoria · confirmación 08-10-2026
+
+- **Armando confirma que la prueba real en el kart con los motores funcionó bien.** Registrado en [ENS-0004](../06_TRABAJO/ensayos/ENS-0004_prueba_real_motores_confirmada.md) y en el [diario para el relatório](../06_TRABAJO/DIARIO_PARA_RELATORIO.md) como comprobación funcional declarada por el usuario.
+- Versión de referencia: última imagen grabada `esp32_trasero-v1.2-diagnostico`, commit `905b09e`; no se comunicó otra grabación ni se recibió identificación del firmware durante esta prueba. El USB no es accesible instalado; la observación integrada se prepara por Wi-Fi.
+- Funcionamiento básico de motores confirmado; no se adjuntaron logs, duración, modos ni condiciones detalladas. La caracterización de CAN/MPU/alimentación/control y la recepción del panel en el kart siguen pendientes de datos. [PROB-0006](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md) conserva abierta la causa de la regresión v1.1, con resultado funcional favorable registrado para la continuación v1.2.
+
+Las secciones siguientes conservan el estado al terminar cada fase anterior; ENS-0004 actualiza el resultado funcional en el kart.
 
 ## v1.2 de diagnóstico, panel y regla del relatório · 07-10-2026 (noche)
 

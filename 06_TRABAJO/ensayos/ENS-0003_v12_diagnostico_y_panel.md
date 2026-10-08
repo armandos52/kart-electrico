@@ -1,12 +1,14 @@
 ---
-estado: banco y software verificados; integración en kart pendiente
-actualizado: 2026-10-07
+estado: banco y software verificados; continuación funcional en ENS-0004
+actualizado: 2026-10-08
 resumen: ESP32 v1.2 observado por USB/Wi-Fi sin MCP2515 y panel mejorado con diagnóstico, resumen, señales y animaciones verificadas.
 ---
 
 # ENS-0003 · v1.2 de diagnóstico y panel de telemetría
 
 Fecha: 07-10-2026. Referencia: [ENS-0001](ENS-0001_telemetria_esp32_usb_wifi.md), [recuperación ENS-0002](ENS-0002_recuperacion_esp32_tras_prueba_kart.md), [PROB-0006](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md).
+
+**Seguimiento del 08-10-2026:** Armando confirma prueba real satisfactoria en el kart con motores; registro separado en [ENS-0004](ENS-0004_prueba_real_motores_confirmada.md). Este ensayo ENS-0003 conserva los datos y límites del banco sin CAN del 07-10; su siguiente ensayo, descrito al final, era el pendiente al terminar esa fase.
 
 ## Objetivo y configuración
 

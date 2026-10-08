@@ -1,7 +1,7 @@
 ---
 estado: abierto
-actualizado: 2026-10-07
-resumen: El usuario declara fallo de marcha con v1.1 y recuperación con la imagen original. Causa pendiente; v1.2 añade diagnóstico observable.
+actualizado: 2026-10-08
+resumen: Fallo con v1.1, recuperación con imagen original y prueba real con motores satisfactoria tras preparar v1.2, según el usuario. Causa de la regresión pendiente.
 ---
 
 # PROB-0006 · Fallo de marcha al pasar a v1.1
@@ -24,7 +24,7 @@ resumen: El usuario declara fallo de marcha con v1.1 y recuperación con la imag
 
 [ENS-0003](../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md), v1.2: red y diagnóstico antes del inicio CAN; estado de inicialización, intentos, recepción CAN, START, motivo de parada, marcha ordenada y reset. No se modifican constantes de PWM, geometría, protocolo 0x100/0x123 ni timeout CAN de 100 ms. Se valida el resultado de lecturas CAN y se impide usar ESC cuando el MPU no respondió al arrancar.
 
-La v1.2 pasa USB/Wi-Fi con el módulo solo y CAN ausente; **esto no demuestra que haya corregido la regresión de marcha**. El problema permanece abierto.
+La v1.2 pasa USB/Wi-Fi con el módulo solo y CAN ausente en ENS-0003. El 08-10-2026 Armando confirma que **la prueba real en el kart con motores funcionó bien**, [ENS-0004](../../06_TRABAJO/ensayos/ENS-0004_prueba_real_motores_confirmada.md), vinculada a la última v1.2 grabada por continuidad de la sesión. No se aportaron logs ni una identificación de versión durante esa prueba. El funcionamiento básico con motores queda confirmado por el usuario; el problema permanece abierto respecto a la **causa del fallo v1.1**, sin atribuir la mejora a una hipótesis concreta.
 
 ## Ensayo necesario
 

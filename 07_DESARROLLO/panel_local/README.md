@@ -26,7 +26,7 @@ Armando indica que el USB no es accesible con el módulo instalado. Las pruebas 
 4. Elegir «Wi-Fi directo ESP32», confirmar la preparación del banco y pulsar «Leer por Wi-Fi». Mantener desactivada la demostración visual.
 5. Comprobar versión, estado CAN/control y recepción de mandos; conservar el JSONL. `can_wait` indica que CAN todavía no inicializa. Una red visible por sí sola no valida el control ni los motores.
 
-v1.2 todavía necesita este ensayo integrado. Si el panel estaba conectado por USB, desconectarlo antes de retirar el módulo; no conectar ambas fuentes simultáneamente.
+El 08-10-2026 Armando confirma prueba real satisfactoria con motores tras preparar v1.2, [ENS-0004](../../06_TRABAJO/ensayos/ENS-0004_prueba_real_motores_confirmada.md). No se adjuntó registro del panel de esa prueba; la captura integrada por Wi-Fi sigue pendiente de conservar. Si el panel estaba conectado por USB, desconectarlo antes de retirar el módulo; no conectar ambas fuentes simultáneamente.
 
 ## Leer el panel
 
@@ -37,7 +37,7 @@ v1.2 todavía necesita este ensayo integrado. Si el panel estaba conectado por U
 - Pausar animación detiene rodadura; dirección cambia sin transición. Se respeta movimiento reducido. La demo genera únicamente datos sintéticos y mantiene bloqueada la lectura del micro.
 - El panel guarda JSONL de lectura real. Horas visuales Europe/Lisbon; datos originales UTC. Los GPIO/relés/PWM son órdenes software, no prueba de tensión ni contacto físico.
 
-Validación: 13 tests Python, QA de Chrome y captura con placa real en `can_wait`. [ENS-0003](../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md) conserva datos, capturas y límites. El diagnóstico de v1.2 aún requiere integración estática con CAN/STM32 en el kart.
+Validación: 13 tests Python, QA de Chrome y captura con placa real en `can_wait`. [ENS-0003](../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md) conserva datos, capturas y límites. La prueba real con motores fue satisfactoria según Armando en ENS-0004; la verificación instrumentada del diagnóstico con CAN/STM32 en el kart sigue pendiente de datos.
 
 La dependencia pySerial 3.5 se ha instalado localmente en `.vendor/` (fuera de Git). Para otro ordenador, instalarla con el Python elegido:
 

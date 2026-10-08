@@ -1,6 +1,6 @@
 ---
 estado: vigente
-actualizado: 2026-10-07
+actualizado: 2026-10-08
 resumen: Índice y diario de evidencias para el relatório final de ingeniería del kart.
 ---
 
@@ -14,6 +14,7 @@ Regla permanente en [AGENTS.md](../AGENTS.md): documentar cambios y ensayos con 
 | 07-10-2026, tarde | Añadir telemetría USB/Wi-Fi de lectura | [ENS-0001](ensayos/ENS-0001_telemetria_esp32_usb_wifi.md): v1 sufrió panic; parche DLC de mcp_can en v1.1; transmisión y reconexión sin pérdidas en banco | Sin mandos CAN reales ni MPU operativo; no valida circulación |
 | 07-10-2026, noche | Recuperar funcionamiento tras prueba fallida con v1.1 | [ENS-0002](ensayos/ENS-0002_recuperacion_esp32_tras_prueba_kart.md): usuario declara motores sin funcionar con v1.1; imagen original restaurada y verificada en 4 MB; después confirma que el kart volvió a funcionar | Comparación funcional declarada por el usuario, sin logs en el kart. La causa de la regresión no está identificada |
 | 07-10-2026, noche | Regla documental y revisión v1.2/panel | [DEC-0003](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0003_trazabilidad_para_relatorio.md), regla en AGENTS; [ENS-0003](ensayos/ENS-0003_v12_diagnostico_y_panel.md), commit firmware `905b09e`: USB 321 y TCP 129/43/43 sin saltos/reinicios; diagnóstico disponible sin CAN; resumen, buscador, gráficas y animaciones, 13 tests y QA Chrome | Solo ESP32 fuera del kart por USB. Dirección ADC estimada sin calibrar. Prueba de motores/CAN/MPU/alimentación en el kart pendiente; [PROB-0006](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md) sigue abierto |
+| 08-10-2026, confirmación | Registrar prueba real con motores tras preparar v1.2 | [ENS-0004](ensayos/ENS-0004_prueba_real_motores_confirmada.md): Armando confirma que la prueba real en el kart con motores funcionó bien; última versión grabada de referencia `905b09e` | Resultado funcional declarado por el usuario. Fecha exacta del ensayo, duración, modos, identificación de versión durante la prueba y registros Wi-Fi no aportados; causa de la regresión v1.1 pendiente |
 
 ## Cómo utilizar las evidencias al redactar
 
