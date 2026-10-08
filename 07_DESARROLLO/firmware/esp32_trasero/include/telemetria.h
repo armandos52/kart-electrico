@@ -9,7 +9,7 @@
 
 #define TELEMETRIA_PUERTO_TCP   3333
 #define TELEMETRIA_PERIODO_MS   200
-#define TELEMETRIA_LINEA_MAX    1536
+#define TELEMETRIA_LINEA_MAX    2048
 #define TELEMETRIA_COLA         4
 
 // Copia de las variables del control en un instante. Los mandos CAN solo son válidos
@@ -35,7 +35,7 @@ struct MuestraKart {
     bool emergency_stop;
     uint32_t can_rx_age_ms;
     uint32_t can_rx_count;
-    bool mpu_ok;  // resultado de mpu.testConnection() en setup()
+    bool mpu_ok;  // v1.3: lectura reciente y calibración válida, no solo presencia al arrancar
     bool control_ready;
     bool can_init_ok;
     uint32_t can_init_attempts;
@@ -43,6 +43,13 @@ struct MuestraKart {
     const char *control_state;
     const char *drive_inhibit;
     const char *drive_direction;
+    uint8_t mode_applied;
+    bool rearm_required, reverse_limited, speed_valid;
+    float speed_kph, reverse_limit_kph;
+    bool frontend_health_seen, frontend_health_ok, watchdog_ok;
+    uint32_t can_rx_invalid, can_tx_errors, mpu_errors;
+    uint8_t can_error_flags;
+    uint16_t accel_adc, steer_adc;
 };
 
 // Arranca la tarea de red (no bloquea: el punto de acceso se crea dentro de la tarea).

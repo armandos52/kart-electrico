@@ -176,6 +176,8 @@ void telemetria_control_iniciado() {
 }
 
 void telemetria_publicar(const MuestraKart &m) {
+    // También hay llamadas directas durante inicio: no usar una cola que no se pudo crear.
+    if (cola == nullptr) return;
     uint32_t t0 = micros();
     Linea l;
     l.len = 0;
@@ -206,6 +208,14 @@ void telemetria_publicar(const MuestraKart &m) {
                 m.motor_esq_speed, m.motor_dir_speed, m.rpm_esq, m.rpm_dir, m.drive_direction,
                 (unsigned long)periodo_max_us);
     }
+    agregar(l, "\"mode_applied\":%u,\"rearm_required\":%d,\"reverse_limited\":%d,"
+               "\"speed_valid\":%d,\"speed_kph_max_wheel\":%.2f,\"reverse_limit_kph\":%.1f,"
+               "\"frontend_health_seen\":%d,\"frontend_health_ok\":%d,\"watchdog_ok\":%d,"
+               "\"can_rx_invalid\":%lu,\"can_tx_errors\":%lu,\"can_error_flags\":%u,\"mpu_errors\":%lu,",
+            m.mode_applied, m.rearm_required, m.reverse_limited, m.speed_valid, m.speed_kph, m.reverse_limit_kph,
+            m.frontend_health_seen, m.frontend_health_ok, m.watchdog_ok,
+            (unsigned long)m.can_rx_invalid, (unsigned long)m.can_tx_errors, m.can_error_flags, (unsigned long)m.mpu_errors);
+    if (m.frontend_health_seen) agregar(l, "\"accelerator_adc_physical\":%u,\"steer_adc_physical\":%u,", m.accel_adc, m.steer_adc);
     agregar(l, "\"relay1\":%d,\"relay2\":%d,\"relay_seq\":%u,\"charger_connected\":%d,"
                "\"emergency_stop\":%d,\"can_rx_count\":%lu,\"mpu_ok\":%d,"
                "\"telemetry_us_max\":%lu,\"telemetry_dropped\":%lu,\"wifi_ap\":%u,\"wifi_clients\":%u}}\n",

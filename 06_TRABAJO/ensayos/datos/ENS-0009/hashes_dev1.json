@@ -1,0 +1,11 @@
+{
+  "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp": "6bdebe657cda3c155e2cbe812c6c3ec3b2a575ccbbc13a944d4b540500a509c9",
+  "07_DESARROLLO/respaldos/esp32/v1.3-dev1/firmware.elf": "fc5e0f94ea36f0ded015ae965772ed0b73beaacb6b248274754be5538e4063ab",
+  "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h": "8a5be6ed5392b413c674832b35da577a4986320f393c90797be1aa6d0961b975",
+  "07_DESARROLLO/firmware/esp32_trasero/platformio.ini": "b7db34735a6e2c7862c666880357bd81ff6ed8d2a93ff0d87f21c3eb439f9567",
+  "07_DESARROLLO/firmware/esp32_trasero/src/telemetria.cpp": "59190af312c312ec2fc054db2dfd4a31d5dd02fe52f9216ca899a632776c4042",
+  "07_DESARROLLO/firmware/esp32_trasero/include/hardware_kart.h": "1968336277ae0772b73b416a306120dc4a3c5af02d3488adb2aeca0b49bbfe68",
+  "07_DESARROLLO/firmware/esp32_trasero/include/telemetria.h": "b8f8d55c740de3867fa85c971340bc86b07a51884a810c98855189fe4f5a176f",
+  "07_DESARROLLO/respaldos/esp32/v1.3-dev1/firmware.bin": "49bb6057dbeab63e1d3f4cdca80ff4f861bc1c852046cb0fd732b430e770e28d",
+  "07_DESARROLLO/firmware/esp32_trasero/src/main.cpp": "19731400cc252392e546565586d8863ab58f441ee02c815a5e46ec84d2902ab0"
+}
