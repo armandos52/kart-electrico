@@ -1,0 +1,25 @@
+# Dependencias y productos históricos conservados físicamente, reproducibles con preparar_stm32.py.
+# Versionar código propio y configuración; ORIGEN_V0.json identifica todos los archivos copiados.
+*
+!.gitignore
+!ORIGEN_V0.json
+!README_ROBUSTEZ.md
+!STM32F746G_DISCO.ioc
+!Core/
+!Core/**
+!TouchGFX/
+TouchGFX/*
+!TouchGFX/gui/
+!TouchGFX/gui/**
+!TouchGFX/generated/
+TouchGFX/generated/*
+!TouchGFX/generated/gui_generated/
+!TouchGFX/generated/gui_generated/**
+!tools/
+!tools/**
+!tests/
+!tests/**
+**/*.o
+**/*.obj
+**/*.exe
+**/__pycache__/
