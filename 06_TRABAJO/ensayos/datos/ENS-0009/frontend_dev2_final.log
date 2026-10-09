@@ -1,0 +1,63 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.35
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+frontend_test.cpp
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tests\../Core/Src/kart_frontend.c(56): warning C4459: declaration of 'tick' hides global declaration
+frontend_test.cpp(6): note: see declaration of 'tick'
+frontend_test.cpp(19): warning C4244: '=': conversion from 'uint32_t' to 'uint16_t', possible loss of data
+PASS Sin feedback transmite N freno pedal cero
+PASS ADC validos y CAN fresco
+PASS Ext 0x101 conserva ADC fisico
+PASS Secuencia avanza por muestra
+PASS D exige freno quietud pedal libre
+PASS Pedal superior normalizado
+PASS D a R con movimiento pasa N, no conserva D
+PASS Fallo conversion ADC inhibe y publica centinela
+PASS ADC fuera de plausibilidad se rechaza
+PASS D R simultaneos invalidos
+PASS Modo avanza parado en N
+PASS Modo con D se rechaza visible
+PASS 0 km/h entero no acredita quietud
+PASS Estado extendido caducado no vuelve a legado
+PASS Feedback caduca
+PASS DLC incorrecto contado
+PASS Buzones llenos abortan y cuentan
+PASS Errores TX visibles
+PASS SD abre al solicitar grabacion
+PASS CSV versionado con cabeceras reales
+PASS Primera fila registrada
+PASS Pausa sincroniza y cierra
+PASS Reanudar vuelve a montar y abrir
+PASS Fallo montaje visible
+PASS Fallo SD no reintenta en bucle rapido
+PASS SD puede recuperar al reinsertar
+PASS Escritura parcial es error y no fila valida
+PASS Error sync cierra y se publica
+PASS Error cierre no se oculta como pausa
+PASS Hall usa periodo real a traves de wrap DWT
+PASS Hall no revive por wrap DWT sin pulsos
+PASS Pantalla no inventa modo ni bateria ni CAN
+PASS Limite R y fallo SD visibles
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+TOTAL 54; FALLOS 0

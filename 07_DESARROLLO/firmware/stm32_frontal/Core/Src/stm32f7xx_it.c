@@ -263,5 +263,8 @@ void DMA2D_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+void EXTI4_IRQHandler(void) { HAL_GPIO_EXTI_IRQHandler(HALL_DI_ESQ_Pin); }
+void EXTI9_5_IRQHandler(void) { HAL_GPIO_EXTI_IRQHandler(HALL_DI_DIR_Pin); }
+
 
 /* USER CODE END 1 */

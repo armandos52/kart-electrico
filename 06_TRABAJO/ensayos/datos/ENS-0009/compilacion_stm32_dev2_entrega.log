@@ -1,0 +1,568 @@
+Configuraci�n comprobada: control, CAN, IWDG, IRQ y RTOS.
+arm-none-eabi-gcc.exe (Arm GNU Toolchain 14.3.Rel1 (Build arm-14.174)) 14.3.1 20250623
+Compilando 151 unidades en C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\.build
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Core\Src\stm32f7xx_hal_msp.c: In function 'HAL_SDRAM_MspInit':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Core\Src\stm32f7xx_hal_msp.c:939:45: warning: unused parameter 'hsdram' [-Wunused-parameter]
+  939 | void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef* hsdram){
+      |                        ~~~~~~~~~~~~~~~~~~~~~^~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Core\Src\stm32f7xx_hal_msp.c: In function 'HAL_SDRAM_MspDeInit':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Core\Src\stm32f7xx_hal_msp.c:1025:47: warning: unused parameter 'hsdram' [-Wunused-parameter]
+ 1025 | void HAL_SDRAM_MspDeInit(SDRAM_HandleTypeDef* hsdram){
+      |                          ~~~~~~~~~~~~~~~~~~~~~^~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c: In function 'ft5336_Init':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c:145:27: warning: unused parameter 'DeviceAddr' [-Wunused-parameter]
+  145 | void ft5336_Init(uint16_t DeviceAddr)
+      |                  ~~~~~~~~~^~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c: In function 'ft5336_Reset':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c:161:28: warning: unused parameter 'DeviceAddr' [-Wunused-parameter]
+  161 | void ft5336_Reset(uint16_t DeviceAddr)
+      |                   ~~~~~~~~~^~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c: In function 'ft5336_TS_ITStatus':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c:407:37: warning: unused parameter 'DeviceAddr' [-Wunused-parameter]
+  407 | uint8_t ft5336_TS_ITStatus(uint16_t DeviceAddr)
+      |                            ~~~~~~~~~^~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c: In function 'ft5336_TS_ClearIT':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c:420:33: warning: unused parameter 'DeviceAddr' [-Wunused-parameter]
+  420 | void ft5336_TS_ClearIT(uint16_t DeviceAddr)
+      |                        ~~~~~~~~~^~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c: In function 'ft5336_TS_Configure':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\BSP\Components\ft5336\ft5336.c:595:46: warning: unused parameter 'DeviceAddr' [-Wunused-parameter]
+  595 | static uint32_t ft5336_TS_Configure(uint16_t DeviceAddr)
+      |                                     ~~~~~~~~~^~~~~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_exti.c: In function 'HAL_EXTI_GetPending':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_exti.c:466:66: warning: unused parameter 'Edge' [-Wunused-parameter]
+  466 | uint32_t HAL_EXTI_GetPending(EXTI_HandleTypeDef *hexti, uint32_t Edge)
+      |                                                         ~~~~~~~~~^~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_exti.c: In function 'HAL_EXTI_ClearPending':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_exti.c:495:64: warning: unused parameter 'Edge' [-Wunused-parameter]
+  495 | void HAL_EXTI_ClearPending(EXTI_HandleTypeDef *hexti, uint32_t Edge)
+      |                                                       ~~~~~~~~~^~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\bsp_driver_sd.c: In function 'HAL_SD_AbortCallback':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\bsp_driver_sd.c:228:45: warning: unused parameter 'hsd' [-Wunused-parameter]
+  228 | void HAL_SD_AbortCallback(SD_HandleTypeDef *hsd)
+      |                           ~~~~~~~~~~~~~~~~~~^~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\bsp_driver_sd.c: In function 'HAL_SD_TxCpltCallback':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\bsp_driver_sd.c:238:46: warning: unused parameter 'hsd' [-Wunused-parameter]
+  238 | void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
+      |                            ~~~~~~~~~~~~~~~~~~^~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\bsp_driver_sd.c: In function 'HAL_SD_RxCpltCallback':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\bsp_driver_sd.c:248:46: warning: unused parameter 'hsd' [-Wunused-parameter]
+  248 | void HAL_SD_RxCpltCallback(SD_HandleTypeDef *hsd)
+      |                            ~~~~~~~~~~~~~~~~~~^~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\sd_diskio.c: In function 'SD_CheckStatus':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\sd_diskio.c:159:36: warning: unused parameter 'lun' [-Wunused-parameter]
+  159 | static DSTATUS SD_CheckStatus(BYTE lun)
+      |                               ~~~~~^~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\sd_diskio.c: In function 'SD_read':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\sd_diskio.c:250:22: warning: unused parameter 'lun' [-Wunused-parameter]
+  250 | DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
+      |                 ~~~~~^~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\sd_diskio.c: In function 'SD_write':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\sd_diskio.c:411:23: warning: unused parameter 'lun' [-Wunused-parameter]
+  411 | DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
+      |                  ~~~~~^~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\sd_diskio.c: In function 'SD_ioctl':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\FATFS\Target\sd_diskio.c:578:23: warning: unused parameter 'lun' [-Wunused-parameter]
+  578 | DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
+      |                  ~~~~~^~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c: In function 'FATFS_UnLinkDriverEx':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c:80:50: warning: unused parameter 'lun' [-Wunused-parameter]
+   80 | uint8_t FATFS_UnLinkDriverEx(char *path, uint8_t lun)
+      |                                          ~~~~~~~~^~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\FatFs\src\option\syscall.c: In function 'ff_cre_syncobj':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\FatFs\src\option\syscall.c:37:14: warning: unused parameter 'vol' [-Wunused-parameter]
+   37 |         BYTE vol,                       /* Corresponding volume (logical drive number) */
+      |         ~~~~~^~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jccoefct.c: In function 'compress_output':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jccoefct.c:346:51: warning: unused parameter 'input_buf' [-Wunused-parameter]
+  346 | compress_output (j_compress_ptr cinfo, JSAMPIMAGE input_buf)
+      |                                        ~~~~~~~~~~~^~~~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jccolor.c: In function 'null_method':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jccolor.c:375:29: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  375 | null_method (j_compress_ptr cinfo)
+      |              ~~~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jcmaster.c: In function 'prepare_for_pass':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jcmaster.c:710:24: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  710 |     master->pass_number++;
+      |     ~~~~~~~~~~~~~~~~~~~^~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jcmaster.c:713:3: note: here
+  713 |   case output_pass:
+      |   ^~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jcsample.c: In function 'start_pass_downsample':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jcsample.c:84:39: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   84 | start_pass_downsample (j_compress_ptr cinfo)
+      |                        ~~~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jctrans.c: In function 'compress_output':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jctrans.c:272:51: warning: unused parameter 'input_buf' [-Wunused-parameter]
+  272 | compress_output (j_compress_ptr cinfo, JSAMPIMAGE input_buf)
+      |                                        ~~~~~~~~~~~^~~~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdarith.c: In function 'decode_mcu_AC_refine':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdarith.c:457:13: warning: left shift of negative value [-Wshift-negative-value]
+  457 |   m1 = (-1) << cinfo->Al;       /* -1 in the bit position being coded */
+      |             ^~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdatadst.c: In function 'init_mem_destination':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdatadst.c:81:38: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   81 | init_mem_destination (j_compress_ptr cinfo)
+      |                       ~~~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdatasrc.c: In function 'init_mem_source':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdatasrc.c:59:35: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   59 | init_mem_source (j_decompress_ptr cinfo)
+      |                  ~~~~~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdatasrc.c: In function 'term_source':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdatasrc.c:200:31: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  200 | term_source (j_decompress_ptr cinfo)
+      |              ~~~~~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdcoefct.c: In function 'dummy_consume_data':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdcoefct.c:230:38: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  230 | dummy_consume_data (j_decompress_ptr cinfo)
+      |                     ~~~~~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdcolor.c: In function 'start_pass_dcolor':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdcolor.c:406:37: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  406 | start_pass_dcolor (j_decompress_ptr cinfo)
+      |                    ~~~~~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdhuff.c: In function 'decode_mcu_AC_refine':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdhuff.c:931:15: warning: left shift of negative value [-Wshift-negative-value]
+  931 |     m1 = (-1) << cinfo->Al;     /* -1 in the bit position being coded */
+      |               ^~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdmerge.c: In function 'merged_2v_upsample':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdmerge.c:146:32: warning: unused parameter 'in_row_groups_avail' [-Wunused-parameter]
+  146 |                     JDIMENSION in_row_groups_avail,
+      |                     ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdmerge.c: In function 'merged_1v_upsample':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdmerge.c:195:32: warning: unused parameter 'in_row_groups_avail' [-Wunused-parameter]
+  195 |                     JDIMENSION in_row_groups_avail,
+      |                     ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdmerge.c:197:32: warning: unused parameter 'out_rows_avail' [-Wunused-parameter]
+  197 |                     JDIMENSION out_rows_avail)
+      |                     ~~~~~~~~~~~^~~~~~~~~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdpostct.c: In function 'post_process_prepass':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdpostct.c:161:34: warning: unused parameter 'output_buf' [-Wunused-parameter]
+  161 |                       JSAMPARRAY output_buf, JDIMENSION *out_row_ctr,
+      |                       ~~~~~~~~~~~^~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdpostct.c:162:34: warning: unused parameter 'out_rows_avail' [-Wunused-parameter]
+  162 |                       JDIMENSION out_rows_avail)
+      |                       ~~~~~~~~~~~^~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdpostct.c: In function 'post_process_2pass':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdpostct.c:203:32: warning: unused parameter 'input_buf' [-Wunused-parameter]
+  203 |                     JSAMPIMAGE input_buf, JDIMENSION *in_row_group_ctr,
+      |                     ~~~~~~~~~~~^~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdpostct.c:203:55: warning: unused parameter 'in_row_group_ctr' [-Wunused-parameter]
+  203 |                     JSAMPIMAGE input_buf, JDIMENSION *in_row_group_ctr,
+      |                                           ~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdpostct.c:204:32: warning: unused parameter 'in_row_groups_avail' [-Wunused-parameter]
+  204 |                     JDIMENSION in_row_groups_avail,
+      |                     ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c: In function 'sep_upsample':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c:92:26: warning: unused parameter 'in_row_groups_avail' [-Wunused-parameter]
+   92 |               JDIMENSION in_row_groups_avail,
+      |               ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c: In function 'fullsize_upsample':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c:158:37: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  158 | fullsize_upsample (j_decompress_ptr cinfo, jpeg_component_info * compptr,
+      |                    ~~~~~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c:158:66: warning: unused parameter 'compptr' [-Wunused-parameter]
+  158 | fullsize_upsample (j_decompress_ptr cinfo, jpeg_component_info * compptr,
+      |                                            ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c: In function 'noop_upsample':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c:171:33: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  171 | noop_upsample (j_decompress_ptr cinfo, jpeg_component_info * compptr,
+      |                ~~~~~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c:171:62: warning: unused parameter 'compptr' [-Wunused-parameter]
+  171 | noop_upsample (j_decompress_ptr cinfo, jpeg_component_info * compptr,
+      |                                        ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c:172:27: warning: unused parameter 'input_data' [-Wunused-parameter]
+  172 |                JSAMPARRAY input_data, JSAMPARRAY * output_data_ptr)
+      |                ~~~~~~~~~~~^~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c: In function 'h2v1_upsample':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c:234:62: warning: unused parameter 'compptr' [-Wunused-parameter]
+  234 | h2v1_upsample (j_decompress_ptr cinfo, jpeg_component_info * compptr,
+      |                                        ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c: In function 'h2v2_upsample':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jdsample.c:262:62: warning: unused parameter 'compptr' [-Wunused-parameter]
+  262 | h2v2_upsample (j_decompress_ptr cinfo, jpeg_component_info * compptr,
+      |                                        ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c: In function 'jpeg_get_small':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:29:30: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   29 | jpeg_get_small (j_common_ptr cinfo, size_t sizeofobject)
+      |                 ~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c: In function 'jpeg_free_small':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:35:31: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   35 | jpeg_free_small (j_common_ptr cinfo, void * object, size_t sizeofobject)
+      |                  ~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:35:60: warning: unused parameter 'sizeofobject' [-Wunused-parameter]
+   35 | jpeg_free_small (j_common_ptr cinfo, void * object, size_t sizeofobject)
+      |                                                     ~~~~~~~^~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c: In function 'jpeg_get_large':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:49:30: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   49 | jpeg_get_large (j_common_ptr cinfo, size_t sizeofobject)
+      |                 ~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c: In function 'jpeg_free_large':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:55:31: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   55 | jpeg_free_large (j_common_ptr cinfo, void FAR * object, size_t sizeofobject)
+      |                  ~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:55:64: warning: unused parameter 'sizeofobject' [-Wunused-parameter]
+   55 | jpeg_free_large (j_common_ptr cinfo, void FAR * object, size_t sizeofobject)
+      |                                                         ~~~~~~~^~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c: In function 'jpeg_mem_available':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:67:34: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   67 | jpeg_mem_available (j_common_ptr cinfo, long min_bytes_needed,
+      |                     ~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:67:46: warning: unused parameter 'min_bytes_needed' [-Wunused-parameter]
+   67 | jpeg_mem_available (j_common_ptr cinfo, long min_bytes_needed,
+      |                                         ~~~~~^~~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:68:49: warning: unused parameter 'already_allocated' [-Wunused-parameter]
+   68 |                     long max_bytes_needed, long already_allocated)
+      |                                            ~~~~~^~~~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c: In function 'jpeg_open_backing_store':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:81:64: warning: unused parameter 'info' [-Wunused-parameter]
+   81 | jpeg_open_backing_store (j_common_ptr cinfo, backing_store_ptr info,
+      |                                              ~~~~~~~~~~~~~~~~~~^~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:82:31: warning: unused parameter 'total_bytes_needed' [-Wunused-parameter]
+   82 |                          long total_bytes_needed)
+      |                          ~~~~~^~~~~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c: In function 'jpeg_mem_init':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:94:29: warning: unused parameter 'cinfo' [-Wunused-parameter]
+   94 | jpeg_mem_init (j_common_ptr cinfo)
+      |                ~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c: In function 'jpeg_mem_term':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jmemnobs.c:100:29: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  100 | jpeg_mem_term (j_common_ptr cinfo)
+      |                ~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c: In function 'output_value':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c:246:32: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  246 | output_value (j_decompress_ptr cinfo, int ci, int j, int maxj)
+      |               ~~~~~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c:246:43: warning: unused parameter 'ci' [-Wunused-parameter]
+  246 | output_value (j_decompress_ptr cinfo, int ci, int j, int maxj)
+      |                                       ~~~~^~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c: In function 'largest_input_value':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c:260:39: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  260 | largest_input_value (j_decompress_ptr cinfo, int ci, int j, int maxj)
+      |                      ~~~~~~~~~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c:260:50: warning: unused parameter 'ci' [-Wunused-parameter]
+  260 | largest_input_value (j_decompress_ptr cinfo, int ci, int j, int maxj)
+      |                                              ~~~~^~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c: In function 'start_pass_1_quant':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c:742:53: warning: unused parameter 'is_pre_scan' [-Wunused-parameter]
+  742 | start_pass_1_quant (j_decompress_ptr cinfo, boolean is_pre_scan)
+      |                                             ~~~~~~~~^~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c: In function 'finish_pass_1_quant':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant1.c:799:39: warning: unused parameter 'cinfo' [-Wunused-parameter]
+  799 | finish_pass_1_quant (j_decompress_ptr cinfo)
+      |                      ~~~~~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant2.c: In function 'prescan_quantize':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant2.c:226:30: warning: unused parameter 'output_buf' [-Wunused-parameter]
+  226 |                   JSAMPARRAY output_buf, int num_rows)
+      |                   ~~~~~~~~~~~^~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant2.c: In function 'finish_pass2':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\Third_Party\LibJPEG\source\jquant2.c:1157:32: warning: unused parameter 'cinfo' [-Wunused-parameter]
+ 1157 | finish_pass2 (j_decompress_ptr cinfo)
+      |               ~~~~~~~~~~~~~~~~~^~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\App\app_touchgfx.c: In function 'TouchGFX_Task':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\App\app_touchgfx.c:84:26: warning: unused parameter 'argument' [-Wunused-parameter]
+   84 | void TouchGFX_Task(void* argument)
+      |                    ~~~~~~^~~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CachedFont.cpp: In member function 'virtual int8_t touchgfx::CachedFont::getKerning(touchgfx::Unicode::UnicodeChar, const touchgfx::GlyphNode*) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CachedFont.cpp:50:52: warning: unused parameter 'prevChar' [-Wunused-parameter]
+   50 | int8_t CachedFont::getKerning(Unicode::UnicodeChar prevChar, const GlyphNode* glyph) const
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CachedFont.cpp:50:79: warning: unused parameter 'glyph' [-Wunused-parameter]
+   50 | int8_t CachedFont::getKerning(Unicode::UnicodeChar prevChar, const GlyphNode* glyph) const
+      |                                                              ~~~~~~~~~~~~~~~~~^~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CompressedFontCache.cpp:5:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CompressedFontCache.cpp: In static member function 'static void touchgfx::CompressedFontCache::unableToCache(const touchgfx::GlyphNode*, int)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CompressedFontCache.cpp:131:58: warning: unused parameter 'glyphNode' [-Wunused-parameter]
+  131 | void CompressedFontCache::unableToCache(const GlyphNode* glyphNode, int byteSize)
+      |                                         ~~~~~~~~~~~~~~~~~^~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CompressedFontCache.cpp:131:73: warning: unused parameter 'byteSize' [-Wunused-parameter]
+  131 | void CompressedFontCache::unableToCache(const GlyphNode* glyphNode, int byteSize)
+      |                                                                     ~~~~^~~~~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CompressedUnmappedFontCache.cpp:5:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CompressedUnmappedFontCache.cpp: In static member function 'static void touchgfx::CompressedUnmappedFontCache::unableToCache(const touchgfx::GlyphNode*, int)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CompressedUnmappedFontCache.cpp:146:66: warning: unused parameter 'glyphNode' [-Wunused-parameter]
+  146 | void CompressedUnmappedFontCache::unableToCache(const GlyphNode* glyphNode, int byteSize)
+      |                                                 ~~~~~~~~~~~~~~~~~^~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\CompressedUnmappedFontCache.cpp:146:81: warning: unused parameter 'byteSize' [-Wunused-parameter]
+  146 | void CompressedUnmappedFontCache::unableToCache(const GlyphNode* glyphNode, int byteSize)
+      |                                                                             ~~~~^~~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\FontCache.cpp: In member function 'uint8_t* touchgfx::FontCache::copyGlyph(uint8_t*, touchgfx::Unicode::UnicodeChar, touchgfx::FontId, bool&)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\FontCache.cpp:275:82: warning: unused parameter 'font' [-Wunused-parameter]
+  275 | uint8_t* FontCache::copyGlyph(uint8_t* top, Unicode::UnicodeChar unicode, FontId font, bool& outOfMemory)
+      |                                                                           ~~~~~~~^~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\UnmappedDataFont.cpp: In member function 'virtual const uint8_t* touchgfx::CompressedUnmappedDataFont::getPixelData(const touchgfx::GlyphNode*) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\fonts\src\UnmappedDataFont.cpp:232:74: warning: unused parameter 'glyph' [-Wunused-parameter]
+  232 | const uint8_t* CompressedUnmappedDataFont::getPixelData(const GlyphNode* glyph) const
+      |                                                         ~~~~~~~~~~~~~~~~~^~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/Screen.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:27,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendApplicationBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\src\common\FrontendApplicationBase.cpp:5:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:29:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp: In member function 'virtual void touchgfx::Transition::FullSolidRect::draw(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp:117:39: warning: unused parameter 'area' [-Wunused-parameter]
+  117 |         virtual void draw(const Rect& area) const
+      |                           ~~~~~~~~~~~~^~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/Screen.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:27,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendApplicationBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/common/FrontendApplication.hpp:4,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/screen1_screen/Screen1ViewBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\src\screen1_screen\Screen1ViewBase.cpp:4:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:29:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp: In member function 'virtual void touchgfx::Transition::FullSolidRect::draw(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp:117:39: warning: unused parameter 'area' [-Wunused-parameter]
+  117 |         virtual void draw(const Rect& area) const
+      |                           ~~~~~~~~~~~~^~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\texts\src\Texts.cpp:9:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\texts\src\Texts.cpp: In member function 'touchgfx::Unicode::UnicodeChar touchgfx::TextProvider::getNextLigature(touchgfx::TextDirection)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\texts\src\Texts.cpp:31:86: warning: unused parameter 'direction' [-Wunused-parameter]
+   31 | touchgfx::Unicode::UnicodeChar touchgfx::TextProvider::getNextLigature(TextDirection direction)
+      |                                                                        ~~~~~~~~~~~~~~^~~~~~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/Screen.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:27,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendApplicationBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/common/FrontendApplication.hpp:4,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\common\FrontendApplication.cpp:1:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:29:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp: In member function 'virtual void touchgfx::Transition::FullSolidRect::draw(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp:117:39: warning: unused parameter 'area' [-Wunused-parameter]
+  117 |         virtual void draw(const Rect& area) const
+      |                           ~~~~~~~~~~~~^~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\common\KartStatus.cpp:2:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/Screen.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:27,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendApplicationBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/common/FrontendApplication.hpp:4,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/screen1_screen/Screen1ViewBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/screen1_screen/Screen1View.hpp:3,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\screen1_screen\Screen1Presenter.cpp:1:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:29:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp: In member function 'virtual void touchgfx::Transition::FullSolidRect::draw(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp:117:39: warning: unused parameter 'area' [-Wunused-parameter]
+  117 |         virtual void draw(const Rect& area) const
+      |                           ~~~~~~~~~~~~^~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/Screen.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:27,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendApplicationBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/common/FrontendApplication.hpp:4,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/screen1_screen/Screen1ViewBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/screen1_screen/Screen1View.hpp:3,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\screen1_screen\Screen1View.cpp:1:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:29:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp: In member function 'virtual void touchgfx::Transition::FullSolidRect::draw(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp:117:39: warning: unused parameter 'area' [-Wunused-parameter]
+  117 |         virtual void draw(const Rect& area) const
+      |                           ~~~~~~~~~~~~^~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\CortexMMCUInstrumentation.cpp:2:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\OSWrappers.cpp:19:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp: In member function 'void SoftwareMJPEGDecoder::decodeMJPEGFrame(const uint8_t*, uint32_t, uint8_t*, uint16_t, uint16_t, uint32_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp:331:176: warning: unused parameter 'bufferStride' [-Wunused-parameter]
+  331 | void SoftwareMJPEGDecoder::decodeMJPEGFrame(const uint8_t* const mjpgdata, const uint32_t length, uint8_t* outputBuffer, uint16_t bufferWidth, uint16_t bufferHeight, uint32_t bufferStride)
+      |                                                                                                                                                                       ~~~~~~~~~^~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp: In member function 'virtual bool SoftwareMJPEGDecoder::decodeThumbnail(uint32_t, uint8_t*, uint16_t, uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp:528:53: warning: unused parameter 'frameno' [-Wunused-parameter]
+  528 | bool SoftwareMJPEGDecoder::decodeThumbnail(uint32_t frameno, uint8_t* buffer, uint16_t width, uint16_t height)
+      |                                            ~~~~~~~~~^~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp:528:71: warning: unused parameter 'buffer' [-Wunused-parameter]
+  528 | bool SoftwareMJPEGDecoder::decodeThumbnail(uint32_t frameno, uint8_t* buffer, uint16_t width, uint16_t height)
+      |                                                              ~~~~~~~~~^~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp:528:88: warning: unused parameter 'width' [-Wunused-parameter]
+  528 | bool SoftwareMJPEGDecoder::decodeThumbnail(uint32_t frameno, uint8_t* buffer, uint16_t width, uint16_t height)
+      |                                                                               ~~~~~~~~~^~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp:528:104: warning: unused parameter 'height' [-Wunused-parameter]
+  528 | bool SoftwareMJPEGDecoder::decodeThumbnail(uint32_t frameno, uint8_t* buffer, uint16_t width, uint16_t height)
+      |                                                                                               ~~~~~~~~~^~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp: In function 'size_t jpeg_read_file(FILE*, uint8_t*, uint32_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp:573:33: warning: unused parameter 'file' [-Wunused-parameter]
+  573 |     size_t jpeg_read_file(FILE* file, uint8_t* buf, uint32_t sizeofbuf)
+      |                           ~~~~~~^~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp:573:48: warning: unused parameter 'buf' [-Wunused-parameter]
+  573 |     size_t jpeg_read_file(FILE* file, uint8_t* buf, uint32_t sizeofbuf)
+      |                                       ~~~~~~~~~^~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\SoftwareMJPEGDecoder.cpp:573:62: warning: unused parameter 'sizeofbuf' [-Wunused-parameter]
+  573 |     size_t jpeg_read_file(FILE* file, uint8_t* buf, uint32_t sizeofbuf)
+      |                                                     ~~~~~~~~~^~~~~~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\STM32DMA.cpp:23:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/NoTransition.hpp:21,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendHeapBase.hpp:11,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/common/FrontendHeap.hpp:4,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\TouchGFXConfiguration.cpp:21:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp: In member function 'virtual void touchgfx::Transition::FullSolidRect::draw(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp:117:39: warning: unused parameter 'area' [-Wunused-parameter]
+  117 |         virtual void draw(const Rect& area) const
+      |                           ~~~~~~~~~~~~^~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/Screen.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:27,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendApplicationBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/common/FrontendApplication.hpp:4,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendHeapBase.hpp:12:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated/TouchGFXGeneratedHAL.hpp:21,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\TouchGFXGeneratedHAL.cpp:19:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/NoTransition.hpp:21,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendHeapBase.hpp:11,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/common/FrontendHeap.hpp:4,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\TouchGFXGeneratedHAL.cpp:21:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp: In member function 'virtual void touchgfx::Transition::FullSolidRect::draw(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp:117:39: warning: unused parameter 'area' [-Wunused-parameter]
+  117 |         virtual void draw(const Rect& area) const
+      |                           ~~~~~~~~~~~~^~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/CWRVectorRenderer.hpp:28,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\TouchGFXGeneratedHAL.cpp:24:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/PainterARGB8888.hpp: In constructor 'touchgfx::PainterARGB8888::PainterARGB8888(touchgfx::colortype)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/PainterARGB8888.hpp:42:31: warning: unused parameter 'color' [-Wunused-parameter]
+   42 |     PainterARGB8888(colortype color = 0)
+      |                     ~~~~~~~~~~^~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/CWRVectorRenderer.hpp:30:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/PainterRGB565.hpp: In constructor 'touchgfx::PainterRGB565::PainterRGB565(touchgfx::colortype)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/PainterRGB565.hpp:42:29: warning: unused parameter 'color' [-Wunused-parameter]
+   42 |     PainterRGB565(colortype color = 0)
+      |                   ~~~~~~~~~~^~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/CWRVectorRenderer.hpp:32:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/PainterRGB888.hpp: In constructor 'touchgfx::PainterRGB888::PainterRGB888(touchgfx::colortype)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/PainterRGB888.hpp:42:29: warning: unused parameter 'color' [-Wunused-parameter]
+   42 |     PainterRGB888(colortype color = 0)
+      |                   ~~~~~~~~~~^~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/CWRVectorRenderer.hpp: In member function 'virtual bool touchgfx::CWRVectorRenderer::CanvasWidgetProxy::drawCanvasWidget(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/widgets/canvas/CWRVectorRenderer.hpp:199:51: warning: unused parameter 'invalidatedArea' [-Wunused-parameter]
+  199 |         virtual bool drawCanvasWidget(const Rect& invalidatedArea) const
+      |                                       ~~~~~~~~~~~~^~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\TouchGFXGeneratedHAL.cpp: In function 'void videoTaskFunc(void*)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\TouchGFXGeneratedHAL.cpp:173:37: warning: unused parameter 'argument' [-Wunused-parameter]
+  173 | extern "C" void videoTaskFunc(void* argument)
+      |                               ~~~~~~^~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated\TouchGFXGeneratedHAL.cpp:26:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated/DoubleBufferedVideoController.hpp: In instantiation of 'void DoubleBufferedVideoController<no_streams, width, height, stride, output_format>::draw(touchgfx::VideoController::Handle, const touchgfx::Rect&, const touchgfx::VideoWidget&) [with long unsigned int no_streams = 1; long unsigned int width = 480; long unsigned int height = 272; long unsigned int stride = 960; touchgfx::Bitmap::BitmapFormat output_format = touchgfx::Bitmap::RGB565; touchgfx::VideoController::Handle = long unsigned int]':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated/DoubleBufferedVideoController.hpp:289:18:   required from here
+  289 |     virtual void draw(const Handle handle, const touchgfx::Rect& invalidatedArea, const touchgfx::VideoWidget& widget)
+      |                  ^~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated/DoubleBufferedVideoController.hpp:289:36: warning: unused parameter 'handle' [-Wunused-parameter]
+  289 |     virtual void draw(const Handle handle, const touchgfx::Rect& invalidatedArea, const touchgfx::VideoWidget& widget)
+      |                       ~~~~~~~~~~~~~^~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated/DoubleBufferedVideoController.hpp:289:66: warning: unused parameter 'invalidatedArea' [-Wunused-parameter]
+  289 |     virtual void draw(const Handle handle, const touchgfx::Rect& invalidatedArea, const touchgfx::VideoWidget& widget)
+      |                                            ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated/DoubleBufferedVideoController.hpp:289:112: warning: unused parameter 'widget' [-Wunused-parameter]
+  289 |     virtual void draw(const Handle handle, const touchgfx::Rect& invalidatedArea, const touchgfx::VideoWidget& widget)
+      |                                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated/TouchGFXGeneratedHAL.hpp:21,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target/TouchGFXHAL.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\STM32TouchController.cpp:24:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\STM32TouchController.cpp: In function 'void I2Cx_Error(I2C_HandleTypeDef*, uint8_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\STM32TouchController.cpp:74:64: warning: unused parameter 'Addr' [-Wunused-parameter]
+   74 | static void I2Cx_Error(I2C_HandleTypeDef* i2c_handler, uint8_t Addr)
+      |                                                        ~~~~~~~~^~~~
+
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\generated/TouchGFXGeneratedHAL.hpp:21,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target/TouchGFXHAL.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\target\TouchGFXHAL.cpp:21:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+
+   text	   data	    bss	    dec	    hex	filename
+6599748	    804	1406272	8006824	 7a2ca8	C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\.build\stm32_frontal-v1.3-dev2.elf
+BUILD OK: ELF + HEX; sin upload.

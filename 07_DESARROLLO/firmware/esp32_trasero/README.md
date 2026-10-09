@@ -1,12 +1,18 @@
 ---
 estado: vigente
-actualizado: 2026-10-07
+actualizado: 2026-10-09
 resumen: Proyecto PlatformIO del ESP32 trasero — partes, entorno fijado, comandos y telemetría Wi-Fi de solo lectura (v1).
 ---
 
 # ESP32 trasero — proyecto de trabajo
 
-**Estado actual: Armando confirma el 08-10-2026 una prueba real satisfactoria en el kart con motores**, [ENS-0004](../../../06_TRABAJO/ensayos/ENS-0004_prueba_real_motores_confirmada.md), tras la grabación de v1.2 de diagnóstico. La versión se vincula por continuidad de la sesión; no se recibieron identificación durante la prueba ni logs. Banco USB/Wi-Fi documentado en [ENS-0003](../../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md). La imagen original restaurada también recuperó el funcionamiento según Armando ([ENS-0002](../../../06_TRABAJO/ensayos/ENS-0002_recuperacion_esp32_tras_prueba_kart.md)); permanece respaldada. Este fuente reconstruido no equivale de forma demostrada al binario original. La causa de la regresión de marcha de v1.1 permanece en [PROB-0006](../../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md).
+**Fuente actual: `esp32_trasero-v1.3-dev2`, compilado y comprobado en PC; sin grabar.** [ENS-0009](../../../06_TRABAJO/ensayos/ENS-0009_robustez_firmware_v13.md), [seguimiento](../../../06_TRABAJO/IMPLEMENTACION_ROBUSTEZ_V13.md) y [protocolo](../common/PROTOCOLO_V13.md). Estados/permisos centralizados, STOP/rearme, rampa efectiva, R 20 km/h estimados, CAN/ADC/Hall/MPU supervisados y watchdog. ESC sigue experimental; geometría/PPR/calibraciones reales pendientes. No hay frenado eléctrico ni garantía física en pendiente. La última grabación conocida sigue siendo v1.2.
+
+Módulos actuales: `lib/kart_control` decide permisos y consignas; `src/main.cpp` adapta periféricos/aplica salidas; `include/hardware_kart.h` fija pines/PPR; `telemetria.cpp` publica por cola sin bloquear control. Wi-Fi sigue siendo solo lectura. Búfer de línea 2048 y TX USB 3072; `mpu_ok` representa ahora lectura calibrada reciente. Parámetros por motor/dirección se preparan en Config y hardware; no se transfieren automáticamente desde la calibración visual del PC.
+
+`tests/compilar.cmd`: 51 comprobaciones dirigidas, sin modelo dinámico ni placa. Rama `codex/robustez-v13`; respaldo dev2/ELF/huellas enlazado en ENS-0009. Conservar original/v1.2 antes del ensayo físico. Las secciones v1.2 siguientes son históricas.
+
+**Referencia física anterior: Armando confirma el 08-10-2026 una prueba real satisfactoria en el kart con motores**, [ENS-0004](../../../06_TRABAJO/ensayos/ENS-0004_prueba_real_motores_confirmada.md), tras la grabación de v1.2 de diagnóstico. La versión se vincula por continuidad de la sesión; no se recibieron identificación durante la prueba ni logs. Banco USB/Wi-Fi documentado en [ENS-0003](../../../06_TRABAJO/ensayos/ENS-0003_v12_diagnostico_y_panel.md). La imagen original restaurada también recuperó el funcionamiento según Armando ([ENS-0002](../../../06_TRABAJO/ensayos/ENS-0002_recuperacion_esp32_tras_prueba_kart.md)); permanece respaldada. Este fuente reconstruido no equivale de forma demostrada al binario original. La causa de la regresión de marcha de v1.1 permanece en [PROB-0006](../../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0006_regresion_marcha_con_firmware_telemetria.md).
 
 ## Cambios de v1.2 y límites
 
@@ -24,7 +30,7 @@ Copia de trabajo según [[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versione
 
 | Archivo | Qué es |
 |---|---|
-| `src/ESP32-final.ino` | Programa del kart: CAN 0x100 → PWM/dirección/relés, Hall, MPU6050, CAN 0x123. En v1 solo se le añaden los enganches marcados `// v1` |
+| `src/main.cpp`, `lib/kart_control` | Adaptación hardware y núcleo v1.3; `.ino` anterior preservado en Git/auditoría v1.2 |
 | `src/telemetria.cpp`, `include/telemetria.h` | v1: telemetría de solo lectura (cola, tarea de red, JSON) |
 | `include/secretos.example.h` | Plantilla del SSID/contraseña Wi-Fi. La real es `include/secretos.h` y no se versiona |
 | `platformio.ini` | Plataforma, core, bibliotecas y opciones de flash fijadas; entornos `usb` y `wifi` |

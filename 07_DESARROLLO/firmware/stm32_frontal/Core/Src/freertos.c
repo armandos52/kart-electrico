@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "kart_frontend.h"
 
 /* USER CODE END Includes */
 
@@ -74,6 +75,8 @@ void vApplicationIdleHook( void )
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+void vApplicationMallocFailedHook(void) {Kart_Fatal();}
+void vApplicationStackOverflowHook(TaskHandle_t task, char* name) {(void)task;(void)name;Kart_Fatal();}
 
 /* USER CODE END Application */
 

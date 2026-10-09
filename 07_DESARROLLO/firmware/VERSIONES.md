@@ -25,3 +25,16 @@ Regla ([[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_e
 - La «imagen extraída» es el binario leído de la placa.
 - v0 es el fuente de la entrega.
 - Restaurar la placa al estado inicial se hace con la imagen extraída, no recompilando v0.
+
+
+## Desarrollo v1.3 · 08–09-10-2026 (sin grabación)
+
+| Versión | Alcance | Verificación / conservación |
+|---|---|---|
+| STM32 v0 de trabajo | Copia íntegra de 2025/26; 1673 archivos verificados | Commit `2deb9ef`, ORIGEN_V0.json; no identifica instalado |
+| ESP32 v1.3-dev1 | Núcleo modular, estados, rampa, R20, sensores/watchdog | Commit `53ebf40`; 46 comprobaciones y compilación; backup dev1 preservado |
+| ESP32 v1.3-dev2 | Revisión final STOP/ADC, D-R/ESC/BLQ, contrato, PWM y telemetría | 51 comprobaciones; compila, RAM 49244 B/flash 949743 B; binario+ELF local |
+| STM32 v1.3-dev2 | ADC/CAN, GUI coherente, SD, Hall EXTI, IWDG, configuración/build | 54 comprobaciones; ELF/HEX compilados con startup y QSPI; hardware pendiente |
+| Panel: compatibilidad v1.3 | 15 señales nuevas, motivos/modo aplicado, validez y calibración | 26 tests Python/16 JS; cambios locales previos conservados, SHA-256 de archivos afectados |
+
+[ENS-0009](../../06_TRABAJO/ensayos/ENS-0009_robustez_firmware_v13.md), [hashes](../../06_TRABAJO/ensayos/datos/ENS-0009/hashes_dev2.json) y [protocolo](common/PROTOCOLO_V13.md). Las compilaciones no son firmware leído de placas. R limita propulsión estimada; ESC experimental, física/calibraciones/BMS pendientes. No push ni copia independiente configurada. V1.2 continúa como última grabación conocida en el kart.

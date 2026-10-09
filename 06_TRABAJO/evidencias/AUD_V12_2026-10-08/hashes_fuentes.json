@@ -1,0 +1,14 @@
+{
+  "07_DESARROLLO\\firmware\\esp32_trasero\\src\\ESP32-final.ino": "b39f5164e06957cb91bb564b7e217c98bd6446bb718e4d9a42af6f8022370f5c",
+  "07_DESARROLLO\\firmware\\esp32_trasero\\src\\telemetria.cpp": "0fd4ec0254be33c6749ce5c3754acb5d09fdced6d176461d88a9e31c196d3377",
+  "07_DESARROLLO\\firmware\\esp32_trasero\\include\\telemetria.h": "418dd3dcd94900f338c2cbcb9e204759ef90949f6c2609d7014bc9240772e52a",
+  "07_DESARROLLO\\firmware\\esp32_trasero\\platformio.ini": "f70ae17392248a8308614da2e98c11485c4df60622cb3c8465b09ff9631851cd",
+  "07_DESARROLLO\\firmware\\esp32_trasero\\lib\\mcp_can\\mcp_can.cpp": "ba29cb58f84b7e2f6f06a04ad1665e3e823cb4e5414fc0a9a1a94129aa49ff4d",
+  "02_ORIGINALES\\entrega_2026-09-28\\Smart Eletric Kart Cross-2223406-2223403\\Smart Eletric Kart Cross-2223406-2223403\\STM32-final\\Core\\Src\\main.c": "07300a8f98f10ceaadc26a1d480bd0e2986f8d27c93c626e02cab36ae823d8bf",
+  "02_ORIGINALES\\entrega_2026-09-28\\Smart Eletric Kart Cross-2223406-2223403\\Smart Eletric Kart Cross-2223406-2223403\\STM32-final\\TouchGFX\\gui\\src\\screen1_screen\\Screen1View.cpp": "05b234989fd0169246c4871f4d5a532b5ea181e03212963feb530e1e3eaa52d3",
+  "02_ORIGINALES\\entrega_2026-09-28\\Smart Eletric Kart Cross-2223406-2223403\\Smart Eletric Kart Cross-2223406-2223403\\STM32-final\\TouchGFX\\generated\\gui_generated\\src\\screen1_screen\\Screen1ViewBase.cpp": "42f57fe474d8a620b25c224c07f98f7baf1b46b8dce8915fa69dfcd92e442bf4",
+  "06_TRABAJO\\evidencias\\AUD_V12_2026-10-08\\generar.py": "354eba1a991c11d7bed4bfbc33118f80da7559213b1d4999f1ef7ad9a7b012c8",
+  "06_TRABAJO\\evidencias\\AUD_V12_2026-10-08\\stubs.hpp": "823ef67dfc066be4b222a7a31a60ef5e7422aeb62e0739fd3b15c1b7d6ca4fea",
+  "06_TRABAJO\\evidencias\\AUD_V12_2026-10-08\\casos.cpp": "b206461be104351e35e4775210498918bf95078f4812343a0ba5b8915efbad81",
+  "06_TRABAJO\\evidencias\\AUD_V12_2026-10-08\\control_host.cpp": "4f31c4db37148a6ed2efc46a3c45000d7132c37f81541a8b20f6e107ac371638"
+}

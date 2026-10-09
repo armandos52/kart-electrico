@@ -1,28 +1,14 @@
 #ifndef MODELLISTENER_HPP
 #define MODELLISTENER_HPP
-
-#include <touchgfx/hal/Types.hpp>
-#include <cstdint>
-
-class Model;  // Forward declaration
-
-class ModelListener
-{
+#include "kart_frontend.h"
+class Model;
+class ModelListener {
 public:
-    ModelListener() : model(0) {}
-    
+    ModelListener():model(0) {}
     virtual ~ModelListener() {}
-
-    void bind(Model* m)
-    {
-        model = m;
-    }
-
-    // Método chamado quando chegam novos dados CAN
-    virtual void notifyCANDataChanged(uint8_t* data, uint32_t id) {}
-
+    void bind(Model* m) {model=m;}
+    virtual void onKartSnapshot(const KartUiSnapshot&) {}
 protected:
     Model* model;
 };
-
-#endif // MODELLISTENER_HPP
+#endif

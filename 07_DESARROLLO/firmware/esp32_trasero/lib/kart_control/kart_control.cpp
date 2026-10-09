@@ -62,16 +62,17 @@ Output Controller::step(const Sensors& s,uint32_t now) {
     // El estado detenido siempre anula inmediatamente las consignas.
     if(s.charger) {relay_=Relay::Off;start_off_seen_=false;start_previous_=false;return stop(out,Inhibit::Charger,true);}
     if(!s.outputs_ok) {relay_=Relay::Off;return stop(out,Inhibit::OutputFault,true);}
+    // Un STOP válido prevalece incluso si el diagnóstico frontal indica fallo de sensores.
+    if(fresh && !invalid_ && !command_.start) {
+        relay_=Relay::Off;start_off_seen_=true;start_previous_=false;gear_=Gear::Neutral;
+        return stop(out,Inhibit::StartOff,true);
+    }
     if(!fresh || invalid_ || !s.can_ok || !s.frontend_ok) {
         // No continuar una precarga sin mandos; conservar contactor ya cerrado evita ciclarlo bajo carga.
         if(relay_!=Relay::Ready) relay_=Relay::Off;
         start_off_seen_=false;start_previous_=false;
         return stop(out,invalid_?Inhibit::InvalidCommand:(!s.can_ok?Inhibit::CanFault:
             (!s.frontend_ok?Inhibit::FrontendInvalid:(received_?Inhibit::CanTimeout:Inhibit::NoCommand))),true);
-    }
-    if(!command_.start) {
-        relay_=Relay::Off;start_off_seen_=true;start_previous_=false;gear_=Gear::Neutral;
-        return stop(out,Inhibit::StartOff,true);
     }
     const bool start_edge=!start_previous_;
     start_previous_=true;
@@ -88,6 +89,7 @@ Output Controller::step(const Sensors& s,uint32_t now) {
     const bool config_ok=isfinite(cfg_.wheelbase_m) && cfg_.wheelbase_m>0 && isfinite(cfg_.track_m) && cfg_.track_m>0 &&
         isfinite(cfg_.wheel_diameter_m) && cfg_.wheel_diameter_m>0 && isfinite(cfg_.reference_motor_rpm) && cfg_.reference_motor_rpm>0 &&
         isfinite(cfg_.ramp_rpm_per_s) && cfg_.ramp_rpm_per_s>0 && cfg_.steer_center-cfg_.steer_left>cfg_.steer_deadband &&
+        isfinite(cfg_.steer_left) && isfinite(cfg_.steer_right) && isfinite(cfg_.steer_center) &&
         cfg_.steer_right-cfg_.steer_center>cfg_.steer_deadband && cfg_.steer_deadband>=0 && cfg_.steer_max_deg>0 && cfg_.steer_max_deg<45 &&
         isfinite(cfg_.reverse_limit_kph) && isfinite(cfg_.reverse_resume_kph) && cfg_.reverse_limit_kph>0 &&
         cfg_.reverse_resume_kph<cfg_.reverse_limit_kph && cfg_.reverse_resume_kph>=0 &&

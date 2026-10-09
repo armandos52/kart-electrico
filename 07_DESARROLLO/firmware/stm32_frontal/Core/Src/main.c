@@ -29,6 +29,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "kart_frontend.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -38,33 +39,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define SD_LOG_INTERVAL_MS  200
-#define SENSOR_READ_INTERVAL_MS 20
-#define HALL_CALC_INTERVAL_MS 100
 
 
-#define CAN_ID_ESP32_DATA   0x123
 
-#define CAN_ID_KART_CONTROL       0x100
-#define ADC_ACCEL_CHANNEL      ADC_CHANNEL_0  // PA0
-#define ADC_STEER_CHANNEL      ADC_CHANNEL_8  // PF10
-#define BRAKE_PIN              GPIO_PIN_6     // PG6
-#define BRAKE_PORT             GPIOG
-#define MODE_D_PIN             GPIO_PIN_7     // PC7 - Drive (D)
-#define MODE_D_PORT            GPIOC
-#define MODE_R_PIN             GPIO_PIN_6     // PC6 - Reverse (R)
-#define MODE_R_PORT            GPIOC
-#define CAN_ID_MODO_CONTROLO      0x104
-#define MODO_DIFERENCIAL         0x00
-#define MODO_DIFERENCIAL_ESC     0x01
-#define MODO_AUTOBLOCANTE        0x02
 #define LCD_FB_START_ADDRESS       ((uint32_t)0xC0000000)
-#define ACCEL_NOISE_THRESHOLD  100
 
 #define REFRESH_COUNT        1835
 
-#define ACCEL_ADC_MIN  124    // 0.1V -> 124
-#define ACCEL_ADC_MAX  1861   // 1.5V -> 1861
 
 #define SDRAM_TIMEOUT                            ((uint32_t)0xFFFF)
 #define SDRAM_MODEREG_BURST_LENGTH_1             ((uint16_t)0x0000)
@@ -119,7 +100,7 @@ osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
   .stack_size = 4096,
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* Definitions for TouchGFXTask */
 osThreadId_t TouchGFXTaskHandle;
@@ -135,6 +116,7 @@ const osThreadAttr_t videoTask_attributes = {
   .stack_size = 1000 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* USER CODE BEGIN PV */
 /* Definitions for SDTask */
 osThreadId_t SDTaskHandle;
 const osThreadAttr_t SDTask_attributes = {
@@ -142,65 +124,8 @@ const osThreadAttr_t SDTask_attributes = {
   .stack_size = 2048 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
-/* USER CODE BEGIN PV */
-extern void* screen1View;
-extern void* screen2View;
 
 static FMC_SDRAM_CommandTypeDef Command;
-
-//Cartao SD
-volatile uint8_t g_sd_record_enable = 0;  // 1 = a gravar, 0 = parado
-
-// ===== VARIÁVEIS GLOBAIS CAN → TouchGFX =====
-volatile uint8_t g_can_data_buffer[8] = {0};
-volatile uint8_t g_can_new_data_flag = 0;
-volatile uint32_t g_can_received_id = 0;
-
-volatile int16_t g_velocidade_kph = 0;
-volatile int16_t g_vel_roda_esq = 0;
-volatile int16_t g_vel_roda_dir = 0;
-volatile uint8_t g_modo_kart = 2;
-volatile int16_t g_yaw_rate = 0;
-
-volatile uint32_t g_pulsos_di_esq = 0;
-volatile uint32_t g_pulsos_di_dir = 0;
-volatile int16_t g_vel_roda_di_esq = 0;
-volatile int16_t g_vel_roda_di_dir = 0;
-
-
-volatile uint8_t g_brake_pressed = 0;
-volatile uint8_t g_botao_start = 0;   // 1 = premido, 0 = solto
-
-// ===== Dados do BMS (Pylontech) =====
-volatile uint16_t g_bms_soc = 0;
-volatile int16_t g_bms_temp = 0;
-
-volatile uint16_t g_steering_raw = 0;   // valor bruto da direção (ADC 0-4095)
-
-// ===== VARIÁVEIS DO SD CARD =====
-FATFS fs;
-FIL fil;
-FRESULT fres;
-UINT bytes_written;
-volatile uint8_t sd_ready = 0;
-uint32_t last_sd_log_time = 0;
-
-// ===== Estrutura de Dados dos Sensores =====
-typedef struct {
-    uint16_t accel_raw;
-    uint16_t steer_raw;
-    uint8_t  brake;
-    uint8_t  mode_d;
-    uint8_t  mode_r;
-} SensorData_t;
-
-
-
-// ===== Variáveis de controlo =====
-volatile uint8_t g_modo_controlo = 0;
-uint8_t marcha_atual = 2; // 0=D, 1=R, 2=N
-uint32_t tick_anterior = 0;
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -218,66 +143,17 @@ static void MX_CAN1_Init(void);
 static void MX_ADC3_Init(void);
 static void MX_SDMMC1_SD_Init(void);
 void StartDefaultTask(void *argument);
-void StartSDTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 extern void videoTaskFunc(void *argument);
 
 /* USER CODE BEGIN PFP */
-void SD_Init(void);
-void SD_Log(SensorData_t *data);
-void Close_SD(void);
-void Read_Sensors(SensorData_t *data);
-void Send_Data_CAN(SensorData_t *data);
-
-void GetManufacturerId (uint8_t *manufacturer_id);
+void StartSDTask(void *argument);
+void GetManufacturerId(uint8_t *manufacturer_id);
 void EnableMemoryMappedMode(uint8_t manufacturer_id);
-void Atualizar_Display_Velocidade(void);
-void atualizarTela1(void);
-
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
-{
-    if (hcan->Instance == CAN1)
-    {
-        CAN_RxHeaderTypeDef rxHeader;
-        uint8_t data[8];
-
-        if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rxHeader, data) == HAL_OK)
-        {
-            // ===== RECEBER DADOS DO ESP32 (ID 0x123) =====
-            if (rxHeader.StdId == 0x123 && rxHeader.DLC >= 8)
-            {
-                g_velocidade_kph = (int16_t)((data[0] << 8) | data[1]);
-                g_vel_roda_esq   = (int16_t)((data[2] << 8) | data[3]);
-                g_vel_roda_dir   = (int16_t)((data[4] << 8) | data[5]);
-
-                // ===== EXTRAI O YAW DOS BYTES 6 E 7 =====
-                g_yaw_rate = (int16_t)((data[6] << 8) | data[7]);
-
-                g_can_new_data_flag = 1;
-            }
-
-            // ===== DADOS DO BMS (Pylontech) =====
-            // SOC (ID 0x355, bytes 4-5, little-endian, 0.01%)
-            if (rxHeader.StdId == 0x355)
-            {
-                uint16_t soc_raw = ((uint16_t)data[5] << 8) | data[4];
-                g_bms_soc = soc_raw / 100;
-            }
-            // Temperatura (ID 0x356, bytes 4-5, little-endian, 0.1 °C)
-            else if (rxHeader.StdId == 0x356)
-            {
-                int16_t temp_raw = (int16_t)(((uint16_t)data[5] << 8) | data[4]);
-                g_bms_temp = temp_raw / 10;
-            }
-        }
-    }
-}
-
 void GetManufacturerId(uint8_t *manufacturer_id)
 {
     QSPI_CommandTypeDef s_command_id;
@@ -323,154 +199,6 @@ void EnableMemoryMappedMode(uint8_t manufacturer_id)
     }
 }
 
-void CAN_Init_Hardware(void)
-{
-    HAL_CAN_Start(&hcan1);
-
-    CAN_FilterTypeDef filter;
-    filter.FilterBank = 0;
-    filter.FilterMode = CAN_FILTERMODE_IDMASK;
-    filter.FilterScale = CAN_FILTERSCALE_32BIT;
-    filter.FilterIdHigh = 0x0000;
-    filter.FilterIdLow = 0x0000;
-    filter.FilterMaskIdHigh = 0x0000;
-    filter.FilterMaskIdLow = 0x0000;
-    filter.FilterFIFOAssignment = CAN_RX_FIFO0;
-    filter.FilterActivation = ENABLE;
-    filter.SlaveStartFilterBank = 14;
-
-    HAL_CAN_ConfigFilter(&hcan1, &filter);
-    HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
-}
-
-void SD_Init(void)
-{
-    fres = f_mount(&fs, "", 1);
-    if (fres != FR_OK) { sd_ready = 0; return; }
-
-    fres = f_open(&fil, "kart_log.csv", FA_OPEN_APPEND | FA_WRITE);
-    if (fres != FR_OK) { sd_ready = 0; return; }
-
-    if (f_size(&fil) == 0) {
-        char header[] = "Tick,Accel,Steer,Brake,ModeD,ModeR,Vel,DiEsq,DiDir,TrEsq,TrDir,ModoDif,Yaw\r\n";
-        f_write(&fil, header, strlen(header), &bytes_written);
-        f_sync(&fil);
-    }
-
-    f_lseek(&fil, f_size(&fil));
-    sd_ready = 1;
-}
-
-void SD_Log(SensorData_t *data)
-{
-    if (!sd_ready) return;
-
-    char line[256];
-    int len = sprintf(line, "%lu,%u,%u,%u,%u,%u,%d,%d,%d,%d,%d,%d,%d\r\n",
-            HAL_GetTick(),
-            data->accel_raw,
-            data->steer_raw,
-            data->brake,
-            data->mode_d,
-            data->mode_r,
-            g_velocidade_kph,
-            g_vel_roda_di_esq,
-            g_vel_roda_di_dir,
-            g_vel_roda_esq,
-            g_vel_roda_dir,
-            g_modo_controlo,
-            g_yaw_rate);
-
-    if (len > 0) {
-        f_write(&fil, line, len, &bytes_written);
-    }
-}
-
-void Read_Sensors(SensorData_t *data)
-{
-    // ===== ACELERADOR (ADC3, Canal 0 - PA0) =====
-    ADC_ChannelConfTypeDef sConfig;
-    sConfig.Channel = ADC_CHANNEL_0;
-    sConfig.Rank = ADC_REGULAR_RANK_1;
-    sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES;
-    HAL_ADC_ConfigChannel(&hadc3, &sConfig);
-
-    HAL_ADC_Start(&hadc3);
-    if (HAL_ADC_PollForConversion(&hadc3, 10) == HAL_OK) {
-        uint16_t raw = HAL_ADC_GetValue(&hadc3);
-        if (raw < ACCEL_ADC_MIN) raw = ACCEL_ADC_MIN;
-        if (raw > ACCEL_ADC_MAX) raw = ACCEL_ADC_MAX;
-        data->accel_raw = (uint16_t)(((uint32_t)(raw - ACCEL_ADC_MIN) * 4095) / (ACCEL_ADC_MAX - ACCEL_ADC_MIN));
-    }
-    HAL_ADC_Stop(&hadc3);
-
-    // ===== DIREÇÃO (ADC3, Canal 8 - PF10) =====
-    // Reconfigura o ADC3 para o Canal 8 antes de ler
-    sConfig.Channel = ADC_CHANNEL_8;
-    HAL_ADC_ConfigChannel(&hadc3, &sConfig);
-
-    HAL_ADC_Start(&hadc3);
-    if (HAL_ADC_PollForConversion(&hadc3, 10) == HAL_OK) {
-        uint16_t raw = HAL_ADC_GetValue(&hadc3);
-
-        // ===== NORMALIZAÇÃO DO VOLANTE (1042 a 3313 → 0 a 4095) =====
-        #define STEER_ADC_MIN   1042   // 0,84 V
-        #define STEER_ADC_MAX   3313   // 2,67 V
-
-        if (raw < STEER_ADC_MIN) raw = STEER_ADC_MIN;
-        if (raw > STEER_ADC_MAX) raw = STEER_ADC_MAX;
-        data->steer_raw = (uint16_t)(((uint32_t)(raw - STEER_ADC_MIN) * 4095) / (STEER_ADC_MAX - STEER_ADC_MIN));
-    }
-    HAL_ADC_Stop(&hadc3);
-    g_steering_raw = data->steer_raw;
-
-    // ===== BOTÕES =====
-    data->brake = (HAL_GPIO_ReadPin(BRAKE_PORT, BRAKE_PIN) == GPIO_PIN_RESET) ? 1 : 0;
-    data->mode_d = HAL_GPIO_ReadPin(MODE_D_GPIO_Port, MODE_D_Pin);
-    data->mode_r = HAL_GPIO_ReadPin(MODE_R_GPIO_Port, MODE_R_Pin);
-
-    g_brake_pressed = data->brake;
-    g_botao_start = HAL_GPIO_ReadPin(START_STOP_GPIO_Port, START_STOP_Pin);
-}
-void Send_Data_CAN(SensorData_t *data)
-{
-    CAN_TxHeaderTypeDef txHeader;
-    uint8_t txData[8];
-    uint32_t mailbox;
-
-    txHeader.StdId = CAN_ID_KART_CONTROL;
-    txHeader.IDE = CAN_ID_STD;
-    txHeader.RTR = CAN_RTR_DATA;
-    txHeader.DLC = 8;
-    txHeader.TransmitGlobalTime = DISABLE;
-
-    txData[0] = (data->accel_raw >> 8) & 0xFF;
-    txData[1] = data->accel_raw & 0xFF;
-    txData[2] = (data->steer_raw >> 8) & 0xFF;
-    txData[3] = data->steer_raw & 0xFF;
-    txData[4] = data->brake;
-    txData[5] = data->mode_d;
-    txData[6] = data->mode_r;
-    txData[7] = (g_modo_controlo & 0x03) | ((g_botao_start & 0x01) << 2);
-
-    HAL_CAN_AddTxMessage(&hcan1, &txHeader, txData, &mailbox);
-}
-
-// Protótipos das funções que vamos usar
-void CAN_Init_Hardware(void);
-void CAN_Send_Test_Message(void);
-
-void Read_Sensors(SensorData_t* sensor_data);
-void Send_Sensor_Data_CAN(SensorData_t* sensor_data);
-
-SensorData_t g_sensor_data = {0};
-
-// Variáveis globais para o CAN (opcional, para debugging)
-CAN_TxHeaderTypeDef   TxHeader;
-CAN_RxHeaderTypeDef   RxHeader;
-uint8_t               TxData[8];
-uint8_t               RxData[8];
-uint32_t              TxMailbox;
 /* USER CODE END 0 */
 
 /**
@@ -565,6 +293,7 @@ int main(void)
   /* USER CODE BEGIN RTOS_THREADS */
   // ===== CRIA A TAREFA DO SD CARD =====
   SDTaskHandle = osThreadNew(StartSDTask, NULL, &SDTask_attributes);
+  if (!defaultTaskHandle || !TouchGFXTaskHandle || !videoTaskHandle || !SDTaskHandle) Kart_Fatal();
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -715,7 +444,7 @@ static void MX_CAN1_Init(void)
   hcan1.Init.TimeTriggeredMode = DISABLE;
   hcan1.Init.AutoBusOff = ENABLE;
   hcan1.Init.AutoWakeUp = ENABLE;
-  hcan1.Init.AutoRetransmission = ENABLE;
+  hcan1.Init.AutoRetransmission = DISABLE;
   hcan1.Init.ReceiveFifoLocked = DISABLE;
   hcan1.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan1) != HAL_OK)
@@ -1183,170 +912,31 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void Close_SD(void)
-{
-    if (sd_ready) {
-        f_sync(&fil);
-        f_close(&fil);
-        f_mount(NULL, "", 0);
-        f_mount(NULL, "", 1);
-        f_mount(NULL, "", 0);
-        sd_ready = 0;
-    }
-}
 void StartSDTask(void *argument)
 {
-    SD_Init(); // Inicializa o SD (tenta montar logo no início)
-
-    uint32_t last_sd_sync = 0;
-
-    for(;;)
-    {
-        uint32_t tick = osKernelGetTickCount();
-
-        // ===== ESCREVER NO SD APENAS SE O BOTÃO PLAY ESTIVER ATIVO =====
-        uint8_t record_now = g_sd_record_enable; // Força a leitura real da variável
-
-        if (record_now == 1 && sd_ready)
-        {
-            static uint32_t last_sd_log = 0;
-
-            if (tick - last_sd_log >= SD_LOG_INTERVAL_MS)
-            {
-                last_sd_log = tick;
-
-                // Verifica se o ficheiro está vazio e escreve o cabeçalho
-                if (f_size(&fil) == 0) {
-                    char header[] = "Tick,Accel,Steer,Brake,ModeD,ModeR,Vel,DiEsq,DiDir,TrEsq,TrDir,ModoDif,Yaw\r\n";
-                    f_write(&fil, header, strlen(header), &bytes_written);
-                    f_sync(&fil);
-                }
-
-                SD_Log(&g_sensor_data);
-            }
-
-            // Sincroniza fisicamente com o cartão apenas a cada 1 segundo
-            if (tick - last_sd_sync >= 1000) {
-                last_sd_sync = tick;
-                f_sync(&fil);
-            }
-        }
-
-        osDelay(SD_LOG_INTERVAL_MS / 2); // Pequeno delay para não sobrecarregar o CPU
-    }
-}
-/* USER CODE END 4 */
-
-void Atualizar_Display_Velocidade(void)
-{
-    // Chama a função do TouchGFX para atualizar o ecrã
-    atualizarTela1();
-
+    (void)argument;
+    for (;;) { Kart_SdTick(); osDelay(50); }
 }
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
-/**
-  * @brief  Function implementing the defaultTask thread.
-  * @param  argument: Not used
-  * @retval None
-  */
+/* Control propio en kart_frontend.c; no regenerar desde un .ioc antiguo. */
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
-    CAN_Init_Hardware();
-
-    for(int i=0; i<3; i++) {
-        HAL_GPIO_TogglePin(LED_STM_GPIO_Port, LED_STM_Pin);
-        osDelay(200);
+    /* USER CODE BEGIN 5 */
+    (void)argument;
+    Kart_Init();
+    uint32_t wake = osKernelGetTickCount();
+    for (;;) {
+        Kart_ControlTick();
+        wake += 5;
+        uint32_t now = osKernelGetTickCount();
+        if ((int32_t)(wake - now) > 0) osDelayUntil(wake);
+        else { wake = now; osDelay(1); }
     }
-
-    uint32_t tick_anterior = 0;
-    uint32_t last_display = 0;
-
-    uint8_t last_hall_esq = 1, last_hall_dir = 1;
-    uint32_t last_pulse_time_esq = 0, last_pulse_time_dir = 0;
-    uint32_t pulse_interval_esq = 0, pulse_interval_dir = 0;
-    bool first_pulse_esq = true, first_pulse_dir = true;
-
-    for(;;)
-    {
-        uint32_t tick = osKernelGetTickCount();
-
-        // ===== 1. LER SENSORES A CADA 5ms =====
-        if (tick - tick_anterior >= 5)
-        {
-            tick_anterior = tick;
-            Read_Sensors(&g_sensor_data);
-
-            uint8_t hall_esq = HAL_GPIO_ReadPin(HALL_DI_ESQ_GPIO_Port, HALL_DI_ESQ_Pin);
-            uint8_t hall_dir = HAL_GPIO_ReadPin(HALL_DI_DIR_GPIO_Port, HALL_DI_DIR_Pin);
-
-            if (last_hall_esq == 1 && hall_esq == 0) {
-                if (!first_pulse_esq) {
-                    pulse_interval_esq = tick - last_pulse_time_esq;
-                }
-                last_pulse_time_esq = tick;
-                first_pulse_esq = false;
-            }
-            last_hall_esq = hall_esq;
-
-            if (last_hall_dir == 1 && hall_dir == 0) {
-                if (!first_pulse_dir) {
-                    pulse_interval_dir = tick - last_pulse_time_dir;
-                }
-                last_pulse_time_dir = tick;
-                first_pulse_dir = false;
-            }
-            last_hall_dir = hall_dir;
-
-            if (g_sensor_data.mode_d == 1) {
-                if (marcha_atual != 0 && g_sensor_data.brake && g_velocidade_kph == 0) {
-                    marcha_atual = 0;
-                }
-            } else if (g_sensor_data.mode_r == 1) {
-                if (marcha_atual != 1 && g_sensor_data.brake && g_velocidade_kph == 0) {
-                    marcha_atual = 1;
-                }
-            } else {
-                marcha_atual = 2;
-            }
-
-            g_modo_kart = marcha_atual;
-
-            SensorData_t tx_data = g_sensor_data;
-            tx_data.mode_d = (marcha_atual == 0);
-            tx_data.mode_r = (marcha_atual == 1);
-            Send_Data_CAN(&tx_data);
-
-            HAL_GPIO_TogglePin(LED_STM_GPIO_Port, LED_STM_Pin);
-        }
-
-        // ===== 2. CALCULAR RPM =====
-        if (pulse_interval_esq > 0 && pulse_interval_esq < 5000
-            && (tick - last_pulse_time_esq) <= 500) {
-            g_vel_roda_di_esq = (60000 / pulse_interval_esq) / 4;
-        } else {
-            g_vel_roda_di_esq = 0;
-        }
-
-        if (pulse_interval_dir > 0 && pulse_interval_dir < 5000
-            && (tick - last_pulse_time_dir) <= 500) {
-            g_vel_roda_di_dir = (60000 / pulse_interval_dir) / 4;
-        } else {
-            g_vel_roda_di_dir = 0;
-        }
-
-        // ===== 3. ATUALIZAR DISPLAY A CADA 50ms =====
-        if ((tick - last_display) >= 50) {
-            last_display = tick;
-            Atualizar_Display_Velocidade();
-        }
-
-        osDelay(5);  // era 1
-    }
+    /* USER CODE END 5 */
 }
-
 
  /* MPU Configuration */
 
@@ -1416,9 +1006,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-
-  /* USER CODE END Error_Handler_Debug */
+Kart_Fatal();
+/* USER CODE END Error_Handler_Debug */
 }
 #ifdef USE_FULL_ASSERT
 /**

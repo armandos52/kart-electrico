@@ -1,0 +1,37 @@
+07_DESARROLLO/firmware/stm32_frontal/.build/stm32_frontal-v1.3-dev2.elf  :
+section                       size         addr
+.isr_vector                    456    134217728
+TextFlashSection               180   2415919104
+FontFlashSection             42112   2415919284
+ExtFlashSection            6309640   2415961396
+BufferSection              1305600   3221225472
+.text                       223232    134218192
+.rodata                      23328    134441424
+FontSearchFlashSection         756    134464752
+.ARM.extab                       0    134465508
+.ARM                             8    134465508
+.preinit_array                   0    134465516
+.init_array                     28    134465516
+.fini_array                      8    134465544
+.data                          292    536870912
+TouchGFX_ScratchbufferB        256    536871232
+TouchGFX_ScratchbufferA        256    536871488
+.tdata                           0    536871744
+.tbss                            0    536871744
+.bss                         95552    536871744
+._user_heap_stack             5120    536967296
+.ARM.attributes                 48            0
+.comment                       139            0
+.debug_info                 759656            0
+.debug_abbrev                99206            0
+.debug_loclists             278849            0
+.debug_aranges               16656            0
+.debug_rnglists              19553            0
+.debug_macro                264870            0
+.debug_line                 543003            0
+.debug_str                 1284116            0
+.debug_frame                 50052            0
+.debug_line_str                603            0
+Total                     11323575
+
+

@@ -7,6 +7,7 @@
 #include "kart_control.h"
 #include "hardware_kart.h"
 #include "telemetria.h"
+#include "../../common/kart_protocol.h"
 #include <algorithm>
 #include <math.h>
 
@@ -115,7 +116,11 @@ bool initOutputs() {
 void applyOutputs(const kart::Output& value) {
     const bool driving=value.direction!=kart::Gear::Neutral && (value.effort_left>0 || value.effort_right>0);
     // Al parar, PWM antes de conmutar dirección/contactores. Nunca se escribe una consigna no autorizada.
-    if(!driving) {ledcWrite(hardware::PWM_L,255);ledcWrite(hardware::PWM_R,255);}
+    if(!driving) {
+        const bool left_ok=ledcWrite(hardware::PWM_L,255);
+        const bool right_ok=ledcWrite(hardware::PWM_R,255);
+        if(!left_ok || !right_ok)outputs_ready=false;
+    }
     const bool forward=driving && value.direction==kart::Gear::Drive;
     const bool reverse=driving && value.direction==kart::Gear::Reverse;
     digitalWrite(hardware::FORWARD_R,forward);digitalWrite(hardware::REVERSE_R,reverse);
@@ -144,9 +149,9 @@ void receiveCan() {
     for(unsigned n=0;n<8 && micros()-start_us<2000 && can.checkReceive()==CAN_MSGAVAIL;++n) {
         unsigned long id=0;uint8_t len=0,data[8]={0};
         if(can.readMsgBuf(&id,&len,data)!=CAN_OK) {++can_rx_errors;controller.receive(nullptr,0,millis());break;}
-        if(id==0x100) controller.receive(data,len,millis()); // id con flags RTR/EXT no coincide
-        else if(id==0x101) {
-            if(len!=8 || data[0]!=1 || (data[1]&0xf8)) {health_seen=true;health_valid=false;continue;}
+        if(id==KART_CAN_COMMAND) controller.receive(data,len,millis()); // id con flags RTR/EXT no coincide
+        else if(id==KART_CAN_INPUT_HEALTH) {
+            if(len!=8 || data[0]!=KART_PROTOCOL_VERSION || (data[1]&0xf8)) {health_seen=true;health_valid=false;continue;}
             const uint16_t seq=uint16_t((uint16_t(data[6])<<8)|data[7]);
             if(!health_seen || seq!=health_seq) {health_tick=millis();health_seq=seq;}
             health_seen=true;health_valid=(data[1]&7)==7;
@@ -167,15 +172,15 @@ void transmitCan(uint32_t now) {
         put16(data,int16_t(kart::rpmToKph(mean,controller.config().wheel_diameter_m)));
         put16(data+2,int16_t(sensors.rpm_left));put16(data+4,int16_t(sensors.rpm_right));
         put16(data+6,sensors.yaw_valid?int16_t(sensors.yaw_dps*10):0);
-        sendCan(0x123,data); // compatible: validez está en 0x124
+        sendCan(KART_CAN_FEEDBACK,data); // compatible: validez está en 0x124
     }
     if(now-status_tick>=100) {
         status_tick=now;
-        const uint8_t flags=(outputs_ready?1:0)|(output.rearm_required?2:0)|(sensors.speed_valid?4:0)|
-            (sensors.yaw_valid?8:0)|(output.stationary?16:0)|(output.reverse_limited?32:0)|(health_seen?64:0);
-        uint8_t data[8]={1,uint8_t(output.inhibit),uint8_t(output.selected_mode),output.applied_mode,
+        const uint8_t flags=(sensors.outputs_ok?KART_STATUS_READY:0)|(output.rearm_required?KART_STATUS_REARM:0)|(sensors.speed_valid?KART_STATUS_SPEED_VALID:0)|
+            (sensors.yaw_valid?KART_STATUS_YAW_VALID:0)|(output.stationary?KART_STATUS_STATIONARY:0)|(output.reverse_limited?KART_STATUS_REVERSE_LIMIT:0)|(health_seen?KART_STATUS_FRONTEND_HEALTH:0);
+        uint8_t data[8]={KART_PROTOCOL_VERSION,uint8_t(output.inhibit),uint8_t(output.selected_mode),output.applied_mode,
             flags,uint8_t(output.relay),uint8_t(output.direction),uint8_t(controller.command().mode)};
-        sendCan(0x124,data);
+        sendCan(KART_CAN_STATUS,data);
     }
 }
 void publish(uint32_t now) {
@@ -183,7 +188,7 @@ void publish(uint32_t now) {
     m.tick_ms=now;m.mandos_validos=controller.hasCommand();m.acelerador_raw=cmd.accelerator;m.direcao_raw=cmd.steer;
     m.travao=cmd.brake;m.modo_d=cmd.gear==kart::Gear::Drive;m.modo_r=cmd.gear==kart::Gear::Reverse;m.modo_controlo=uint8_t(cmd.mode);
     m.motor_esq_speed=pwm_left;m.motor_dir_speed=pwm_right;m.rpm_esq=int16_t(sensors.rpm_left);m.rpm_dir=int16_t(sensors.rpm_right);
-    m.yaw_rate=sensors.yaw_dps;m.mpu_ok=sensors.yaw_valid;m.control_ready=outputs_ready;
+    m.yaw_rate=sensors.yaw_dps;m.mpu_ok=sensors.yaw_valid;m.control_ready=sensors.outputs_ok;
     m.relay1=digitalRead(hardware::RELAY1);m.relay2=digitalRead(hardware::RELAY2);m.estado_relays=uint8_t(output.relay);
     m.carregador=sensors.charger;m.emergency_stop=output.inhibit==kart::Inhibit::CanTimeout;
     m.can_rx_age_ms=controller.age(now);m.can_rx_count=controller.accepted();m.can_init_ok=can_ready;m.can_init_attempts=can_attempts;
@@ -245,6 +250,9 @@ void loop() {
     // Calibración inmóvil: no permitir tracción durante la ventana inicial.
     if(gyro_present && !gyro_calibrated) sensors.outputs_ok=false;
     output=controller.step(sensors,now);applyOutputs(output);
+    if(!outputs_ready && sensors.outputs_ok) {
+        sensors.outputs_ok=false;output=controller.step(sensors,millis());applyOutputs(output);
+    }
     if(can_ready) transmitCan(now);
     if(telemetria_toca(millis())) publish(millis());
     delay(1);

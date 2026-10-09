@@ -82,6 +82,16 @@ int main() {
     check(hall.out.inhibit==Inhibit::HallFault && hall.out.effort_left==0,"Hall ausente tras gracia corta");
     Fixture quality;quality.drive();quality.s.speed_valid=false;quality.step();check(quality.out.effort_left==0,"velocidad invalida corta");
     Fixture front;front.drive();front.s.frontend_ok=false;front.step();check(front.out.inhibit==Inhibit::FrontendInvalid,"frontal invalido corta");
+    front.b[7]=0;front.step();check(front.out.relay==Relay::Off,"STOP prevalece sobre fallo ADC frontal");
+    Fixture change;change.drive();change.s.rpm_left=change.s.rpm_right=100;change.b[5]=0;change.b[6]=1;change.step();
+    check(change.out.effort_left==0 && change.out.rearm_required,"D a R en movimiento corta y exige rearme");
+    Fixture modechange;modechange.drive();modechange.b[7]=5;modechange.step();
+    check(modechange.out.inhibit==Inhibit::ModeChange && modechange.out.effort_left==0,"modo durante traccion corta");
+    Fixture blq;blq.drive(Gear::Drive,Mode::Equal);blq.steer(3005);for(int i=0;i<300;i++)blq.step();
+    check(blq.out.effort_left==blq.out.effort_right,"BLQ iguala esfuerzo con direccion girada");
+    Fixture revYaw;revYaw.drive(Gear::Reverse,Mode::Esc);revYaw.steer(3005);revYaw.s.rpm_left=revYaw.s.rpm_right=100;revYaw.s.yaw_dps=-20;
+    for(int i=0;i<300;i++)revYaw.step();
+    check(revYaw.out.effort_left>=0 && revYaw.out.effort_right>=0 && revYaw.out.direction==Gear::Reverse,"ESC R mantiene salidas acotadas");
     Fixture outputs;outputs.drive();outputs.s.outputs_ok=false;outputs.step();check(outputs.out.relay==Relay::Off && outputs.out.effort_left==0,"fallo salida abre y para");
     Config wrong;wrong.esc_gain_per_dps=std::numeric_limits<float>::quiet_NaN();Fixture nan(wrong);nan.drive();
     check(nan.out.inhibit==Inhibit::Configuration && nan.out.effort_left==0,"configuracion no finita rechazada");

@@ -19,6 +19,17 @@ TouchGFX/generated/*
 !tools/**
 !tests/
 !tests/**
+!Drivers/
+Drivers/*
+!Drivers/STM32F7xx_HAL_Driver/
+Drivers/STM32F7xx_HAL_Driver/*
+!Drivers/STM32F7xx_HAL_Driver/LICENSE_IWDG.md
+!Drivers/STM32F7xx_HAL_Driver/Inc/
+Drivers/STM32F7xx_HAL_Driver/Inc/*
+!Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_iwdg.h
+!Drivers/STM32F7xx_HAL_Driver/Src/
+Drivers/STM32F7xx_HAL_Driver/Src/*
+!Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_iwdg.c
 **/*.o
 **/*.obj
 **/*.exe

@@ -1,12 +1,38 @@
 ---
 estado: vigente
-actualizado: 2026-10-08
+actualizado: 2026-10-09
 resumen: Lo conocido, lo pendiente y el siguiente paso del proyecto; traspaso entre sesiones.
 ---
 
 # Estado actual
 
-Última actualización: 2026-10-08.
+Última actualización: 2026-10-09.
+
+## Robustez v1.3 implementada en código · 09-10-2026
+
+- Armando autorizó todas las correcciones y R a **20 km/h**, trabajando desde el fuente STM32 histórico sin conexión a pantalla. Rama `codex/robustez-v13`; ESP32/STM32 `v1.3-dev2` y panel con nuevos estados. [Alcance](../06_TRABAJO/IMPLEMENTACION_ROBUSTEZ_V13.md), [ENS-0009](../06_TRABAJO/ensayos/ENS-0009_robustez_firmware_v13.md), [DEC-0006](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0006_robustez_v13_y_limite_marcha_atras.md).
+- STOP/rearme/rampa, marcha atrás, ADC/CAN/Hall/MPU, watchdog, SD y GUI corregidos; solicitado/recibido/aplicado separados. Comprobaciones en PC y compilaciones documentadas. **Sin grabar ni probar físicamente; v1.2 sigue como última grabación conocida.**
+- R corta propulsión según velocidad estimada, sin frenado eléctrico ni garantía física en pendiente. ESC experimental; calibraciones/PPR/BMS pendientes. No se acredita firmware instalado STM32 ni regeneración CubeMX.
+- Siguiente: identificar y respaldar frontal+QSPI, comparar versión, banco preparado y después integración por Wi-Fi. USB ESP32 solo fuera del kart. Originales y respaldos anteriores conservados; no push ni copia de seguridad independiente configurada. Las secciones anteriores de v1.2 se mantienen como historia.
+
+## Revisión v1.2 y modos · 08-10-2026
+
+- Armando reconfirma marcha satisfactoria y pide investigar antes de modificar; declara modos/pantalla poco funcionales. [Diagnóstico y propuesta](../06_TRABAJO/REVISION_CODIGO_V12_2026-10-08.md), [PROB-0008](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0008_robustez_control_modos_y_pantalla.md): rampa sin efecto, STOP temprano perdido, recuperación CAN sin rearme, ESC asimétrico y SD sin reanudación, entre otros hallazgos.
+- 19 observaciones reproducidas en PC con funciones originales y periféricos simulados; incluye defectos y protecciones, no validación física. ESP32 `905b09e` intacto; frontal revisado es fuente histórico, binario instalado sin identificar. Propuesta: estados/protecciones → DIF/BLQ y calibración → pantalla/SD → ESC → limpieza. Acceso a pantalla y registro Wi-Fi pendientes; sin grabación ni cambio de panel.
+
+## Modelo visual del kart basado en fotos · 08-10-2026
+
+- Panel `0.3.2-sentido-ruedas` en **http://127.0.0.1:8766/**, desconectado. 3D aceptado por Armando y esquema superior redibujado desde la cuarta foto de [DOC-0044](../03_CATALOGO/fichas/DOC-0044.md): bastidor rojo, asiento amarillo, cubierta trasera en T y ruedas diferentes. [Abrir esquema](http://127.0.0.1:8766/#esquema), con botón «Foto superior» y selección de piezas.
+- [ENS-0006](../06_TRABAJO/ensayos/ENS-0006_modelo_visual_fotografias.md): 21 tests Python y 32 comprobaciones web satisfactorias con datos sintéticos. Originales/hashes preservados; sin publicación ni cambios de firmware. [DEC-0005](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0005_modelo_visual_basado_en_fotos.md).
+- Actualización superior [ENS-0007](../06_TRABAJO/ensayos/ENS-0007_esquema_superior_fotografia.md): 30 comprobaciones del esquema y 32 de regresión 3D satisfactorias, sin hardware. Cuarta foto copiada/verificada, galería ampliada; ubicaciones ocultas pendientes.
+- Corrección puntual [ENS-0008](../06_TRABAJO/ensayos/ENS-0008_lados_y_sentido_ruedas_visual.md): pulsador a la izquierda del conductor, lados I/D coherentes, rodadura y reparto de demo corregidos; «Arriba» ahora coincide con el esquema. 19 comprobaciones dirigidas y 32 de regresión satisfactorias. Señal de dirección/calibración y firmware intactos.
+- Proporciones aproximadas, componentes ocultos por confirmar; no CAD medido. Próximo: contraste de Armando, cotas y registro Wi-Fi integrado. Catálogo: 44 entradas, incluido el conjunto de cuatro fotos; cobertura histórica sin cambios.
+
+## Dirección: asistente implementado y aprobado · 08-10-2026
+
+- Armando observa unos grados de variación en la **app del portátil con las ruedas quietas**; no dispone de esa indicación en la pantalla del kart. Sospecha calidad del sensor, recorridos distintos y centro incorrecto: causas/asimetría sin medir. [PROB-0007](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0007_variacion_y_centro_direccion.md).
+- Armando aprueba la etapa A, [DEC-0004](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0004_proponer_calibracion_antes_de_aplicar.md). Implementado «Calibrar dirección» en el [panel local](../07_DESARROLLO/panel_local/README.md), versión `0.2.0-direccion`: centro, extremos, tres ciclos de retorno, estadísticas, perfiles y exportación de muestras. Solo calibración visual del PC; firmware/control intactos.
+- [ENS-0005](../06_TRABAJO/ensayos/ENS-0005_calibracion_direccion_panel.md): 21 pruebas Python y 16 comprobaciones Chrome satisfactorias con datos sintéticos. **Panel disponible en http://127.0.0.1:8766/, desconectado; sin perfil físico activo.** Próximo: capturas reales por Wi-Fi, tolerancias y mediciones angulares. `steer_raw` es CAN normalizado; no ADC original. Sin referencias físicas se muestra porcentaje, no grados calibrados.
 
 ## Prueba real con motores satisfactoria · confirmación 08-10-2026
 

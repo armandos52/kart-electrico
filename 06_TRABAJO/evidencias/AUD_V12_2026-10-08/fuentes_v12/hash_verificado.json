@@ -1,0 +1,7 @@
+{
+  "fuentes_v12\\src\\ESP32-final.ino": "b39f5164e06957cb91bb564b7e217c98bd6446bb718e4d9a42af6f8022370f5c",
+  "fuentes_v12\\src\\telemetria.cpp": "0fd4ec0254be33c6749ce5c3754acb5d09fdced6d176461d88a9e31c196d3377",
+  "fuentes_v12\\include\\telemetria.h": "418dd3dcd94900f338c2cbcb9e204759ef90949f6c2609d7014bc9240772e52a",
+  "fuentes_v12\\platformio.ini": "f70ae17392248a8308614da2e98c11485c4df60622cb3c8465b09ff9631851cd",
+  "fuentes_v12\\lib\\mcp_can\\mcp_can.cpp": "ba29cb58f84b7e2f6f06a04ad1665e3e823cb4e5414fc0a9a1a94129aa49ff4d"
+}

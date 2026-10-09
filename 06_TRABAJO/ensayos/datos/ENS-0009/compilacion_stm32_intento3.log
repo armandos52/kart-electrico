@@ -1,0 +1,10 @@
+arm-none-eabi-gcc.exe (Arm GNU Toolchain 14.3.Rel1 (Build arm-14.174)) 14.3.1 20250623
+Compilando 151 unidades en C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\.build
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tools\build.py", line 74, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tools\build.py", line 64, in main
+    if not re.search(r'^[0-9a-f]+ T Reset_Handler$',symbols,re.M):raise RuntimeError('Falta Reset_Handler')
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Falta Reset_Handler

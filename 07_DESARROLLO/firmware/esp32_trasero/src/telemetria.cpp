@@ -202,7 +202,8 @@ void telemetria_publicar(const MuestraKart &m) {
     }
     // Sin MPU en el arranque, yaw_rate es (0 - offset)/131: no es una medida y no se publica.
     if (m.control_ready && m.mpu_ok && isfinite(m.yaw_rate)) agregar(l, "\"yaw_dps\":%.1f,", m.yaw_rate);
-    if (m.control_ready) {
+    { // v1.3: orden de reposo visible incluso si falla inicializacion/salida
+
         agregar(l, "\"pwm_left_raw\":%d,\"pwm_right_raw\":%d,\"rpm_rl\":%d,\"rpm_rr\":%d,"
                    "\"drive_direction\":\"%s\",\"loop_max_us\":%lu,",
                 m.motor_esq_speed, m.motor_dir_speed, m.rpm_esq, m.rpm_dir, m.drive_direction,
