@@ -73,6 +73,8 @@ Totales de secciones STM32: text 6599748 B, data 804 B, bss 1406272 B; incluyen 
 
 ### Versiones, conservación y trazabilidad
 
+Commit local de firmware y evidencia: `8a60a6ecafe9370426286752f0471a080705573a`. El panel conserva sus cambios locales previos, con snapshot privado y hashes; no se incluyó ese conjunto previo en el commit.
+
 [Manifiesto dev2](datos/ENS-0009/hashes_dev2.json) identifica fuentes de trabajo y binarios, sin copiar `secretos.h`. [Manifiesto de compilación STM32](datos/ENS-0009/hashes_compilacion_stm32_dev2.json) incluye todas las unidades y digest de cabeceras. Resguardos locales en `07_DESARROLLO/respaldos/esp32/v1.3-dev2/` (firmware/ELF/bootloader/particiones) y `07_DESARROLLO/respaldos/stm32/v1.3-dev2/` (ELF/HEX), excluidos de Git. No son respaldo leído de placas. El binario ESP32 puede incorporar la clave Wi-Fi: no publicarlo. V1.2 y dev1 permanecen aparte. No push ni segunda copia en otro soporte.
 
 El panel se desarrolla sobre cambios locales previos de visualización/calibración: se conservan, no se barren para fabricar un árbol limpio. Código del panel conservado además en `07_DESARROLLO/respaldos/panel/v1.3-dev2/codigo_panel.zip` (sin sesiones/datos privados, solo código y dependencias estáticas). Sus archivos afectados y el ZIP están identificados por SHA-256 en el manifiesto; el commit de firmware no pretende incorporar silenciosamente todo ese trabajo previo.

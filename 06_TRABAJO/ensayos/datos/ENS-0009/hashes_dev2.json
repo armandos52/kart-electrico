@@ -243,5 +243,7 @@
   },
   "git_head_at_capture": "53ebf404fb6195771e231725a5f358ebf81ed7e6",
   "note": "Fuentes de trabajo identificadas por SHA-256; cabecera Wi-Fi privada excluida. Binarios privados, sin push.",
-  "panel_snapshot_files": 36
+  "panel_snapshot_files": 36,
+  "firmware_commit": "8a60a6ecafe9370426286752f0471a080705573a",
+  "panel_commit_state": "Cambios locales previos preservados; fuente actual conservado en codigo_panel.zip y hashes individuales."
 }

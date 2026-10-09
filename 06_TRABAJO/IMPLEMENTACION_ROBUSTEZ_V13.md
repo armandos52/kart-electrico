@@ -44,4 +44,4 @@ ESP32 y STM32 `v1.3-dev2`, panel ampliado compatible con v1.2. [ENS-0009](ensayo
 
 Cierre de implementación no equivale a calibración ni validación física. Pendientes externos: identidad/respaldo STM32+QSPI, escalas BMS, PPR/ángulos, polaridad Hall/MPU/entradas, carga/jitter/latencia y watchdog medidos, prueba real por Wi-Fi y comparación con v1.2. CubeMX/Designer no se ejecutaron; la compilación comprueba requisitos que no deben perderse al regenerar. ESC continúa experimental. No hay grabación, conexión al kart ni publicación.
 
-Etapas trazables: `2deb9ef` copia frontal v0; `53ebf40` ESP32 dev1; continuación dev2 frontal/contrato/panel/correcciones finales con manifiesto de fuentes. El acceso pendiente a la pantalla no impidió completar los cambios posibles en código.
+Etapas trazables: `2deb9ef` copia frontal v0; `53ebf40` ESP32 dev1; `8a60a6e` firmware dev2 frontal/contrato/correcciones finales; panel local conservado por snapshot/hashes. El acceso pendiente a la pantalla no impidió completar los cambios posibles en código.
