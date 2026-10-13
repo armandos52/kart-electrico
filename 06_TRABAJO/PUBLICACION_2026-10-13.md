@@ -25,7 +25,7 @@ Hacer revisables los avances hasta hoy, sus fuentes, decisiones y resultados. Se
 | JavaScript | Robustez 16 y lenguas 33 satisfactorias; [robustez](evidencias/publicacion_2026-10-13/js-robustez.log), [idiomas](evidencias/publicacion_2026-10-13/idiomas.json), [velocidad](evidencias/publicacion_2026-10-13/js-velocidad.log) |
 | Copia pública / navegador | 9 comprobaciones, cero errores JS: [resultado](evidencias/publicacion_2026-10-13/browser.json); [demo](evidencias/publicacion_2026-10-13/panel-demo-publico.png), [galería](evidencias/publicacion_2026-10-13/galeria-publica.png), [móvil](evidencias/publicacion_2026-10-13/panel-movil.png). Chrome sin hardware sobre copia que excluye archivos ignorados |
 | Enlaces y revisión de secretos | [Navegación](evidencias/publicacion_2026-10-13/enlaces.json): cero destinos públicos ausentes; fuentes locales diferenciadas. [Revisión inicial](evidencias/publicacion_2026-10-13/revision_secretos.json) y [repetición sin coincidencias](evidencias/publicacion_2026-10-13/revision_secretos_final.json) |
-| Remoto y CI | Pendiente de push y verificación |
+| Remoto y CI | Rama publicada; CI Linux **satisfactoria** en `c397ef1`: [ejecución](https://github.com/armandos52/kart-electrico/actions/runs/38418521346), [resultado guardado](evidencias/publicacion_2026-10-13/ci-linux.json). Revisión e integración trazadas en [PR #1](https://github.com/armandos52/kart-electrico/pull/1) |
 
 Intento inicial Python bloqueado por permisos del directorio temporal del entorno restringido: [log negativo](evidencias/publicacion_2026-10-13/python.log). Repetición con acceso a temporales/localhost: 35 tests satisfactorios. Se distingue esta incidencia de entorno de un defecto del panel. MSVC conserva advertencias ya registradas; no se afirma compilación sin advertencias.
 
@@ -42,3 +42,9 @@ El primer push fue rechazado por revisión automática: destino/alcance no consi
 Inspección adicional del contenido exacto de `9d27afa` y su historial no publicado: 861 blobs/entradas comprimidas, 39.304.872 bytes, sin coincidencias de tokens/clave privada/contraseña local ni archivos secretos o imágenes de memoria. [Auditoría](evidencias/publicacion_2026-10-13/auditoria_commit.json) y [procedimiento](evidencias/publicacion_2026-10-13/auditar_salida.py). La carpeta respaldos contiene solo notas, hashes, logs de herramientas y reglas de exclusión. Se conserva el alcance limitado de la búsqueda; no se afirma auditoría integral.
 
 La consulta de batería del 13-10 incorporada durante esta preparación se incluye y se enlaza en el dossier: décimo problema, fuentes/cálculos y límites propios. Las evidencias se versionan sin transformar saltos de línea/espacios para conservar sus bytes.
+
+## Cierre de entrega
+
+El reintento de push tras verificar destino y contenido fue aceptado. La revisión automática rechazó después la actualización directa de `main` por exigir revisión mediante pull request; se siguió la alternativa de [PR #1](https://github.com/armandos52/kart-electrico/pull/1), sin forzar referencias. CI tanto en rama como en PR satisfactoria en `c397ef1`; comprobación focalizada del diff de STOP/START y coherencia con ENS-0011/0013. La página de la PR conserva el estado final de integración y los commits; la etiqueta `revision-academica-2026-10-13` identifica el corte académico.
+
+Pruebas de Linux: Python, contratos JavaScript, núcleos C++ ESP32/frontal y navegación documental, sin hardware. La última actualización documental no cambia las fuentes probadas. Enlaces públicos revisados y referencias solo locales señaladas. Próximo paso académico: recibir feedback; pasos físicos siguen abiertos en TAREAS.

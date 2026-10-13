@@ -8,7 +8,7 @@ resumen: Estado consolidado, configuración y siguiente paso; historia enlazada 
 
 ## Entrega para revisión académica
 
-Armando solicita preparar y subir el trabajo acumulado para recibir feedback de los profesores. Portada, [dossier](REVISION_PARA_PROFESORES.md), [índice de ensayos](../06_TRABAJO/ensayos/README.md), navegación y guía de reproducción preparados. Verificación/publicación en curso; resultado trazable en [PUB-0001](../06_TRABAJO/PUBLICACION_2026-10-13.md). No implica nueva prueba física ni lectura integral de originales.
+Armando solicita preparar y subir el trabajo acumulado para recibir feedback de los profesores. Portada, [dossier](REVISION_PARA_PROFESORES.md), [índice de ensayos](../06_TRABAJO/ensayos/README.md), navegación y guía de reproducción preparados. Entrega subida y pruebas de GitHub Actions satisfactorias; revisión/integración en [PR #1](https://github.com/armandos52/kart-electrico/pull/1), corte `revision-academica-2026-10-13`. Resultado trazable en [PUB-0001](../06_TRABAJO/PUBLICACION_2026-10-13.md). No implica nueva prueba física ni lectura integral de originales.
 
 ## Configuración conocida
 

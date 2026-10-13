@@ -12,7 +12,7 @@ Objetivo: tutorial/gráfica para cargar 16 celdas e interpretar 3,2–3,3 V. Arm
 
 ## PUB-0001 · Revisión académica · 13-10-2026
 
-Armando solicita preparar y subir todo el trabajo para recibir feedback. [PUB-0001](PUBLICACION_2026-10-13.md) registra alcance, punto de partida, organización, pruebas, incidencias del entorno, exclusiones y resultado de publicación. Portada/dossier e índices de ensayos/decisiones/problemas; historia de estados conservada. Los ajustes del panel se limitan a arranque portable y referencia fotográfica ausente. Sin hardware, cambio de control ni nueva lectura integral. [Índice de ensayos](ensayos/README.md), [decisiones y problemas](../05_DECISIONES_Y_PROBLEMAS/README.md).
+Armando solicita preparar y subir todo el trabajo para recibir feedback. [PUB-0001](PUBLICACION_2026-10-13.md) registra alcance, punto de partida, organización, pruebas, incidencias del entorno, exclusiones y resultado de publicación. Portada/dossier e índices de ensayos/decisiones/problemas; historia de estados conservada. Entrega publicada en rama y CI Linux satisfactoria; integración mediante [PR #1](https://github.com/armandos52/kart-electrico/pull/1), tras las verificaciones de destino/contenido y el rechazo del push directo a main registrados en PUB-0001. Los ajustes del panel se limitan a arranque portable y referencia fotográfica ausente. Sin hardware, cambio de control ni nueva lectura integral. [Índice de ensayos](ensayos/README.md), [decisiones y problemas](../05_DECISIONES_Y_PROBLEMAS/README.md).
 
 ## ENS-0013 / PROB-0009 / DEC-0008 · 13-10-2026
 
