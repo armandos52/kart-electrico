@@ -1,0 +1,177 @@
+{
+  "scope": "Prueba automática sintética del panel; sin hardware",
+  "source": "07_DESARROLLO/panel_local/static/nucleo.js",
+  "status": "PASS",
+  "rows": [
+    {
+      "gear": "D",
+      "pedal_pct": 30,
+      "rpm": 120,
+      "visual_rad_s": -0.37699111843077515
+    },
+    {
+      "gear": "D",
+      "pedal_pct": 45,
+      "rpm": 180,
+      "visual_rad_s": -0.5654866776461627
+    },
+    {
+      "gear": "D",
+      "pedal_pct": 60,
+      "rpm": 240,
+      "visual_rad_s": -0.7539822368615503
+    },
+    {
+      "gear": "D",
+      "pedal_pct": 80,
+      "rpm": 320,
+      "visual_rad_s": -1.0053096491487337
+    },
+    {
+      "gear": "D",
+      "pedal_pct": 100,
+      "rpm": 400,
+      "visual_rad_s": -1.2566370614359172
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 30,
+      "rpm": 120,
+      "visual_rad_s": 0.37699111843077515
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 45,
+      "rpm": 180,
+      "visual_rad_s": 0.5654866776461627
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 60,
+      "rpm": 240,
+      "visual_rad_s": 0.7539822368615503
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 80,
+      "rpm": 320,
+      "visual_rad_s": 1.0053096491487337
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 100,
+      "rpm": 400,
+      "visual_rad_s": 1.2566370614359172
+    }
+  ],
+  "checks": [
+    {
+      "name": "D: cada incremento de 30 a 100 % acelera la animación",
+      "pass": true
+    },
+    {
+      "name": "D: duplicar RPM duplica velocidad visual",
+      "pass": true
+    },
+    {
+      "name": "R: cada incremento de 30 a 100 % acelera la animación",
+      "pass": true
+    },
+    {
+      "name": "R: duplicar RPM duplica velocidad visual",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 0 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 1 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 120 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 400 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 1200 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 4000 RPM",
+      "pass": true
+    },
+    {
+      "name": "Cero RPM: cero movimiento",
+      "pass": true
+    },
+    {
+      "name": "Acelerar rueda D no ralentiza rueda I",
+      "pass": true
+    },
+    {
+      "name": "Reparto I/D conserva proporción 240/1600",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 10 fps",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 20 fps",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 30 fps",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 60 fps",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 120 fps",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida null: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida undefined: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida NaN: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida Infinity: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida 400: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM stale: rueda quieta",
+      "pass": true
+    },
+    {
+      "name": "RPM missing: rueda quieta",
+      "pass": true
+    },
+    {
+      "name": "La marcha aplicada R tiene prioridad sobre solicitada D",
+      "pass": true
+    },
+    {
+      "name": "Paso temporal negativo no mueve ruedas",
+      "pass": true
+    }
+  ]
+}

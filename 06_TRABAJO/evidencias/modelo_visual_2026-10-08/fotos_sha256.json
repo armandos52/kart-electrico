@@ -1,0 +1,20 @@
+[
+  {
+    "file": "WhatsApp Image 2026-10-08 at 15.32.55.jpeg",
+    "view": "trasera.jpg",
+    "sha256": "821AC65C82E5E694824F2D0E7052503101CB87240FFA3FDAD635D1F4A1CFDFA1",
+    "copy_verified": true
+  },
+  {
+    "file": "WhatsApp Image 2026-10-08 at 15.32.55 (1).jpeg",
+    "view": "frontal.jpg",
+    "sha256": "23C82750C217C50875BDBE2BB7D043E02AA5817A5617A699D1BC86C138713A9B",
+    "copy_verified": true
+  },
+  {
+    "file": "WhatsApp Image 2026-10-08 at 15.32.55 (2).jpeg",
+    "view": "lateral.jpg",
+    "sha256": "ED8461A9059908D1BA5AC295CF5D98F95613D0336FB77F30DFCFFF85B7C67B6B",
+    "copy_verified": true
+  }
+]

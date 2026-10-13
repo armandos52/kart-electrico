@@ -1,0 +1,168 @@
+{
+  "date": "2026-10-11",
+  "base_commit": "4f7f1501a4c11dd52cbc74d649fbd2ede8b9bb09",
+  "firmware": "esp32_trasero-v1.3-dev3",
+  "scope": "PC, sin hardware; binarios privados compilados, no flash leida",
+  "files": [
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp",
+      "bytes": 9998,
+      "sha256": "e86c31d2f52adb852e7101afb37836de4be50503f3fcc7402626f0dfdebb786c"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h",
+      "bytes": 3799,
+      "sha256": "fb45e6d3816d186730d0b312b08b394ebb12564ba176ffe751242651199c5767"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/tests/control_test.cpp",
+      "bytes": 8677,
+      "sha256": "2eee63d5a2b11cc93e7cad107c5a443c4a608528b2913bae28908013a0fef0a3"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/src/main.cpp",
+      "bytes": 13957,
+      "sha256": "a796cb4734acf393649e7673e3401a192bef230d857c46ccaec18618edead105"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/include/hardware_kart.h",
+      "bytes": 659,
+      "sha256": "1968336277ae0772b73b416a306120dc4a3c5af02d3488adb2aeca0b49bbfe68"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/platformio.ini",
+      "bytes": 1790,
+      "sha256": "89dee3720f08bc59c8af9e0279a17cc3efd32d4ef0e617d5a86477d1978f4484"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/common/kart_protocol.h",
+      "bytes": 806,
+      "sha256": "b99c275a36b7f8e1b9634ee1c4bcf30fc18ee7f06d1b1db89ab409151c85011a"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c",
+      "bytes": 15956,
+      "sha256": "c7b29335935c61872ac1ca7a61b2b55f3c725ef3eed801b176225e7ef2c4a494"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c",
+      "bytes": 1833,
+      "sha256": "23be0ce7b5818a60a85991cae84ced3f35750ca33e3d73d647ce212920e000d3"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp",
+      "bytes": 6758,
+      "sha256": "c15a176b6d04799697aab1a52818911a1d0edd40df0095a1c4ab2b8ea8ee6ba9"
+    },
+    {
+      "path": "07_DESARROLLO/panel_local/server.py",
+      "bytes": 29187,
+      "sha256": "08a274f58fd3551cdfb25fac1b7c36bca112e24e984ed3b66acc70d656d18e97"
+    },
+    {
+      "path": "07_DESARROLLO/panel_local/calibracion.py",
+      "bytes": 26630,
+      "sha256": "056d4bba78086d00240f292b98caaf1c8a6867888ef8fa230419cf99aef805d4"
+    },
+    {
+      "path": "07_DESARROLLO/panel_local/static/nucleo.js",
+      "bytes": 8329,
+      "sha256": "7add862ecb319099b586b7dadd6b18333718b410edb543b540e70d75c8835f72"
+    },
+    {
+      "path": "07_DESARROLLO/panel_local/static/textos.js",
+      "bytes": 75851,
+      "sha256": "50cef6eac3c23ec6845492ffa249a5ab604da7c22c52ac6d6e06fb3c0ee4f2f3"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/cambio_control.diff",
+      "bytes": 5500,
+      "sha256": "9c6d1dc559171e0dd1f50896d90879f52bcb147c7e164d5ae10599f2354f47ea"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/build_esp32_dev3_final.log",
+      "bytes": 8812,
+      "sha256": "080f1e4b3ad665913d026efe4e756170c333543cd7c4b019ef16c6fefbe7f1c1"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/build_esp32_dev3.log",
+      "bytes": 5552,
+      "sha256": "59c8c0e1e8a9c5d03ad499b9034496366b896efbca464ccc23947631a917ff2b"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/control_dev3.log",
+      "bytes": 2274,
+      "sha256": "f51e916308e54363e85ceddf567a630e169fc05bbcdc5bcaaf143609b59e7855"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/control_regresion_antes.log",
+      "bytes": 2282,
+      "sha256": "8c9d2febbdcb43efd4f865ae7a6a05208c217583065353a70e4361d0ee9b68e5"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/control.log",
+      "bytes": 1991,
+      "sha256": "a9bb8dd12e1a95bada1e6163cc19c4897688ae9bf6804dba0f473c95187fd0d4"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/frontend.log",
+      "bytes": 2509,
+      "sha256": "91dabbe12b01188e51b17fde3c2f9dee73b469203a8bf01d64c70d59f3e71d33"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/panel_js.log",
+      "bytes": 73,
+      "sha256": "6d710b3ccba60614e315f304303df6975fd251fd7465b6157b849c113973fce1"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/panel_python_final.log",
+      "bytes": 4000,
+      "sha256": "c5cc2b644955d69ddf914727ad431ec4e0cae89ed062e3173a760fe04ff215f2"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/panel_python_reintento.log",
+      "bytes": 5853,
+      "sha256": "7829e9edde949a16cf7a8e0a9f9833eac717b0f3540dceb20543cd244e1418ff"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/panel_python.log",
+      "bytes": 60354,
+      "sha256": "31e93624a2724ef166ebf119f8247cc8280f4ced143a80f987cec47af6da73f7"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/antes/control_test.cpp",
+      "bytes": 7476,
+      "sha256": "81a75782e8355666a0e804b6c69d5c4e37d741c1cc88138ea4b1109421fee946"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/antes/kart_control.cpp",
+      "bytes": 9779,
+      "sha256": "68d065e68aad3e629d723271d72f4409a4742578119ac4a811152cfcd8f37d2d"
+    },
+    {
+      "path": "06_TRABAJO/evidencias/REV_2026-10-11/antes/kart_control.h",
+      "bytes": 3699,
+      "sha256": "8a5be6ed5392b413c674832b35da577a4986320f393c90797be1aa6d0961b975"
+    },
+    {
+      "path": "07_DESARROLLO/respaldos/esp32/v1.3-dev3/bootloader.bin",
+      "bytes": 23488,
+      "sha256": "7784e3c3f38fa4c4334f478131488d8ba2a88ce623adca939f4cb8f019607f31"
+    },
+    {
+      "path": "07_DESARROLLO/respaldos/esp32/v1.3-dev3/firmware.bin",
+      "bytes": 960928,
+      "sha256": "77c557711599561a4874cdaf0447882fa1b924aeb41b18de17a11da81133d995"
+    },
+    {
+      "path": "07_DESARROLLO/respaldos/esp32/v1.3-dev3/firmware.elf",
+      "bytes": 12644412,
+      "sha256": "766c800a5d25e6e1117201df971bf675a3fc6f1e3e180521e8cac73dc250a119"
+    },
+    {
+      "path": "07_DESARROLLO/respaldos/esp32/v1.3-dev3/partitions.bin",
+      "bytes": 3072,
+      "sha256": "148b959cbff1c38aa8e1d5c0ba9d612c54997b945e56a63f41223eef650653a1"
+    }
+  ]
+}

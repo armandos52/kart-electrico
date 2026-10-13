@@ -1,0 +1,22 @@
+{
+  "sizes": [
+    {
+      "client": 1280,
+      "scroll": 1280,
+      "overflow": []
+    },
+    {
+      "client": 375,
+      "scroll": 375,
+      "overflow": []
+    },
+    {
+      "client": 320,
+      "scroll": 320,
+      "overflow": []
+    }
+  ],
+  "errors": [],
+  "disconnected_guard": true,
+  "demo_guard": true
+}

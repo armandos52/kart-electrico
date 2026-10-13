@@ -1,0 +1,64 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.35
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+control_test.cpp
+kart_control.cpp
+Generating Code...
+OK CAN valido
+OK DLC invalido
+OK buffer ausente
+OK rechazar campo fuera de rango
+OK rechazar campo fuera de rango
+OK rechazar campo fuera de rango
+OK rechazar campo fuera de rango
+OK rechazar campo fuera de rango
+OK rechazar campo fuera de rango
+OK D y R simultaneos
+OK modo 3 rechazado
+OK START alto al encender no arranca
+OK inicio precarga
+OK STOP a 100ms no se pierde
+OK STOP persistente no reactiva
+FAIL STOP seguido de START en el mismo lote CAN corta traccion
+FAIL START del lote descartado no inicia precarga al volver a N
+OK nuevo OFF START deliberado permite precarga tras STOP de lote
+FAIL STOP de lote interrumpe tambien precarga
+FAIL precarga no reinicia por START ya recibido
+OK traccion solo tras PRONTO
+OK rampa aplicada primer paso 5ms
+OK tasa rampa por salida
+OK freno inmediato
+OK doble pedal exige liberacion
+OK timeout corta
+OK CAN recuperado no rearranca pisado
+OK rearme deliberado N freno pedal libre
+OK cargador anula PWM y reles juntos
+OK quitar cargador no autoarranca
+OK dato invalido corta
+OK N nunca entrega consigna transitoria
+OK techo R 20 km/h por rueda todos modos
+OK R a 20 corta sin esperar rampa
+OK histeresis no oscila bajo 20
+OK R recupera con rampa al bajar de 19
+OK techo R 20 km/h por rueda todos modos
+OK R a 20 corta sin esperar rampa
+OK histeresis no oscila bajo 20
+OK R recupera con rampa al bajar de 19
+OK techo R 20 km/h por rueda todos modos
+OK R a 20 corta sin esperar rampa
+OK histeresis no oscila bajo 20
+OK R recupera con rampa al bajar de 19
+OK ESC espejo firmado
+OK MPU perdido en marcha corta ESC
+OK Hall ausente tras gracia corta
+OK velocidad invalida corta
+OK frontal invalido corta
+OK STOP prevalece sobre fallo ADC frontal
+OK D a R en movimiento corta y exige rearme
+OK modo durante traccion corta
+OK BLQ iguala esfuerzo con direccion girada
+OK ESC R mantiene salidas acotadas
+OK fallo salida abre y para
+OK configuracion no finita rechazada
+TOTAL 56; FALLOS 4

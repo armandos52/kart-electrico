@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "name": "Sin confirmar preparación no empieza",
+      "ok": true
+    },
+    {
+      "name": "Mover antes de medir no cancela",
+      "ok": true
+    },
+    {
+      "name": "Límite visible y medición bloqueada",
+      "ok": true
+    },
+    {
+      "name": "Cuenta atrás y avance visibles",
+      "ok": true
+    },
+    {
+      "name": "Variación visible sin abrir detalles",
+      "ok": true
+    },
+    {
+      "name": "Medición ruidosa no guardada",
+      "ok": true
+    },
+    {
+      "name": "Centro guardado y siguiente paso espera clic",
+      "ok": true
+    },
+    {
+      "name": "Fallo de límite conserva centro",
+      "ok": true
+    },
+    {
+      "name": "13 posiciones completas",
+      "ok": true
+    },
+    {
+      "name": "Perfil guardado y activo en PC",
+      "ok": true
+    },
+    {
+      "name": "Exportación ZIP disponible",
+      "ok": true
+    },
+    {
+      "name": "Sin desborde del asistente a 1366",
+      "ok": true
+    },
+    {
+      "name": "Sin desborde del asistente a 768",
+      "ok": true
+    },
+    {
+      "name": "Sin desborde del asistente a 375",
+      "ok": true
+    },
+    {
+      "name": "Sin desborde del asistente a 320",
+      "ok": true
+    },
+    {
+      "name": "Movimiento reducido respetado",
+      "ok": true
+    },
+    {
+      "name": "Escape cierra y devuelve foco",
+      "ok": true
+    },
+    {
+      "name": "Traducción de etapas pt",
+      "ok": true
+    },
+    {
+      "name": "Traducción de etapas en",
+      "ok": true
+    },
+    {
+      "name": "Traducción de etapas es",
+      "ok": true
+    },
+    {
+      "name": "Panel real desconectado bloquea calibración",
+      "ok": true
+    },
+    {
+      "name": "Demo no permite calibrar",
+      "ok": true
+    },
+    {
+      "name": "Sin errores JavaScript",
+      "ok": true
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,6 @@
+{
+  "file": "07_DESARROLLO\\firmware\\esp32_trasero\\include\\secretos.example.h",
+  "before_sha256": "533c6460fde1181dabf0bbf146176de4cbad53e6c53f8e503a94b399e3304cf2",
+  "after_sha256": "1a2e99feea42baf0eafaba433f464eaf0443130d28efdcd54d4713fb9d062581",
+  "change": "Plantilla sustituida por marcador p\u00fablico distinto de la configuraci\u00f3n local. Valores anteriores omitidos."
+}

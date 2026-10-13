@@ -1,0 +1,3 @@
+# Los fuentes de firmware se versionan byte a byte (CRLF incluido) para que su SHA-256
+# coincida con el de la entrega original (DEC-0001).
+*.ino -text

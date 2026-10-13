@@ -1,0 +1,137 @@
+[
+  {
+    "path": "07_DESARROLLO/panel_local/static/modelo_kart.js",
+    "bytes": 11053,
+    "sha256": "073842ae0ab3a12d8e63c3e123e5fa6db76baaabe93474062ea9d34478c24c74"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/escena_kart.js",
+    "bytes": 7191,
+    "sha256": "8122f1eca88fe1df405df566d8d4798094076c7622c8c7dc0179252d4151d3c2"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/vista_kart.js",
+    "bytes": 9804,
+    "sha256": "71ac5ad8e4a675647ab208ef1597e387e4767c377ef4b26e4dd6189915318c32"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/nucleo.js",
+    "bytes": 5569,
+    "sha256": "705f581fc318447f81743c277ebe738ecd36c969c9af3949b047e6d5b91e44ed"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/app.js",
+    "bytes": 14923,
+    "sha256": "addfcbbd67094fa5a50067d079bf65f655f8ab4231c5df61eb5141fdb3e52a6a"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/check-sentido.cjs",
+    "bytes": 7387,
+    "sha256": "4189a6c9206908f5af967f9e4a05bd4ee462f92e1f366c7634308a967e308a9a"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/check-modelo.cjs",
+    "bytes": 8567,
+    "sha256": "52de0994e13fb0549e207dd60244285ba58d6a635789811251276375acdee2d8"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes-giro--15.png",
+    "bytes": 297338,
+    "sha256": "f62a8f0c2bdaee39a4ae786d99544e22dfecd3536b00a979528e9268df4894df"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes-giro-0.png",
+    "bytes": 297174,
+    "sha256": "4aef45d2391916eeb98abdd9190cae7b8b929e79225ee5a50626fd7cbe4818fc"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes-giro-15.png",
+    "bytes": 297847,
+    "sha256": "be541b00cb0c29e6ababddb4e5ba864897ef5515c8908d83d71c138bcc6c229c"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes-pulsador.png",
+    "bytes": 295589,
+    "sha256": "f079821e2b433a7d57f62299bc8dcf22162be36cb491d24467e39bd2368c65b9"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes.json",
+    "bytes": 2888,
+    "sha256": "59e2caf39dfa776260760b4db8818fc5fdc2ae2b8c1bde8b44e6647d4e7b18c7"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/despues-giro--15.png",
+    "bytes": 296038,
+    "sha256": "b8c5f266ad963d208c3f3720d97029063ee7690e5289fcf2718120736b8efa80"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/despues-giro-0.png",
+    "bytes": 295777,
+    "sha256": "0ab8ba4eeea58aeac334b1d90cda3f4cd4e96e7d356cb52d25a4e7d7badf3a50"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/despues-giro-15.png",
+    "bytes": 296023,
+    "sha256": "d9ef09275f13abf8d3450d318190f61c2270d2b813c5da8ccd6d277395df75b4"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/despues-pulsador.png",
+    "bytes": 295620,
+    "sha256": "8e371f6da6b3876349d53b055de3c6dc3f0b4dea01640832d2ac99800b88b408"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/despues.json",
+    "bytes": 3021,
+    "sha256": "bfd695c605cdf5bc793f07930dd684eb204674bc0cd914ebe480b7775bb085e4"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes/app.js",
+    "bytes": 14683,
+    "sha256": "449f1ba80f2600f28ab266d6746c7a2f7ff5350f9909467e3617c5f6491f1d19"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes/escena_kart.js",
+    "bytes": 7297,
+    "sha256": "7b370e12c62479f123bb33193f144eb1520993f6591f3504d69a60e1d95d908f"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes/modelo_kart.js",
+    "bytes": 11040,
+    "sha256": "6bdab5fe2f84e73afa4fca868fc3a71a88c8a8d3c15c71aa7b031f1626227f2b"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes/nucleo.js",
+    "bytes": 4820,
+    "sha256": "a4f42f612280fac41ff26b49afeb286a0a0f0a0a49f1a8d4210613a884f60aea"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/antes/vista_kart.js",
+    "bytes": 9899,
+    "sha256": "90ec33d20a26a46aae07ed91689b8dcecb0817fea72745e84ae2a73f25b158c0"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/regresion_3d/modelo-lateral-final.png",
+    "bytes": 284323,
+    "sha256": "ae6314329a88642c79bfea8be39c635704ad8ba9dda37b6f0101e0d7dd07a313"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/regresion_3d/panel-3d-demo.png",
+    "bytes": 533776,
+    "sha256": "28a6fab415be33d5be74db55327f0a6e06d32cede1d7c85ced6d2da806bb494a"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/regresion_3d/panel-3d-final.png",
+    "bytes": 504402,
+    "sha256": "685ee8186434b8cc13796648c234b87ccc57afa980727c08091d696d9f28c5b2"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/regresion_3d/panel-3d-movil.png",
+    "bytes": 285474,
+    "sha256": "550e45077b84a04a32d9145efad444bdd0986396ae281c895a38cf72c6aefaea"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/regresion_3d/qa_modelo.json",
+    "bytes": 1836,
+    "sha256": "479a4fb9f34f3fbf747a7d4180638e87b0632fae9b2a0c0f7d5b3606eec58785"
+  }
+]

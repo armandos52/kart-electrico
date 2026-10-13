@@ -1,0 +1,25 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.35
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+control_host.cpp
+ESP32-final.ino(124): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(138): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(142): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(143): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(144): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(180): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(184): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(185): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(186): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(191): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(194): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(201): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(204): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(283): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(410): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(536): warning C4244: 'initializing': conversion from 'long' to 'float', possible loss of data
+ESP32-final.ino(539): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+ESP32-final.ino(540): warning C4305: '=': truncation from 'double' to 'float'
+ESP32-final.ino(541): warning C4305: '=': truncation from 'double' to 'float'
+ESP32-final.ino(544): warning C4305: 'initializing': truncation from 'double' to 'float'

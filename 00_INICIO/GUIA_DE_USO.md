@@ -1,5 +1,7 @@
 # Guía de uso
 
+Para consultar lo recibido: [recorrido de repaso en Obsidian](REPASO_EN_OBSIDIAN.md), con formatos, enlaces y lista personal.
+
 ## Abrir en Obsidian
 
 En el selector de bóvedas, elegir «Abrir carpeta como bóveda» (Open folder as vault) y seleccionar `C:\kart proyecto`. Abrir después `00_INICIO/MAPA_DEL_PROYECTO`.

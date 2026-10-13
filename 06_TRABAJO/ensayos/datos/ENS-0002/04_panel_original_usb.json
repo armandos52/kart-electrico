@@ -1,0 +1,1245 @@
+﻿{
+    "status":  "connected",
+    "port":  "COM4",
+    "error":  null,
+    "stats":  {
+                  "valid_frames":  0,
+                  "invalid_frames":  0,
+                  "sequence_gaps":  0,
+                  "discarded_lines":  0,
+                  "unknown_signals":  0
+              },
+    "session_file":  "20261007-213319-fd324c.jsonl",
+    "messages":  [
+                     {
+                         "id":  1,
+                         "time":  "2026-10-07T20:33:19.645684+00:00",
+                         "kind":  "connection",
+                         "text":  "Lectura abierta en COM4 a 115200 bit/s; sin TX al micro"
+                     },
+                     {
+                         "id":  2,
+                         "time":  "2026-10-07T20:33:20.048077+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  3,
+                         "time":  "2026-10-07T20:33:20.048077+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  4,
+                         "time":  "2026-10-07T20:33:20.855538+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  5,
+                         "time":  "2026-10-07T20:33:20.855538+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  6,
+                         "time":  "2026-10-07T20:33:21.462821+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  7,
+                         "time":  "2026-10-07T20:33:21.462821+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  8,
+                         "time":  "2026-10-07T20:33:22.276598+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  9,
+                         "time":  "2026-10-07T20:33:22.276598+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  10,
+                         "time":  "2026-10-07T20:33:22.887926+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  11,
+                         "time":  "2026-10-07T20:33:22.887926+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  12,
+                         "time":  "2026-10-07T20:33:23.697695+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  13,
+                         "time":  "2026-10-07T20:33:23.697695+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  14,
+                         "time":  "2026-10-07T20:33:24.305062+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  15,
+                         "time":  "2026-10-07T20:33:24.305062+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  16,
+                         "time":  "2026-10-07T20:33:25.112908+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  17,
+                         "time":  "2026-10-07T20:33:25.112908+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  18,
+                         "time":  "2026-10-07T20:33:25.722064+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  19,
+                         "time":  "2026-10-07T20:33:25.722064+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  20,
+                         "time":  "2026-10-07T20:33:26.531389+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  21,
+                         "time":  "2026-10-07T20:33:26.531389+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  22,
+                         "time":  "2026-10-07T20:33:27.140573+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  23,
+                         "time":  "2026-10-07T20:33:27.140573+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  24,
+                         "time":  "2026-10-07T20:33:27.748910+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  25,
+                         "time":  "2026-10-07T20:33:27.748910+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  26,
+                         "time":  "2026-10-07T20:33:28.571254+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  27,
+                         "time":  "2026-10-07T20:33:28.571254+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  28,
+                         "time":  "2026-10-07T20:33:29.179964+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  29,
+                         "time":  "2026-10-07T20:33:29.179964+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  30,
+                         "time":  "2026-10-07T20:33:29.989858+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  31,
+                         "time":  "2026-10-07T20:33:29.989858+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  32,
+                         "time":  "2026-10-07T20:33:30.595977+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  33,
+                         "time":  "2026-10-07T20:33:30.595977+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  34,
+                         "time":  "2026-10-07T20:33:31.406769+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  35,
+                         "time":  "2026-10-07T20:33:31.406769+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  36,
+                         "time":  "2026-10-07T20:33:32.011372+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  37,
+                         "time":  "2026-10-07T20:33:32.011372+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  38,
+                         "time":  "2026-10-07T20:33:32.824621+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  39,
+                         "time":  "2026-10-07T20:33:32.824621+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  40,
+                         "time":  "2026-10-07T20:33:33.435005+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  41,
+                         "time":  "2026-10-07T20:33:33.435005+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  42,
+                         "time":  "2026-10-07T20:33:34.244332+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  43,
+                         "time":  "2026-10-07T20:33:34.244332+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  44,
+                         "time":  "2026-10-07T20:33:34.854350+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  45,
+                         "time":  "2026-10-07T20:33:34.854350+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  46,
+                         "time":  "2026-10-07T20:33:35.677713+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  47,
+                         "time":  "2026-10-07T20:33:35.677713+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  48,
+                         "time":  "2026-10-07T20:33:36.285739+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  49,
+                         "time":  "2026-10-07T20:33:36.285739+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  50,
+                         "time":  "2026-10-07T20:33:37.094305+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  51,
+                         "time":  "2026-10-07T20:33:37.094305+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  52,
+                         "time":  "2026-10-07T20:33:37.702125+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  53,
+                         "time":  "2026-10-07T20:33:37.702125+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  54,
+                         "time":  "2026-10-07T20:33:38.516127+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  55,
+                         "time":  "2026-10-07T20:33:38.516127+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  56,
+                         "time":  "2026-10-07T20:33:39.122211+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  57,
+                         "time":  "2026-10-07T20:33:39.122211+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  58,
+                         "time":  "2026-10-07T20:33:39.932702+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  59,
+                         "time":  "2026-10-07T20:33:39.932702+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  60,
+                         "time":  "2026-10-07T20:33:40.540417+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  61,
+                         "time":  "2026-10-07T20:33:40.540417+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  62,
+                         "time":  "2026-10-07T20:33:41.147666+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  63,
+                         "time":  "2026-10-07T20:33:41.147666+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  64,
+                         "time":  "2026-10-07T20:33:41.957745+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  65,
+                         "time":  "2026-10-07T20:33:41.957745+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  66,
+                         "time":  "2026-10-07T20:33:42.565834+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  67,
+                         "time":  "2026-10-07T20:33:42.565834+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  68,
+                         "time":  "2026-10-07T20:33:43.385808+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  69,
+                         "time":  "2026-10-07T20:33:43.385808+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  70,
+                         "time":  "2026-10-07T20:33:43.994985+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  71,
+                         "time":  "2026-10-07T20:33:43.994985+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  72,
+                         "time":  "2026-10-07T20:33:44.803562+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  73,
+                         "time":  "2026-10-07T20:33:44.803562+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  74,
+                         "time":  "2026-10-07T20:33:45.426027+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  75,
+                         "time":  "2026-10-07T20:33:45.426027+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  76,
+                         "time":  "2026-10-07T20:33:46.237826+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  77,
+                         "time":  "2026-10-07T20:33:46.237826+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  78,
+                         "time":  "2026-10-07T20:33:46.848011+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  79,
+                         "time":  "2026-10-07T20:33:46.848011+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  80,
+                         "time":  "2026-10-07T20:33:47.672419+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  81,
+                         "time":  "2026-10-07T20:33:47.672419+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  82,
+                         "time":  "2026-10-07T20:33:48.280296+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  83,
+                         "time":  "2026-10-07T20:33:48.280296+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  84,
+                         "time":  "2026-10-07T20:33:49.091284+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  85,
+                         "time":  "2026-10-07T20:33:49.091284+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  86,
+                         "time":  "2026-10-07T20:33:49.700787+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  87,
+                         "time":  "2026-10-07T20:33:49.700787+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  88,
+                         "time":  "2026-10-07T20:33:50.309022+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  89,
+                         "time":  "2026-10-07T20:33:50.309022+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  90,
+                         "time":  "2026-10-07T20:33:51.118026+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  91,
+                         "time":  "2026-10-07T20:33:51.118026+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  92,
+                         "time":  "2026-10-07T20:33:51.730712+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  93,
+                         "time":  "2026-10-07T20:33:51.730712+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  94,
+                         "time":  "2026-10-07T20:33:52.554365+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  95,
+                         "time":  "2026-10-07T20:33:52.554365+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  96,
+                         "time":  "2026-10-07T20:33:53.162716+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  97,
+                         "time":  "2026-10-07T20:33:53.162716+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  98,
+                         "time":  "2026-10-07T20:33:53.975447+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  99,
+                         "time":  "2026-10-07T20:33:53.975447+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  100,
+                         "time":  "2026-10-07T20:33:54.581875+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  101,
+                         "time":  "2026-10-07T20:33:54.581875+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  102,
+                         "time":  "2026-10-07T20:33:55.190299+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Successful!"
+                     },
+                     {
+                         "id":  103,
+                         "time":  "2026-10-07T20:33:55.190299+00:00",
+                         "kind":  "serial",
+                         "text":  "Setting Baudrate Successful!"
+                     },
+                     {
+                         "id":  104,
+                         "time":  "2026-10-07T20:33:55.392248+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN OK!"
+                     },
+                     {
+                         "id":  105,
+                         "time":  "2026-10-07T20:33:55.392248+00:00",
+                         "kind":  "serial",
+                         "text":  "MPU-6050 FALHOU!"
+                     },
+                     {
+                         "id":  106,
+                         "time":  "2026-10-07T20:33:55.392248+00:00",
+                         "kind":  "serial",
+                         "text":  "A calibrar giroscopio..."
+                     },
+                     {
+                         "id":  107,
+                         "time":  "2026-10-07T20:33:56.322447+00:00",
+                         "kind":  "serial",
+                         "text":  "KART ELÉTRICO - DIF | ESC | BLQ"
+                     },
+                     {
+                         "id":  108,
+                         "time":  "2026-10-07T20:33:56.322447+00:00",
+                         "kind":  "serial",
+                         "text":  "Guru Meditation Error: Core  1 panic\u0027ed (LoadProhibited). Exception was unhandled."
+                     },
+                     {
+                         "id":  109,
+                         "time":  "2026-10-07T20:33:56.322447+00:00",
+                         "kind":  "serial",
+                         "text":  "Core  1 register dump:"
+                     },
+                     {
+                         "id":  110,
+                         "time":  "2026-10-07T20:33:56.322447+00:00",
+                         "kind":  "serial",
+                         "text":  "PC      : 0x400d7126  PS      : 0x00060b30  A0      : 0x800d2c63  A1      : 0x3ffb2020  "
+                     },
+                     {
+                         "id":  111,
+                         "time":  "2026-10-07T20:33:56.322447+00:00",
+                         "kind":  "serial",
+                         "text":  "A2      : 0x00000000  A3      : 0x00000000  A4      : 0x00000000  A5      : 0x00000001  "
+                     },
+                     {
+                         "id":  112,
+                         "time":  "2026-10-07T20:33:56.322447+00:00",
+                         "kind":  "serial",
+                         "text":  "A6      : 0x3ffba210  A7      : 0x0000ff00  A8      : 0x3ff65000  A9      : 0x00000000  "
+                     },
+                     {
+                         "id":  113,
+                         "time":  "2026-10-07T20:33:56.322447+00:00",
+                         "kind":  "serial",
+                         "text":  "A10     : 0x00040000  A11     : 0x00000000  A12     : 0x00000005  A13     : 0x3ffb1fdc  "
+                     },
+                     {
+                         "id":  114,
+                         "time":  "2026-10-07T20:33:56.441760+00:00",
+                         "kind":  "serial",
+                         "text":  "A14     : 0x3ffb8cb4  A15     : 0x00000000  SAR     : 0x0000001b  EXCCAUSE: 0x0000001c  "
+                     },
+                     {
+                         "id":  115,
+                         "time":  "2026-10-07T20:33:56.441760+00:00",
+                         "kind":  "serial",
+                         "text":  "EXCVADDR: 0x0000ff04  LBEG    : 0x4008334d  LEND    : 0x40083355  LCOUNT  : 0x00000027  "
+                     },
+                     {
+                         "id":  116,
+                         "time":  "2026-10-07T20:33:56.441760+00:00",
+                         "kind":  "serial",
+                         "text":  "Backtrace: 0x400d7123:0x3ffb2020 0x400d2c60:0x3ffb2040 0x400d2d78:0x3ffb2060 0x400d354d:0x3ffb2090 0x400d36a8:0x3ffb20b0 0x400d36d9:0x3ffb20d0 0x400d28a0:0x3ffb20f0 0x400d8a40:0x3ffb2130 0x40088745:0x3ffb2150"
+                     },
+                     {
+                         "id":  117,
+                         "time":  "2026-10-07T20:33:56.441760+00:00",
+                         "kind":  "serial",
+                         "text":  "ELF file SHA256: e96f5258c"
+                     },
+                     {
+                         "id":  118,
+                         "time":  "2026-10-07T20:33:56.441760+00:00",
+                         "kind":  "serial",
+                         "text":  "Rebooting..."
+                     },
+                     {
+                         "id":  119,
+                         "time":  "2026-10-07T20:33:56.441760+00:00",
+                         "kind":  "serial",
+                         "text":  "ets Jul 29 2019 12:21:46"
+                     },
+                     {
+                         "id":  120,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)"
+                     },
+                     {
+                         "id":  121,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "configsip: 0, SPIWP:0xee"
+                     },
+                     {
+                         "id":  122,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00"
+                     },
+                     {
+                         "id":  123,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "mode:DIO, clock div:1"
+                     },
+                     {
+                         "id":  124,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "load:0x3fff0030,len:4876"
+                     },
+                     {
+                         "id":  125,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "ho 0 tail 12 room 4"
+                     },
+                     {
+                         "id":  126,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "load:0x40078000,len:16560"
+                     },
+                     {
+                         "id":  127,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "load:0x40080400,len:3500"
+                     },
+                     {
+                         "id":  128,
+                         "time":  "2026-10-07T20:33:56.655992+00:00",
+                         "kind":  "serial",
+                         "text":  "entry 0x400805b4"
+                     },
+                     {
+                         "id":  129,
+                         "time":  "2026-10-07T20:33:56.857408+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  130,
+                         "time":  "2026-10-07T20:33:56.857408+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  131,
+                         "time":  "2026-10-07T20:33:57.666139+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  132,
+                         "time":  "2026-10-07T20:33:57.666139+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  133,
+                         "time":  "2026-10-07T20:33:58.276497+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  134,
+                         "time":  "2026-10-07T20:33:58.276497+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  135,
+                         "time":  "2026-10-07T20:33:59.086175+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  136,
+                         "time":  "2026-10-07T20:33:59.086175+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  137,
+                         "time":  "2026-10-07T20:33:59.698461+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  138,
+                         "time":  "2026-10-07T20:33:59.698461+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  139,
+                         "time":  "2026-10-07T20:34:00.507908+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  140,
+                         "time":  "2026-10-07T20:34:00.507908+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  141,
+                         "time":  "2026-10-07T20:34:01.114318+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  142,
+                         "time":  "2026-10-07T20:34:01.114318+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  143,
+                         "time":  "2026-10-07T20:34:01.928629+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  144,
+                         "time":  "2026-10-07T20:34:01.928629+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  145,
+                         "time":  "2026-10-07T20:34:02.538970+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  146,
+                         "time":  "2026-10-07T20:34:02.538970+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  147,
+                         "time":  "2026-10-07T20:34:03.352733+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  148,
+                         "time":  "2026-10-07T20:34:03.352733+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  149,
+                         "time":  "2026-10-07T20:34:03.960491+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  150,
+                         "time":  "2026-10-07T20:34:03.960491+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  151,
+                         "time":  "2026-10-07T20:34:04.580997+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  152,
+                         "time":  "2026-10-07T20:34:04.580997+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  153,
+                         "time":  "2026-10-07T20:34:05.392120+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  154,
+                         "time":  "2026-10-07T20:34:05.392120+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  155,
+                         "time":  "2026-10-07T20:34:06.000972+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  156,
+                         "time":  "2026-10-07T20:34:06.000972+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  157,
+                         "time":  "2026-10-07T20:34:06.811088+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  158,
+                         "time":  "2026-10-07T20:34:06.811088+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  159,
+                         "time":  "2026-10-07T20:34:07.415273+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  160,
+                         "time":  "2026-10-07T20:34:07.415273+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  161,
+                         "time":  "2026-10-07T20:34:08.227987+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Successful!"
+                     },
+                     {
+                         "id":  162,
+                         "time":  "2026-10-07T20:34:08.227987+00:00",
+                         "kind":  "serial",
+                         "text":  "Setting Baudrate Successful!"
+                     },
+                     {
+                         "id":  163,
+                         "time":  "2026-10-07T20:34:08.227987+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN OK!"
+                     },
+                     {
+                         "id":  164,
+                         "time":  "2026-10-07T20:34:08.227987+00:00",
+                         "kind":  "serial",
+                         "text":  "MPU-6050 FALHOU!"
+                     },
+                     {
+                         "id":  165,
+                         "time":  "2026-10-07T20:34:08.227987+00:00",
+                         "kind":  "serial",
+                         "text":  "A calibrar giroscopio..."
+                     },
+                     {
+                         "id":  166,
+                         "time":  "2026-10-07T20:34:09.222757+00:00",
+                         "kind":  "serial",
+                         "text":  "KART ELÉTRICO - DIF | ESC | BLQ"
+                     },
+                     {
+                         "id":  167,
+                         "time":  "2026-10-07T20:34:09.223763+00:00",
+                         "kind":  "serial",
+                         "text":  "Guru Meditation Error: Core  1 panic\u0027ed (LoadProhibited). Exception was unhandled."
+                     },
+                     {
+                         "id":  168,
+                         "time":  "2026-10-07T20:34:09.223763+00:00",
+                         "kind":  "serial",
+                         "text":  "Core  1 register dump:"
+                     },
+                     {
+                         "id":  169,
+                         "time":  "2026-10-07T20:34:09.223763+00:00",
+                         "kind":  "serial",
+                         "text":  "PC      : 0x400d7126  PS      : 0x00060b30  A0      : 0x800d2c63  A1      : 0x3ffb2020  "
+                     },
+                     {
+                         "id":  170,
+                         "time":  "2026-10-07T20:34:09.223763+00:00",
+                         "kind":  "serial",
+                         "text":  "A2      : 0x00000000  A3      : 0x00000000  A4      : 0x00000000  A5      : 0x00000001  "
+                     },
+                     {
+                         "id":  171,
+                         "time":  "2026-10-07T20:34:09.223763+00:00",
+                         "kind":  "serial",
+                         "text":  "A6      : 0x3ffba210  A7      : 0x0000ff00  A8      : 0x3ff65000  A9      : 0x00000000  "
+                     },
+                     {
+                         "id":  172,
+                         "time":  "2026-10-07T20:34:09.223763+00:00",
+                         "kind":  "serial",
+                         "text":  "A10     : 0x00040000  A11     : 0x00000000  A12     : 0x00000005  A13     : 0x3ffb1fdc  "
+                     },
+                     {
+                         "id":  173,
+                         "time":  "2026-10-07T20:34:09.341774+00:00",
+                         "kind":  "serial",
+                         "text":  "A14     : 0x3ffb8cb4  A15     : 0x00000000  SAR     : 0x0000001b  EXCCAUSE: 0x0000001c  "
+                     },
+                     {
+                         "id":  174,
+                         "time":  "2026-10-07T20:34:09.341774+00:00",
+                         "kind":  "serial",
+                         "text":  "EXCVADDR: 0x0000ff04  LBEG    : 0x4008334d  LEND    : 0x40083355  LCOUNT  : 0x00000027  "
+                     },
+                     {
+                         "id":  175,
+                         "time":  "2026-10-07T20:34:09.341774+00:00",
+                         "kind":  "serial",
+                         "text":  "Backtrace: 0x400d7123:0x3ffb2020 0x400d2c60:0x3ffb2040 0x400d2d78:0x3ffb2060 0x400d354d:0x3ffb2090 0x400d36a8:0x3ffb20b0 0x400d36d9:0x3ffb20d0 0x400d28a0:0x3ffb20f0 0x400d8a40:0x3ffb2130 0x40088745:0x3ffb2150"
+                     },
+                     {
+                         "id":  176,
+                         "time":  "2026-10-07T20:34:09.341774+00:00",
+                         "kind":  "serial",
+                         "text":  "ELF file SHA256: e96f5258c"
+                     },
+                     {
+                         "id":  177,
+                         "time":  "2026-10-07T20:34:09.341774+00:00",
+                         "kind":  "serial",
+                         "text":  "Rebooting..."
+                     },
+                     {
+                         "id":  178,
+                         "time":  "2026-10-07T20:34:09.341774+00:00",
+                         "kind":  "serial",
+                         "text":  "ets Jul 29 2019 12:21:46"
+                     },
+                     {
+                         "id":  179,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)"
+                     },
+                     {
+                         "id":  180,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "configsip: 0, SPIWP:0xee"
+                     },
+                     {
+                         "id":  181,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00"
+                     },
+                     {
+                         "id":  182,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "mode:DIO, clock div:1"
+                     },
+                     {
+                         "id":  183,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "load:0x3fff0030,len:4876"
+                     },
+                     {
+                         "id":  184,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "ho 0 tail 12 room 4"
+                     },
+                     {
+                         "id":  185,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "load:0x40078000,len:16560"
+                     },
+                     {
+                         "id":  186,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "load:0x40080400,len:3500"
+                     },
+                     {
+                         "id":  187,
+                         "time":  "2026-10-07T20:34:09.551075+00:00",
+                         "kind":  "serial",
+                         "text":  "entry 0x400805b4"
+                     },
+                     {
+                         "id":  188,
+                         "time":  "2026-10-07T20:34:09.752823+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  189,
+                         "time":  "2026-10-07T20:34:09.752823+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  190,
+                         "time":  "2026-10-07T20:34:10.563239+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  191,
+                         "time":  "2026-10-07T20:34:10.563239+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  192,
+                         "time":  "2026-10-07T20:34:11.170927+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  193,
+                         "time":  "2026-10-07T20:34:11.170927+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  194,
+                         "time":  "2026-10-07T20:34:11.978958+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  195,
+                         "time":  "2026-10-07T20:34:11.978958+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  196,
+                         "time":  "2026-10-07T20:34:12.587538+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  197,
+                         "time":  "2026-10-07T20:34:12.587538+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  198,
+                         "time":  "2026-10-07T20:34:13.399251+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  199,
+                         "time":  "2026-10-07T20:34:13.399251+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  200,
+                         "time":  "2026-10-07T20:34:14.004679+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  201,
+                         "time":  "2026-10-07T20:34:14.004679+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  202,
+                         "time":  "2026-10-07T20:34:14.824986+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  203,
+                         "time":  "2026-10-07T20:34:14.824986+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     },
+                     {
+                         "id":  204,
+                         "time":  "2026-10-07T20:34:15.432060+00:00",
+                         "kind":  "serial",
+                         "text":  "Entering Configuration Mode Failure..."
+                     },
+                     {
+                         "id":  205,
+                         "time":  "2026-10-07T20:34:15.432060+00:00",
+                         "kind":  "serial",
+                         "text":  "CAN init failed, retrying..."
+                     }
+                 ]
+}

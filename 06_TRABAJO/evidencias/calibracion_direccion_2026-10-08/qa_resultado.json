@@ -1,0 +1,20 @@
+{
+  "tipo": "prueba_automatica_datos_sinteticos",
+  "fecha_local": "2026-10-08",
+  "checks": [
+    "Centro de ejemplo cero; estimación anterior desplazada",
+    "Tope izquierdo conserva −24° y −100 %",
+    "Tope derecho independiente +19° y +100 %",
+    "Captura inválida rechazada sin alterar perfil",
+    "Centro candidato se actualiza y recalcula",
+    "Fuera de rango visible sin grados extrapolados",
+    "Variación sigue visible después de centrar",
+    "Diseño 800px sin desborde ni etiquetas superpuestas",
+    "Diseño 375px sin desborde ni etiquetas superpuestas",
+    "Diseño 320px sin desborde ni etiquetas superpuestas",
+    "Sin errores JavaScript"
+  ],
+  "errors": [],
+  "hardware_conectado": false,
+  "panel_modificado": false
+}

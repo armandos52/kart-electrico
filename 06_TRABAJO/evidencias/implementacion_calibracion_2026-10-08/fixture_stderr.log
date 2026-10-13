@@ -1,0 +1,2 @@
+127.0.0.1 - - [08/Oct/2026 10:51:35] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [08/Oct/2026 10:51:37] "POST /api/calibration/capture HTTP/1.1" 403 -

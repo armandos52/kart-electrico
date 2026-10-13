@@ -1,0 +1,52 @@
+[
+  {
+    "path": "07_DESARROLLO/panel_local/server.py",
+    "sha256": "29A8A912DD7982469F034D39393898D3C9C7D4B803C84F11C3D6D86C0ABE785C",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/app.js",
+    "sha256": "16B51B3750788EE4E4CB1C0AACD661C08A4DDECCB8273F2FE6BD62BF93662633",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/nucleo.js",
+    "sha256": "B64C20E7E363764620DBFAE21DFC14044C0837F7A5C092E78FE7B97677B17768",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/canales.js",
+    "sha256": "DD2C1E9061241A39C140C12A1779E6F66ACB505F2AB9B31BB0E24B01D90A0C5A",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/graficas.js",
+    "sha256": "6CD310F23C2B3AFD96AC98ABCA6F5E7B985259272044D3E474FB5184ECD57777",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/vista_kart.js",
+    "sha256": "1A05BCFA3E47D0E91C7D73CF04A072233A47B2DD9405066F3919A73547518100",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/index.html",
+    "sha256": "ACBAC7335A79D184C40ADB0AC69539B8077C926688EB71093533F782C585E2B4",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/style.css",
+    "sha256": "63E39C59248946BC31D290DC137447F01A3E9902DED5C6DF1966C7F33C408C68",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/firmware/esp32_trasero/src/ESP32-final.ino",
+    "sha256": "B39F5164E06957CB91BB564B7E217C98BD6446BB718E4D9A42AF6F8022370F5C",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/firmware/esp32_trasero/src/telemetria.cpp",
+    "sha256": "0FD4EC0254BE33C6749CE5C3754ACB5D09FDCED6D176461D88A9E31C196D3377",
+    "sin_cambios": true
+  }
+]

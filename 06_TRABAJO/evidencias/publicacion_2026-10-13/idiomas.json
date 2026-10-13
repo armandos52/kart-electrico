@@ -1,0 +1,142 @@
+{
+  "scope": "Prueba automática de idiomas del panel; datos sintéticos, sin hardware",
+  "status": "PASS",
+  "claves": 480,
+  "servidor": 155,
+  "patrones": 11,
+  "comprobaciones": 33,
+  "checks": [
+    {
+      "name": "Cada clave tiene tres textos no vacíos (es, pt, en)",
+      "pass": true
+    },
+    {
+      "name": "Los parámetros {…} coinciden en los tres idiomas",
+      "pass": true
+    },
+    {
+      "name": "Ningún texto largo queda sin traducir (ni en portugués ni en inglés)",
+      "pass": true
+    },
+    {
+      "name": "Servidor: filas [es, pt, en] completas y sin duplicados",
+      "pass": true
+    },
+    {
+      "name": "Patrones del servidor: regex con (.*) y $1 en pt y en",
+      "pass": true
+    },
+    {
+      "name": "El código usa claves que están todas definidas",
+      "pass": true
+    },
+    {
+      "name": "Familias dinámicas completas (w.*, part.*, plan.*, loc.*, dir.*)",
+      "pass": true
+    },
+    {
+      "name": "12 piezas con título, etiqueta y nota",
+      "pass": true
+    },
+    {
+      "name": "Nombres cortos: las 48 señales del catálogo de presentación, todas con su clave de telemetría",
+      "pass": true
+    },
+    {
+      "name": "No sobran claves en el diccionario",
+      "pass": true
+    },
+    {
+      "name": "Los textos en español del HTML coinciden con el diccionario",
+      "pass": true
+    },
+    {
+      "name": "Los textos en español de la plantilla de calibración coinciden con el diccionario",
+      "pass": true
+    },
+    {
+      "name": "El selector de idioma tiene tres botones ES · PT · EN",
+      "pass": true
+    },
+    {
+      "name": "Español por defecto: aria-pressed solo en ES",
+      "pass": true
+    },
+    {
+      "name": "Todas las etiquetas/unidades de SIGNALS tienen traducción",
+      "pass": true
+    },
+    {
+      "name": "Todos los mensajes del servicio (ValueError, eventos, guía, interrupciones) tienen traducción",
+      "pass": true
+    },
+    {
+      "name": "Cobertura: 56 etiquetas y 99 mensajes del servicio",
+      "pass": true
+    },
+    {
+      "name": "es: t() devuelve el texto original",
+      "pass": true
+    },
+    {
+      "name": "es: srv() no cambia el texto del servicio",
+      "pass": true
+    },
+    {
+      "name": "t() con clave desconocida devuelve la clave; parámetro ausente queda visible",
+      "pass": true
+    },
+    {
+      "name": "word() traduce valores conocidos y devuelve undefined si no los conoce",
+      "pass": true
+    },
+    {
+      "name": "pt: t() y parámetros",
+      "pass": true
+    },
+    {
+      "name": "pt: srv() exacto, unidades y patrones anidados",
+      "pass": true
+    },
+    {
+      "name": "pt: valores de texto y estados binarios",
+      "pass": true
+    },
+    {
+      "name": "pt: números con el formato de Portugal",
+      "pass": true
+    },
+    {
+      "name": "en: t(), srv() y word()",
+      "pass": true
+    },
+    {
+      "name": "en: números con punto decimal y separador de miles",
+      "pass": true
+    },
+    {
+      "name": "Cada idioma da un título distinto",
+      "pass": true
+    },
+    {
+      "name": "pt: activeSignals traduce etiqueta y unidad",
+      "pass": true
+    },
+    {
+      "name": "pt: dirección calibrada con etiquetas traducidas",
+      "pass": true
+    },
+    {
+      "name": "pt: ángulo interpolado indica la rueda",
+      "pass": true
+    },
+    {
+      "name": "en: ángulo interpolado y fuera de rango",
+      "pass": true
+    },
+    {
+      "name": "es: la dirección sigue como antes",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+## codex/robustez-v13
+ M .gitignore
+ M 00_INICIO/CRONOLOGIA.md
+ M 00_INICIO/ESTADO_ACTUAL.md
+ M 00_INICIO/MAPA_DEL_PROYECTO.md
+ M 03_CATALOGO/INDICE_DOCUMENTOS.md
+ M 03_CATALOGO/fichas/DOC-0002.md
+ M 03_CATALOGO/fichas/DOC-0003.md
+ M 03_CATALOGO/fichas/DOC-0008.md
+ M 03_CATALOGO/fichas/DOC-0023.md
+ M 03_CATALOGO/fichas/DOC-0024.md
+ M 03_CATALOGO/fichas/DOC-0025.md
+ M 03_CATALOGO/fichas/DOC-0026.md
+ M 03_CATALOGO/fichas/DOC-0027.md
+ M 03_CATALOGO/fichas/DOC-0031.md
+ M 03_CATALOGO/fichas/DOC-0042.md
+ M 04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO.md
+ M 05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_ensayos.md
+ M 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender.md
+ M 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0008_robustez_control_modos_y_pantalla.md
+ M 06_TRABAJO/DIARIO_PARA_RELATORIO.md
+ M 06_TRABAJO/IDEAS.md
+ M 06_TRABAJO/IMPLEMENTACION_ROBUSTEZ_V13.md
+ M 06_TRABAJO/PLAN_DE_LECTURA.md
+ M 06_TRABAJO/TAREAS.md
+ M 06_TRABAJO/ensayos/datos/ENS-0002/panel_stderr.log
+ M 06_TRABAJO/ensayos/datos/ENS-0002/panel_stdout.log
+ M 07_DESARROLLO/firmware/VERSIONES.md
+ M 07_DESARROLLO/firmware/common/PROTOCOLO_V13.md
+ M 07_DESARROLLO/firmware/esp32_trasero/README.md
+ M 07_DESARROLLO/firmware/esp32_trasero/include/secretos.example.h
+ M 07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp
+ M 07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h
+ M 07_DESARROLLO/firmware/esp32_trasero/platformio.ini
+ M 07_DESARROLLO/firmware/esp32_trasero/tests/control_test.cpp
+ M 07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h
+ M 07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c
+ M 07_DESARROLLO/firmware/stm32_frontal/README_ROBUSTEZ.md
+ M 07_DESARROLLO/firmware/stm32_frontal/tests/compilar.cmd
+ M 07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp
+ M 07_DESARROLLO/firmware/stm32_frontal/tools/build.py
+ M 07_DESARROLLO/panel_local/PROTOCOLO.md
+ M 07_DESARROLLO/panel_local/README.md
+ M 07_DESARROLLO/panel_local/iniciar.ps1
+ M 07_DESARROLLO/panel_local/server.py
+ M 07_DESARROLLO/panel_local/static/app.js
+ M 07_DESARROLLO/panel_local/static/index.html
+ M 07_DESARROLLO/panel_local/static/style.css
+ M 07_DESARROLLO/panel_local/tests/test_reader.py
+ M README.md
+?? .github/workflows/
+?? 00_INICIO/REVISION_PARA_PROFESORES.md
+?? 02_ORIGINALES/README.md
+?? 03_CATALOGO/fichas/DOC-0044.md
+?? 05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0002_panel_real_y_calibracion.md
+?? 05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0004_proponer_calibracion_antes_de_aplicar.md
+?? 05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0005_modelo_visual_basado_en_fotos.md
+?? 05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0007_calibracion_con_medicion_explicita.md
+?? 05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0008_start_momentaneo_con_memoria.md
+?? 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0003_energia_residual_al_abrir_contactor.md
+?? 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0004_franja_blanca_pantalla_frontal.md
+?? 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0007_variacion_y_centro_direccion.md
+?? 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0009_start_pulsador_momentaneo.md
+?? 06_TRABAJO/ANALISIS_VISTA_3D_DIFERENCIAL_2026-10-07.md
+?? 06_TRABAJO/ARRANQUE_PANEL_PORTATIL_2026-10-07.md
+?? 06_TRABAJO/CHROME_MCP_2026-10-07.md
+?? 06_TRABAJO/COMPRA_CARGADOR_Y_NEUMATICOS.md
+?? 06_TRABAJO/GUIA_DE_ESTUDIO_DEL_KART.md
+?? 06_TRABAJO/PANEL_REAL_CALIBRACION_2026-10-07.md
+?? 06_TRABAJO/PROMPT_RESPALDO_ESP32_WIFI_VSCODE_2026-10-07.md
+?? 06_TRABAJO/PROPUESTA_CALIBRACION_DIRECCION_2026-10-08.md
+?? 06_TRABAJO/PROPUESTA_SIMULADOR_2026-10-07.md
+?? 06_TRABAJO/RETOMA_PROGRAMA_2026-10-11.md
+?? 06_TRABAJO/SESION_ESTUDIO_2026-10-07.md
+?? 06_TRABAJO/ensayos/ENS-0005_calibracion_direccion_panel.md
+?? 06_TRABAJO/ensayos/ENS-0006_modelo_visual_fotografias.md
+?? 06_TRABAJO/ensayos/ENS-0007_esquema_superior_fotografia.md
+?? 06_TRABAJO/ensayos/ENS-0008_lados_y_sentido_ruedas_visual.md
+?? 06_TRABAJO/ensayos/ENS-0010_velocidad_visual_ruedas.md
+?? 06_TRABAJO/ensayos/ENS-0011_stop_en_lote_can.md
+?? 06_TRABAJO/ensayos/ENS-0012_calibracion_por_pasos.md
+?? 06_TRABAJO/ensayos/ENS-0013_start_stop_momentaneo.md
+?? 06_TRABAJO/evidencias/2026-10-08_panel_v1/
+?? 06_TRABAJO/evidencias/2026-10-13_bateria/
+?? 06_TRABAJO/evidencias/REV_2026-10-11/
+?? 06_TRABAJO/evidencias/calibracion_direccion_2026-10-08/
+?? 06_TRABAJO/evidencias/calibracion_guiada_2026-10-08/
+?? 06_TRABAJO/evidencias/calibracion_pasos_2026-10-11/
+?? 06_TRABAJO/evidencias/esquema_superior_2026-10-08/
+?? 06_TRABAJO/evidencias/implementacion_calibracion_2026-10-08/
+?? 06_TRABAJO/evidencias/modelo_visual_2026-10-08/
+?? 06_TRABAJO/evidencias/sentido_ruedas_2026-10-08/
+?? 06_TRABAJO/evidencias/start_stop_2026-10-13/
+?? 06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/
+?? 07_DESARROLLO/README.md
+?? 07_DESARROLLO/bms_p70_revision.png
+?? 07_DESARROLLO/herramientas/chrome_mcp_verificacion.json
+?? 07_DESARROLLO/herramientas/configurar_chrome_mcp.ps1
+?? 07_DESARROLLO/herramientas/resumir_cronograma_2026.py
+?? 07_DESARROLLO/herramientas/verificar_chrome_mcp.mjs
+?? 07_DESARROLLO/herramientas/verificar_publicacion.py
+?? 07_DESARROLLO/panel_local/calibracion.py
+?? 07_DESARROLLO/panel_local/qa/README.md
+?? 07_DESARROLLO/panel_local/qa/calibration_fixture.py
+?? 07_DESARROLLO/panel_local/qa/check-calibration.cjs
+?? 07_DESARROLLO/panel_local/qa/check-esquema.cjs
+?? 07_DESARROLLO/panel_local/qa/check-guided.cjs
+?? 07_DESARROLLO/panel_local/qa/check-idiomas.mjs
+?? 07_DESARROLLO/panel_local/qa/check-load.cjs
+?? 07_DESARROLLO/panel_local/qa/check-modelo.cjs
+?? 07_DESARROLLO/panel_local/qa/check-robustez.mjs
+?? 07_DESARROLLO/panel_local/qa/check-sentido.cjs
+?? 07_DESARROLLO/panel_local/qa/check-velocidad-browser.cjs
+?? 07_DESARROLLO/panel_local/qa/check-velocidad.mjs
+?? 07_DESARROLLO/panel_local/qa/extraer_mensajes.py
+?? 07_DESARROLLO/panel_local/qa/preview-modelo.cjs
+?? 07_DESARROLLO/panel_local/qa/reproducir_sesion.py
+?? 07_DESARROLLO/panel_local/qa/smoke-calibration.cjs
+?? 07_DESARROLLO/panel_local/static/calibracion.js
+?? 07_DESARROLLO/panel_local/static/canales.js
+?? 07_DESARROLLO/panel_local/static/escena_kart.js
+?? 07_DESARROLLO/panel_local/static/esquema_kart.js
+?? 07_DESARROLLO/panel_local/static/graficas.js
+?? 07_DESARROLLO/panel_local/static/i18n.js
+?? 07_DESARROLLO/panel_local/static/modelo_kart.js
+?? 07_DESARROLLO/panel_local/static/nucleo.js
+?? 07_DESARROLLO/panel_local/static/referencias/
+?? 07_DESARROLLO/panel_local/static/textos.js
+?? 07_DESARROLLO/panel_local/static/vendor/
+?? 07_DESARROLLO/panel_local/static/vista_kart.js
+?? 07_DESARROLLO/panel_local/tests/test_calibration.py
+?? 07_DESARROLLO/panel_local/tests/test_guided_calibration.py
+?? 07_DESARROLLO/panel_local/tests/test_robustez.py
+?? 07_DESARROLLO/propuesta_2026-27/Cronograma_Smart_Electric_Kart_proposta_resumida.docx
+?? 07_DESARROLLO/respaldos/esp32/2026-10-07_212814/log.txt
+?? 07_DESARROLLO/respaldos/esp32/v1.3-dev2/
+?? 07_DESARROLLO/respaldos/esp32/v1.3-dev3/
+?? 07_DESARROLLO/respaldos/panel/
+?? 07_DESARROLLO/respaldos/stm32/

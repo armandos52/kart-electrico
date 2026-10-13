@@ -1,0 +1,41 @@
+{
+  "sessions": [
+    "331fb84e5ad58968"
+  ],
+  "firmwares": [
+    "esp32_trasero-v1.2-diagnostico"
+  ],
+  "usb_frames": 321,
+  "tcp_frames": 215,
+  "invalid_json": {
+    "usb": 0,
+    "tcp": 0
+  },
+  "usb_sequence_gaps": 0,
+  "phases": {
+    "A_30s": {
+      "frames": 129,
+      "sequence_gaps": 0
+    },
+    "B_reconexion": {
+      "frames": 43,
+      "sequence_gaps": 0
+    },
+    "C_tras_corte": {
+      "frames": 43,
+      "sequence_gaps": 0
+    }
+  },
+  "control_states": [
+    "can_wait"
+  ],
+  "all_control_not_ready": true,
+  "all_relays_off": true,
+  "no_motor_measurements_published": true,
+  "telemetry_us_max": 256,
+  "sample_tick_deltas_ms": [
+    200,
+    306
+  ],
+  "telemetry_dropped_max": 0
+}

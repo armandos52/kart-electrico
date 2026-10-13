@@ -1,0 +1,55 @@
+test_active_profile_requires_confirmation_and_is_invalidated_on_loss (test_calibration.CalibrationTests.test_active_profile_requires_confirmation_and_is_invalidated_on_loss) ... ok
+test_capture_counts_original_frames_not_browser_polls_and_keeps_noise (test_calibration.CalibrationTests.test_capture_counts_original_frames_not_browser_polls_and_keeps_noise) ... ok
+test_complete_profiles_asymmetry_persistence_and_export_originals (test_calibration.CalibrationTests.test_complete_profiles_asymmetry_persistence_and_export_originals) ... ok
+test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) ... ok
+test_integer_valued_float_can_counter_does_not_break_capture (test_calibration.CalibrationTests.test_integer_valued_float_can_counter_does_not_break_capture) ... ok
+test_no_save_with_nonfinite_criteria_and_no_path_escape (test_calibration.CalibrationTests.test_no_save_with_nonfinite_criteria_and_no_path_escape) ... ok
+test_reverse_sensor_and_independent_angular_references (test_calibration.CalibrationTests.test_reverse_sensor_and_independent_angular_references) ... ok
+test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save (test_calibration.CalibrationTests.test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save) ... ok
+test_diagnostic_fields_and_reset_are_preserved (test_reader.DiagnosticTests.test_diagnostic_fields_and_reset_are_preserved) ... ok
+test_invalid_reset_metadata_cannot_invalidate_previous_boot (test_reader.DiagnosticTests.test_invalid_reset_metadata_cannot_invalidate_previous_boot) ... ok
+test_new_boot_waiting_for_can_does_not_keep_motor_measurements (test_reader.DiagnosticTests.test_new_boot_waiting_for_can_does_not_keep_motor_measurements) ... ok
+test_fragmented_lines_and_oversize_recovery_without_transmission (test_reader.ReaderTests.test_fragmented_lines_and_oversize_recovery_without_transmission) ... ok
+test_invalid_frame_is_atomic_and_console_text_is_not_measurement (test_reader.ReaderTests.test_invalid_frame_is_atomic_and_console_text_is_not_measurement) ... ok
+test_invalid_new_boot_cannot_clear_previous_samples (test_reader.ReaderTests.test_invalid_new_boot_cannot_clear_previous_samples) ... ok
+test_new_boot_invalidates_previous_fields_and_sequence_rollover_is_allowed (test_reader.ReaderTests.test_new_boot_invalidates_previous_fields_and_sequence_rollover_is_allowed) ... ok
+test_nonfinite_boolean_duplicate_and_out_of_order_are_rejected (test_reader.ReaderTests.test_nonfinite_boolean_duplicate_and_out_of_order_are_rejected) ... ok
+test_partial_telemetry_does_not_refresh_an_older_field (test_reader.ReaderTests.test_partial_telemetry_does_not_refresh_an_older_field) ... ok
+test_registers_received_telemetry_with_origin_tick (test_reader.ReaderTests.test_registers_received_telemetry_with_origin_tick) ... ok
+test_firmware_v1_frame_is_fully_known (test_reader.WifiTests.test_firmware_v1_frame_is_fully_known) ... ok
+test_tcp_source_reads_lines_never_transmits_and_detects_disconnection (test_reader.WifiTests.test_tcp_source_reads_lines_never_transmits_and_detects_disconnection) ... ERROR
+test_wifi_url_accepts_only_private_socket_addresses (test_reader.WifiTests.test_wifi_url_accepts_only_private_socket_addresses) ... ok
+test_all_new_inhibits_and_modes (test_robustez.RobustezTests.test_all_new_inhibits_and_modes) ... ok
+test_calibration_rejects_bad_frontend (test_robustez.RobustezTests.test_calibration_rejects_bad_frontend) ... ok
+test_full_v13_field_budget (test_robustez.RobustezTests.test_full_v13_field_budget) ... ok
+test_legacy_mpu_label_remains_startup (test_robustez.RobustezTests.test_legacy_mpu_label_remains_startup) ... ok
+test_sensor_failure_masks_old_readings (test_robustez.RobustezTests.test_sensor_failure_masks_old_readings) ... ok
+
+======================================================================
+ERROR: test_tcp_source_reads_lines_never_transmits_and_detects_disconnection (test_reader.WifiTests.test_tcp_source_reads_lines_never_transmits_and_detects_disconnection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\.vendor\serial\urlhandler\protocol_socket.py", line 63, in open
+    self._socket = socket.create_connection(self.from_url(self.portstr), timeout=POLL_TIMEOUT)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 865, in create_connection
+    raise exceptions[0]
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 850, in create_connection
+    sock.connect(sa)
+PermissionError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_reader.py", line 162, in test_tcp_source_reads_lines_never_transmits_and_detects_disconnection
+    monitor.connect(url, True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 347, in connect
+    handle.open()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\.vendor\serial\urlhandler\protocol_socket.py", line 66, in open
+    raise SerialException("Could not open port {}: {}".format(self.portstr, msg))
+serial.serialutil.SerialException: Could not open port socket://127.0.0.1:65329: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions
+
+----------------------------------------------------------------------
+Ran 26 tests in 2.083s
+
+FAILED (errors=1)

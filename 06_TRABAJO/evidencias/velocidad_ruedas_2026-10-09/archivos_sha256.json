@@ -1,0 +1,222 @@
+[
+  {
+    "path": "07_DESARROLLO/panel_local/static/nucleo.js",
+    "bytes": 6742,
+    "sha256": "eaa5200b54f37a3287f7b57f8ee2ff2de36044fe1122134122249bcca204b7b2"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/vista_kart.js",
+    "bytes": 10151,
+    "sha256": "b210f206c9e0dfd5481a6ef9b40fead6f356c3f215c4a243e8ea11da3844a35d"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/esquema_kart.js",
+    "bytes": 11140,
+    "sha256": "5d70b19fbbad9c5e67ff434cb5b3dde1aa62f8c59c2e1d79043f8d5cb0aacb15"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/modelo_kart.js",
+    "bytes": 11416,
+    "sha256": "643b1b6806ef969227c7e1411ba2f672b7e8a484829a088ce35c112f811341d0"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/app.js",
+    "bytes": 14877,
+    "sha256": "0cbe3425849d15bd6c93900ff9ca1516ae9d0d5181eb95542fa8fb3ef1c875e3"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/index.html",
+    "bytes": 8555,
+    "sha256": "c7e66fb2a55d590c91e18242fec014c8fc39d692d5d5e75aa28ee786fd697a92"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/style.css",
+    "bytes": 25693,
+    "sha256": "eddaa0fe0aa6952ae8b85a783c2f156bd2061ea2f21bb3a72b0ac8f2865e7384"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/check-velocidad.mjs",
+    "bytes": 2837,
+    "sha256": "f3c1b1187c0f499aaaa58cebcda717eebc78a56b1a2ca774f6e5bd264e31cfc1"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/check-velocidad-browser.cjs",
+    "bytes": 6108,
+    "sha256": "06f831baf9992a7b3b2e43e23ffc1c6bba673e7b4af8cef1ecece2d8044339b2"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/3d-marcas.png",
+    "bytes": 476166,
+    "sha256": "f0fc7ffde9bd1c48a526cf3ae6cc65380eb2704b200ae75a2c3f19d70a34c221"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes/app.js",
+    "bytes": 14923,
+    "sha256": "addfcbbd67094fa5a50067d079bf65f655f8ab4231c5df61eb5141fdb3e52a6a"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes/escena_kart.js",
+    "bytes": 7191,
+    "sha256": "8122f1eca88fe1df405df566d8d4798094076c7622c8c7dc0179252d4151d3c2"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes/esquema_kart.js",
+    "bytes": 11002,
+    "sha256": "443abfcc11cdd02238e17dff817444a4c7d086af2e553483b278543bd7c372ef"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes/index.html",
+    "bytes": 8279,
+    "sha256": "eb7aaefef740ae11c246f361b11bc76d62ada7c13d9cbc38e6559893caffddc9"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes/modelo_kart.js",
+    "bytes": 11053,
+    "sha256": "073842ae0ab3a12d8e63c3e123e5fa6db76baaabe93474062ea9d34478c24c74"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes/nucleo.js",
+    "bytes": 6529,
+    "sha256": "32f4adf38abeec3df2e6d9bd240da4f28e22b6fcec986d22e496b7ddcf876b44"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes/style.css",
+    "bytes": 25425,
+    "sha256": "148212ee38298d65aa2667a40e2d6a97133f06c0e299936f9a2ad5619f1fbde3"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes/vista_kart.js",
+    "bytes": 9804,
+    "sha256": "71ac5ad8e4a675647ab208ef1597e387e4767c377ef4b26e4dd6189915318c32"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/antes.json",
+    "bytes": 3554,
+    "sha256": "9b347fb08b81c1f52c90a35395d7adcdb0348810144f013ed500dd88452c7a21"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/browser.json",
+    "bytes": 3459,
+    "sha256": "b87287d8efafa0afd8d19744413bbfdf582b38bcbf0c4575cd417dfc0f94a9c3"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/despues.json",
+    "bytes": 3611,
+    "sha256": "a41055d9d249c707a23881c8c137eeb93da7976abffbbe7512850c1ab242bf33"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/esquema-marcas.png",
+    "bytes": 314424,
+    "sha256": "b2938093a221315853977eb0b5350ffdd824d3c2a4c13947211ba1583fcfee84"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/movil-demo.png",
+    "bytes": 295405,
+    "sha256": "3f20054395f933ffdaeae0c3d53557f72333fe33227eefc29f55ed3c0c80652c"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/panel_local_stderr.log",
+    "bytes": 70,
+    "sha256": "4002cfe11bdafff4e9b472ca65c42f8abbc48ba7421723a173adcdfc40b75cc7"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/panel_local_stdout.log",
+    "bytes": 80,
+    "sha256": "c6b2c9ad4402af323143d636cc69e311239a31ed49de43d462c82b0905e5895e"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/3d-marcas.png",
+    "bytes": 474683,
+    "sha256": "4f0f2d6cd457cfa7adad9436a001ff8507a0713d7f6b6ef5a59887b6c1529c20"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/browser.json",
+    "bytes": 3460,
+    "sha256": "f5d39a88d8bba3d43f204075fe802c105cdaac5dacfb4261356fe6622041aa5e"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/esquema-demo.png",
+    "bytes": 313663,
+    "sha256": "3d57bfa76931b331bf8b15918ba6906e81fef8368ef4d48382f0a188f5989403"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/esquema-desconectado.png",
+    "bytes": 226161,
+    "sha256": "7cc06b824053bb3d1357a37b780233c20e756cbd58aa282f72c797f32b20f7a0"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/esquema-marcas.png",
+    "bytes": 314104,
+    "sha256": "ac696bfc17e5da89e1c2deaaa044e9eac2b91ba9df95d61fd6bead574c4270f0"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/esquema-movil.png",
+    "bytes": 103732,
+    "sha256": "ed1daf8748e9edf4d9df7801848ec67a63047d07351d6df3903026c69293de61"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/esquema-superior.png",
+    "bytes": 113582,
+    "sha256": "929e60c2742c7d7171c8f5e8f13512f9640c3347a73c37709a5860c6c736fc84"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/modelo-lateral-final.png",
+    "bytes": 284790,
+    "sha256": "d35482bc57aea4d342a0d43baa3338c53ea3d6785ad2a8aebfa7ab2816edc1f6"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/movil-demo.png",
+    "bytes": 297099,
+    "sha256": "a5538010c44a53c8aee6869dab8a0e9d45a4173d1c176cc791410b1c273efd18"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/panel-3d-demo.png",
+    "bytes": 539593,
+    "sha256": "1d75b93d9a5f6ec946a79ceec700ed6548a095317928e925558f3fe01feaf751"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/panel-3d-final.png",
+    "bytes": 505491,
+    "sha256": "f3ecf5b3679b290e6c30b1ec7bf66887af8cc84daf54d455587285ea64c976d1"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/panel-3d-movil.png",
+    "bytes": 286905,
+    "sha256": "fde9d119c5cea0bc3e618b7932546a198eb2241f6c56da0b88876183ab2c1bbe"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/qa_esquema.json",
+    "bytes": 1818,
+    "sha256": "f5e8bf42a2c15574a1f3c545aa4210aeeb44deac36a44da105726337ec2da892"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/qa_modelo.json",
+    "bytes": 1836,
+    "sha256": "479a4fb9f34f3fbf747a7d4180638e87b0632fae9b2a0c0f7d5b3606eec58785"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/regresion-giro--15.png",
+    "bytes": 296567,
+    "sha256": "5014e042df83ef28f5d072d79d910e328e21a6fa292eabea376308fec19f4274"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/regresion-giro-0.png",
+    "bytes": 295938,
+    "sha256": "44f2bd2c74b7f50debcb827d5150d018217e9a2ba1fef461799cba99f8cf74eb"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/regresion-giro-15.png",
+    "bytes": 296285,
+    "sha256": "1ba4f6ba9fb0df0f1a308e3f9cb1071195364a6e1157bad26883d10f23c5c69f"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/regresion-pulsador.png",
+    "bytes": 295684,
+    "sha256": "fe463905ef2bc91e3a3e7d61cb0beb2b5c53fe5970af5c6cc86255002388f95d"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/regresion/regresion.json",
+    "bytes": 2942,
+    "sha256": "9fc54eb150e32508e4ac19705e2e7993db6f04abc32dad830d57cbe847ff5f4d"
+  }
+]

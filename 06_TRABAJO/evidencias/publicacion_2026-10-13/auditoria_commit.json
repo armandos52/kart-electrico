@@ -1,0 +1,28 @@
+{
+  "head": "9d27afa08d87c81aa8c7ac92494d12205ae7fc02",
+  "base": "3f4d6244c3b6a5c582cfe1e1e4e1ed9df1cd9352",
+  "remote": "https://github.com/armandos52/kart-electrico.git",
+  "scope": "Blobs del historial origin/main..HEAD; tokens comunes, claves privadas y coincidencia con clave Wi-Fi local. Incluye contenido ZIP/DOCX menor de 10 MB por entrada. No auditoría exhaustiva.",
+  "blobs_and_archive_entries": 861,
+  "bytes_scanned": 39304872,
+  "tracked_files": 708,
+  "forbidden_files": [],
+  "findings": [],
+  "backup_paths": [
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_175739/NOTA.md",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_175739/log.txt",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_175906/NOTA.md",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_175906/log.txt",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_180133/RESPALDO.md",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_180133/SHA256SUMS.txt",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_180133/log.txt",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_212814/RESPALDO.md",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_212814/SHA256SUMS.txt",
+    "07_DESARROLLO/respaldos/esp32/2026-10-07_212814/log.txt",
+    "07_DESARROLLO/respaldos/esp32/v1.3-dev1/.gitignore",
+    "07_DESARROLLO/respaldos/esp32/v1.3-dev2/.gitignore",
+    "07_DESARROLLO/respaldos/esp32/v1.3-dev3/.gitignore",
+    "07_DESARROLLO/respaldos/panel/v1.3-dev2/.gitignore",
+    "07_DESARROLLO/respaldos/stm32/v1.3-dev2/.gitignore"
+  ]
+}

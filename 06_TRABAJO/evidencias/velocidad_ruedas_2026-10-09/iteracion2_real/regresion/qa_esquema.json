@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "scope": "QA sintético del esquema; sin hardware",
+  "checks": [
+    "Enlace directo abre el esquema",
+    "Doce componentes accesibles",
+    "Selección con teclado front_left",
+    "Selección con teclado front_right",
+    "Selección con teclado rear_left",
+    "Selección con teclado rear_right",
+    "Selección con teclado stm32",
+    "Selección con teclado power",
+    "Selección con teclado esp32",
+    "Selección con teclado battery",
+    "Selección con teclado can",
+    "Selección con teclado imu",
+    "Selección con teclado motor_left",
+    "Selección con teclado motor_right",
+    "Selección inversa del inspector al esquema",
+    "Fotografía superior original disponible",
+    "Dirección gira sobre el centro de las dos ruedas",
+    "Rodadura responde a RPM sintéticas",
+    "Pausa mantiene inmóvil la rodadura",
+    "Salir de demo retira las RPM",
+    "CAN caducado retira la dirección del esquema",
+    "La vista 3D sigue disponible",
+    "Sin desborde a 1440",
+    "Sin desborde a 1024",
+    "Sin desborde a 760",
+    "Sin desborde a 375",
+    "Sin desborde a 320",
+    "Modo compacto en móvil",
+    "Sin errores de JavaScript ni SVG",
+    "Ningún hardware conectado"
+  ],
+  "errors": [],
+  "sizes": [
+    {
+      "width": 1440,
+      "scroll": 1440,
+      "viewBox": "0 0 840 640",
+      "compact": false
+    },
+    {
+      "width": 1024,
+      "scroll": 1024,
+      "viewBox": "0 0 840 640",
+      "compact": false
+    },
+    {
+      "width": 760,
+      "scroll": 760,
+      "viewBox": "0 0 840 640",
+      "compact": false
+    },
+    {
+      "width": 375,
+      "scroll": 375,
+      "viewBox": "208 40 424 600",
+      "compact": true
+    },
+    {
+      "width": 320,
+      "scroll": 320,
+      "viewBox": "208 40 424 600",
+      "compact": true
+    }
+  ]
+}

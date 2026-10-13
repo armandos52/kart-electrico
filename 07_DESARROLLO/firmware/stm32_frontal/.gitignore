@@ -1,0 +1,36 @@
+# Dependencias y productos históricos conservados físicamente, reproducibles con preparar_stm32.py.
+# Versionar código propio y configuración; ORIGEN_V0.json identifica todos los archivos copiados.
+*
+!.gitignore
+!ORIGEN_V0.json
+!README_ROBUSTEZ.md
+!STM32F746G_DISCO.ioc
+!Core/
+!Core/**
+!TouchGFX/
+TouchGFX/*
+!TouchGFX/gui/
+!TouchGFX/gui/**
+!TouchGFX/generated/
+TouchGFX/generated/*
+!TouchGFX/generated/gui_generated/
+!TouchGFX/generated/gui_generated/**
+!tools/
+!tools/**
+!tests/
+!tests/**
+!Drivers/
+Drivers/*
+!Drivers/STM32F7xx_HAL_Driver/
+Drivers/STM32F7xx_HAL_Driver/*
+!Drivers/STM32F7xx_HAL_Driver/LICENSE_IWDG.md
+!Drivers/STM32F7xx_HAL_Driver/Inc/
+Drivers/STM32F7xx_HAL_Driver/Inc/*
+!Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_iwdg.h
+!Drivers/STM32F7xx_HAL_Driver/Src/
+Drivers/STM32F7xx_HAL_Driver/Src/*
+!Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_iwdg.c
+**/*.o
+**/*.obj
+**/*.exe
+**/__pycache__/

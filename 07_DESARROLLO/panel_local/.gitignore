@@ -1,0 +1,5 @@
+.vendor/
+__pycache__/
+sesiones/
+qa/*.png
+qa/*.json

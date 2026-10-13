@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "QA sintético · reloj acelerado en servidor de prueba separado · sin hardware",
+  "checks": [
+    "Captura bloqueada sin preparación",
+    "Escritura local requiere token",
+    "Interrupción registrada sin avanzar paso",
+    "13 capturas completas y rechazo conservado",
+    "Sin grados inventados al activar perfil sin referencias",
+    "Exportación ZIP con perfil y muestras",
+    "Asistente sin desborde a 1280",
+    "Panel completo sin desborde a 1280",
+    "Asistente sin desborde a 375",
+    "Panel completo sin desborde a 375",
+    "Asistente sin desborde a 320",
+    "Panel completo sin desborde a 320",
+    "Fuera de rango visible sin saturación silenciosa",
+    "Pérdida de datos desactiva perfil",
+    "Se exige confirmar de nuevo el montaje",
+    "Sin errores JavaScript"
+  ],
+  "errors": []
+}

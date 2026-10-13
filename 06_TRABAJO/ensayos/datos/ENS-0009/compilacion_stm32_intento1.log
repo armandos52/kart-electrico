@@ -1,0 +1,35 @@
+arm-none-eabi-gcc.exe (Arm GNU Toolchain 14.3.Rel1 (Build arm-14.174)) 14.3.1 20250623
+Compilando 150 unidades en C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\.build
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tools\build.py", line 71, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tools\build.py", line 55, in main
+    for obj,output in pool.map(compile_one,sorted(sources)):
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tools\build.py", line 49, in compile_one
+    if result.returncode:raise RuntimeError(str(source)+'\n'+result.stdout)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Core\Src\freertos.c
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Drivers\STM32F7xx_HAL_Driver\Inc/stm32f7xx_hal.h:29,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Core\Inc/main.h:31,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Core\Src\freertos.c:24:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Core\Inc/stm32f7xx_hal_conf.h:363:11: fatal error: stm32f7xx_hal_iwdg.h: No such file or directory
+  363 |  #include "stm32f7xx_hal_iwdg.h"
+      |           ^~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+

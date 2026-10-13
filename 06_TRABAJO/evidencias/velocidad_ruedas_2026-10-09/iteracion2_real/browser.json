@@ -1,0 +1,483 @@
+{
+  "scope": "Chrome, demo y transformaciones renderizadas; sin hardware",
+  "status": "PASS",
+  "rows": [
+    {
+      "gear": "D",
+      "pedal": 30,
+      "rpm": 165,
+      "seconds": 1.11,
+      "frames": 67,
+      "rad_s": -17.121538448881775
+    },
+    {
+      "gear": "D",
+      "pedal": 60,
+      "rpm": 330,
+      "seconds": 1.135,
+      "frames": 67,
+      "rad_s": -33.99120213492872
+    },
+    {
+      "gear": "D",
+      "pedal": 100,
+      "rpm": 550,
+      "seconds": 1.111,
+      "frames": 67,
+      "rad_s": -57.02042507728407
+    },
+    {
+      "gear": "R",
+      "pedal": 30,
+      "rpm": 165,
+      "seconds": 1.105,
+      "frames": 67,
+      "rad_s": 17.463274855574614
+    },
+    {
+      "gear": "R",
+      "pedal": 60,
+      "rpm": 330,
+      "seconds": 1.1133000000044704,
+      "frames": 67,
+      "rad_s": 35.175227472711974
+    },
+    {
+      "gear": "R",
+      "pedal": 100,
+      "rpm": 550,
+      "seconds": 1.1165,
+      "frames": 67,
+      "rad_s": 58.447035739199286
+    },
+    {
+      "gear": "D",
+      "pedal": 3,
+      "rpm": 16.5,
+      "svg_expected_px_s": -94.16923979135404,
+      "seconds": 1.10989999999851,
+      "frames": 67,
+      "rad_s": -1.7378393851372596,
+      "svg_px_s": -94.74619335087951
+    },
+    {
+      "gear": "R",
+      "pedal": 3,
+      "rpm": 16.5,
+      "seconds": 1.107,
+      "frames": 67,
+      "rad_s": 1.7427041632819795,
+      "svg_px_s": 94.97734417344171
+    },
+    {
+      "modo": "lento",
+      "pedal": 100,
+      "seconds": 1.1206000000014902,
+      "frames": 67,
+      "rad_s": -1.7218624700539726,
+      "svg_px_s": -93.84151347479937
+    }
+  ],
+  "blurRows": [
+    {
+      "gear": "D",
+      "pedal": 0,
+      "detail3d": 1,
+      "arc3d": 0,
+      "uArc": 0,
+      "uDir": 0,
+      "uPeak": 0.92,
+      "detailVisible": true,
+      "trailVisible": false,
+      "detailSvg": 1,
+      "trailSvgVisible": false,
+      "trailSvgSegments": 10
+    },
+    {
+      "gear": "D",
+      "pedal": 3,
+      "detail3d": 1,
+      "arc3d": 0.05759586531581287,
+      "uArc": 0.05759586531581287,
+      "uDir": -1,
+      "uPeak": 0.92,
+      "detailVisible": true,
+      "trailVisible": true,
+      "detailSvg": 1,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 15
+    },
+    {
+      "gear": "D",
+      "pedal": 10,
+      "detail3d": 0.6611890910140121,
+      "arc3d": 0.19198621771937624,
+      "uArc": 0.19198621771937624,
+      "uDir": -1,
+      "uPeak": 0.7953175854931565,
+      "detailVisible": true,
+      "trailVisible": true,
+      "detailSvg": 0.661,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 7
+    },
+    {
+      "gear": "D",
+      "pedal": 30,
+      "detail3d": 0,
+      "arc3d": 0.5759586531581287,
+      "uArc": 0.5759586531581287,
+      "uDir": -1,
+      "uPeak": 0.552,
+      "detailVisible": false,
+      "trailVisible": true,
+      "detailSvg": 0,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 13
+    },
+    {
+      "gear": "D",
+      "pedal": 60,
+      "detail3d": 0,
+      "arc3d": 1.1519173063162573,
+      "uArc": 1.1519173063162573,
+      "uDir": -1,
+      "uPeak": 0.552,
+      "detailVisible": false,
+      "trailVisible": true,
+      "detailSvg": 0,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 14
+    },
+    {
+      "gear": "D",
+      "pedal": 100,
+      "detail3d": 0,
+      "arc3d": 1.9198621771937623,
+      "uArc": 1.9198621771937623,
+      "uDir": -1,
+      "uPeak": 0.552,
+      "detailVisible": false,
+      "trailVisible": true,
+      "detailSvg": 0,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 7
+    },
+    {
+      "gear": "R",
+      "pedal": 0,
+      "detail3d": 1,
+      "arc3d": 0,
+      "uArc": 0,
+      "uDir": 0,
+      "uPeak": 0.92,
+      "detailVisible": true,
+      "trailVisible": false,
+      "detailSvg": 1,
+      "trailSvgVisible": false,
+      "trailSvgSegments": 1
+    },
+    {
+      "gear": "R",
+      "pedal": 3,
+      "detail3d": 1,
+      "arc3d": 0.05759586531581287,
+      "uArc": 0.05759586531581287,
+      "uDir": 1,
+      "uPeak": 0.92,
+      "detailVisible": true,
+      "trailVisible": true,
+      "detailSvg": 1,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 14
+    },
+    {
+      "gear": "R",
+      "pedal": 10,
+      "detail3d": 0.6611890910140121,
+      "arc3d": 0.19198621771937624,
+      "uArc": 0.19198621771937624,
+      "uDir": 1,
+      "uPeak": 0.7953175854931565,
+      "detailVisible": true,
+      "trailVisible": true,
+      "detailSvg": 0.661,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 15
+    },
+    {
+      "gear": "R",
+      "pedal": 30,
+      "detail3d": 0,
+      "arc3d": 0.5759586531581287,
+      "uArc": 0.5759586531581287,
+      "uDir": 1,
+      "uPeak": 0.552,
+      "detailVisible": false,
+      "trailVisible": true,
+      "detailSvg": 0,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 0
+    },
+    {
+      "gear": "R",
+      "pedal": 60,
+      "detail3d": 0,
+      "arc3d": 1.1519173063162573,
+      "uArc": 1.1519173063162573,
+      "uDir": 1,
+      "uPeak": 0.552,
+      "detailVisible": false,
+      "trailVisible": true,
+      "detailSvg": 0,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 14
+    },
+    {
+      "gear": "R",
+      "pedal": 100,
+      "detail3d": 0,
+      "arc3d": 1.9198621771937623,
+      "uArc": 1.9198621771937623,
+      "uDir": 1,
+      "uPeak": 0.552,
+      "detailVisible": false,
+      "trailVisible": true,
+      "detailSvg": 0,
+      "trailSvgVisible": true,
+      "trailSvgSegments": 14
+    },
+    {
+      "gear": "D",
+      "energia_estela_svg": [
+        2.045726865671642,
+        3.3698676119402977,
+        5.44570328358209
+      ]
+    },
+    {
+      "gear": "R",
+      "energia_estela_svg": [
+        2.04512119402985,
+        3.317330294117647,
+        5.538446323529411
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "name": "Una marca única unida a cada rueda 3D",
+      "pass": true
+    },
+    {
+      "name": "Cuatro marcas equivalentes en el esquema",
+      "pass": true
+    },
+    {
+      "name": "Cada rueda del esquema tiene su estela",
+      "pass": true
+    },
+    {
+      "name": "La estela 3D no se puede seleccionar",
+      "pass": true
+    },
+    {
+      "name": "D 30 %: el 3D gira a la velocidad real (165 RPM)",
+      "pass": true
+    },
+    {
+      "name": "D 60 %: el 3D gira a la velocidad real (330 RPM)",
+      "pass": true
+    },
+    {
+      "name": "D 100 %: el 3D gira a la velocidad real (550 RPM)",
+      "pass": true
+    },
+    {
+      "name": "D: se distinguen los tres escalones 3D (30/60/100 %)",
+      "pass": true
+    },
+    {
+      "name": "D: a 100 % la rueda gira como a 50 km/h",
+      "pass": true
+    },
+    {
+      "name": "R 30 %: el 3D gira a la velocidad real (165 RPM)",
+      "pass": true
+    },
+    {
+      "name": "R 60 %: el 3D gira a la velocidad real (330 RPM)",
+      "pass": true
+    },
+    {
+      "name": "R 100 %: el 3D gira a la velocidad real (550 RPM)",
+      "pass": true
+    },
+    {
+      "name": "R: se distinguen los tres escalones 3D (30/60/100 %)",
+      "pass": true
+    },
+    {
+      "name": "R: a 100 % la rueda gira como a 50 km/h",
+      "pass": true
+    },
+    {
+      "name": "El mando muestra el equivalente en km/h",
+      "pass": true
+    },
+    {
+      "name": "D: parado y a 3 % las ruedas son nítidas y sin estela perceptible",
+      "pass": true
+    },
+    {
+      "name": "D: a 30 % y más los detalles 3D desaparecen",
+      "pass": true
+    },
+    {
+      "name": "D: a 10 % están a medio camino",
+      "pass": true
+    },
+    {
+      "name": "D: el esquema usa el mismo desenfoque que el 3D",
+      "pass": true
+    },
+    {
+      "name": "D: la estela 3D crece con el pedal",
+      "pass": true
+    },
+    {
+      "name": "D: la estela mide lo que gira la rueda en 1/30 s",
+      "pass": true
+    },
+    {
+      "name": "D: la estela va detrás del sentido de giro",
+      "pass": true
+    },
+    {
+      "name": "D: la estela del esquema está activa a 30/60/100 % y oculta parado",
+      "pass": true
+    },
+    {
+      "name": "D: la estela del esquema crece con la velocidad (energía media 30<60<100 %)",
+      "pass": true
+    },
+    {
+      "name": "D: marca y estela más tenues a máxima velocidad",
+      "pass": true
+    },
+    {
+      "name": "R: parado y a 3 % las ruedas son nítidas y sin estela perceptible",
+      "pass": true
+    },
+    {
+      "name": "R: a 30 % y más los detalles 3D desaparecen",
+      "pass": true
+    },
+    {
+      "name": "R: a 10 % están a medio camino",
+      "pass": true
+    },
+    {
+      "name": "R: el esquema usa el mismo desenfoque que el 3D",
+      "pass": true
+    },
+    {
+      "name": "R: la estela 3D crece con el pedal",
+      "pass": true
+    },
+    {
+      "name": "R: la estela mide lo que gira la rueda en 1/30 s",
+      "pass": true
+    },
+    {
+      "name": "R: la estela va detrás del sentido de giro",
+      "pass": true
+    },
+    {
+      "name": "R: la estela del esquema está activa a 30/60/100 % y oculta parado",
+      "pass": true
+    },
+    {
+      "name": "R: la estela del esquema crece con la velocidad (energía media 30<60<100 %)",
+      "pass": true
+    },
+    {
+      "name": "R: marca y estela más tenues a máxima velocidad",
+      "pass": true
+    },
+    {
+      "name": "D 3 %: la banda del esquema avanza a ω·R (px reales)",
+      "pass": true
+    },
+    {
+      "name": "R 3 %: la banda del esquema avanza al revés",
+      "pass": true
+    },
+    {
+      "name": "Pausa conserva 3D y esquema",
+      "pass": true
+    },
+    {
+      "name": "Pausa: ruedas nítidas y sin estela",
+      "pass": true
+    },
+    {
+      "name": "Movimiento reducido detiene el esquema",
+      "pass": true
+    },
+    {
+      "name": "Movimiento reducido: esquema nítido y sin estela",
+      "pass": true
+    },
+    {
+      "name": "Movimiento reducido detiene el 3D",
+      "pass": true
+    },
+    {
+      "name": "Movimiento reducido: ruedas 3D nítidas y sin estela",
+      "pass": true
+    },
+    {
+      "name": "Pedal cero detiene las dos vistas sin estela",
+      "pass": true
+    },
+    {
+      "name": "El giro real es el valor por defecto",
+      "pass": true
+    },
+    {
+      "name": "Modo Lento: 3 % de la velocidad real, nítido",
+      "pass": true
+    },
+    {
+      "name": "Modo Lento se recuerda en el navegador",
+      "pass": true
+    },
+    {
+      "name": "Modo Lento se conserva al recargar",
+      "pass": true
+    },
+    {
+      "name": "Volver a Real se recuerda",
+      "pass": true
+    },
+    {
+      "name": "Selectores y mandos sin desbordamiento móvil",
+      "pass": true
+    },
+    {
+      "name": "Sin escrituras al servidor",
+      "pass": true
+    },
+    {
+      "name": "Sin errores JavaScript",
+      "pass": true
+    },
+    {
+      "name": "Servidor desconectado del kart",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "writes": []
+}

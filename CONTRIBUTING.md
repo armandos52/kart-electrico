@@ -2,6 +2,8 @@
 
 Gracias por revisar el proyecto. No es necesario instalar Obsidian para consultar la documentación ni para dejar comentarios en GitHub.
 
+Para esta entrega, empezar por el [dossier del 13-10-2026](00_INICIO/REVISION_PARA_PROFESORES.md). Citar la etiqueta `revision-academica-2026-10-13` permite conservar el contexto aunque avance el desarrollo.
+
 ## Elegir dónde comentar
 
 - [Discussions](https://github.com/armandos52/kart-electrico/discussions): preguntas generales, alternativas de diseño e ideas que necesitan debate.

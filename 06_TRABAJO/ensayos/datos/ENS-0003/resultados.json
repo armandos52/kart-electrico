@@ -1,0 +1,43 @@
+{
+  "result": "PASS",
+  "hardware": "No abierto; fixture interceptada solo en navegador",
+  "checks": [
+    "arranque desconectado",
+    "diagnóstico ESP32 inicial",
+    "Wi-Fi por defecto y rótulos TCP",
+    "resumen y buscador de todas las señales",
+    "dirección del ADC rotulada como estimada",
+    "ausencia de animación delantera sin RPM",
+    "pausa de animación",
+    "selección de kart",
+    "demostración animada explícita",
+    "separación demo/USB",
+    "ausencia/antigüedad de señales",
+    "POST local protegido",
+    "sin ruta de actuación",
+    "sin errores JS",
+    "diseño adaptable"
+  ],
+  "sizes": [
+    {
+      "width": 1280,
+      "client": 1280,
+      "scroll": 1280
+    },
+    {
+      "width": 1024,
+      "client": 1024,
+      "scroll": 1024
+    },
+    {
+      "width": 760,
+      "client": 760,
+      "scroll": 760
+    },
+    {
+      "width": 375,
+      "client": 375,
+      "scroll": 375
+    }
+  ]
+}

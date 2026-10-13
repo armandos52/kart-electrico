@@ -1,0 +1,42 @@
+name: Verificación sin hardware
+on:
+  push:
+    branches: [main, 'codex/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  software:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Dependencia de adquisición
+        run: python -m pip install -r 07_DESARROLLO/panel_local/requirements.txt
+      - name: Panel y calibración
+        run: python -m unittest discover -s 07_DESARROLLO/panel_local/tests -v
+      - name: Contratos JavaScript
+        run: |
+          node 07_DESARROLLO/panel_local/qa/check-robustez.mjs
+          node 07_DESARROLLO/panel_local/qa/check-velocidad.mjs
+          node 07_DESARROLLO/panel_local/qa/check-idiomas.mjs
+      - name: Control ESP32 en PC
+        working-directory: 07_DESARROLLO/firmware/esp32_trasero/tests
+        run: |
+          g++ -std=c++17 -Wall -Wextra -I../lib/kart_control control_test.cpp ../lib/kart_control/kart_control.cpp -o /tmp/kart-control-test
+          /tmp/kart-control-test
+      - name: Frontal e integración CAN en PC
+        working-directory: 07_DESARROLLO/firmware/stm32_frontal/tests
+        run: |
+          g++ -std=c++17 -Wall -Wextra -Istubs -I../Core/Inc -I../../esp32_trasero/lib/kart_control frontend_test.cpp ../../esp32_trasero/lib/kart_control/kart_control.cpp -o /tmp/kart-frontend-test
+          /tmp/kart-frontend-test
+      - name: Navegación y límites de publicación
+        run: python 07_DESARROLLO/herramientas/verificar_publicacion.py

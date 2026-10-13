@@ -1,0 +1,10 @@
+[
+  {
+    "path": "07_DESARROLLO/firmware/esp32_trasero/src/ESP32-final.ino",
+    "sin_cambios": true
+  },
+  {
+    "path": "07_DESARROLLO/firmware/esp32_trasero/src/telemetria.cpp",
+    "sin_cambios": true
+  }
+]

@@ -1,0 +1,209 @@
+{
+  "scope": "Prueba automática sintética del panel; sin hardware",
+  "source": "../../06_TRABAJO/evidencias/velocidad_ruedas_2026-10-09/iteracion2_real/antes/nucleo.js",
+  "status": "FAIL",
+  "rows": [
+    {
+      "gear": "D",
+      "pedal_pct": 30,
+      "rpm": 165,
+      "visual_rad_s": -0.5183627878423158
+    },
+    {
+      "gear": "D",
+      "pedal_pct": 45,
+      "rpm": 247.5,
+      "visual_rad_s": -0.7775441817634737
+    },
+    {
+      "gear": "D",
+      "pedal_pct": 60,
+      "rpm": 330,
+      "visual_rad_s": -1.0367255756846316
+    },
+    {
+      "gear": "D",
+      "pedal_pct": 80,
+      "rpm": 440,
+      "visual_rad_s": -1.382300767579509
+    },
+    {
+      "gear": "D",
+      "pedal_pct": 100,
+      "rpm": 550,
+      "visual_rad_s": -1.727875959474386
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 30,
+      "rpm": 165,
+      "visual_rad_s": 0.5183627878423158
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 45,
+      "rpm": 247.5,
+      "visual_rad_s": 0.7775441817634737
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 60,
+      "rpm": 330,
+      "visual_rad_s": 1.0367255756846316
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 80,
+      "rpm": 440,
+      "visual_rad_s": 1.382300767579509
+    },
+    {
+      "gear": "R",
+      "pedal_pct": 100,
+      "rpm": 550,
+      "visual_rad_s": 1.727875959474386
+    }
+  ],
+  "checks": [
+    {
+      "name": "D: cada incremento de 30 a 100 % acelera la animación",
+      "pass": true
+    },
+    {
+      "name": "D: duplicar RPM duplica velocidad visual",
+      "pass": true
+    },
+    {
+      "name": "R: cada incremento de 30 a 100 % acelera la animación",
+      "pass": true
+    },
+    {
+      "name": "R: duplicar RPM duplica velocidad visual",
+      "pass": true
+    },
+    {
+      "name": "Giro real: 60 RPM = una vuelta por segundo (D)",
+      "pass": false
+    },
+    {
+      "name": "Giro real: 60 RPM = una vuelta por segundo (R)",
+      "pass": false
+    },
+    {
+      "name": "Giro real: 50 km/h (Ø 0,48 m) = RPM·2π/60 rad/s",
+      "pass": false
+    },
+    {
+      "name": "Giro real: 50 km/h supera 9 vueltas por segundo",
+      "pass": false
+    },
+    {
+      "name": "wheelRates entrega rad/s con signo sin depender de dt",
+      "pass": false
+    },
+    {
+      "name": "wheelMotion = rad/s × dt",
+      "pass": false
+    },
+    {
+      "name": "D/R opuestos a 0 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 1 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 120 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 400 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 1200 RPM",
+      "pass": true
+    },
+    {
+      "name": "D/R opuestos a 4000 RPM",
+      "pass": true
+    },
+    {
+      "name": "Cero RPM: cero movimiento",
+      "pass": true
+    },
+    {
+      "name": "Acelerar rueda D no ralentiza rueda I",
+      "pass": true
+    },
+    {
+      "name": "Reparto I/D conserva proporción 240/1600",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 10 fps",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 20 fps",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 30 fps",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 60 fps",
+      "pass": true
+    },
+    {
+      "name": "Mismo giro por segundo a 120 fps",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida null: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida undefined: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida NaN: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida Infinity: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM inválida 400: sin movimiento ni NaN",
+      "pass": true
+    },
+    {
+      "name": "RPM stale: rueda quieta",
+      "pass": true
+    },
+    {
+      "name": "RPM missing: rueda quieta",
+      "pass": true
+    },
+    {
+      "name": "La marcha aplicada R tiene prioridad sobre solicitada D",
+      "pass": true
+    },
+    {
+      "name": "Paso temporal negativo no mueve ruedas",
+      "pass": true
+    },
+    {
+      "name": "wheelBlur disponible",
+      "pass": false
+    },
+    {
+      "name": "Modo lento seleccionable (app.wheelScale)",
+      "pass": false
+    }
+  ]
+}

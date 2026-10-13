@@ -1,0 +1,34 @@
+ok   Cada clave tiene tres textos no vacíos (es, pt, en)
+ok   Los parámetros {…} coinciden en los tres idiomas
+ok   Ningún texto largo queda sin traducir (ni en portugués ni en inglés)
+ok   Servidor: filas [es, pt, en] completas y sin duplicados
+ok   Patrones del servidor: regex con (.*) y $1 en pt y en
+ok   El código usa claves que están todas definidas
+ok   Familias dinámicas completas (w.*, part.*, plan.*, loc.*, dir.*)
+ok   12 piezas con título, etiqueta y nota
+ok   Nombres cortos: las 48 señales del catálogo de presentación, todas con su clave de telemetría
+ok   No sobran claves en el diccionario
+ok   Los textos en español del HTML coinciden con el diccionario
+ok   Los textos en español de la plantilla de calibración coinciden con el diccionario
+ok   El selector de idioma tiene tres botones ES · PT · EN
+ok   Español por defecto: aria-pressed solo en ES
+ok   Todas las etiquetas/unidades de SIGNALS tienen traducción
+ok   Todos los mensajes del servicio (ValueError, eventos, guía, interrupciones) tienen traducción
+ok   Cobertura: 56 etiquetas y 99 mensajes del servicio
+ok   es: t() devuelve el texto original
+ok   es: srv() no cambia el texto del servicio
+ok   t() con clave desconocida devuelve la clave; parámetro ausente queda visible
+ok   word() traduce valores conocidos y devuelve undefined si no los conoce
+ok   pt: t() y parámetros
+ok   pt: srv() exacto, unidades y patrones anidados
+ok   pt: valores de texto y estados binarios
+ok   pt: números con el formato de Portugal
+ok   en: t(), srv() y word()
+ok   en: números con punto decimal y separador de miles
+ok   Cada idioma da un título distinto
+ok   pt: activeSignals traduce etiqueta y unidad
+ok   pt: dirección calibrada con etiquetas traducidas
+ok   pt: ángulo interpolado indica la rueda
+ok   en: ángulo interpolado y fuera de rango
+ok   es: la dirección sigue como antes
+33/33 comprobaciones; 480 claves, 155 mensajes del servicio, 11 patrones. PASS

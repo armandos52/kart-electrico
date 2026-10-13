@@ -1,0 +1,30 @@
+[
+  {
+    "path": "06_TRABAJO/evidencias/calibracion_direccion_2026-10-08/preview.html",
+    "sha256": "7681C2A4F091D52047BD39650EA73038963F10C1A2FEF8BC5AC40C5D6B34BBE4"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/calibracion_direccion_2026-10-08/verificar_demo.cjs",
+    "sha256": "DAEE0230803B2223067B2E5DCD3DD38C5385C2FA80BADFC67734F0F3181AD6C7"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/calibracion_direccion_2026-10-08/qa_resultado.json",
+    "sha256": "E5CCCF3C93A82C03C12E9340F2F9A6812B2FC04684AE1DEFDE07C76C701E8B30"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/calibracion_direccion_2026-10-08/demo-800.png",
+    "sha256": "44DEFCB63172B169277225F33A27F1DB7B131F01311D78655C3F663B4B49F8A4"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/calibracion_direccion_2026-10-08/demo-375.png",
+    "sha256": "71EAFE54B77856537E7DC4855281C3689E33A7714CBDDF53714FE0BEE4D68964"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/calibracion_direccion_2026-10-08/demo-320.png",
+    "sha256": "B69CD3780B861DC1F8F487AD58C1451D6912D80904C8208C7054ABE75E7204C6"
+  },
+  {
+    "path": "C:/Users/nandi/.codex/visualizations/2026/10/08/01a11ad1-2f69-74b2-ae1e-1173f58b042e/calibracion-direccion.html",
+    "sha256": "07180EA4604D3BCEF5F65E36940C3740844DED6F61706D3AB14B01B41FDC0AA3"
+  }
+]
