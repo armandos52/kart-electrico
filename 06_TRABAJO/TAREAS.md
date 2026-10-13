@@ -8,6 +8,8 @@ resumen: Tareas próximas y completadas del proyecto del kart.
 
 ## Próximas
 
+- [ ] **Esta semana (12–18 de octubre):** preparar y realizar [ENS-0014 · carga completa 16S](ensayos/ENS-0014_carga_completa_bateria_16s.md), solicitado por Armando el 13-10. Identificar equipos y criterio de terminación; conservar 16 tensiones, corriente final, temperatura y balanceo para verificar final de carga y referencia del SOC. Día/hora pendientes; no marcar 100 % alcanzado hasta disponer de evidencia.
+
 - [ ] Confirmar identidad/carga 16S: etiquetas celda/cargador, 16 tensiones precisas en reposo, temperatura y BMS/protecciones/balanceo; resolver 60/70 Ah de [PROB-0010](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0010_identificacion_y_carga_bateria_16s.md). [Tutorial 13-10](../04_CONOCIMIENTO/bateria_y_bms/TUTORIAL_CELDAS_Y_CARGA_16S.md) completado como orientación, sin carga ni ajustes físicos.
 
 - [ ] Recoger y vincular el feedback de profesores sobre la entrega del 13-10: aportación, protocolo experimental y prioridades. [Dossier](../00_INICIO/REVISION_PARA_PROFESORES.md), [PUB-0001](PUBLICACION_2026-10-13.md).

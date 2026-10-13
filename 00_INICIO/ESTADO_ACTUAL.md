@@ -21,6 +21,8 @@ Armando solicita preparar y subir el trabajo acumulado para recibir feedback de 
 
 ## Siguiente trabajo técnico
 
+- **Carga esta semana (12–18 de octubre), solicitada por Armando:** [ENS-0014](../06_TRABAJO/ensayos/ENS-0014_carga_completa_bateria_16s.md) planificado para comprobar carga completa y referencia SOC con las 16 celdas, corriente final y perfil válido. Día/hora, identidad de equipos y criterios de terminación pendientes; 100 % todavía no acreditado.
+
 1. Identificar versiones de las placas y respaldar/comparar STM32 + QSPI; seleccionar grabación solo después. Validar START momentáneo primero en banco y después integrado por Wi-Fi.
 2. Continuar cadena frontal → CAN → DIF/BLQ/ESC → pantalla; calibrar ADC, Hall/PPR y MPU, verificar BMS/configuración real. Límite R estimado no equivale a frenado ni garantía física; ESC experimental.
 3. Repetir calibración por pasos con registro Wi-Fi. Seis intentos del 09-10 analizados: ningún centro aceptado; causa eléctrica/posición/recorte sin separar. [PROB-0007](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0007_variacion_y_centro_direccion.md).

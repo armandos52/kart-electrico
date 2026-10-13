@@ -16,7 +16,7 @@
 | Recuperación y diagnóstico | Respaldo ESP32 verificado, recuperación de la imagen original y telemetría Wi-Fi/USB v1.2 | [ENS-0001 a ENS-0004](06_TRABAJO/ensayos/README.md). Banco documentado; funcionamiento de motores declarado por Armando |
 | Panel del portátil | Lectura sin transmitir mandos, registro, gráficas, 3D/esquema, idiomas ES/PT/EN y calibración por pasos | [Guía y arranque](07_DESARROLLO/panel_local/README.md). Demo sintética; calibración solo de la visualización |
 | Control v1.3-dev3 | STOP/rearme, supervisión de entradas, modos, registro SD y memoria para START momentáneo | [Versiones](07_DESARROLLO/firmware/VERSIONES.md), [protocolo](07_DESARROLLO/firmware/common/PROTOCOLO_V13.md). Comprobaciones en PC y compilaciones; validación física pendiente |
-| Trazabilidad | 13 fichas de ensayo, 10 problemas y 8 decisiones, con resultados favorables y fallidos | [Diario de ingeniería](06_TRABAJO/DIARIO_PARA_RELATORIO.md), [prioridades](06_TRABAJO/TAREAS.md) |
+| Trazabilidad | 13 fichas con resultados y 1 ensayo planificado, 10 problemas y 8 decisiones, con resultados favorables y fallidos | [Diario de ingeniería](06_TRABAJO/DIARIO_PARA_RELATORIO.md), [prioridades](06_TRABAJO/TAREAS.md) |
 | Batería y carga | Tutorial documental 16S, cálculos y discrepancias de identificación | [Consulta del 13-10](04_CONOCIMIENTO/bateria_y_bms/TUTORIAL_CELDAS_Y_CARGA_16S.md). Sin carga, ajuste BMS ni SOC medido |
 
 **Estado del vehículo:** el 08-10 Armando confirmó marcha satisfactoria tras preparar v1.2; el 13-10 comunicó un problema de relé con «B1.3». Esta última denominación no identifica los binarios de las placas. Las correcciones dev3 publicadas están comprobadas en PC; falta identificar/resguardar el frontal y validar en banco y kart. La publicación es una entrega para revisión, no una versión de firmware validada para circular.
@@ -51,4 +51,4 @@ Para consultar los avances no hace falta instalar nada. Para explorar la demo lo
 
 Se publican el desarrollo, las notas, los registros seleccionados y tres fotografías del kart. Los originales históricos completos, las imágenes de flash, las credenciales y las sesiones locales permanecen conservados fuera de Git; las referencias **«solo local»** requieren la copia documental de trabajo. [Alcance y acceso a fuentes](02_ORIGINALES/README.md). Las dependencias mantienen sus licencias; [procedencia del software](07_DESARROLLO/README.md#procedencia).
 
-La entrega queda identificada por la etiqueta `revision-academica-2026-10-13`. No hay sincronización automática ni copia independiente de todo el archivo configurada.
+El primer corte de entrega queda identificado por la etiqueta `revision-academica-2026-10-13`; la rama principal incorpora además [ENS-0014, plan de carga pendiente](06_TRABAJO/ensayos/ENS-0014_carga_completa_bateria_16s.md), añadido al cierre del mismo día. No hay sincronización automática ni copia independiente de todo el archivo configurada.
