@@ -6,6 +6,10 @@ resumen: Índice y diario de evidencias para el relatório final de ingeniería 
 
 # Diario para el relatório final
 
+## ENS-0014 / PROB-0010 · Carga prevista esta semana · 13-10-2026
+
+Armando solicita guardar la explicación de las celdas y anuncia carga esta semana para llegar al «verdadero 100 %». Creado [ENS-0014](ensayos/ENS-0014_carga_completa_bateria_16s.md), **planificado para 12–18 de octubre; día/hora pendientes, no ejecutado**. Objetivo: verificar final de carga y referencia SOC mediante perfil válido, 16 tensiones, corriente final, temperatura, balanceo y registros antes/durante/después. Identidad, discrepancia 60/70 Ah, cargador/BMS y criterios precisos pendientes; no perseguir 100 % subiendo al extremo documental ni forzando el indicador. Sin nuevas mediciones, resultados, ajustes físicos o cambio de firmware. El plan enlaza tutorial, evidencia previa y PROB-0010; no amplía lectura de originales. Próximo: identificar equipos y completar criterios antes del ensayo; documentar también interrupciones y límites.
+
 ## Consulta batería / PROB-0010 · 13-10-2026
 
 Objetivo: tutorial/gráfica para cargar 16 celdas e interpretar 3,2–3,3 V. Armando confirma reposo; lectura aproximada declarada, no registro recibido. [Tutorial: configuración, método, fuentes, cálculos, recomendaciones y límites](../04_CONOCIMIENTO/bateria_y_bms/TUTORIAL_CELDAS_Y_CARGA_16S.md). Buscador y revisión visual completa DOC-0030 p.1/DOC-0042 PDF 69 (impresa 55). Discrepancia 60/70 Ah en [PROB-0010](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0010_identificacion_y_carga_bateria_16s.md). Cálculos 16S, techo prudente propuesto 3,65 V/58,4 V condicionado; no se adoptan extremos de operación como objetivos cotidianos. [Renders, vista previa y hashes](evidencias/2026-10-13_bateria/). Curva sintética didáctica y comprobación visual en PC, sin ensayo físico, ajuste de BMS o firmware. Problemas de acceso web/alias Python y parche concurrente documentados en tutorial. Positivo: límites/consignas diferenciados; pendientes identidad, cargador, BMS y datos precisos antes de concretar carga. No se ejecutó commit/push en esta consulta.

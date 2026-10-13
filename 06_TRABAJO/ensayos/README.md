@@ -17,5 +17,6 @@ Corte de revisión: 13-10-2026. Cada ficha contiene objetivo, configuración, pr
 | [ENS-0011 · STOP conservado al recibir un lote CAN](ENS-0011_stop_en_lote_can.md) | PC / datos sintéticos |
 | [ENS-0012 · Calibración por pasos y diagnóstico visible](ENS-0012_calibracion_por_pasos.md) | Registros Wi-Fi anteriores + pruebas nuevas en PC |
 | [ENS-0013 · START/STOP con pulsador momentáneo](ENS-0013_start_stop_momentaneo.md) | PC / datos sintéticos |
+| [ENS-0014 · Carga completa y comprobación del SOC 16S](ENS-0014_carga_completa_bateria_16s.md) | Planificado para 12–18 de octubre; sin mediciones ni ejecución |
 
 [Diario para el relatório](../DIARIO_PARA_RELATORIO.md) · [Versiones de firmware](../../07_DESARROLLO/firmware/VERSIONES.md) · [Tareas pendientes](../TAREAS.md). No equivale a validación física completa ni a certificación del vehículo.

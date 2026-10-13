@@ -69,3 +69,5 @@ También se incluye la [consulta documental de batería del 13-10](../04_CONOCIM
 [Código y comandos](../07_DESARROLLO/README.md) · [versiones](../07_DESARROLLO/firmware/VERSIONES.md) · [diario](../06_TRABAJO/DIARIO_PARA_RELATORIO.md) · [catálogo](../03_CATALOGO/INDICE_DOCUMENTOS.md) · [alcance público](../02_ORIGINALES/README.md).
 
 Los informes históricos completos se conservan en la copia local; el catálogo mantiene nombres, hashes, páginas y cobertura. La revisión de publicación no amplía su lectura técnica ni acredita una copia de seguridad independiente.
+
+Última incorporación del 13-10: [ENS-0014 · plan de carga completa y referencia SOC](../06_TRABAJO/ensayos/ENS-0014_carga_completa_bateria_16s.md), previsto para esta semana. Identificación de equipos y criterios de finalización pendientes; sin datos ni carga ejecutada.
