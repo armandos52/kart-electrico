@@ -1,0 +1,142 @@
+[
+  {
+    "path": "05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0008_start_momentaneo_con_memoria.md",
+    "bytes": 3422,
+    "sha256": "dc0f053b36d2ebc235db5ef732976e0b4a9a183c27410cf275ec0d642dab3d1a"
+  },
+  {
+    "path": "05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0009_start_pulsador_momentaneo.md",
+    "bytes": 1981,
+    "sha256": "57ff692c37b7973c2fdd82dee9e73792e56d5153ba1970c4996a01adef10024c"
+  },
+  {
+    "path": "06_TRABAJO/ensayos/ENS-0013_start_stop_momentaneo.md",
+    "bytes": 8758,
+    "sha256": "c5a713540d2715d93d5dbe01066d3515e177a24bca36446f0ffc4dcc49cd4be7"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/antes/Core/Inc/kart_frontend.h",
+    "bytes": 1267,
+    "sha256": "d15cbd52db1ad9ea410be2cd43e4008e36367cdfc1b08fa261783d4530e60ffc"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/antes/Core/Src/kart_frontend.c",
+    "bytes": 15956,
+    "sha256": "c7b29335935c61872ac1ca7a61b2b55f3c725ef3eed801b176225e7ef2c4a494"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/antes/tests/compilar.cmd",
+    "bytes": 313,
+    "sha256": "dea71465fe27fdff7a4f51b76d91d7ab76db7cd347887b89196ed562903ef1bc"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/antes/tests/frontend_test.cpp",
+    "bytes": 6758,
+    "sha256": "c15a176b6d04799697aab1a52818911a1d0edd40df0095a1c4ab2b8ea8ee6ba9"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/antes/tools/build.py",
+    "bytes": 5198,
+    "sha256": "02f3ee4f2dfb249813e69427f5a711586c53c23842e57051eb636dfc8e137d25"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/build_hashes.json",
+    "bytes": 19319,
+    "sha256": "fbf54b9f491f3b02997286797b3be5d07f923652e27c142d0589b34a6dcc1f65"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/build_stm32_dev3.log",
+    "bytes": 62623,
+    "sha256": "2fec184f7623e4b9aade346c62f0e2f595d239e6c93e83cb8a79dc54a62b70ff"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/cambio_start.diff",
+    "bytes": 12230,
+    "sha256": "9ff1cb94c67b1c56109c50017c96b27aa133816abdfde19ddcd1c36fc601bcf9"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/conservar_evidencia.py",
+    "bytes": 3152,
+    "sha256": "83d23c95b21464281ce135079af654e453f38a521ed48328e61ebc3ad9934d42"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/control_dev3.log",
+    "bytes": 2274,
+    "sha256": "f51e916308e54363e85ceddf567a630e169fc05bbcdc5bcaaf143609b59e7855"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/despues/Core/Inc/kart_frontend.h",
+    "bytes": 1267,
+    "sha256": "932954df4f880025e4692e89e55064bea765e84b209af32ca3653aeee813952d"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/despues/Core/Src/kart_frontend.c",
+    "bytes": 17260,
+    "sha256": "c21f3433bb155cb324ac036a26a2d95852d19f6c4a278500201825dbc62c1dfe"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/despues/tests/compilar.cmd",
+    "bytes": 406,
+    "sha256": "e94725019f1a30ab2390a507051ee4164762ec1e4cd3c1a0d65be55d99924a05"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/despues/tests/frontend_test.cpp",
+    "bytes": 11724,
+    "sha256": "4907b4e5e0c74ad2500440e127230b37eac68922481552c310cbda9e67941af2"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/despues/tools/build.py",
+    "bytes": 5449,
+    "sha256": "2b51ba95b4122cec7bb8ad3606e92f829ad565dcdddd71ccac1c082c7dbd2f68"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/frontend_base.log",
+    "bytes": 2509,
+    "sha256": "91dabbe12b01188e51b17fde3c2f9dee73b469203a8bf01d64c70d59f3e71d33"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/frontend_dev3.log",
+    "bytes": 6081,
+    "sha256": "61ba4ffcc331a95ea41f36ed18d2072264b5863fb2c006445f31b753c8ae2d1c"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/frontend_regresion_antes.log",
+    "bytes": 6083,
+    "sha256": "d4978f2e995c0fde3c6b875fa0a39b2b262af2491eb4f93a2b35bafefd4c6b8f"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/start_stop_2026-10-13/trazas_sinteticas.csv",
+    "bytes": 3063,
+    "sha256": "6cae90bc8f15595ef87c0db4180190f09d27d531e0f49463c9b5531830814325"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp",
+    "bytes": 9998,
+    "sha256": "e86c31d2f52adb852e7101afb37836de4be50503f3fcc7402626f0dfdebb786c"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h",
+    "bytes": 3799,
+    "sha256": "fb45e6d3816d186730d0b312b08b394ebb12564ba176ffe751242651199c5767"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/esp32_trasero/tests/control_test.exe",
+    "bytes": 165376,
+    "sha256": "5f92c7d9bc0c318ea46d13ff6fdc29e855e3ba94e33cd68ac6991bef0d3e9301"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.exe",
+    "bytes": 209920,
+    "sha256": "369905c49c2aafb83cde055a769a83c1b2955762a69b8b8d7614a1b172e6249f"
+  },
+  {
+    "path": "07_DESARROLLO/respaldos/stm32/v1.3-dev3/stm32_frontal-v1.3-dev3.elf",
+    "bytes": 10097148,
+    "sha256": "a61913643aa0d977c20687f8803cbb64986f8b350b04c64f17140112ac12a3ee"
+  },
+  {
+    "path": "07_DESARROLLO/respaldos/stm32/v1.3-dev3/stm32_frontal-v1.3-dev3.hex",
+    "bytes": 18566177,
+    "sha256": "6455904ae01f27fca2df7e74fcae57a1a8428576b7b9382a4f1a1297e9522291"
+  }
+]

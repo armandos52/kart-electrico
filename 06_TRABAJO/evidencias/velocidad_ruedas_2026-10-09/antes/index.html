@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kart · Panel de laboratorio</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/style.css"></head>
+<body>
+<div class="app">
+<header class="barra">
+  <div class="marca"><strong>Kart eléctrico</strong><span>Panel de laboratorio · solo lectura</span></div>
+  <div class="conexion" aria-label="Conexión al microcontrolador">
+    <select id="port" aria-label="Fuente de datos"><option value="">Buscando puertos…</option></select>
+    <button id="refresh" type="button" title="Actualizar puertos" aria-label="Actualizar puertos">Actualizar</button>
+    <label class="ready"><input id="bench" type="checkbox"> Banco preparado · tracción inhabilitada</label>
+    <button id="connect" type="button" class="primary" disabled>Leer por cable</button>
+    <button id="disconnect" type="button" disabled>Desconectar</button>
+  </div>
+  <div class="acciones">
+    <button id="buscar" type="button" title="Buscar señal (Ctrl+K)">Buscar señal <kbd>Ctrl K</kbd></button>
+    <button id="abrir-calibracion" type="button">Calibrar dirección</button>
+    <button id="demo" type="button" aria-pressed="false">Demostración</button>
+    <span id="mode-badge">Sin conexión</span>
+  </div>
+</header>
+<div class="estado" role="status">
+  <div id="diagnostic" class="diagnostic">Conecta una fuente para ver el diagnóstico.</div>
+  <div id="indicadores" class="indicadores"></div>
+  <div id="connection-info" class="nota">No hay ningún puerto abierto. Esta versión no envía comandos al micro.</div>
+</div>
+<main class="tablero">
+  <aside class="tira" aria-label="Canales fijados">
+    <div id="espacios" class="espacios" role="tablist" aria-label="Espacios de trabajo"></div>
+    <div id="canales" class="canales"></div>
+    <div class="tira-pie"><span class="leyenda"><i class="l-medida"></i>medido <i class="l-orden"></i>orden <i class="l-estimacion"></i>estimación</span><button id="restablecer" type="button" class="enlace">Restablecer</button></div>
+  </aside>
+  <section class="vista" aria-label="Vista del kart">
+    <div class="vista-cab"><div><strong>El kart · modelo visual</strong><span class="modelo-sub">3D y esquema basados en tus 4 fotografías</span></div><div class="vista-acciones"><button id="ver-3d" type="button" aria-pressed="true">3D</button><button id="ver-esquema" type="button" aria-pressed="false">Esquema</button><button id="foto-superior" type="button" hidden>Foto superior</button><button id="ver-fotos" type="button">Fotos</button><button id="ampliar-modelo" type="button" aria-pressed="false">Ampliar</button><button id="motion" type="button" aria-pressed="false">Pausar animación</button></div></div>
+    <div id="demo-banner" hidden>Demostración · datos sintéticos · sin conexión con el hardware</div>
+    <div class="lamina">
+    <div id="modelo-3d" aria-label="Modelo tridimensional del kart">
+      <div id="escena-3d"></div>
+      <div class="modelo-titulo"><span class="modelo-eyebrow">SMART ELECTRIC KART</span><strong>Tu kart, en perspectiva.</strong><span>Forma y colores observados · escala aproximada</span></div>
+      <div class="modelo-rpm"><span>RPM TRASERAS</span><strong id="modelo-rpm">I — · D —</strong></div>
+      <div class="camaras" role="group" aria-label="Cámara del modelo"><button data-camera="perspectiva" aria-pressed="true">Perspectiva</button><button data-camera="lateral" aria-pressed="false">Lateral</button><button data-camera="frontal" aria-pressed="false">Frente</button><button data-camera="trasera" aria-pressed="false">Detrás</button><button data-camera="superior" aria-pressed="false">Arriba</button></div>
+      <div class="modelo-pie"><span id="modelo-status" role="status">Preparando vista 3D…</span><span id="modelo-steering">Dirección sin datos</span><small>Rodadura ralentizada · sentido según marcha ordenada</small><small>Arrastra para girar · rueda para acercar · pulsa una rueda o la pantalla</small></div>
+    </div>
+    <svg id="kart" role="group" aria-labelledby="kart-title kart-desc"></svg>
+    </div>
+    <div id="demo-controls" hidden><label>Pedal de ejemplo <input id="demo-pedal" type="range" min="0" max="100" value="32"><output id="demo-pedal-value">32 %</output></label><label>Dirección de ejemplo <input id="demo-steer" type="range" min="-20" max="20" value="8"><output id="demo-steer-value">8°</output></label></div>
+    <div class="inspector" aria-label="Datos de la pieza seleccionada">
+      <label class="selector-pieza" for="modelo-pieza">Inspeccionar componente<select id="modelo-pieza"></select></label>
+      <div class="insp-cab"><h2 id="selection-title">ESP32</h2><span id="selection-tag">Unidad trasera</span></div>
+      <p id="selection-note">Diferencial, PWM, relés y retorno de sensores.</p>
+      <div id="signals" class="signal-list"></div>
+    </div>
+  </section>
+  <section id="graficas" class="graficas" aria-label="Gráficas con cursor de tiempo común"></section>
+</main>
+<footer class="cajon">
+  <div class="cajon-barra">
+    <button id="ver-senales" type="button" aria-expanded="false" aria-controls="panel-senales">Todas las señales</button>
+    <button id="ver-consola" type="button" aria-expanded="false" aria-controls="panel-consola">Consola</button>
+    <span id="session-info">Sin sesión registrada.</span>
+    <a id="download" href="/api/download" download="sesion-kart.jsonl" hidden>Descargar sesión</a>
+    <span class="pie">Solo lectura · sin órdenes a los motores · USB o Wi-Fi directo al ESP32</span>
+  </div>
+  <div id="panel-senales" class="cajon-panel" hidden>
+    <div class="cajon-cab"><strong>Todas las señales</strong><input id="signal-search" type="search" placeholder="Filtrar: rpm, can, relé…" aria-label="Filtrar señales"><label><input id="show-missing" type="checkbox" checked> Mostrar sin datos</label><span class="nota">Doble clic en una fila para verla en la gráfica de selección.</span></div>
+    <div class="table-scroll"><table><thead><tr><th>Señal</th><th>Valor</th><th>Origen</th><th>Estado</th><th></th></tr></thead><tbody id="all-signal-rows"></tbody></table></div>
+  </div>
+  <div id="panel-consola" class="cajon-panel" hidden><div id="log" role="log" aria-live="off">Sin mensajes.</div></div>
+</footer>
+</div>
+<dialog id="paleta" aria-label="Buscar señal">
+  <input id="paleta-buscar" type="search" placeholder="Buscar señal: rpm, can, relé, batería…" aria-label="Buscar señal" autocomplete="off">
+  <ul id="paleta-lista" role="listbox"></ul>
+  <p id="paleta-vacio" hidden>No hay ninguna señal con ese nombre.</p>
+  <p class="paleta-pie">Intro: fijar o quitar · Mayús+Intro: ver en la gráfica · Esc: cerrar</p>
+</dialog>
+<dialog id="fotos-kart" aria-labelledby="fotos-title">
+  <div class="fotos-cab"><div><h2 id="fotos-title">Las referencias del modelo</h2><p>Cuatro vistas aportadas el 08-10-2026 · originales conservados</p></div><button id="cerrar-fotos" type="button">Cerrar</button></div>
+  <div class="fotos-grid"><figure><img src="/referencias/frontal.jpg" alt="Frontal del kart: bastidor rojo, ruedas de tacos y asiento amarillo" loading="lazy"><figcaption>01 / Frontal</figcaption></figure><figure><img src="/referencias/lateral.jpg" alt="Lateral del kart con arco alto, asiento amarillo y plataforma trasera" loading="lazy"><figcaption>02 / Lateral</figcaption></figure><figure><img src="/referencias/trasera.jpg" alt="Parte trasera del kart con ruedas estrechas y caja transparente" loading="lazy"><figcaption>03 / Trasera</figcaption></figure></div>
+  <figure id="referencia-superior" class="foto-superior"><img src="/referencias/superior.jpg" alt="Vista superior oblicua del kart: volante delante, asiento amarillo central, cubierta negra trasera en T y caja lateral a la izquierda" loading="lazy"><figcaption>04 / Superior · referencia del esquema</figcaption></figure>
+  <p class="fotos-nota">El modelo reproduce rasgos visibles. No es un CAD medido: faltan cotas y confirmar los componentes ocultos. Los colores del bastidor y del asiento representan materiales, no alarmas.</p>
+</dialog>
+<script type="module" src="/app.js"></script>
+</body></html>

@@ -1,0 +1,8 @@
+page.waitForSelector: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#calibracion')
+
+    at C:\kart proyecto\07_DESARROLLO\panel_local\qa\check-guided.cjs:83:14 {
+  log: [ "  - waiting for locator('#calibracion')" ],
+  name: 'TimeoutError'
+}

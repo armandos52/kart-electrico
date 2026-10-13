@@ -1,0 +1,185 @@
+diff --git a/07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h b/07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h
+index 1de1406..ae7303e 100644
+--- a/07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h
++++ b/07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h
+@@ -5,7 +5,7 @@
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+-#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev2"
++#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev3"
+ enum { KART_SD_STOPPED=0,KART_SD_RECORDING=1,KART_SD_ERROR=2,KART_SD_OPENING=3 };
+ enum { KART_UI_OK=0,KART_UI_REQUIRE_N=1,KART_UI_REQUIRE_STOP=2,KART_UI_CAN_OLD=3,KART_UI_INPUT_BAD=4 };
+ typedef struct {
+diff --git a/07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c b/07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c
+index ce13995..76a993d 100644
+--- a/07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c
++++ b/07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c
+@@ -18,6 +18,32 @@ extern CAN_HandleTypeDef hcan1;
+ #define BMS_MAX_AGE 2000u
+ // Hasta verificar protocolo del BMS instalado, conservar bytes y ocultar valores no acreditados.
+ #define BMS_FORMAT_CONFIRMED 0
++// Pulsador momentaneo activo alto, confirmado por Armando (13-10-2026).
++// Valores de desarrollo: contrastar rebotes y latencias reales en banco.
++#define START_PRESS_MS 40u
++#define START_RELEASE_MS 40u
++
++static struct {
++    uint32_t changed_at;
++    uint8_t seen,raw,armed,requested;
++} start_button;
++
++static uint8_t read_start_button(uint8_t pressed,uint32_t now) {
++    if(!start_button.seen || pressed!=start_button.raw) {
++        start_button.seen=1;start_button.raw=pressed;start_button.changed_at=now;
++    }
++    if(!pressed) {
++        // Soltar solo rearma la siguiente pulsacion; no es una orden STOP.
++        // Tambien exige liberacion al encender/reinicializar con boton sostenido.
++        if(now-start_button.changed_at>=START_RELEASE_MS)start_button.armed=1;
++    } else if(start_button.armed &&
++              (start_button.requested || now-start_button.changed_at>=START_PRESS_MS)) {
++        // START exige estabilidad; STOP se acepta en la primera muestra pulsada.
++        // Consumir la pulsacion impide que mantener/rebotar repita el cambio.
++        start_button.requested=!start_button.requested;start_button.armed=0;
++    }
++    return start_button.requested;
++}
+ 
+ static KartUiSnapshot ui;
+ typedef struct {
+@@ -116,6 +142,7 @@ static void transmit(uint32_t id,uint8_t bytes[8]) {
+     if(HAL_CAN_GetTxMailboxesFreeLevel(&hcan1)==0 || HAL_CAN_AddTxMessage(&hcan1,&header,bytes,&mailbox)!=HAL_OK)tx_errors++;
+ }
+ void Kart_Init(void) {
++    memset(&start_button,0,sizeof(start_button));
+     memset(&ui,0,sizeof(ui));ui.mode_applied=255;ui.can_age=ui.status_age=UINT32_MAX;
+     CAN_FilterTypeDef filter={0};filter.FilterBank=0;filter.FilterMode=CAN_FILTERMODE_IDMASK;
+     filter.FilterScale=CAN_FILTERSCALE_32BIT;filter.FilterFIFOAssignment=CAN_RX_FIFO0;filter.FilterActivation=ENABLE;filter.SlaveStartFilterBank=14;
+@@ -140,7 +167,8 @@ void Kart_ControlTick(void) {
+     next.input_flags=read_adc(ADC_CHANNEL_0,&next.accel_adc,ACCEL_MIN,ACCEL_MAX,&next.accel_raw)?KART_INPUT_ACCEL_OK:0;
+     if(read_adc(ADC_CHANNEL_8,&next.steer_adc,STEER_MIN,STEER_MAX,&next.steer_raw))next.input_flags|=KART_INPUT_STEER_OK;
+     next.brake=HAL_GPIO_ReadPin(BRAKE_GPIO_Port,BRAKE_Pin)==GPIO_PIN_RESET;
+-    next.start=HAL_GPIO_ReadPin(START_STOP_GPIO_Port,START_STOP_Pin)==GPIO_PIN_SET;
++    const uint8_t start_pressed=HAL_GPIO_ReadPin(START_STOP_GPIO_Port,START_STOP_Pin)==GPIO_PIN_SET;
++    next.start=read_start_button(start_pressed,HAL_GetTick());
+     const uint8_t drive=HAL_GPIO_ReadPin(MODE_D_GPIO_Port,MODE_D_Pin)==GPIO_PIN_SET;
+     const uint8_t reverse=HAL_GPIO_ReadPin(MODE_R_GPIO_Port,MODE_R_Pin)==GPIO_PIN_SET;
+     if(!(drive&&reverse))next.input_flags|=KART_INPUT_BUTTONS_OK;
+diff --git a/07_DESARROLLO/firmware/stm32_frontal/tests/compilar.cmd b/07_DESARROLLO/firmware/stm32_frontal/tests/compilar.cmd
+index 8154ea7..ba6ecf8 100644
+--- a/07_DESARROLLO/firmware/stm32_frontal/tests/compilar.cmd
++++ b/07_DESARROLLO/firmware/stm32_frontal/tests/compilar.cmd
+@@ -1,6 +1,6 @@
+ @echo off
+ call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64
+ if errorlevel 1 exit /b 1
+-cl /nologo /std:c++17 /EHsc /W4 /Od /utf-8 /Istubs /I..\Core\Inc frontend_test.cpp /Fe:frontend_test.exe
++cl /nologo /std:c++17 /EHsc /W4 /Od /utf-8 /Istubs /I..\Core\Inc /I..\..\esp32_trasero\lib\kart_control frontend_test.cpp ..\..\esp32_trasero\lib\kart_control\kart_control.cpp /Fe:frontend_test.exe
+ if errorlevel 1 exit /b 1
+ frontend_test.exe
+diff --git a/07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp b/07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp
+index f21c652..68cc6e6 100644
+--- a/07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp
++++ b/07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp
+@@ -1,5 +1,6 @@
+ #include <cstdio>
+ #include <string>
++#include "kart_control.h"
+ #include "stubs/main.h"
+ #include "stubs/fatfs.h"
+ ADC_HandleTypeDef hadc3;CAN_HandleTypeDef hcan1={CAN1};FakeDwt fakeDwt={};FakeDebug fakeDebug={};
+@@ -23,7 +24,77 @@ void reset(){
+ }
+ void rx(unsigned id,const uint8_t* b,unsigned len=8){rx_header={id,0,0,len};memcpy(rx_bytes,b,8);rx_pending=1;HAL_CAN_RxFifo0MsgPendingCallback(&hcan1);}
+ void feedback(){const uint8_t b[8]={0,0,0,0,0,0,0,0};rx(0x123,b);const uint8_t s[8]={1,10,0,255,4|16|8,3,0,0};rx(0x124,s);}
++void button(int pressed,uint32_t dt=5){tick+=dt;pins[1]=pressed;feedback();Kart_ControlTick();}
++bool start_sent(){return (sent_command[7]&4)!=0;}
++void arm_button(){button(0,0);button(0,40);}
++void press_start(){button(1,0);button(1,40);}
++void test_start_stop(){
++    reset();button(1,0);button(1,1000);
++    check(!start_sent(),"Pulsador sostenido al encender no solicita START");
++    button(0,0);button(0,39);button(1,0);button(1,40);
++    check(!start_sent(),"Liberacion inicial menor de 40 ms no habilita START");
++    arm_button();button(1,0);button(1,39);
++    check(!start_sent(),"START espera 40 ms continuos, no solo un flanco");
++    button(1,1);check(start_sent() && ui.start,"START estable llega a CAN y snapshot");
++    button(1,5000);check(start_sent(),"Mantener pulsado no repite ni apaga");
++    button(0,0);check(start_sent(),"Soltar pulsador mantiene START enclavado por software");
++    button(1,5);button(0,5);button(1,10);button(0,5);button(0,39);
++    check(start_sent(),"Rebotes al soltar no generan una segunda pulsacion");
++    button(0,1);button(1,0);
++    check(!start_sent() && !ui.start,"Segunda pulsacion pide STOP en primera lectura, sin 40 ms");
++    button(1,5000);check(!start_sent(),"Mantener STOP no vuelve a arrancar");
++    button(0,0);button(1,20);button(0,5);button(1,20);button(1,100);
++    check(!start_sent(),"Rebotes despues de STOP no rearman START");
++    arm_button();press_start();check(start_sent(),"Soltar estable y pulsar otra vez permite nuevo START");
++    arm_button();adc_ok=0;button(1,0);
++    check(!start_sent() && ui.input_flags!=7,"STOP llega aun con ADC invalido");
++
++    reset();arm_button();bool pulse_rejected=true;
++    for(unsigned i=0;i<100;i++){button(1,0);button(1,5);pulse_rejected&=!start_sent();button(0,5);pulse_rejected&=!start_sent();}
++    check(pulse_rejected,"Cien pulsos de 5 ms no acumulan tiempo para arrancar");
++    press_start();check(start_sent(),"Despues del ruido un START estable funciona");
++    Kart_Init();button(1,1000);check(!start_sent(),"Reinicializar borra memoria y exige soltar el pulsador");
++
++    reset();tick=0xfffffff0u;arm_button();press_start();
++    check(start_sent(),"Liberacion funciona cruzando desbordamiento del tick");
++    reset();arm_button();tick=0xfffffff0u;press_start();
++    check(start_sent(),"Antirrebote START funciona cruzando desbordamiento del tick");
++    arm_button();selected_mode=2;button(1,0);
++    check(!start_sent() && (sent_command[7]&3)==2,"STOP conserva bits de modo CAN");
++
++    // Integracion de funciones reales: GPIO simulado -> trama emitida -> nucleo ESP32 dev3.
++    // No simula transporte electrico, perifericos ni dinamica del kart.
++    reset();kart::Controller backend;kart::Sensors sensors;sensors.speed_valid=true;
++    sensors.yaw_valid=sensors.pulse_left_recent=sensors.pulse_right_recent=true;
++    kart::Output output;
++    auto sample=[&](int pressed,uint32_t dt){
++        button(pressed,dt);backend.receive(sent_command,8,tick);output=backend.step(sensors,tick);
++        printf("TRACE tick_ms=%lu raw=%d start=%d relay=%u inhibit=%s\n",
++            (unsigned long)tick,pressed,start_sent(),unsigned(output.relay),kart::inhibitName(output.inhibit));
++    };
++    sample(0,0);sample(0,600);sample(1,0);sample(1,40);
++    check(output.relay==kart::Relay::Precharge,"Integracion: pulsacion estable inicia precarga");
++    sample(0,5);check(output.relay==kart::Relay::Precharge,"Integracion: soltar no cancela precarga");
++    sample(1,5);sample(0,5);sample(0,40);
++    check(output.relay==kart::Relay::Precharge,"Integracion: rebotes de liberacion no ciclan rele");
++    sample(0,2000);check(output.relay==kart::Relay::Overlap,"Integracion: precarga completa llega a solapamiento");
++    sample(0,1000);check(output.relay==kart::Relay::Ready,"Integracion: rele queda listo con pulsador suelto");
++    sample(1,5);check(output.relay==kart::Relay::Off && output.effort_left==0 && output.effort_right==0,
++        "Integracion: siguiente pulsacion corta reles y consignas");
++    sample(0,5);sample(1,5);sample(1,200);
++    check(output.relay==kart::Relay::Off,"Integracion: rebote tras STOP no reinicia precarga");
++    sample(0,0);sample(0,40);sample(1,0);sample(1,40);
++    check(output.relay==kart::Relay::Precharge,"Integracion: nuevo ciclo deliberado permite precarga");
++    sample(0,0);sample(0,40);sample(1,5);
++    check(output.relay==kart::Relay::Off,"Integracion: segunda pulsacion para tambien durante precarga");
++    sample(0,0);sample(0,40);sample(1,0);sample(1,40);
++    sensors.can_ok=false;sample(1,5);sensors.can_ok=true;sample(0,5);sample(0,40);
++    check(output.relay==kart::Relay::Off,"Integracion: recuperacion CAN no reutiliza START para arrancar");
++    sample(1,0);sample(0,5);sample(0,40);sample(1,0);sample(1,40);
++    check(output.relay==kart::Relay::Precharge,"Integracion: tras fallo se exige OFF y START deliberados");
++}
+ int main(){
++    test_start_stop();
+     reset();Kart_ControlTick();check(ui.gear==0 && sent_command[4]==1 && sent_command[0]==0,"Sin feedback transmite N freno pedal cero");
+     feedback();Kart_ControlTick();check(ui.input_flags==7 && ui.feedback_fresh && ui.status_fresh,"ADC validos y CAN fresco");
+     check(sent_health[0]==1 && sent_health[1]==7 && kart_u16be(sent_health+2)==124,"Ext 0x101 conserva ADC fisico");
+diff --git a/07_DESARROLLO/firmware/stm32_frontal/tools/build.py b/07_DESARROLLO/firmware/stm32_frontal/tools/build.py
+index 1014d43..587d636 100644
+--- a/07_DESARROLLO/firmware/stm32_frontal/tools/build.py
++++ b/07_DESARROLLO/firmware/stm32_frontal/tools/build.py
+@@ -58,7 +58,10 @@ def main():
+             objects.append(obj)
+             if output:print(output,flush=True)
+     response=OUT/'objects.rsp';response.write_text('\n'.join('"'+p.as_posix()+'"' for p in objects))
+-    elf=OUT/'stm32_frontal-v1.3-dev2.elf'
++    version_header=(ROOT/'Core/Inc/kart_frontend.h').read_text(encoding='utf-8')
++    version=re.search(r'^#define KART_FRONTEND_VERSION "([A-Za-z0-9_.-]+)"$',version_header,re.M)
++    if not version:raise RuntimeError('Falta KART_FRONTEND_VERSION valida')
++    elf=OUT/(version.group(1)+'.elf')
+     link=[gxx,'@'+str(response),'-o',elf,'-mcpu=cortex-m7','-mthumb','-mfpu=fpv5-sp-d16','-mfloat-abi=hard','-T',ROOT/'STM32F746XX_FLASH.ld','--specs=nosys.specs','--specs=nano.specs','-Wl,--gc-sections','-Wl,-Map='+str(OUT/'firmware.map'),'-static','-L'+str(ROOT/'Middlewares/ST/touchgfx/lib/core/cortex_m7/gcc'),'-l:libtouchgfx-float-abi-hard.a','-Wl,--start-group','-lc','-lm','-lstdc++','-lsupc++','-Wl,--end-group']
+     link.append('-Wl,--fatal-warnings')
+     subprocess.run(link,check=True)

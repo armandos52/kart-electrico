@@ -1,6 +1,6 @@
 ---
 estado: vigente
-actualizado: 2026-09-30
+actualizado: 2026-10-07
 resumen: Propuestas técnicas que aún no son decisiones.
 ---
 
@@ -8,10 +8,25 @@ resumen: Propuestas técnicas que aún no son decisiones.
 
 ## Propias
 
+- **Mejora de pantalla, solicitada por Armando (07-10-2026).**
+  - Propósito: comprender mejor el estado del kart y facilitar su uso y diagnóstico.
+  - Requisitos aún por elegir: lectura al sol/tamaño, menús, avisos y datos de batería/autonomía. No se ha elegido otro hardware.
+  - Propuesta inicial: vista de conducción legible y vista de diagnóstico estando parado; indicar datos CAN antiguos o ausentes, estado real de SD, versión y fallos. Tensión/autonomía solo cuando haya datos validados.
+  - Base: DOC-0042 PDF 31 y 33, texto consultado el 07-10; pantalla táctil 480 × 272 con TouchGFX en STM32. Capturas y tabla pendientes de revisión visual.
+  - Comprobar: requisitos del usuario, visibilidad real, antigüedad de datos y reanudación de SD. Ver la [guía](GUIA_DE_ESTUDIO_DEL_KART.md), sección 9.
+
+- **PCB con apagado y arranque controlados, ampliación de Armando (07-10-2026).**
+  - Declaración: queda energía al abrir el contactor, la atribuye a los variadores y afecta al programa. Ruta eléctrica y causa no confirmadas.
+  - Propósito: evitar alimentación parcial y estados de salida indeterminados, conservando habilitación deliberada y protecciones.
+  - Estudiar: alimentación de lógica, interfaces con alimentación apagada, supervisor de reset, estados de GPIO, protección de bobinas, puntos de diagnóstico y precarga/descarga de potencia si el esquema y las medidas lo justifican.
+  - Antes de elegir componentes: mapa real de fuentes y masas, tiempos/tensiones, modelos y firmware grabado. La interfaz hacia los variadores ya se describe con optoacopladores; verificarla antes de atribuir realimentación a sus señales.
+  - Diferenciar economización de bobina, precarga y descarga del bus. Añadir condensadores de reserva también puede prolongar el apagado.
+  - Evidencias, hipótesis y ensayo pendiente en [PROB-0003](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0003_energia_residual_al_abrir_contactor.md); relacionada con la idea de PCB del 30-09, sin diseño aprobado.
+
 - **Nueva PCB de la unidad trasera (30-09-2026).**
   - Propósito: acabar con el bloqueo del ESP32 al encender y con los cortes del contactor.
   - Beneficio: montaje antivibración, sin pines de arranque ni señales de 5 V hacia el ESP32, CAN integrado (TWAI) y alimentación con reset limpio.
-  - Antes, comprobar la causa con las pruebas de [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender|PROB-0002]] y revisar la PCB actual.
+  - Antes, comprobar la causa con las pruebas de [PROB-0002](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender.md) y revisar la PCB actual.
 
 - **Sensores de dinámica como en los coches (30-09-2026).**
   - **Propósito:** que el modo ESC del diferencial funcione con datos fiables. Los coches con control de estabilidad combinan tres sensores que se vigilan entre sí:
@@ -46,7 +61,7 @@ resumen: Propuestas técnicas que aún no son decisiones.
 
 **Diferencias con el kart:**
 - Su coche es de alta tensión y debe pasar una inspección técnica con reglamento.
-- El kart funciona a 48 V (15 celdas LiFePO4) y no tiene esa obligación, pero maneja corrientes de hasta 150 A por controlador.
+- La referencia histórica 2025/26 describe operación con 15 celdas LiFePO4 y parámetros de corriente en la auditoría. Armando confirma 16 celdas actuales el 01-10 y 07-10; configuración y límites reales deben comprobarse. No aplicar al kart un reglamento de Formula Student sin definir el contexto.
 
 Se adoptan los principios, no la complejidad. Las ideas van ordenadas por prioridad para el kart.
 
@@ -58,7 +73,7 @@ Se adoptan los principios, no la complejidad. Las ideas van ordenadas por priori
      - Un watchdog externo cortaría las señales de par hacia los Kelly si el ESP32 deja de dar señales de vida.
      - Un contactor con economizador de fábrica, o un driver de bobina, sustituiría a los dos relés con resistencias.
    - *Ataca:*
-     - [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender|PROB-0002]];
+     - [PROB-0002](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender.md);
      - el contactor que se suelta (DOC-0042 p. 90);
      - el riesgo de que el PWM quede congelado si el ESP32 se cuelga.
    - *Comprobar:* la palabra «emergência» no aparece en el texto de DOC-0042, así que hay que ver en el kart si existe una seta de emergencia.
@@ -80,14 +95,14 @@ Se adoptan los principios, no la complejidad. Las ideas van ordenadas por priori
 5. **Registro de datos y GPS.** Prioridad alta.
    - *Ellos:* una placa de registro para que «cada sesión dé datos en lugar de opiniones», y un GPS para posición y velocidad.
    - *En el kart:*
-     - Registrar la versión de firmware, la tensión, la corriente y el SOC. El mensaje `0x356` del BMS quizá ya trae tensión y corriente; ver el [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|inventario]], mejora 12.
+     - Registrar la versión de firmware, la tensión, la corriente y el SOC. El mensaje `0x356` del BMS quizá ya trae tensión y corriente; ver el [inventario](../04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO.md), mejora 12.
      - Añadir un GPS para medir la distancia sin depender de los Hall, cuyos 89/68 pulsos son dudosos.
    - *Ataca:* el ensayo de autonomía (Wh/km) de la propuesta.
 6. **Fallos enclavados e interruptores de prueba.** Prioridad media.
    - *Ellos:* un fallo no se borra solo, y tienen un interruptor para demostrar cada ruta de fallo.
    - *En el kart:*
      - Los fallos de CAN, sensores o BMS quedarían enclavados hasta parar y rearmar en N. Según el código, hoy el ESP32 vuelve a mover los motores en cuanto regresa la señal CAN (comprobar).
-     - Preparar una forma de provocar cada fallo en un ensayo y documentarlo con la [[09_PLANTILLAS/ENSAYO|plantilla de ensayo]].
+     - Preparar una forma de provocar cada fallo en un ensayo y documentarlo con la [plantilla de ensayo](../09_PLANTILLAS/ENSAYO.md).
 7. **Corte por freno y corriente (BSPD simplificado).** Prioridad media.
    - *Ellos:* un corte por hardware si hay freno fuerte y corriente alta a la vez durante un tiempo.
    - *En el kart:* usar los sensores de corriente HAIS de 2023/24; su PCB se fabricó pero nunca se instaló (DOC-0027 p. 52-53). Ese sensor serviría también para medir la energía en el ensayo de autonomía.
@@ -105,6 +120,6 @@ Se adoptan los principios, no la complejidad. Las ideas van ordenadas por priori
 11. **Estimación avanzada: filtro de Kalman, redes neuronales, optimización bayesiana.** Prioridad baja por ahora.
     - Un filtro de Kalman sencillo para estimar el SOC o la velocidad del kart podría ser un buen tema, pero no antes de tener sensores y datos fiables. Encaja con la hipótesis 3 de la auditoría (el SOC cae a 0 %).
     - Las redes neuronales y la optimización bayesiana quedan fuera de alcance hasta febrero.
-12. **Documentar para la siguiente generación.** Ya adoptado en [[05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_ensayos|DEC-0001]].
+12. **Documentar para la siguiente generación.** Ya adoptado en [DEC-0001](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0001_versiones_de_firmware_y_ensayos.md).
 
 Anotar cada idea con su propósito, posible beneficio y qué habría que comprobar. Una idea no es una decisión aprobada ni una especificación vigente.

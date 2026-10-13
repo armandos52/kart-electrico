@@ -29,9 +29,9 @@ Los rangos siguientes se refieren a estos archivos y a sus hashes conservados, n
 
 - **E:** [ESP32-final.ino de v1.2](evidencias/AUD_V12_2026-10-08/fuentes_v12/src/ESP32-final.ino), SHA-256 `b39f5164e06957cb91bb564b7e217c98bd6446bb718e4d9a42af6f8022370f5c`.
 - **T:** [telemetria.cpp](evidencias/AUD_V12_2026-10-08/fuentes_v12/src/telemetria.cpp).
-- **M:** [main.c del STM32 2025/26](../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/STM32-final/Core/Src/main.c).
-- **S:** [Screen1View.cpp](../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/STM32-final/TouchGFX/gui/src/screen1_screen/Screen1View.cpp).
-- **G:** [Screen1ViewBase.cpp generado](../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/STM32-final/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp).
+- **M:** [main.c del STM32 2025/26 · solo local](../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/STM32-final/Core/Src/main.c).
+- **S:** [Screen1View.cpp · solo local](../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/STM32-final/TouchGFX/gui/src/screen1_screen/Screen1View.cpp).
+- **G:** [Screen1ViewBase.cpp generado · solo local](../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/STM32-final/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp).
 
 ## Qué está activo y para qué sirve
 

@@ -1,4 +1,8 @@
-# Contrato CAN v1.3-dev2
+# Contrato CAN v1.3 · dev2/dev3
+
+Actualización 13-10: frontal dev3 adapta el pulsador momentáneo a una **petición memorizada**: START tras alto estable 40 ms, liberación estable 40 ms para otra pulsación y STOP al primer alto de esta. Soltar no envía STOP. Bit 2 de 0x100 y todos los formatos permanecen; `start_requested`/CSV `Start` no son lectura del pin. El ESP32 sigue dev3, con STOP prioritario. [ENS-0013](../../../06_TRABAJO/ensayos/ENS-0013_start_stop_momentaneo.md); versiones instaladas por identificar.
+
+Actualización 11-10: ESP32 dev3 conserva el contrato dev2 y publica `fw=esp32_trasero-v1.3-dev3`; frontal permanece dev2. Cada STOP válido recibido queda pendiente hasta ser aplicado aunque otro mando START llegue en el mismo lote. Ese START anterior a aplicar la parada no habilita nuevo arranque: requiere nuevo OFF→START y las condiciones existentes. Durante la aplicación del STOP retenido, `start_requested` puede ser 1 y `drive_inhibit` ser `start_off`; representan orden más reciente y causa aplicada respectivamente. [ENS-0011](../../../06_TRABAJO/ensayos/ENS-0011_stop_en_lote_can.md).
 
 Fuente común: `kart_protocol.h`. CAN estándar 500 kbit/s, datos de 8 bytes; ESP32 MCP2515 con cristal histórico de 8 MHz. Parámetros físicos aún por contrastar. IDs ampliados 0x101/0x124 deben comprobarse libres en el bus real.
 

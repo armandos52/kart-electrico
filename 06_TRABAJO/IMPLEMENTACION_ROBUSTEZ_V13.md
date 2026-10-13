@@ -1,10 +1,14 @@
 ---
 estado: implementación de código completada; pruebas físicas pendientes
-actualizado: 2026-10-09
+actualizado: 2026-10-11
 resumen: Seguimiento de todas las propuestas de la revisión v1.2 y límite solicitado de marcha atrás a 20 km/h.
 ---
 
 # Implementación de robustez v1.3
+
+**Continuación 13-10:** [ENS-0013](ensayos/ENS-0013_start_stop_momentaneo.md), [PROB-0009](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0009_start_pulsador_momentaneo.md) y [DEC-0008](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0008_start_momentaneo_con_memoria.md): STM32 dev3 añade memoria/antirrebote al pulsador momentáneo confirmado por Armando. Corrige STOP al soltar; 83 pruebas frontal/integración, 56 traseras y compilación ARM correctas. ESP32 dev3 intacto. Usuario declara pruebas «B1.3», versiones exactas por identificar; sin grabación ni ensayo físico en esta sesión. Resúmenes de START por nivel de dev2 quedan superados para la copia de trabajo, pendientes de contraste con el firmware instalado.
+
+**Continuación 11-10:** Armando confirma v1.2 física sin cambios, sin acceso frontal, y prioriza control DIF/BLQ/ESC. [Retoma](RETOMA_PROGRAMA_2026-10-11.md), [ENS-0011](ensayos/ENS-0011_stop_en_lote_can.md): ESP32 dev3 corrige STOP perdido entre varias recepciones CAN antes de `step`; 56 comprobaciones satisfactorias y compilación correcta. STM32 sigue en dev2. A01 se amplía con esta regresión: el cierre previo era de alcance implementado, no garantía de ausencia de defectos. Sin grabación ni validación física.
 
 Armando autoriza implementar por etapas todas las propuestas de [la revisión](REVISION_CODIGO_V12_2026-10-08.md), trabajando también desde el último fuente STM32 disponible aunque no haya acceso a su placa/pantalla. Solicita limitar R a **20 km/h** y declara que actualmente alcanza a veces 50 km/h (declaración, no medición recibida). Prueba real/comparación con el frontal instalado se harán después. Pide no realizar ahora una pre-simulación: se omite simulación dinámica; compilación y pruebas unitarias dirigidas de código son verificación de implementación, no un modelo físico del kart.
 

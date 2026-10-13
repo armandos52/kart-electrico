@@ -35,6 +35,14 @@ Se preparó la [guía personal](GUIA_DE_ESTUDIO_DEL_KART.md). Cobertura exacta e
 
 ## Regla de economía de contexto
 
+Batería (13-10): índice, fichas y notas; buscador DOC-0030 PDF 1/DOC-0042 PDF 69. Revisión visual completa de ambas páginas (tabla, §3.4/figura 17). [Tutorial y cobertura](../04_CONOCIMIENTO/bateria_y_bms/TUTORIAL_CELDAS_Y_CARGA_16S.md). Discrepancia 60/70 Ah; ficha de una página revisada pero correspondencia física pendiente. No se cierran L1/L2 ni se revisa el resto/Loop.
+
+START físico momentáneo (13-10): índice/ficha DOC-0042, inventario/notas de software, ENS-0011 y código de trabajo STM32/ESP32; [ENS-0013](ensayos/ENS-0013_start_stop_momentaneo.md). Defecto de interpretación de nivel reproducido y corregido en copia frontal, pruebas sintéticas y compilación. Sin nuevas páginas originales/lectura visual ni cierre L1/L4. «B1.3» y síntoma son declaraciones del usuario; no identificación ni medición física de esta sesión.
+
+Calibración por pasos (11-10): consulta focalizada de índice/ficha DOC-0042, notas PROB-0007/ENS-0005, panel de trabajo y seis registros Wi-Fi del 09-10. [ENS-0012](ensayos/ENS-0012_calibracion_por_pasos.md). Sin nuevos originales ni ampliación de lectura integral L1/L4. Lecturas históricas analizadas, ensayos nuevos solo sintéticos; sin conexión física.
+
+Retoma de control (11-10): [análisis y cobertura](RETOMA_PROGRAMA_2026-10-11.md), [ENS-0011](ensayos/ENS-0011_stop_en_lote_can.md). Revisión focalizada de notas/código de trabajo y corrección STOP en lote CAN; sin nuevas páginas de originales ni mediciones físicas. L1/L4 no se cierran; ESP32 físico v1.2 declarado, frontal instalado aún sin identificar.
+
 Revisión v1.2/modos (08-10): [cobertura exacta y propuesta](REVISION_CODIGO_V12_2026-10-08.md), [PROB-0008](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0008_robustez_control_modos_y_pantalla.md). ESP32 de trabajo y telemetría completos, funciones propias focalizadas STM32, vista frontal, Model/Presenter y enlace del botón generado; 19 casos de software con periféricos simulados. DOC-0042 texto PDF 32,57,96 recuperado con buscador; sin nueva verificación visual de figura/ecuaciones, sin identificación del frontal instalado ni ensayo físico. L1/L4 no se cierran. Esta revisión actualiza la vigencia de notas de código del 30-09.
 
 Corrección de lados/rodadura (08-10): consulta focalizada de código visual, notas e índice/ficha DOC-0044; referencias fotográficas ya revisadas. [ENS-0008](ensayos/ENS-0008_lados_y_sentido_ruedas_visual.md). Sin nuevos originales ni cobertura adicional de L1/L4; pruebas de software, no medidas físicas.
@@ -73,3 +81,7 @@ La extracción automática no basta. Deben estar leídas sus secciones sustantiv
 ## Cobertura focalizada de software · 08–09-10-2026
 
 ENS-0009 continúa A01–A12 desde la auditoría v1.2, leyendo y sustituyendo control/adaptador ESP32, main/IRQ/ADC/CAN/SD/Model/Presenter/View STM32; revisión de configuración FreeRTOS, API LCD/Widget, HAL IWDG v1.3.3 y makefiles/startup necesarios para compilar. Copia de 1673 archivos verificada; eso no significa lectura integral de dependencias. Se compilan proyectos y se prueban funciones concretas con entradas controladas, sin modelo dinámico, hardware ni lectura completa de los 42 documentos. No se amplía la cobertura de PDF/formatos visuales/Loop. BMS real, CubeMX y binario STM32 siguen pendientes.
+
+## Preparación de publicación · 13-10-2026
+
+Consulta de estado, mapa, catálogo, fichas DOC-0042/0043/0044, notas y ensayos existentes. Revisión visual de cuatro fotos ya catalogadas para seleccionar tres vistas públicas. Navegación, código de arranque/presentación y QA focalizados; sin nuevas páginas originales, lectura integral ni cierre de lote. [PUB-0001](PUBLICACION_2026-10-13.md).

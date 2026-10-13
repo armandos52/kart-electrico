@@ -21,7 +21,7 @@ Entre lecturas cada conexión usa `--before default-reset`: el chip entra direct
 - Puente USB: Silicon Labs CP2102 (VID 10C4, PID EA60), COM4 en este portátil con el driver CP210x.
 - Chip: **ESP32-D0WD-V3, revisión v3.1**, doble núcleo 240 MHz, cristal 40 MHz, MAC `70:4b:ca:7c:df:68`.
 - Flash: **4 MB** (fabricante 0x46, dispositivo 0x4016), tensión 3,3 V fijada por el pin de arranque (GPIO12 bajo al arrancar).
-- La ficha [[03_CATALOGO/fichas/DOC-0032|DOC-0032]] (Keyestudio KS0413) es compatible pero no queda confirmada como la placa montada.
+- La ficha [DOC-0032](../../../../03_CATALOGO/fichas/DOC-0032.md) (Keyestudio KS0413) es compatible pero no queda confirmada como la placa montada.
 
 ## Seguridad (eFuses, solo lectura)
 
@@ -57,7 +57,7 @@ Esto es coherente con que el fuente entregado sea el grabado, pero **no lo demue
 - No respalda las eFuses (se registró su resumen), la RAM ni el estado de los periféricos.
 - El coredump no se puede descodificar sin el ELF de esa compilación exacta.
   - Un intento posterior: recompilar con core 3.3.10 y comparar.
-  - Puede guardar relación con [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender|PROB-0002]].
+  - Puede guardar relación con [PROB-0002](../../../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender.md).
 
 ## Copias
 

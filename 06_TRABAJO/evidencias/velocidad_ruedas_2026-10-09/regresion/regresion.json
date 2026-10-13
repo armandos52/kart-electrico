@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "scope": "Geometría y animación visual; datos sintéticos, sin hardware",
+  "checks": [
+    {
+      "name": "Pulsador en el lado izquierdo del conductor (X negativo)",
+      "pass": true
+    },
+    {
+      "name": "Ruedas e inspectores I/D coinciden con lados físicos",
+      "pass": true
+    },
+    {
+      "name": "Kelly I/D asociados a su lado",
+      "pass": true
+    },
+    {
+      "name": "Avance: la parte superior de las cuatro ruedas va hacia el frontal (-Z)",
+      "pass": true
+    },
+    {
+      "name": "Rodadura SVG también va hacia el frontal",
+      "pass": true
+    },
+    {
+      "name": "Giro -15: ambas ruedas y esquema coinciden",
+      "pass": true
+    },
+    {
+      "name": "Giro -15: rueda exterior más rápida, recto igual",
+      "pass": true
+    },
+    {
+      "name": "Giro 0: ambas ruedas y esquema coinciden",
+      "pass": true
+    },
+    {
+      "name": "Giro 0: rueda exterior más rápida, recto igual",
+      "pass": true
+    },
+    {
+      "name": "Giro 15: ambas ruedas y esquema coinciden",
+      "pass": true
+    },
+    {
+      "name": "Giro 15: rueda exterior más rápida, recto igual",
+      "pass": true
+    },
+    {
+      "name": "Pedal cero no genera RPM al girar el volante",
+      "pass": true
+    },
+    {
+      "name": "Pausa detiene las cuatro ruedas",
+      "pass": true
+    },
+    {
+      "name": "Movimiento reducido mantiene las ruedas quietas",
+      "pass": true
+    },
+    {
+      "name": "Marcha atrás invierte las dos ruedas traseras",
+      "pass": true
+    },
+    {
+      "name": "Sin RPM vigentes la rodadura se detiene",
+      "pass": true
+    },
+    {
+      "name": "Cámara superior: frontal arriba y lado izquierdo a la izquierda, igual al esquema",
+      "pass": true
+    },
+    {
+      "name": "Sin errores JavaScript",
+      "pass": true
+    },
+    {
+      "name": "Servidor sin conexión al kart",
+      "pass": true
+    }
+  ],
+  "geometry": {
+    "power": -0.59,
+    "wheels": {
+      "front_left": -0.77,
+      "front_right": 0.77,
+      "rear_left": -0.79,
+      "rear_right": 0.79
+    },
+    "controllers": {
+      "motor_left": -0.39,
+      "motor_right": 0.39
+    }
+  },
+  "motion": {
+    "front_left": -0.06719489694910134,
+    "front_right": -0.06719489694910134,
+    "rear_left": -0.06719489694910134,
+    "rear_right": -0.06719489694910133
+  },
+  "steering": [
+    {
+      "angle": -15,
+      "wheelX": [
+        -0.25881904510252074,
+        -0.25881904510252074
+      ],
+      "svgAngle": -14.983080408845957,
+      "rpmL": 108.8,
+      "rpmR": 147.2
+    },
+    {
+      "angle": 0,
+      "wheelX": [
+        0,
+        0
+      ],
+      "svgAngle": -0.016659491846612366,
+      "rpmL": 128,
+      "rpmR": 128
+    },
+    {
+      "angle": 15,
+      "wheelX": [
+        0.25881904510252074,
+        0.25881904510252074
+      ],
+      "svgAngle": 14.97954493753568,
+      "rpmL": 147.2,
+      "rpmR": 108.8
+    }
+  ],
+  "errors": []
+}

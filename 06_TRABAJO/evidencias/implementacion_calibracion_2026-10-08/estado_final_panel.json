@@ -1,0 +1,10 @@
+{
+  "url": "http://127.0.0.1:8766/",
+  "status": "disconnected",
+  "port": null,
+  "valid_frames": 0,
+  "calibration_schema": "steering-cal-v1",
+  "profiles": 0,
+  "active_profile": null,
+  "read_only": true
+}

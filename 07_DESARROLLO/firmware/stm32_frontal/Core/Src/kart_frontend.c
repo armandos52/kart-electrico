@@ -18,6 +18,32 @@ extern CAN_HandleTypeDef hcan1;
 #define BMS_MAX_AGE 2000u
 // Hasta verificar protocolo del BMS instalado, conservar bytes y ocultar valores no acreditados.
 #define BMS_FORMAT_CONFIRMED 0
+// Pulsador momentaneo activo alto, confirmado por Armando (13-10-2026).
+// Valores de desarrollo: contrastar rebotes y latencias reales en banco.
+#define START_PRESS_MS 40u
+#define START_RELEASE_MS 40u
+
+static struct {
+    uint32_t changed_at;
+    uint8_t seen,raw,armed,requested;
+} start_button;
+
+static uint8_t read_start_button(uint8_t pressed,uint32_t now) {
+    if(!start_button.seen || pressed!=start_button.raw) {
+        start_button.seen=1;start_button.raw=pressed;start_button.changed_at=now;
+    }
+    if(!pressed) {
+        // Soltar solo rearma la siguiente pulsacion; no es una orden STOP.
+        // Tambien exige liberacion al encender/reinicializar con boton sostenido.
+        if(now-start_button.changed_at>=START_RELEASE_MS)start_button.armed=1;
+    } else if(start_button.armed &&
+              (start_button.requested || now-start_button.changed_at>=START_PRESS_MS)) {
+        // START exige estabilidad; STOP se acepta en la primera muestra pulsada.
+        // Consumir la pulsacion impide que mantener/rebotar repita el cambio.
+        start_button.requested=!start_button.requested;start_button.armed=0;
+    }
+    return start_button.requested;
+}
 
 static KartUiSnapshot ui;
 typedef struct {
@@ -116,6 +142,7 @@ static void transmit(uint32_t id,uint8_t bytes[8]) {
     if(HAL_CAN_GetTxMailboxesFreeLevel(&hcan1)==0 || HAL_CAN_AddTxMessage(&hcan1,&header,bytes,&mailbox)!=HAL_OK)tx_errors++;
 }
 void Kart_Init(void) {
+    memset(&start_button,0,sizeof(start_button));
     memset(&ui,0,sizeof(ui));ui.mode_applied=255;ui.can_age=ui.status_age=UINT32_MAX;
     CAN_FilterTypeDef filter={0};filter.FilterBank=0;filter.FilterMode=CAN_FILTERMODE_IDMASK;
     filter.FilterScale=CAN_FILTERSCALE_32BIT;filter.FilterFIFOAssignment=CAN_RX_FIFO0;filter.FilterActivation=ENABLE;filter.SlaveStartFilterBank=14;
@@ -140,7 +167,8 @@ void Kart_ControlTick(void) {
     next.input_flags=read_adc(ADC_CHANNEL_0,&next.accel_adc,ACCEL_MIN,ACCEL_MAX,&next.accel_raw)?KART_INPUT_ACCEL_OK:0;
     if(read_adc(ADC_CHANNEL_8,&next.steer_adc,STEER_MIN,STEER_MAX,&next.steer_raw))next.input_flags|=KART_INPUT_STEER_OK;
     next.brake=HAL_GPIO_ReadPin(BRAKE_GPIO_Port,BRAKE_Pin)==GPIO_PIN_RESET;
-    next.start=HAL_GPIO_ReadPin(START_STOP_GPIO_Port,START_STOP_Pin)==GPIO_PIN_SET;
+    const uint8_t start_pressed=HAL_GPIO_ReadPin(START_STOP_GPIO_Port,START_STOP_Pin)==GPIO_PIN_SET;
+    next.start=read_start_button(start_pressed,HAL_GetTick());
     const uint8_t drive=HAL_GPIO_ReadPin(MODE_D_GPIO_Port,MODE_D_Pin)==GPIO_PIN_SET;
     const uint8_t reverse=HAL_GPIO_ReadPin(MODE_R_GPIO_Port,MODE_R_Pin)==GPIO_PIN_SET;
     if(!(drive&&reverse))next.input_flags|=KART_INPUT_BUTTONS_OK;

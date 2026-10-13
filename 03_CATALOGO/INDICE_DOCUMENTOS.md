@@ -1,6 +1,12 @@
 # Índice documental
 
-43 documentos catalogados: 42 de la entrega histórica y 1 propuesta personal incorporada el 30-09-2026. Las fichas enlazan a los archivos locales y registran el alcance de lectura; la extracción automática no implica análisis completo.
+44 entradas catalogadas: 42 de la entrega histórica, 1 propuesta personal y 1 conjunto de cuatro fotografías incorporado el 08-10-2026. Las fichas enlazan a los archivos locales y registran el alcance de lectura; la extracción automática no implica análisis completo.
+
+## F1 · Referencias visuales del montaje
+
+| Documento | Tipo | Cobertura |
+|---|---|---|
+| [DOC-0044 · Fotografías del kart](fichas/DOC-0044.md) | Cuatro JPEG: frente, lateral, trasera y superior | Revisión visual completa del conjunto; dimensiones y componentes ocultos pendientes |
 
 ## P1 · Inicio del proyecto personal 2026/27
 
@@ -31,7 +37,7 @@
 | [DOC-0010 · ten3n_datasheet](fichas/DOC-0010.md) | datasheet | 4 | parcial |
 | [DOC-0011 · TLP5211](fichas/DOC-0011.md) | datasheet | 19 | parcial |
 | [DOC-0029 · apt-hi-link-vrb4805ld-10wr3-dc-to-dc-module](fichas/DOC-0029.md) | datasheet | 11 | parcial |
-| [DOC-0030 · Bateria](fichas/DOC-0030.md) | datasheet | 1 | parcial |
+| [DOC-0030 · Bateria](fichas/DOC-0030.md) | datasheet | 1 | página revisada visualmente; montaje y discrepancia 60/70 Ah pendientes |
 | [DOC-0033 · RZ03-1A4-D005](fichas/DOC-0033.md) | datasheet | 3 | parcial |
 | [DOC-0035 · 主动均衡保护板说明书 电子版 （英文）](fichas/DOC-0035.md) | manual | 4 | parcial |
 

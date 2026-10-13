@@ -1,0 +1,14 @@
+{
+  "scope": "SHA-256 de bytes en disco antes del commit de entrega; normalizaci\u00f3n Git de saltos de l\u00ednea puede cambiar el hash de un checkout.",
+  "files": {
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp": "e86c31d2f52adb852e7101afb37836de4be50503f3fcc7402626f0dfdebb786c",
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h": "fb45e6d3816d186730d0b312b08b394ebb12564ba176ffe751242651199c5767",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c": "c21f3433bb155cb324ac036a26a2d95852d19f6c4a278500201825dbc62c1dfe",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h": "932954df4f880025e4692e89e55064bea765e84b209af32ca3653aeee813952d",
+    "07_DESARROLLO/panel_local/server.py": "8f08700ae382957e4441451b25985463b9b45234914445ea10780d49dc0edc3b",
+    "07_DESARROLLO/panel_local/calibracion.py": "b573d406b53923e3a0a8aec1aa1c13ce44a80e05644501d4363f822c0c044c29",
+    "07_DESARROLLO/panel_local/static/vista_kart.js": "e69d72c4917b2c1c5920651b636dbfc1f7b3ef62e8d6bd81dd1980b215257dee",
+    "07_DESARROLLO/panel_local/static/textos.js": "2bfdaa17226beb1846fde035bbb7882e7014dbead898ff5b762dadeada3b6d3f",
+    "07_DESARROLLO/panel_local/iniciar.ps1": "b4dd162dfbde60c0becccf4c7bcb8f3e4058461ff640ff08d11098177e14eaf6"
+  }
+}

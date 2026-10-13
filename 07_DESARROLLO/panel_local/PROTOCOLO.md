@@ -52,3 +52,12 @@ Los rangos en `server.py` solo validan representación de datos. No autorizan ac
 La caducidad visual inicial es 1500 ms, 3000 ms para SD y 8000 ms para batería/BMS: criterios provisionales de presentación, independientes del timeout CAN de control. Afinar después de medir frecuencias. Puerto cerrado/error de servicio hace que ninguna muestra se presente como vigente. No inferir fallo físico del micro a partir de pérdida de observabilidad.
 
 Primer emisor: integrar pequeñas muestras ESP32 con versión, sesión y secuencia en una copia v0; cola/buffer limitado y envío no bloqueante a cadencia medida. Registrar carga y pérdidas y asegurar que diagnóstico no retrasa el control. No copiar impresiones JSON extensas al bucle crítico sin análisis.
+
+
+## Extensión de robustez · ESP32 v1.3-dev2 (09-10-2026)
+
+Se mantiene `v:1`. [Contrato detallado CAN/JSON](../firmware/common/PROTOCOLO_V13.md) y [ENS-0009](../../06_TRABAJO/ensayos/ENS-0009_robustez_firmware_v13.md). `mode` es recibido, `mode_applied` vale 0 DIF / 1 ESC / 2 BLQ / 255 sin tracción. En v1.3, `mpu_ok` es lectura calibrada reciente; en v1.2 solo acredita respuesta al arrancar. El lector y la calibración distinguen la versión. La velocidad que gobierna R es la estimada de la rueda más rápida (`speed_kph_max_wheel`), no la media de CAN 0x123.
+
+Se añaden flags `rearm_required`, `reverse_limited`, `speed_valid`, `frontend_health_seen`, `frontend_health_ok`, `watchdog_ok`; contadores `can_rx_invalid`, `can_tx_errors`, `can_error_flags`, `mpu_errors`; ADC físicos `accelerator_adc_physical`/`steer_adc_physical`, y `reverse_limit_kph`. ADC 65535 significa fallo; no graficarlo como posición válida. `frontend_health_seen=0` significa perfil antiguo sin comprobación de ADC físicos.
+
+Espacio «Control v1.3» en el panel. Lecturas Hall/MPU inválidas se marcan antiguas, sin convertirlas en cero válido. La versión se recibe en `fw`; BMS/SD frontales no se inventan si no llegan. No hay escritura, calibración remota, OTA ni actuación desde el panel.

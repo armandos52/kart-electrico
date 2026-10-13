@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "scope": "Software y señales sintéticas; sin ensayo físico",
+  "checks": [
+    "3D disponible sin solicitudes externas",
+    "Inicio desconectado; sin RPM inventadas",
+    "Selección por clic en rueda 3D",
+    "Inspector compartido con el modelo",
+    "Esquema 2D disponible",
+    "Selección 2D sincroniza selector",
+    "Cámara frontal",
+    "Cámara trasera",
+    "Cámara superior",
+    "Cámara lateral",
+    "Cámara perspectiva",
+    "Las cuatro fotografías locales se muestran",
+    "Demo rotulada y conexión bloqueada",
+    "RPM producen movimiento renderizado",
+    "Pausa detiene la rodadura 3D",
+    "Movimiento reducido respetado",
+    "Solo se muestran RPM recibidas",
+    "Timeout CAN retira dirección vigente",
+    "Datos caducados detienen rodadura renderizada",
+    "Calibración conservada, bloqueada sin datos",
+    "Vista ampliada disponible",
+    "Sin desborde a 1920",
+    "Sin desborde a 1440",
+    "Sin desborde a 1280",
+    "Sin desborde a 1024",
+    "Sin desborde a 760",
+    "Sin desborde a 375",
+    "Sin desborde a 320",
+    "No se sirven archivos fuera de rutas cerradas",
+    "No se conectó ningún hardware",
+    "Sin errores JavaScript",
+    "Fallo de 3D conserva esquema y conexión"
+  ],
+  "errors": [],
+  "external": [],
+  "sizes": [
+    {
+      "width": 1920,
+      "scroll": 1920,
+      "canvas": 1096
+    },
+    {
+      "width": 1440,
+      "scroll": 1440,
+      "canvas": 1014
+    },
+    {
+      "width": 1280,
+      "scroll": 1280,
+      "canvas": 854
+    },
+    {
+      "width": 1024,
+      "scroll": 1024,
+      "canvas": 808
+    },
+    {
+      "width": 760,
+      "scroll": 760,
+      "canvas": 742
+    },
+    {
+      "width": 375,
+      "scroll": 375,
+      "canvas": 357
+    },
+    {
+      "width": 320,
+      "scroll": 320,
+      "canvas": 302
+    }
+  ]
+}

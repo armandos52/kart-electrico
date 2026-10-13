@@ -1,67 +1,87 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kart · Panel de laboratorio</title><link rel="stylesheet" href="/style.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kart · Panel de laboratorio</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/style.css"></head>
 <body>
-<header class="top"><div><div class="eyebrow">SMART ELECTRIC KART · LABORATORIO</div><h1>El kart, a la vista.</h1><p>Placas reales · lectura por USB o Wi-Fi directo</p></div><div class="status"><span id="mode-badge">Sin conexión</span><span id="frame-count">0 tramas de telemetría</span></div></header>
-<main>
-<section class="connection" aria-label="Conexión al microcontrolador">
-  <div class="port-controls"><label>Puerto <select id="port"><option value="">Buscando puertos…</option></select></label><button id="refresh" type="button">Actualizar puertos</button><button id="connect" type="button" class="primary" disabled>Leer por cable</button><button id="disconnect" type="button" disabled>Desconectar</button></div>
-  <label class="ready"><input id="bench" type="checkbox"> Banco preparado con tracción inhabilitada. Abrir el puerto puede reiniciar la placa.</label>
-  <div id="connection-info" role="status">No hay ningún puerto abierto. Esta versión no envía comandos al micro.</div>
-</section>
-<section class="overview" aria-label="Resumen del kart">
-  <div class="section-head"><div><div class="eyebrow">LECTURA EN DIRECTO</div><h2>Lo esencial, de un vistazo</h2></div><button id="motion" type="button" aria-pressed="false">Pausar animación</button></div>
-  <div id="diagnostic" class="diagnostic" role="status">Conecta una fuente para ver el diagnóstico.</div>
-  <div id="overview-cards" class="overview-cards"></div>
-  <div id="firmware-info" class="firmware-info">Versión y motivo de reinicio: pendientes de recibir.</div>
-</section>
-<div class="workspace">
-  <section class="kart-view" aria-label="Mapa interactivo del kart">
-    <div class="section-head"><div><h2>Selecciona una parte del kart</h2><p>Vista esquemática · disposición física por verificar</p></div><button id="demo" type="button" aria-pressed="false">Vista animada de ejemplo</button></div>
-    <div id="demo-banner" hidden>DEMOSTRACIÓN VISUAL · Valores sintéticos · Sin conexión ni órdenes al hardware</div>
-    <svg id="kart" viewBox="0 0 680 560" role="img" aria-labelledby="kart-title kart-desc">
-      <title id="kart-title">Kart visto desde arriba</title><desc id="kart-desc">Selecciona ruedas, placas, batería, bus CAN o motores para inspeccionar sus señales. Animaciones solo con datos vigentes o en demostración explícita.</desc>
-      <defs><linearGradient id="floor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#243343"/><stop offset="1" stop-color="#131e2a"/></linearGradient>
-        <clipPath id="clip-fl"><rect x="156" y="89" width="45" height="86" rx="12"/></clipPath>
-        <clipPath id="clip-fr"><rect x="479" y="89" width="45" height="86" rx="12"/></clipPath>
-        <clipPath id="clip-rl"><rect x="146" y="386" width="58" height="98" rx="12"/></clipPath>
-        <clipPath id="clip-rr"><rect x="476" y="386" width="58" height="98" rx="12"/></clipPath>
-      </defs>
-      <text x="340" y="26" text-anchor="middle" class="orient">FRONTAL ↑</text>
-      <path class="chassis" d="M246 100 L434 100 L472 165 L464 442 L428 479 L252 479 L216 442 L208 165 Z"/>
-      <path class="frame" d="M246 130L434 130L442 428L405 452L275 452L238 428Z M246 130L442 428 M434 130L238 428"/>
-      <path class="axle" d="M176 129H505 M176 429H505"/>
-      <path class="wire can-wire" d="M340 179V342"/>
-      <path class="wire power-wire" d="M340 303V410 M308 386H223 M372 386H457"/>
-      <g class="part" data-part="front_left" role="button" tabindex="0" aria-label="Rueda delantera izquierda"><g id="steer-left"><rect x="153" y="86" width="51" height="92" rx="15" class="tire"/><g clip-path="url(#clip-fl)"><g id="rim-fl" class="rim"><path d="M161 72H196 M161 90H196 M161 108H196 M161 126H196 M161 144H196 M161 162H196 M161 180H196 M161 198H196"/></g></g></g><text x="136" y="201" text-anchor="middle" id="rpm-fl">— rpm</text></g>
-      <g class="part" data-part="front_right" role="button" tabindex="0" aria-label="Rueda delantera derecha"><g id="steer-right"><rect x="476" y="86" width="51" height="92" rx="15" class="tire"/><g clip-path="url(#clip-fr)"><g id="rim-fr" class="rim"><path d="M484 72H519 M484 90H519 M484 108H519 M484 126H519 M484 144H519 M484 162H519 M484 180H519 M484 198H519"/></g></g></g><text x="548" y="201" text-anchor="middle" id="rpm-fr">— rpm</text></g>
-      <g class="part" data-part="rear_left" role="button" tabindex="0" aria-label="Rueda trasera izquierda"><rect x="143" y="383" width="64" height="104" rx="16" class="tire"/><g clip-path="url(#clip-rl)"><g id="rim-rl" class="rim"><path d="M152 366H199 M152 384H199 M152 402H199 M152 420H199 M152 438H199 M152 456H199 M152 474H199 M152 492H199 M152 510H199"/></g></g><text x="133" y="515" text-anchor="middle" id="rpm-rl">— rpm</text></g>
-      <g class="part" data-part="rear_right" role="button" tabindex="0" aria-label="Rueda trasera derecha"><rect x="473" y="383" width="64" height="104" rx="16" class="tire"/><g clip-path="url(#clip-rr)"><g id="rim-rr" class="rim"><path d="M481 366H529 M481 384H529 M481 402H529 M481 420H529 M481 438H529 M481 456H529 M481 474H529 M481 492H529 M481 510H529"/></g></g><text x="547" y="515" text-anchor="middle" id="rpm-rr">— rpm</text></g>
-      <text id="steering-map" x="340" y="76" text-anchor="middle" class="orient">DIRECCIÓN SIN DATOS</text>
-      <text id="travel-map" x="340" y="531" text-anchor="middle" class="orient">MARCHA SIN DATOS</text>
-      <g class="part" data-part="stm32" role="button" tabindex="0" aria-label="STM32 frontal"><rect x="282" y="130" width="116" height="57" rx="8" class="board"/><rect x="294" y="140" width="92" height="24" rx="3" class="screen"/><path d="M294 145H386" class="damaged-strip"/><text x="340" y="177" text-anchor="middle" class="part-name">STM32</text></g>
-      <g class="part" data-part="battery" role="button" tabindex="0" aria-label="Batería y BMS"><rect x="271" y="224" width="138" height="80" rx="9" class="battery"/><path d="M298 238V288 M325 238V288 M352 238V288 M379 238V288" class="cells"/><text x="340" y="272" text-anchor="middle" class="part-name">BATERÍA / BMS</text><text x="340" y="324" text-anchor="middle" id="battery-value">— V · — %</text></g>
-      <g class="part" data-part="esp32" role="button" tabindex="0" aria-label="ESP32 trasero"><rect x="282" y="345" width="116" height="59" rx="9" class="board"/><rect x="294" y="356" width="28" height="28" rx="4" class="chip"/><text x="356" y="380" text-anchor="middle" class="part-name">ESP32</text></g>
-      <g class="part" data-part="motor_left" role="button" tabindex="0" aria-label="Controlador Kelly izquierdo"><rect x="214" y="402" width="65" height="48" rx="8" class="controller"/><text x="246" y="431" text-anchor="middle" class="part-name">KELLY I</text></g>
-      <g class="part" data-part="motor_right" role="button" tabindex="0" aria-label="Controlador Kelly derecho"><rect x="401" y="402" width="65" height="48" rx="8" class="controller"/><text x="434" y="431" text-anchor="middle" class="part-name">KELLY D</text></g>
-      <g class="part" data-part="can" role="button" tabindex="0" aria-label="Comunicación CAN"><rect x="426" y="242" width="79" height="40" rx="8" class="bus"/><text x="465" y="267" text-anchor="middle" class="part-name">CAN</text><path d="M426 262H411" class="wire can-wire"/></g>
-      <g class="part" data-part="power" role="button" tabindex="0" aria-label="Relés y contactor"><rect x="293" y="461" width="94" height="35" rx="7" class="controller"/><text x="340" y="484" text-anchor="middle" class="part-name">RELÉS</text></g>
-      <g class="part" data-part="imu" role="button" tabindex="0" aria-label="Giroscopio"><rect x="426" y="349" width="70" height="33" rx="7" class="bus"/><text x="461" y="371" text-anchor="middle" class="part-name">IMU</text></g>
-    </svg>
-    <div class="map-notes"><span><i class="dot"></i>Seleccionable · movimiento cualitativo</span><span id="animation-note">Animación ilustrativa según RPM. Sin datos, las ruedas no se animan.</span></div>
-    <div id="demo-controls" hidden><label>Pedal de ejemplo <input id="demo-pedal" type="range" min="0" max="100" value="32"><output id="demo-pedal-value">32 %</output></label><label>Dirección de ejemplo <input id="demo-steer" type="range" min="-20" max="20" value="8"><output id="demo-steer-value">8°</output></label></div>
-  </section>
-  <aside class="inspector" aria-label="Datos de la parte seleccionada">
-    <div class="eyebrow" id="selection-tag">UNIDAD FRONTAL</div><h2 id="selection-title">STM32</h2><p id="selection-note">Entradas, pantalla y registro.</p>
-    <div id="signals" class="signal-list"></div><div class="inspector-foot">Datos reportados por el micro. Una orden de GPIO/PWM no confirma la tensión física ni el cierre del contactor.</div>
-  </aside>
+<div class="app">
+<header class="barra">
+  <div class="marca"><strong data-i18n="marca.nombre">Kart eléctrico</strong><span data-i18n="marca.sub">Panel de laboratorio · solo lectura</span></div>
+  <div class="conexion" role="group" aria-label="Conexión al microcontrolador" data-i18n-aria="conexion.aria">
+    <select id="port" aria-label="Fuente de datos" data-i18n-aria="puerto.aria"><option value="">Buscando puertos…</option></select>
+    <button id="refresh" type="button" title="Actualizar puertos" aria-label="Actualizar puertos" data-i18n-title="refrescar.titulo" data-i18n-aria="refrescar.titulo" data-i18n="refrescar">Actualizar</button>
+    <label class="ready"><input id="bench" type="checkbox"> <span data-i18n="banco">Banco preparado · tracción inhabilitada</span></label>
+    <button id="connect" type="button" class="primary" disabled>Leer por cable</button>
+    <button id="disconnect" type="button" disabled data-i18n="desconectar">Desconectar</button>
+  </div>
+  <div class="acciones">
+    <div class="idiomas" role="group" aria-label="Idioma" data-i18n-aria="idioma.aria">
+      <button type="button" data-lang="es" lang="es" title="Español" aria-pressed="true">ES</button><button type="button" data-lang="pt" lang="pt-PT" title="Português (Portugal)" aria-pressed="false">PT</button><button type="button" data-lang="en" lang="en" title="English" aria-pressed="false">EN</button>
+    </div>
+    <button id="buscar" type="button" title="Buscar señal (Ctrl+K)" data-i18n-title="buscar.titulo"><span data-i18n="buscar">Buscar señal</span> <kbd>Ctrl K</kbd></button>
+    <button id="abrir-calibracion" type="button" data-i18n="calibrar">Calibrar dirección</button>
+    <button id="demo" type="button" aria-pressed="false">Demostración</button>
+    <span id="mode-badge">Sin conexión</span>
+  </div>
+</header>
+<div class="estado" role="status">
+  <div id="diagnostic" class="diagnostic">Conecta una fuente para ver el diagnóstico.</div>
+  <div id="indicadores" class="indicadores"></div>
+  <div id="connection-info" class="nota">No hay ningún puerto abierto. Esta versión no envía comandos al micro.</div>
 </div>
-<section class="all-signals" aria-label="Todas las señales">
-  <div class="section-head"><div><h2>Todas las señales</h2><p>Valores, origen y antigüedad en una sola vista.</p></div><div class="signal-filters"><input id="signal-search" type="search" placeholder="Buscar señal…" aria-label="Buscar señal"><label><input id="show-missing" type="checkbox" checked> Mostrar sin datos</label></div></div>
-  <div class="table-scroll"><table><thead><tr><th>Señal</th><th>Valor</th><th>Origen</th><th>Estado</th></tr></thead><tbody id="all-signal-rows"></tbody></table></div>
-</section>
-<section class="traces"><div class="section-head"><div><h2>Traza de una señal</h2><p>Los huecos indican datos ausentes o antiguos.</p></div><label>Señal <select id="trace-signal"><option value="rpm_rl">RPM trasera izquierda</option><option value="rpm_rr">RPM trasera derecha</option><option value="accelerator_pct">Pedal procesado</option><option value="yaw_dps">Guiñada</option><option value="pwm_left_raw">PWM bruto izquierdo</option><option value="battery_v">Tensión BMS</option></select></label></div><canvas id="trace" height="190" role="img" aria-label="Gráfica temporal de la señal seleccionada"></canvas><div id="trace-info">Sin muestras de telemetría.</div></section>
-<section class="console"><div class="section-head"><div><h2>Mensajes y sesión</h2><p>Texto del firmware existente y diagnóstico del lector.</p></div><a id="download" href="/api/download" download="sesion-kart.jsonl" hidden>Descargar sesión</a></div><div id="log" role="log" aria-live="off">Sin mensajes.</div><div id="session-info">Sin sesión registrada.</div></section>
-</main><footer>Panel local en el portátil · USB o Wi-Fi directo al ESP32 · Solo lectura, sin órdenes a los motores.</footer>
-<script src="/app.js"></script>
+<main class="tablero">
+  <aside class="tira" aria-label="Canales fijados" data-i18n-aria="tira.aria">
+    <div id="espacios" class="espacios" role="tablist" aria-label="Espacios de trabajo" data-i18n-aria="espacios.aria"></div>
+    <div id="canales" class="canales"></div>
+    <div class="tira-pie"><span class="leyenda"><i class="l-medida"></i><span data-i18n="leyenda.medido">medido</span> <i class="l-orden"></i><span data-i18n="leyenda.orden">orden</span> <i class="l-estimacion"></i><span data-i18n="leyenda.estimacion">estimación</span></span><button id="restablecer" type="button" class="enlace" data-i18n="restablecer">Restablecer</button></div>
+  </aside>
+  <section class="vista" aria-label="Vista del kart" data-i18n-aria="vista.aria">
+    <div class="vista-cab"><div><strong data-i18n="vista.titulo">El kart · modelo visual</strong><span class="modelo-sub" data-i18n="vista.sub">3D y esquema basados en tus 4 fotografías</span></div><div class="vista-acciones"><button id="ver-3d" type="button" aria-pressed="true">3D</button><button id="ver-esquema" type="button" aria-pressed="false" data-i18n="btn.esquema">Esquema</button><button id="foto-superior" type="button" hidden data-i18n="btn.foto_sup">Foto superior</button><button id="ver-fotos" type="button" data-i18n="btn.fotos">Fotos</button><button id="ampliar-modelo" type="button" aria-pressed="false">Ampliar</button><button id="motion" type="button" aria-pressed="false">Pausar animación</button><label class="giro-escala"><span data-i18n="giro.etiqueta">Giro de ruedas</span><select id="giro-escala" aria-label="Velocidad del giro de las ruedas" data-i18n-aria="giro.aria"><option value="1" data-i18n="giro.real">Real 1:1</option><option value="0.03" data-i18n="giro.lento">Lento 3 %</option></select></label></div></div>
+    <div id="demo-banner" hidden data-i18n="demo.banner">Demostración · datos sintéticos · sin conexión con el hardware</div>
+    <div class="lamina">
+    <div id="modelo-3d" aria-label="Modelo tridimensional del kart" data-i18n-aria="m3d.aria">
+      <div id="escena-3d"></div>
+      <div class="modelo-titulo"><span class="modelo-eyebrow">SMART ELECTRIC KART</span><strong data-i18n="m3d.titulo">Tu kart, en perspectiva.</strong><span data-i18n="m3d.sub">Forma y colores observados · escala aproximada</span></div>
+      <div class="modelo-rpm"><span data-i18n="m3d.rpm">RPM TRASERAS</span><strong id="modelo-rpm">I — · D —</strong></div>
+      <div class="camaras" role="group" aria-label="Cámara del modelo" data-i18n-aria="cam.aria"><button data-camera="perspectiva" aria-pressed="true" data-i18n="cam.perspectiva">Perspectiva</button><button data-camera="lateral" aria-pressed="false" data-i18n="cam.lateral">Lateral</button><button data-camera="frontal" aria-pressed="false" data-i18n="cam.frontal">Frente</button><button data-camera="trasera" aria-pressed="false" data-i18n="cam.trasera">Detrás</button><button data-camera="superior" aria-pressed="false" data-i18n="cam.superior">Arriba</button></div>
+      <div class="modelo-pie"><span id="modelo-status" role="status">Preparando vista 3D…</span><span id="modelo-steering">Dirección sin datos</span><small data-i18n="m3d.nota1">Giro real 1:1 con desenfoque de movimiento · sentido según marcha ordenada</small><small data-i18n="m3d.nota2">Arrastra para girar · rueda para acercar · pulsa una rueda o la pantalla</small></div>
+    </div>
+    <svg id="kart" role="group" aria-labelledby="kart-title kart-desc"></svg>
+    </div>
+    <div id="demo-controls" hidden><label><span data-i18n="demo.marcha">Marcha de ejemplo</span><select id="demo-gear"><option value="D" data-i18n="demo.D">D · Adelante</option><option value="R" data-i18n="demo.R">R · Atrás</option></select></label><label><span data-i18n="demo.pedal">Pedal de ejemplo</span> <input id="demo-pedal" type="range" min="0" max="100" value="32"><output id="demo-pedal-value">32 %</output></label><label><span data-i18n="demo.direccion">Dirección de ejemplo</span> <input id="demo-steer" type="range" min="-20" max="20" value="8"><output id="demo-steer-value">8°</output></label><p class="rodadura-nota" data-i18n="demo.nota">Giro real: las ruedas dan las vueltas que indican las RPM. A mucha velocidad el dibujo se difumina y la marca clara deja una estela más larga. 100 % de pedal ≈ 50 km/h (Ø 0,48 m, referencia del firmware).</p></div>
+    <div class="inspector" aria-label="Datos de la pieza seleccionada" data-i18n-aria="insp.aria">
+      <label class="selector-pieza" for="modelo-pieza"><span data-i18n="insp.selector">Inspeccionar componente</span><select id="modelo-pieza"></select></label>
+      <div class="insp-cab"><h2 id="selection-title">ESP32</h2><span id="selection-tag">Unidad trasera</span></div>
+      <p id="selection-note">Diferencial, PWM, relés y retorno de sensores.</p>
+      <div id="signals" class="signal-list"></div>
+    </div>
+  </section>
+  <section id="graficas" class="graficas" aria-label="Gráficas con cursor de tiempo común" data-i18n-aria="graficas.aria"></section>
+</main>
+<footer class="cajon">
+  <div class="cajon-barra">
+    <button id="ver-senales" type="button" aria-expanded="false" aria-controls="panel-senales" data-i18n="senales.todas">Todas las señales</button>
+    <button id="ver-consola" type="button" aria-expanded="false" aria-controls="panel-consola">Consola</button>
+    <span id="session-info">Sin sesión registrada.</span>
+    <a id="download" href="/api/download" download="sesion-kart.jsonl" hidden data-i18n="descargar">Descargar sesión</a>
+    <span class="pie" data-i18n="pie">Solo lectura · sin órdenes a los motores · USB o Wi-Fi directo al ESP32</span>
+  </div>
+  <div id="panel-senales" class="cajon-panel" hidden>
+    <div class="cajon-cab"><strong data-i18n="senales.todas">Todas las señales</strong><input id="signal-search" type="search" placeholder="Filtrar: rpm, can, relé…" aria-label="Filtrar señales" data-i18n-ph="senales.filtrar_ph" data-i18n-aria="senales.filtrar_aria"><label><input id="show-missing" type="checkbox" checked> <span data-i18n="senales.mostrar_sin">Mostrar sin datos</span></label><span class="nota" data-i18n="senales.doble_clic">Doble clic en una fila para verla en la gráfica de selección.</span></div>
+    <div class="table-scroll"><table><thead><tr><th data-i18n="tabla.senal">Señal</th><th data-i18n="tabla.valor">Valor</th><th data-i18n="tabla.origen">Origen</th><th data-i18n="tabla.estado">Estado</th><th></th></tr></thead><tbody id="all-signal-rows"></tbody></table></div>
+  </div>
+  <div id="panel-consola" class="cajon-panel" hidden><div id="log" role="log" aria-live="off">Sin mensajes.</div></div>
+</footer>
+</div>
+<dialog id="paleta" aria-label="Buscar señal" data-i18n-aria="paleta.aria">
+  <input id="paleta-buscar" type="search" placeholder="Buscar señal: rpm, can, relé, batería…" aria-label="Buscar señal" autocomplete="off" data-i18n-ph="paleta.ph" data-i18n-aria="paleta.aria">
+  <ul id="paleta-lista" role="listbox"></ul>
+  <p id="paleta-vacio" hidden data-i18n="paleta.vacio">No hay ninguna señal con ese nombre.</p>
+  <p class="paleta-pie" data-i18n="paleta.pie">Intro: fijar o quitar · Mayús+Intro: ver en la gráfica · Esc: cerrar</p>
+</dialog>
+<dialog id="fotos-kart" aria-labelledby="fotos-title">
+  <div class="fotos-cab"><div><h2 id="fotos-title" data-i18n="fotos.titulo">Las referencias del modelo</h2><p data-i18n="fotos.sub">Cuatro vistas aportadas el 08-10-2026 · originales conservados</p></div><button id="cerrar-fotos" type="button" data-i18n="fotos.cerrar">Cerrar</button></div>
+  <div class="fotos-grid"><figure><img src="/referencias/frontal.jpg" alt="Frontal del kart: bastidor rojo, ruedas de tacos y asiento amarillo" data-i18n-alt="fotos.alt.frontal" loading="lazy"><figcaption data-i18n="fotos.c.frontal">01 / Frontal</figcaption></figure><figure><img src="/referencias/lateral.jpg" alt="Lateral del kart con arco alto, asiento amarillo y plataforma trasera" data-i18n-alt="fotos.alt.lateral" loading="lazy"><figcaption data-i18n="fotos.c.lateral">02 / Lateral</figcaption></figure><figure><img src="/referencias/trasera.jpg" alt="Parte trasera del kart con ruedas estrechas y caja transparente" data-i18n-alt="fotos.alt.trasera" loading="lazy"><figcaption data-i18n="fotos.c.trasera">03 / Trasera</figcaption></figure></div>
+  <figure id="referencia-superior" class="foto-superior"><img src="/referencias/superior.jpg" alt="Vista superior oblicua del kart: volante delante, asiento amarillo central, cubierta negra trasera en T y caja lateral a la izquierda" data-i18n-alt="fotos.alt.superior" loading="lazy"><figcaption data-i18n="fotos.c.superior">04 / Superior · referencia del esquema</figcaption></figure>
+  <p class="fotos-nota" data-i18n="fotos.nota">El modelo reproduce rasgos visibles. No es un CAD medido: faltan cotas y confirmar los componentes ocultos. Los colores del bastidor y del asiento representan materiales, no alarmas.</p>
+</dialog>
+<script type="module" src="/app.js"></script>
 </body></html>

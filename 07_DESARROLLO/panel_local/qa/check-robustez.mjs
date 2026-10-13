@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+global.window={matchMedia:()=>({matches:false})};
+global.document={getElementById:()=>null};
+global.localStorage={getItem:()=>null};
+const source=fs.readFileSync(new URL('../static/nucleo.js',import.meta.url),'utf8');
+const m=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+// Los textos viven en textos.js (módulo de datos sin imports); se entregan al núcleo igual que hace i18n.js en el navegador.
+const textos=await import('data:text/javascript;base64,'+Buffer.from(fs.readFileSync(new URL('../static/textos.js',import.meta.url),'utf8')).toString('base64'));
+m.cargarTextos(textos);
+let checks=0;
+const check=(test)=>{assert.ok(test);checks++;};
+for(const [code,name] of [[0,'DIF'],[1,'ESC'],[2,'BLQ'],[255,'Sin tracción']])check(m.display({quality:'fresh',value:code},'mode_applied')===name);
+check(m.display({quality:'stale',value:1},'mode_applied')==='—');
+for(const key of ['reverse_limit','rearm_required','frontend_invalid','hall_fault','configuration'])check(m.word(key)!==undefined);
+for(const key of ['speed_valid','frontend_health_ok','watchdog_ok'])check(m.anomaly(key,0)==='aviso');
+check(m.anomaly('reverse_limited',1)==='aviso');
+check(m.display({quality:'fresh',value:1},'rearm_required')==='Sí / 1');
+m.app.stateReceivedAt=Date.now();m.app.state={signals:{can_rx_age_ms:{value:101,quality:'fresh',age_ms:0},mode:{value:'ESC',node:'esp32',quality:'fresh',age_ms:0}}};
+check(m.activeSignals().mode.quality==='stale');
+console.log(`${checks} comprobaciones JS; 0 fallos. Datos unitarios, sin navegador ni kart.`);

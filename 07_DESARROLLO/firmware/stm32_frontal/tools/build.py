@@ -58,7 +58,10 @@ def main():
             objects.append(obj)
             if output:print(output,flush=True)
     response=OUT/'objects.rsp';response.write_text('\n'.join('"'+p.as_posix()+'"' for p in objects))
-    elf=OUT/'stm32_frontal-v1.3-dev2.elf'
+    version_header=(ROOT/'Core/Inc/kart_frontend.h').read_text(encoding='utf-8')
+    version=re.search(r'^#define KART_FRONTEND_VERSION "([A-Za-z0-9_.-]+)"$',version_header,re.M)
+    if not version:raise RuntimeError('Falta KART_FRONTEND_VERSION valida')
+    elf=OUT/(version.group(1)+'.elf')
     link=[gxx,'@'+str(response),'-o',elf,'-mcpu=cortex-m7','-mthumb','-mfpu=fpv5-sp-d16','-mfloat-abi=hard','-T',ROOT/'STM32F746XX_FLASH.ld','--specs=nosys.specs','--specs=nano.specs','-Wl,--gc-sections','-Wl,-Map='+str(OUT/'firmware.map'),'-static','-L'+str(ROOT/'Middlewares/ST/touchgfx/lib/core/cortex_m7/gcc'),'-l:libtouchgfx-float-abi-hard.a','-Wl,--start-group','-lc','-lm','-lstdc++','-lsupc++','-Wl,--end-group']
     link.append('-Wl,--fatal-warnings')
     subprocess.run(link,check=True)

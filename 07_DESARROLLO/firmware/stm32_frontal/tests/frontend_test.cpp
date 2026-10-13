@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <string>
+#include "kart_control.h"
 #include "stubs/main.h"
 #include "stubs/fatfs.h"
 ADC_HandleTypeDef hadc3;CAN_HandleTypeDef hcan1={CAN1};FakeDwt fakeDwt={};FakeDebug fakeDebug={};
@@ -23,7 +24,77 @@ void reset(){
 }
 void rx(unsigned id,const uint8_t* b,unsigned len=8){rx_header={id,0,0,len};memcpy(rx_bytes,b,8);rx_pending=1;HAL_CAN_RxFifo0MsgPendingCallback(&hcan1);}
 void feedback(){const uint8_t b[8]={0,0,0,0,0,0,0,0};rx(0x123,b);const uint8_t s[8]={1,10,0,255,4|16|8,3,0,0};rx(0x124,s);}
+void button(int pressed,uint32_t dt=5){tick+=dt;pins[1]=pressed;feedback();Kart_ControlTick();}
+bool start_sent(){return (sent_command[7]&4)!=0;}
+void arm_button(){button(0,0);button(0,40);}
+void press_start(){button(1,0);button(1,40);}
+void test_start_stop(){
+    reset();button(1,0);button(1,1000);
+    check(!start_sent(),"Pulsador sostenido al encender no solicita START");
+    button(0,0);button(0,39);button(1,0);button(1,40);
+    check(!start_sent(),"Liberacion inicial menor de 40 ms no habilita START");
+    arm_button();button(1,0);button(1,39);
+    check(!start_sent(),"START espera 40 ms continuos, no solo un flanco");
+    button(1,1);check(start_sent() && ui.start,"START estable llega a CAN y snapshot");
+    button(1,5000);check(start_sent(),"Mantener pulsado no repite ni apaga");
+    button(0,0);check(start_sent(),"Soltar pulsador mantiene START enclavado por software");
+    button(1,5);button(0,5);button(1,10);button(0,5);button(0,39);
+    check(start_sent(),"Rebotes al soltar no generan una segunda pulsacion");
+    button(0,1);button(1,0);
+    check(!start_sent() && !ui.start,"Segunda pulsacion pide STOP en primera lectura, sin 40 ms");
+    button(1,5000);check(!start_sent(),"Mantener STOP no vuelve a arrancar");
+    button(0,0);button(1,20);button(0,5);button(1,20);button(1,100);
+    check(!start_sent(),"Rebotes despues de STOP no rearman START");
+    arm_button();press_start();check(start_sent(),"Soltar estable y pulsar otra vez permite nuevo START");
+    arm_button();adc_ok=0;button(1,0);
+    check(!start_sent() && ui.input_flags!=7,"STOP llega aun con ADC invalido");
+
+    reset();arm_button();bool pulse_rejected=true;
+    for(unsigned i=0;i<100;i++){button(1,0);button(1,5);pulse_rejected&=!start_sent();button(0,5);pulse_rejected&=!start_sent();}
+    check(pulse_rejected,"Cien pulsos de 5 ms no acumulan tiempo para arrancar");
+    press_start();check(start_sent(),"Despues del ruido un START estable funciona");
+    Kart_Init();button(1,1000);check(!start_sent(),"Reinicializar borra memoria y exige soltar el pulsador");
+
+    reset();tick=0xfffffff0u;arm_button();press_start();
+    check(start_sent(),"Liberacion funciona cruzando desbordamiento del tick");
+    reset();arm_button();tick=0xfffffff0u;press_start();
+    check(start_sent(),"Antirrebote START funciona cruzando desbordamiento del tick");
+    arm_button();selected_mode=2;button(1,0);
+    check(!start_sent() && (sent_command[7]&3)==2,"STOP conserva bits de modo CAN");
+
+    // Integracion de funciones reales: GPIO simulado -> trama emitida -> nucleo ESP32 dev3.
+    // No simula transporte electrico, perifericos ni dinamica del kart.
+    reset();kart::Controller backend;kart::Sensors sensors;sensors.speed_valid=true;
+    sensors.yaw_valid=sensors.pulse_left_recent=sensors.pulse_right_recent=true;
+    kart::Output output;
+    auto sample=[&](int pressed,uint32_t dt){
+        button(pressed,dt);backend.receive(sent_command,8,tick);output=backend.step(sensors,tick);
+        printf("TRACE tick_ms=%lu raw=%d start=%d relay=%u inhibit=%s\n",
+            (unsigned long)tick,pressed,start_sent(),unsigned(output.relay),kart::inhibitName(output.inhibit));
+    };
+    sample(0,0);sample(0,600);sample(1,0);sample(1,40);
+    check(output.relay==kart::Relay::Precharge,"Integracion: pulsacion estable inicia precarga");
+    sample(0,5);check(output.relay==kart::Relay::Precharge,"Integracion: soltar no cancela precarga");
+    sample(1,5);sample(0,5);sample(0,40);
+    check(output.relay==kart::Relay::Precharge,"Integracion: rebotes de liberacion no ciclan rele");
+    sample(0,2000);check(output.relay==kart::Relay::Overlap,"Integracion: precarga completa llega a solapamiento");
+    sample(0,1000);check(output.relay==kart::Relay::Ready,"Integracion: rele queda listo con pulsador suelto");
+    sample(1,5);check(output.relay==kart::Relay::Off && output.effort_left==0 && output.effort_right==0,
+        "Integracion: siguiente pulsacion corta reles y consignas");
+    sample(0,5);sample(1,5);sample(1,200);
+    check(output.relay==kart::Relay::Off,"Integracion: rebote tras STOP no reinicia precarga");
+    sample(0,0);sample(0,40);sample(1,0);sample(1,40);
+    check(output.relay==kart::Relay::Precharge,"Integracion: nuevo ciclo deliberado permite precarga");
+    sample(0,0);sample(0,40);sample(1,5);
+    check(output.relay==kart::Relay::Off,"Integracion: segunda pulsacion para tambien durante precarga");
+    sample(0,0);sample(0,40);sample(1,0);sample(1,40);
+    sensors.can_ok=false;sample(1,5);sensors.can_ok=true;sample(0,5);sample(0,40);
+    check(output.relay==kart::Relay::Off,"Integracion: recuperacion CAN no reutiliza START para arrancar");
+    sample(1,0);sample(0,5);sample(0,40);sample(1,0);sample(1,40);
+    check(output.relay==kart::Relay::Precharge,"Integracion: tras fallo se exige OFF y START deliberados");
+}
 int main(){
+    test_start_stop();
     reset();Kart_ControlTick();check(ui.gear==0 && sent_command[4]==1 && sent_command[0]==0,"Sin feedback transmite N freno pedal cero");
     feedback();Kart_ControlTick();check(ui.input_flags==7 && ui.feedback_fresh && ui.status_fresh,"ADC validos y CAN fresco");
     check(sent_health[0]==1 && sent_health[1]==7 && kart_u16be(sent_health+2)==124,"Ext 0x101 conserva ADC fisico");

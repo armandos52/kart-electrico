@@ -19,6 +19,7 @@ desktop.ini
 __pycache__/
 .venv/
 node_modules/
+.publicacion-local/
 
 # Índices regenerables; conservar solo la carpeta
 /08_INDICE_GENERADO/*
@@ -26,9 +27,24 @@ node_modules/
 
 # Imágenes de flash extraídas: locales (repo público). Se versionan logs, hashes y documentación.
 /07_DESARROLLO/respaldos/**/*.bin
+/07_DESARROLLO/respaldos/**/*.elf
+/07_DESARROLLO/respaldos/**/*.hex
+
+# Borradores vacíos y archivo binario sin extensión: conservar solo localmente.
+/Sin título*.canvas
+/programa kart
+# Duplicado de la propuesta; la copia canónica está en 07_DESARROLLO/propuesta_2026-27/.
+/Proposta_Smart_Electric_Kart_V2_2026-27.docx
 
 # Compilación PlatformIO
 .pio/
 
 # Recepción local; preparar por separado la publicación de originales grandes.
 /02_ORIGINALES/entrega_2026-09-28/
+
+# Originales fotográficos locales; vistas del kart seleccionadas para revisión pública.
+/02_ORIGINALES/fotos_kart_2026-10-08/
+/07_DESARROLLO/panel_local/static/referencias/*.jpg
+!/07_DESARROLLO/panel_local/static/referencias/lateral.jpg
+!/07_DESARROLLO/panel_local/static/referencias/trasera.jpg
+!/07_DESARROLLO/panel_local/static/referencias/superior.jpg

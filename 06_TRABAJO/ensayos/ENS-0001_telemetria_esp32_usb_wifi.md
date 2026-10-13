@@ -8,7 +8,7 @@ resumen: Primera grabación del ESP32 trasero (v1 y v1.1) y ensayo en banco de l
 
 Fecha: 2026-10-07.
 Resultado: v1 salió mal (cuelgue) · **v1.1 salió bien** (telemetría USB y Wi-Fi, pérdida y reconexión).
-Firmware: ESP32 `esp32_trasero-v1-telemetria` y `esp32_trasero-v1.1-telemetria` ([[07_DESARROLLO/firmware/VERSIONES|VERSIONES]]). STM32 sin cambios.
+Firmware: ESP32 `esp32_trasero-v1-telemetria` y `esp32_trasero-v1.1-telemetria` ([VERSIONES](../../07_DESARROLLO/firmware/VERSIONES.md)). STM32 sin cambios.
 Configuración del kart: ESP32 en su placa trasera con el MCP2515, tal como estaba (Armando: «no he movido nada»), y alimentado por USB.
 
 ## Objetivo y criterio de éxito
@@ -52,7 +52,7 @@ En `06_TRABAJO/ensayos/datos/ENS-0001/`:
 
 **v1:**
 - Cuelgue *LoadProhibited* en el núcleo 1 dentro de `CAN.readMsgBuf()` → `SPIClass::transfer`, seguido de reinicio (`SW_CPU_RESET`).
-- Causa: desbordamiento en mcp_can con DLC > 8 ([[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0005_mcp_can_desborda_con_dlc_mayor_8|PROB-0005]]).
+- Causa: desbordamiento en mcp_can con DLC > 8 ([PROB-0005](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0005_mcp_can_desborda_con_dlc_mayor_8.md)).
 - Además, los registros de error del core (no presentes en la imagen original) inundaban el puerto serie.
 
 **v1.1 (DLC limitado, `CORE_DEBUG_LEVEL=0`):**
@@ -93,7 +93,7 @@ Apuntan a entradas Hall (GPIO34, GPIO4) y GPIO35 al aire o con ruido en el banco
 
 ## Qué se aprende y siguiente paso
 
-- El bloqueo en `CAN init failed` reproduce la hipótesis 3 de [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender|PROB-0002]]. Siguiente: medir con osciloscopio y multímetro la alimentación del módulo MCP2515/TJA1050, MISO (GPIO19), CS (GPIO5) y el cristal mientras se reintenta.
+- El bloqueo en `CAN init failed` reproduce la hipótesis 3 de [PROB-0002](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender.md). Siguiente: medir con osciloscopio y multímetro la alimentación del módulo MCP2515/TJA1050, MISO (GPIO19), CS (GPIO5) y el cristal mientras se reintenta.
 - Repetir con el STM32 transmitiendo 0x100 para ver mandos reales y `can_rx_count`.
 - Comprobar las entradas Hall y GPIO35 (resistencias de *pull*) con las ruedas quietas.
 - Para seguir con asistencia durante la prueba Wi-Fi: instalar la app «Dispositivos Apple» (driver de red USB del iPhone) o usar un segundo adaptador.

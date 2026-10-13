@@ -1,10 +1,12 @@
 ---
 estado: vigente
-actualizado: 2026-09-30
+actualizado: 2026-10-08
 resumen: Inventario del código entregado por sistema y versión (Arduino 23/24, STM32 24/25 y 25/26, ESP32 25/26), su estructura y la lista de mejoras candidatas para analizar.
 ---
 
 # Inventario del código del kart
+
+**Vigencia:** el cuerpo de este inventario describe la entrega y la revisión del 30-09. Para el ESP32 de trabajo v1.2 y sus funciones efectivas, consultar la [revisión del 08-10](../../06_TRABAJO/REVISION_CODIGO_V12_2026-10-08.md), con fuentes/hashes y 19 casos aislados. Desde octubre ya hay dependencias fijadas, compilación/grabación y telemetría con motivo de reset; «no se ha compilado» y «faltan librerías» se conservan como situación histórica. El binario frontal instalado sigue sin identificar. Se precisan abajo corte por freno, watchdogs, bus-off y significado de ceros para no perpetuar conclusiones incorrectas.
 
 ## Resumen
 
@@ -22,7 +24,7 @@ resumen: Inventario del código entregado por sistema y versión (Arduino 23/24,
   - El STM32 lee pedales, volante y botones, muestra la pantalla y graba la SD. Cada 5 ms manda una orden por CAN al ESP32.
   - El ESP32 calcula el diferencial, mueve los dos Kelly y los relés del contactor, y mide los Hall traseros y el giróscopo. Responde cada 200 ms.
 - **Debilidades comunes.**
-  - No hay watchdog y `Error_Handler` está vacío.
+  - No hay supervisión explícita del bucle de control en el fuente propio; IWDG/WWDG del STM32 deshabilitados y `Error_Handler` vacío. No equivale a ausencia de todos los watchdogs internos del ESP32.
   - El STM32 no detecta si dejan de llegar mensajes del ESP32 o del BMS.
   - El arranque del ESP32 se bloquea si falla el CAN.
   - La rampa de par se calcula pero no se aplica.
@@ -36,13 +38,13 @@ resumen: Inventario del código entregado por sistema y versión (Arduino 23/24,
 - `P23` = `Relatórios de anos anteriores/ProjetoKart2324/ProjetoKart2324/`
 
 **Archivos de código propio:**
-- `M` = [[02_ORIGINALES/entrega_2026-09-28/Smart Eletric Kart Cross-2223406-2223403/Smart Eletric Kart Cross-2223406-2223403/STM32-final/Core/Src/main.c|main.c · STM32 2025/26]]
-- `S` = [[02_ORIGINALES/entrega_2026-09-28/Smart Eletric Kart Cross-2223406-2223403/Smart Eletric Kart Cross-2223406-2223403/STM32-final/TouchGFX/gui/src/screen1_screen/Screen1View.cpp|Screen1View.cpp · pantalla 2025/26]]
-- `E` = [[02_ORIGINALES/entrega_2026-09-28/Smart Eletric Kart Cross-2223406-2223403/Smart Eletric Kart Cross-2223406-2223403/ESP32-final/ESP32-final/ESP32-final.ino|ESP32-final.ino · 2025/26]]
-- `M24` = [[02_ORIGINALES/entrega_2026-09-28/Relatórios de anos anteriores/PEEC_2425_10_Smart_Eletric_Kart_Cross_Anexos/PEEC_2425_10_Smart_Eletric_Kart_Cross_Anexos/KartProjetoFinal/Core/Src/main.c|main.c · STM32 2024/25]]
-- `K` = [[02_ORIGINALES/entrega_2026-09-28/Relatórios de anos anteriores/ProjetoKart2324/ProjetoKart2324/Arduino/CodigoKart/CodigoKart.ino|CodigoKart.ino · Arduino 2023/24]]
+- `M` = [main.c · STM32 2025/26 · solo local](../../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/STM32-final/Core/Src/main.c)
+- `S` = [Screen1View.cpp · pantalla 2025/26 · solo local](../../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/STM32-final/TouchGFX/gui/src/screen1_screen/Screen1View.cpp)
+- `E` = [ESP32-final.ino · 2025/26 · solo local](../../02_ORIGINALES/entrega_2026-09-28/Smart%20Eletric%20Kart%20Cross-2223406-2223403/Smart%20Eletric%20Kart%20Cross-2223406-2223403/ESP32-final/ESP32-final/ESP32-final.ino)
+- `M24` = [main.c · STM32 2024/25 · solo local](../../02_ORIGINALES/entrega_2026-09-28/Relat%C3%B3rios%20de%20anos%20anteriores/PEEC_2425_10_Smart_Eletric_Kart_Cross_Anexos/PEEC_2425_10_Smart_Eletric_Kart_Cross_Anexos/KartProjetoFinal/Core/Src/main.c)
+- `K` = [CodigoKart.ino · Arduino 2023/24 · solo local](../../02_ORIGINALES/entrega_2026-09-28/Relat%C3%B3rios%20de%20anos%20anteriores/ProjetoKart2324/ProjetoKart2324/Arduino/CodigoKart/CodigoKart.ino)
 
-Contexto: [[06_TRABAJO/AUDITORIA_2026-09-29|auditoría del 29-09]] (sección 2, protocolo CAN y calibraciones), [[03_CATALOGO/DATOS_Y_PROYECTOS|datos y proyectos]], [[06_TRABAJO/INICIO_INVESTIGACION_2026-27|propuesta 2026/27]].
+Contexto: [auditoría del 29-09](../../06_TRABAJO/AUDITORIA_2026-09-29.md) (sección 2, protocolo CAN y calibraciones), [datos y proyectos](../../03_CATALOGO/DATOS_Y_PROYECTOS.md), [propuesta 2026/27](../../06_TRABAJO/INICIO_INVESTIGACION_2026-27.md).
 
 ## 1. Sistemas y versiones
 
@@ -164,7 +166,7 @@ Las páginas de esta tabla proceden de una búsqueda en el texto extraído. Un l
 
 - **El registro en SD lo escribe el STM32 [V].** Su cabecera coincide columna a columna con `KART_LOG.CSV`; solo cambian el separador y el periodo.
 - **Fechas.** La fecha interna de `KART_LOG.CSV` es el 04-07-2026 09:31 y la del `main.c` final, el 10-07-2026 **[V]**. Refuerza que el registro procede de una versión anterior del STM32.
-- **`ModoDif = 0` en el registro significa modo DIF,** que es el valor por defecto; no es falta de dato. En cambio, `Yaw = 0` y los Hall delanteros a 0 sí indican que no llegó dato.
+- **`ModoDif = 0` en el registro significa modo DIF,** que es el valor por defecto; no es falta de dato. Un cero de yaw o de Hall por sí solo no distingue valor real, inicialización o ausencia de dato; hacen falta validez y contexto (precisión 08-10).
 - **Rueda.** 0,48 m de diámetro frente a 0,243 m de radio (0,486 m de diámetro): son dos literales distintos, con un 1,2 % de diferencia, más que una incoherencia de magnitud.
 - **La SD no vuelve a grabar tras Pausa por un defecto del STM32 [V `S`:134-135, `M`:1199].** Pausa cierra y desmonta la SD, y la tarjeta solo se inicializa al arrancar la tarea.
 
@@ -173,9 +175,9 @@ Las páginas de esta tabla proceden de una búsqueda en el texto extraído. Un l
 Están ordenadas por impacto. Son puntos de partida para el análisis, no decisiones.
 
 **Seguridad funcional**
-1. **Ningún controlador tiene watchdog.**
-   - En el STM32 están desactivados IWDG y WWDG **[V `stm32f7xx_hal_conf.h`:57, 73]**. El ESP32 no tiene ninguno.
-   - Tampoco se registra por qué se reinicia el ESP32. Sería el primer dato para contrastar la hipótesis del contactor (auditoría, sección 5).
+1. **Supervisión del control pendiente.**
+   - En el STM32 están desactivados IWDG y WWDG **[V `stm32f7xx_hal_conf.h`:57, 73]**. El fuente ESP32 no habilita explícitamente watchdog de `loopTask`; no se afirma ausencia de watchdogs del core.
+   - El fuente histórico no registraba motivo de reinicio; la telemetría añadida en octubre sí lo hace. Política de supervisión/recuperación pendiente, ver revisión v1.2.
 2. **El STM32 no vigila si siguen llegando `0x123` ni los mensajes del BMS [V `M`:250-277].** Si el ESP32 se reinicia, la pantalla y la lógica de marchas siguen usando la última velocidad recibida, sin saber si está al día.
 3. **Cuando no llega orden, el ESP32 para los motores pero no abre los relés ni el contactor [V `E`:371-373].**
 4. **`Error_Handler` está vacío [V `M`:1416-1422].** Un fallo al inicializar se ignora y el programa sigue.
@@ -184,7 +186,7 @@ Están ordenadas por impacto. Son puntos de partida para el análisis, no decisi
 
 Añadida el 30-09:
 
-24. **Un fallo del acelerador se lee como acelerador a fondo [V `M`:401-403].** Cualquier lectura por encima de 1861 (por ejemplo, un cortocircuito a 3,3 V) se recorta al máximo y se envía como 100 %. No se comprueba si la señal está fuera de rango ni se corta el par cuando se pisan acelerador y freno a la vez. Ver la idea 4 tomada de Formula Student en [[06_TRABAJO/IDEAS|ideas]].
+24. **Lectura de acelerador fuera de rango alto se trata como fondo [V `M`:401-403].** Cualquier lectura por encima de 1861 se recorta al máximo y se envía como 100 %; un fallo que produzca esa lectura no se distingue de aceleración válida. No se comprueba plausibilidad y una conversión fallida conserva el valor anterior. **Sí existe corte por `travao==1` en ESP32** (v1.2 E:527), también con acelerador pisado; no confundirlo con frenado eléctrico. Ver A03 de la revisión del 08-10 y la idea 4 de [ideas](../../06_TRABAJO/IDEAS.md).
 
 **Control y diferencial**
 
@@ -205,7 +207,7 @@ Añadida el 30-09:
     - `g_sensor_data` se copia sin exclusión mutua.
 15. **CAN del STM32:**
     - no se comprueba lo que devuelven `HAL_CAN_Start` ni `AddTxMessage`;
-    - no hay tratamiento de errores ni de bus-off;
+    - falta tratamiento/diagnóstico de errores en la aplicación; **AutoBusOff sí está habilitado** (`M`:716, precisión 08-10);
     - el filtro acepta todos los mensajes;
     - no se comprueba la longitud de los mensajes del BMS.
 16. **La pantalla se actualiza desde tres sitios,** y uno de ellos está en otra tarea (`defaultTask`).

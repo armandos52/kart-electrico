@@ -1,0 +1,26 @@
+[
+  {
+    "iteration": 1,
+    "dialog": true,
+    "status": "disconnected",
+    "version": "0.4.0-calibracion-pasos",
+    "failed": [],
+    "errors": []
+  },
+  {
+    "iteration": 2,
+    "dialog": true,
+    "status": "disconnected",
+    "version": "0.4.0-calibracion-pasos",
+    "failed": [],
+    "errors": []
+  },
+  {
+    "iteration": 3,
+    "dialog": true,
+    "status": "disconnected",
+    "version": "0.4.0-calibracion-pasos",
+    "failed": [],
+    "errors": []
+  }
+]

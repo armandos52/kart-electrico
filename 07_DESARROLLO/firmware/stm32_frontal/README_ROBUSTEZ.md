@@ -1,4 +1,6 @@
-# Frontal STM32 · v1.3-dev2
+# Frontal STM32 · v1.3-dev3
+
+Actualización 13-10: pulsador físico **momentáneo**, confirmado por Armando. START/STOP tiene memoria: START tras 40 ms alto estable, soltar no para, siguiente pulsación STOP al primer alto muestreado; exige liberación estable de 40 ms entre eventos y tras inicialización. Sin `delay` ni cambio CAN/GPIO. Umbrales de desarrollo, no rebote medido. Snapshot/CSV `Start` es petición lógica, no nivel del pin. [Política DEC-0008](../../../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0008_start_momentaneo_con_memoria.md), [ENS-0013](../../../06_TRABAJO/ensayos/ENS-0013_start_stop_momentaneo.md): 83 comprobaciones frontales/integradas, 56 del ESP32 intacto y compilación ARM correctas. Fuentes y ELF/HEX preservados, sin grabación; «B1.3» declarada en kart aún sin identificación binaria. Cambiar únicamente ESP32 no instala esta corrección.
 
 Copia de trabajo del STM32F746G Discovery/TouchGFX 2025/26, sin grabar ni identificar todavía el firmware instalado. `ORIGEN_V0.json` identifica los 1673 archivos originales verificados antes de editar. No se cambian GPIO, relojes, QSPI, SDRAM ni controlador de pantalla de la entrega.
 
@@ -24,7 +26,7 @@ ARM GNU 14.3.Rel1 portable en `07_DESARROLLO/herramientas/toolchains/bin`; opci�
 
 Después de clonar, con entrega histórica disponible, `tools/restore_dependencies.py` repone solo archivos ausentes y verifica sus hashes; no sobreescribe desarrollo. Los dos archivos IWDG que faltaban se incorporaron desde [HAL oficial v1.3.3](https://github.com/STMicroelectronics/stm32f7xx-hal-driver/tree/v1.3.3), misma versión que `stm32f7xx_hal.c`; licencia y fuentes añadidas versionadas. No actualizar todo HAL por esta dependencia.
 
-`tests/compilar.cmd` comprueba adquisición/protocolo/SD/textos con MSVC y respuestas de periféricos controladas. Son pruebas unitarias, no simulación dinámica ni prueba del hardware. Evidencia en [ENS-0009](../../../06_TRABAJO/ensayos/ENS-0009_robustez_firmware_v13.md).
+`tests/compilar.cmd` comprueba adquisición/protocolo/SD/textos y pulsador con MSVC y respuestas de periféricos controladas; también enlaza el núcleo ESP32 real para verificar las tramas emitidas y la secuencia de relés. Son pruebas de software, no simulación dinámica ni prueba del hardware. Evidencias en [ENS-0009](../../../06_TRABAJO/ensayos/ENS-0009_robustez_firmware_v13.md) y [ENS-0013](../../../06_TRABAJO/ensayos/ENS-0013_start_stop_momentaneo.md). `build.py` nombra ELF/HEX según `KART_FRONTEND_VERSION` de la cabecera.
 
 ## CubeMX / Designer
 

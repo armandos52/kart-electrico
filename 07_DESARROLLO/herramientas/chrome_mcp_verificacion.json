@@ -1,0 +1,25 @@
+{
+  "fechaUTC": "2026-10-07T14:44:17.846Z",
+  "servidor": {
+    "name": "chrome_devtools",
+    "title": "Chrome DevTools MCP server",
+    "version": "1.10.1"
+  },
+  "chrome": "154.0.8037.98",
+  "modoPrueba": "headless; configuración habitual visible",
+  "herramientas": 30,
+  "resultados": {
+    "conexionMCP": true,
+    "navegador": true,
+    "clic": true,
+    "javascript": true,
+    "consola": true,
+    "redHTTP200": true
+  },
+  "paginaPrueba": "Página sintética local; no se ha ensayado todavía una aplicación del kart",
+  "evidencia": {
+    "evaluation": "Script ran on page and returned:\n```json\n{\"titulo\":\"Prueba Chrome MCP\",\"resultado\":\"OK_MCP\"}\n```",
+    "consoleMessages": "## Console messages\nShowing 1-1 of 1 (Page 1 of 1).\nmsgid=1 [log] CONSOLA_MCP_OK (1 args)",
+    "network": "## Network requests\nShowing 1-3 of 3 (Page 1 of 1).\nreqid=1 GET http://127.0.0.1:61384/ [200]\nreqid=2 GET http://127.0.0.1:61384/favicon.ico [200]\nreqid=3 GET http://127.0.0.1:61384/dato [200]"
+  }
+}

@@ -14,7 +14,8 @@ import secrets
 import sys
 import threading
 import time
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, parse_qs
+from calibracion import SteeringCalibration
 
 BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE / ".vendor"))
@@ -64,14 +65,37 @@ SIGNALS = {
     "can_init_ok": ("CAN inicializado", "", 0, 1, 1500),
     "can_init_attempts": ("Intentos de inicio CAN", "", 0, 4294967295, 1500),
     "start_requested": ("START recibido", "", 0, 1, 1500),
-    "control_state": ("Fase del programa", "", {"can_wait", "mpu_init", "running"}, None, 1500),
+    "control_state": ("Fase del programa", "", {"can_wait", "mpu_init", "mpu_calibration", "running"}, None, 1500),
     "drive_direction": ("Marcha ordenada a los Kelly", "", {"N", "D", "R"}, None, 1500),
-    "drive_inhibit": ("Motivo de parada del control", "", {"can_init", "initializing", "no_command", "relays", "brake", "pedal_zero", "neutral", "direction_change", "can_timeout", "mpu_unavailable", "none"}, None, 1500),
+    "drive_inhibit": ("Motivo de parada del control", "", {"can_init", "initializing", "no_command", "relays", "brake", "pedal_zero", "neutral", "direction_change", "can_timeout", "mpu_unavailable", "none", "invalid_command", "start_off", "charger", "rearm_required", "mode_change", "speed_invalid", "hall_fault", "frontend_invalid", "reverse_limit", "output_fault", "can_fault", "configuration"}, None, 1500),
 }
+SIGNALS.update({
+    'mode_applied': ('Modo aplicando traccion (255 = ninguno)', '', 0, 255, 1500),
+    'rearm_required': ('Rearme requerido', '', 0, 1, 1500),
+    'reverse_limited': ('Limitacion de marcha atras activa', '', 0, 1, 1500),
+    'speed_valid': ('Calidad de velocidad Hall', '', 0, 1, 1500),
+    'speed_kph_max_wheel': ('Velocidad estimada rueda mas rapida', 'km/h', 0, 300, 1500),
+    'reverse_limit_kph': ('Umbral configurado marcha atras', 'km/h', 0, 100, 1500),
+    'frontend_health_seen': ('Frontal envia diagnostico ADC', '', 0, 1, 1500),
+    'frontend_health_ok': ('Salud frontal aceptada', '', 0, 1, 1500),
+    'watchdog_ok': ('Watchdog configurado', '', 0, 1, 1500),
+    'can_rx_invalid': ('Recepciones CAN invalidas', '', 0, 4294967295, 1500),
+    'can_tx_errors': ('Errores envio CAN', '', 0, 4294967295, 1500),
+    'can_error_flags': ('Bits error MCP2515', '', 0, 255, 1500),
+    'mpu_errors': ('Errores lectura/calibracion MPU', '', 0, 4294967295, 1500),
+    'accelerator_adc_physical': ('ADC fisico pedal (65535 = fallo)', 'cuentas', 0, 65535, 1500),
+    'steer_adc_physical': ('ADC fisico direccion (65535 = fallo)', 'cuentas', 0, 65535, 1500),
+})
 DISCRETE = {"brake", "relay1", "relay2", "charger_connected", "sd_ready", "pwm_left_raw", "pwm_right_raw", "can_rx_age_ms",
             "accelerator_raw", "steer_raw", "relay_seq", "emergency_stop", "can_rx_count", "loop_max_us",
             "telemetry_us_max", "telemetry_dropped", "wifi_clients", "wifi_ap", "mpu_ok",
             "control_ready", "can_init_ok", "can_init_attempts", "start_requested"}
+
+DISCRETE.update({'can_tx_errors', 'frontend_health_seen', 'accelerator_adc_physical', 'speed_valid', 'watchdog_ok', 'reverse_limited', 'frontend_health_ok', 'steer_adc_physical', 'mpu_errors', 'can_error_flags', 'mode_applied', 'can_rx_invalid', 'rearm_required'})
+
+STATIC_MODULES = ("app.js", "nucleo.js", "i18n.js", "textos.js", "canales.js", "graficas.js", "vista_kart.js", "calibracion.js",
+                  "modelo_kart.js", "escena_kart.js", "esquema_kart.js", "vendor/three.module.min.js",
+                  "vendor/three.core.min.js", "vendor/OrbitControls.js")
 
 # Fuentes TCP (Wi-Fi directo con el ESP32) añadidas con --wifi; solo direcciones privadas.
 WIFI_URLS = []
@@ -99,7 +123,7 @@ def port_inventory():
 
 
 class Monitor:
-    def __init__(self, clock=time.monotonic, session_dir=None):
+    def __init__(self, clock=time.monotonic, session_dir=None, calibration_dir=None):
         self.clock = clock
         self.lock = threading.RLock()
         self.samples = {}
@@ -116,6 +140,7 @@ class Monitor:
         self.log = None
         self.session_file = None
         self.session_dir = Path(session_dir) if session_dir else BASE / "sesiones"
+        self.calibration = SteeringCalibration(calibration_dir or self.session_dir / "calibraciones", clock)
         self.connection_lock = threading.Lock()
         self.handle = None
         self.worker = None
@@ -173,6 +198,8 @@ class Monitor:
                         unknown += 1
                         continue
                     definition = SIGNALS[key]
+                    if key == "mode_applied" and (type(value) is not int or value not in {0, 1, 2, 255}):
+                        raise ValueError("Modo aplicado invalido")
                     if isinstance(definition[2], set):
                         if not isinstance(value, str) or value not in definition[2]:
                             raise ValueError("Valor inválido: " + key)
@@ -213,9 +240,20 @@ class Monitor:
                     self.stats["sequence_gaps"] += delta - 1
                 self._log({"kind": "telemetry", "received_utc": datetime.now(timezone.utc).isoformat(),
                            "frame": data})
+                try:
+                    self.calibration.observe(data, self.port, self.session_file)
+                except (OSError, ValueError) as exc:
+                    self.calibration.error = "Registro de calibración fallido: " + str(exc)
+                    self.calibration.active = None
+                    self.calibration.capture = None
             except (ValueError, TypeError, OverflowError) as exc:
                 self.stats["invalid_frames"] += 1
                 self.event("Telemetría rechazada: " + str(exc), "invalid")
+                if self.calibration.capture:
+                    try:
+                        self.calibration.interrupt("Telemetría inválida: " + str(exc))
+                    except OSError as error:
+                        self.calibration.error = str(error)
 
     def snapshot(self):
         with self.lock:
@@ -231,12 +269,59 @@ class Monitor:
                                "node": sample["node"] if sample else None,
                                "tick_ms": sample["tick_ms"] if sample else None,
                                "sample_id": sample["sample_id"] if sample else None}
+            esp_version = self.nodes.get("esp32", {}).get("fw") or ""
+            if "v1.3" in esp_version:
+                fields["mpu_ok"]["label"] = "MPU: lectura reciente y calibrada"
+                for flag, keys in [("speed_valid", ("rpm_rl", "rpm_rr", "speed_kph_max_wheel")),
+                                   ("mpu_ok", ("yaw_dps",)),
+                                   ("frontend_health_ok", ("accelerator_adc_physical", "steer_adc_physical"))]:
+                    valid = fields[flag]
+                    if valid["quality"] != "fresh" or valid["value"] == 0:
+                        for key in keys:
+                            if fields[key]["quality"] == "fresh":fields[key]["quality"] = "stale"
             return {"status": self.status, "port": self.port, "error": self.error,
                     "log_error": self.log_error, "session_file": self.session_file,
                     "frame_id": self.frame_id, "signals": fields, "stats": dict(self.stats),
                     "nodes": {key: {k: v for k, v in value.items() if k != "received"}
                               for key, value in self.nodes.items()}, "messages": list(self.messages),
-                    "serial_available": serial is not None, "read_only": True}
+                    "serial_available": serial is not None, "read_only": True,
+                    "calibration": self.calibration.snapshot(self.status == "connected")}
+
+    def calibrate(self, action, data):
+        """API del PC; nunca entrega estos mensajes a serial/TCP."""
+        with self.lock:
+            reason = self.calibration.tick(self.status == "connected")
+            if action in {"begin", "capture", "activate", "guided-begin", "guided-measure", "guided-resume", "guided-use"} and reason:
+                raise ValueError(reason)
+            if self.log_error and action in {"begin", "capture", "guided-begin", "guided-measure", "guided-resume"}:
+                raise ValueError("Resuelve el error del registro de sesión antes de capturar")
+            if action == "guided-begin":
+                self.calibration.begin_guided(data)
+            elif action == "guided-measure":
+                self.calibration.measure_guided()
+            elif action == "guided-resume":
+                self.calibration.resume_guided()
+            elif action == "guided-cancel":
+                self.calibration.cancel_guided()
+            elif action == "guided-use":
+                return {"id":self.calibration.use_guided(data)}
+            elif action == "begin":
+                self.calibration.begin(data)
+            elif action == "capture":
+                self.calibration.start_capture()
+            elif action == "cancel":
+                self.calibration.finish("rejected", "Cancelada por el usuario")
+            elif action == "save":
+                return {"id": self.calibration.save(data)}
+            elif action == "activate":
+                self.calibration.activate(data)
+            elif action == "deactivate":
+                if self.calibration.capture:
+                    raise ValueError("Termina o cancela la captura antes de cambiar perfil")
+                self.calibration.active = None
+            else:
+                raise ValueError("Operación de calibración desconocida")
+            return {"ok": True}
 
     def connect(self, port, bench_ready):
         if bench_ready is not True:
@@ -270,6 +355,8 @@ class Monitor:
                 raise
             with self.lock:
                 self.samples.clear()
+                self.calibration.interrupt("Nueva conexión: confirma de nuevo el perfil")
+                self.calibration.latest = None
                 self.nodes.clear()
                 self.messages.clear()
                 for key in self.stats:
@@ -316,6 +403,10 @@ class Monitor:
             with self.lock:
                 self.status = "disconnected"
                 self.handle = None
+                try:
+                    self.calibration.interrupt("Fuente desconectada")
+                except OSError as exc:
+                    self.calibration.error = str(exc)
                 self.event("Puerto cerrado; señales marcadas sin datos vigentes", "connection")
                 if self.log:
                     self.log.close()
@@ -330,6 +421,7 @@ class Monitor:
                     raise ValueError("Lectura aún finalizando; vuelve a comprobar el estado")
             with self.lock:
                 self.status = "disconnected"
+                self.calibration.interrupt("Fuente desconectada")
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -364,7 +456,19 @@ class Handler(BaseHTTPRequestHandler):
             if not name:
                 return self._respond(404, {"error": "No hay sesión serie registrada"})
             return self._respond(200, (self.server.monitor.session_dir / name).read_bytes(), "application/x-ndjson; charset=utf-8")
-        routes = {"/": ("index.html", "text/html; charset=utf-8"), "/app.js": ("app.js", "text/javascript; charset=utf-8"), "/style.css": ("style.css", "text/css; charset=utf-8")}
+        if path == "/api/calibration/export":
+            query = parse_qs(urlsplit(self.path).query)
+            try:
+                with self.server.monitor.lock:
+                    payload = self.server.monitor.calibration.export(query.get("run", [None])[0], query.get("profile", [None])[0])
+                return self._respond(200, payload, "application/zip")
+            except (ValueError, OSError) as exc:
+                return self._respond(400, {"error": str(exc)})
+        routes = {"/": ("index.html", "text/html; charset=utf-8"), "/style.css": ("style.css", "text/css; charset=utf-8")}
+        # Lista cerrada de módulos del navegador; no se sirve ningún otro archivo de la carpeta.
+        routes.update({f"/{name}": (name, "text/javascript; charset=utf-8") for name in STATIC_MODULES})
+        routes.update({f"/referencias/{name}.jpg": (f"referencias/{name}.jpg", "image/jpeg")
+                       for name in ("frontal", "lateral", "trasera", "superior")})
         if path not in routes:
             return self._respond(404, {"error": "No encontrado"})
         name, content_type = routes[path]
@@ -388,8 +492,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.server.monitor.connect(data.get("port"), data.get("bench_ready"))
             elif path == "/api/disconnect":
                 self.server.monitor.disconnect()
+            elif path.startswith("/api/calibration/"):
+                return self._respond(200, self.server.monitor.calibrate(path.rsplit("/", 1)[-1], data))
             else:
-                return self._respond(404, {"error": "No hay comandos de actuación/calibración en esta versión"})
+                return self._respond(404, {"error": "No hay comandos de actuación al micro"})
             return self._respond(200, {"ok": True})
         except Exception as exc:
             return self._respond(400, {"error": str(exc)})
@@ -397,6 +503,12 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):
         if args and str(args[1]) != "200":
             super().log_message(fmt, *args)
+
+
+class PanelHTTPServer(ThreadingHTTPServer):
+    # Margen para los módulos que Chrome solicita en paralelo y varias pestañas,
+    # frente a la cola predeterminada de cinco conexiones de este runtime.
+    request_queue_size = 32
 
 
 def main():
@@ -411,7 +523,7 @@ def main():
         print(json.dumps({"ports": port_inventory(), "serial_available": serial is not None}, ensure_ascii=False))
         return
     monitor = Monitor()
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
+    server = PanelHTTPServer(("127.0.0.1", args.port), Handler)
     server.monitor = monitor
     server.token = secrets.token_urlsafe(32)
     print(f"Panel local: http://127.0.0.1:{server.server_port}/ — lectura sin TX; sin puerto serie abierto", flush=True)

@@ -1,0 +1,156 @@
+Processing usb (platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.311/platform-espressif32.zip; board: esp32dev; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32dev.html
+PLATFORM: Espressif 32 (55.3.311) > Espressif ESP32 Dev Module
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, esp-prog-2, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.11 
+ - framework-arduinoespressif32-libs @ 5.5.5+sha.b774170ff46 
+ - tool-esptoolpy @ 5.3.0 
+ - tool-xtensa-esp-elf-gdb @ 17.1.0+20260402 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20260121
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 47 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- MPU6050 @ 1.4.5
+|-- kart_control
+|-- mcp_can @ 1.5.1
+|-- SPI @ 3.3.11
+|-- Wire @ 3.3.11
+|-- WiFi @ 3.3.11
+Building in release mode
+Compiling .pio\build\usb\lib594\Wire\Wire.cpp.o
+Compiling .pio\build\usb\lib214\MPU6050\I2Cdev.cpp.o
+Compiling .pio\build\usb\lib214\MPU6050\MPU6050.cpp.o
+Compiling .pio\build\usb\lib214\MPU6050\MPU6050_6Axis_MotionApps20.cpp.o
+Compiling .pio\build\usb\lib214\MPU6050\MPU6050_6Axis_MotionApps612.cpp.o
+Compiling .pio\build\usb\lib214\MPU6050\MPU6050_9Axis_MotionApps41.cpp.o
+Compiling .pio\build\usb\lib120\kart_control\kart_control.cpp.o
+Compiling .pio\build\usb\libe53\SPI\SPI.cpp.o
+Compiling .pio\build\usb\lib75d\mcp_can\mcp_can.cpp.o
+Compiling .pio\build\usb\lib9ff\Network\NetworkClient.cpp.o
+Compiling .pio\build\usb\lib9ff\Network\NetworkEvents.cpp.o
+Compiling .pio\build\usb\lib9ff\Network\NetworkInterface.cpp.o
+Compiling .pio\build\usb\lib9ff\Network\NetworkManager.cpp.o
+Compiling .pio\build\usb\lib9ff\Network\NetworkServer.cpp.o
+Compiling .pio\build\usb\lib9ff\Network\NetworkUdp.cpp.o
+Compiling .pio\build\usb\libc88\WiFi\AP.cpp.o
+Compiling .pio\build\usb\libc88\WiFi\STA.cpp.o
+Compiling .pio\build\usb\libc88\WiFi\WiFi.cpp.o
+Compiling .pio\build\usb\libc88\WiFi\WiFiAP.cpp.o
+Compiling .pio\build\usb\libc88\WiFi\WiFiGeneric.cpp.o
+Compiling .pio\build\usb\libc88\WiFi\WiFiMulti.cpp.o
+Compiling .pio\build\usb\libc88\WiFi\WiFiSTA.cpp.o
+Compiling .pio\build\usb\libc88\WiFi\WiFiScan.cpp.o
+Compiling .pio\build\usb\src\main.cpp.o
+Compiling .pio\build\usb\src\telemetria.cpp.o
+Building .pio\build\usb\bootloader.bin
+Generating partitions .pio\build\usb\partitions.bin
+Compiling .pio\build\usb\FrameworkArduino\ColorFormat.c.o
+esptool v5.3.0
+Creating ESP32 image...
+Merged 2 ELF sections.
+Successfully created ESP32 image.
+src/main.cpp: In function 'void {anonymous}::hallLeft()':
+src/main.cpp:39:45: warning: '++' expression of 'volatile'-qualified type is deprecated [-Wvolatile]
+   39 |     if(!seen_l || now-last_pulse_l>=100) {++pulses_l;last_pulse_l=now;seen_l=true;}
+      |                                             ^~~~~~~~
+src/main.cpp: In function 'void {anonymous}::hallRight()':
+src/main.cpp:45:45: warning: '++' expression of 'volatile'-qualified type is deprecated [-Wvolatile]
+   45 |     if(!seen_r || now-last_pulse_r>=100) {++pulses_r;last_pulse_r=now;seen_r=true;}
+      |                                             ^~~~~~~~
+src/main.cpp: In function 'void {anonymous}::updateHall(uint32_t)':
+src/main.cpp:53:26: warning: using value of assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+   53 |         pulses_l=pulses_r=0;
+      |                  ~~~~~~~~^~
+Compiling .pio\build\usb\FrameworkArduino\Esp.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\FirmwareMSC.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\FunctionalInterrupt.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\HEXBuilder.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\HWCDC.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\HardwareSerial.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\HashBuilder.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\IPAddress.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\MD5Builder.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\MacAddress.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\Print.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\Stream.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\StreamString.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\StringUtils.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\Tone.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\USB.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\USBCDC.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\USBMSC.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\WMath.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\WString.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\base64.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\cbuf.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\chip-debug-report.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-adc.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-bt.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-cpu.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-dac.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-gpio.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-hosted.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-i2c-ng.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-i2c-slave.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-i2c.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-ldo.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-ledc.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-log-wrapper.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-matrix.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-misc.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-periman.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-psram.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-rgb-led.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-rmt.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-sigmadelta.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-spi.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-time.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-timer.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-tinyusb.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-touch-ng.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-touch.c.o
+Compiling .pio\build\usb\FrameworkArduino\esp32-hal-uart.c.o
+Compiling .pio\build\usb\FrameworkArduino\firmware_msc_fat.c.o
+Compiling .pio\build\usb\FrameworkArduino\freertos_stats.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\idf_openthread_mpool_wrapper.c.o
+Compiling .pio\build\usb\FrameworkArduino\libb64\cdecode.c.o
+Compiling .pio\build\usb\FrameworkArduino\libb64\cencode.c.o
+Compiling .pio\build\usb\FrameworkArduino\main.cpp.o
+Compiling .pio\build\usb\FrameworkArduino\stdlib_noniso.c.o
+Compiling .pio\build\usb\FrameworkArduino\wiring_pulse.c.o
+Compiling .pio\build\usb\FrameworkArduino\wiring_shift.c.o
+Archiving .pio\build\usb\libFrameworkArduino.a
+Linking .pio\build\usb\firmware.elf
+Firmware metrics can not be shown. Set the terminal codepage to "utf-8" or "cp65001" on Windows.
+Retrieving maximum program size .pio\build\usb\firmware.elf
+Checking size .pio\build\usb\firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [==        ]  15.0% (used 49244 bytes from 327680 bytes)
+Flash: [=======   ]  72.5% (used 949795 bytes from 1310720 bytes)
+Building .pio\build\usb\firmware.bin with action:
+  $ERASETOOL --chip esp32 elf2image --flash-mode ${__get_board_flash_mode(__env__)} --flash-freq ${__get_board_f_image(__env__)} --flash-size 4MB --elf-sha256-offset 0xb0 -o "$TARGET" "$SOURCES"
+Building .pio\build\usb\firmware.bin
+esptool v5.3.0
+Creating ESP32 image...
+Merged 3 ELF sections.
+Successfully created ESP32 image.
+Creating binary "firmware.factory.bin" with:
+    Offset   | File
+ -  0x1000   | bootloader.bin
+ -  0x8000   | partitions.bin
+ -  0xe000   | boot_app0.bin
+ -  0x10000  | firmware.bin
+Successfully created combined binary image.
+======================== [SUCCESS] Took 108.54 seconds ========================
+
+Environment    Status    Duration
+-------------  --------  ------------
+usb            SUCCESS   00:01:48.543
+========================= 1 succeeded in 00:01:48.543 =========================

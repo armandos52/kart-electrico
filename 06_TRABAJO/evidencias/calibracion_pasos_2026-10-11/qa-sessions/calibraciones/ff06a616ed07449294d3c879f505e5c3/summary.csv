@@ -1,0 +1,16 @@
+attempt,kind,cycle,status,reason,n,median_counts,min_counts,max_counts,peak_to_peak_counts,stdev_counts,duration_s
+2da82eeaf4d8414b8477002a3c857edb,center,0,rejected,"La señal varía demasiado durante la medición. Si no moviste el volante, revisa el sensor o el cableado. Puedes repetir este paso.",51,2180,2000,2360,360,152.73506473629428,10.0
+d671ff1a7f644c0a82be2292c961b5bc,center,0,completed,,51,2180,2178,2182,4,1.6492422502470643,10.0
+5bbe5aa052ad44b88c7bfc42f5e9ec10,left,1,rejected,La señal CAN ha llegado a 0 o 4095. No se puede distinguir más recorrido. Revisa la señal antes de repetir este paso.,1,0,0,0,0,0,0.0
+a481ae1264f6427c8a2b3ae60c9351ab,left,1,completed,,26,500.0,498,502,4,1.647375535160746,5.0
+ef7812a0ecb2441c91bd69e6666a95b2,center_left,1,completed,,26,2180.0,2178,2182,4,1.647375535160746,5.0
+fffe327bf52c4bcd9cf29eb37046ae11,right,1,completed,,26,3500.0,3498,3502,4,1.647375535160746,5.0
+c23b727d16dc4516ab8b5dbff8a492e7,center_right,1,completed,,26,2180.0,2178,2182,4,1.647375535160746,5.0
+7a0e3a92a4924806b6b0af465d9739ad,left,2,completed,,26,500.0,498,502,4,1.647375535160746,5.0
+d6099f664d114047ab5b84f62762de11,center_left,2,completed,,26,2180.0,2178,2182,4,1.647375535160746,5.0
+b37e4c49ad294f5ebaca58052fa3e2f3,right,2,completed,,26,3500.0,3498,3502,4,1.647375535160746,5.0
+63668c2290a740a8b632d18ae18cfc32,center_right,2,completed,,26,2180.0,2178,2182,4,1.647375535160746,5.0
+530d445b7fa8416594bad94497fbfcdb,left,3,completed,,26,500.0,498,502,4,1.647375535160746,5.000000000000007
+7a35460e4a1348baaba2f0b0b36021b5,center_left,3,completed,,26,2180.0,2178,2182,4,1.647375535160746,5.0
+c4936d5fa58642d39e3c34bebf7db661,right,3,completed,,26,3500.0,3498,3502,4,1.647375535160746,5.0
+2f61188d06a94d93b539e106aac144eb,center_right,3,completed,,26,2180.0,2178,2182,4,1.647375535160746,5.0

@@ -1,0 +1,164 @@
+{
+  "scope": "Chrome, demo y transformaciones renderizadas; sin hardware",
+  "status": "PASS",
+  "rows": [
+    {
+      "gear": "D",
+      "pedal": 30,
+      "rpm": 120,
+      "seconds": 1.1088999999985099,
+      "frames": 67,
+      "rad_s": -0.3795748793656111,
+      "svg_px_s": -7.59150148797129
+    },
+    {
+      "gear": "D",
+      "pedal": 60,
+      "rpm": 240,
+      "seconds": 1.1012999999970197,
+      "frames": 67,
+      "rad_s": -0.7416589096470794,
+      "svg_px_s": -15.287769000313764
+    },
+    {
+      "gear": "D",
+      "pedal": 100,
+      "rpm": 400,
+      "seconds": 1.10760000000149,
+      "frames": 67,
+      "rad_s": -1.2663942650531639,
+      "svg_px_s": -25.330137233624285
+    },
+    {
+      "gear": "R",
+      "pedal": 30,
+      "rpm": 120,
+      "seconds": 1.1091000000014901,
+      "frames": 67,
+      "rad_s": 0.37960840416817626,
+      "svg_px_s": 7.592164818310972
+    },
+    {
+      "gear": "R",
+      "pedal": 60,
+      "rpm": 240,
+      "seconds": 1.1185,
+      "frames": 67,
+      "rad_s": 0.7523643938857181,
+      "svg_px_s": 15.058077782744734
+    },
+    {
+      "gear": "R",
+      "pedal": 100,
+      "rpm": 400,
+      "seconds": 1.10789999999851,
+      "frames": 67,
+      "rad_s": 1.2857873209185595,
+      "svg_px_s": 25.330065890457394
+    }
+  ],
+  "checks": [
+    {
+      "name": "Una marca única unida a cada rueda 3D",
+      "pass": true
+    },
+    {
+      "name": "Cuatro marcas equivalentes en el esquema",
+      "pass": true
+    },
+    {
+      "name": "D 30 %: 3D proporcional a RPM",
+      "pass": true
+    },
+    {
+      "name": "D 30 %: SVG proporcional y mismo sentido",
+      "pass": true
+    },
+    {
+      "name": "D 60 %: 3D proporcional a RPM",
+      "pass": true
+    },
+    {
+      "name": "D 60 %: SVG proporcional y mismo sentido",
+      "pass": true
+    },
+    {
+      "name": "D 100 %: 3D proporcional a RPM",
+      "pass": true
+    },
+    {
+      "name": "D 100 %: SVG proporcional y mismo sentido",
+      "pass": true
+    },
+    {
+      "name": "D: se distinguen los tres escalones 3D",
+      "pass": true
+    },
+    {
+      "name": "R 30 %: 3D proporcional a RPM",
+      "pass": true
+    },
+    {
+      "name": "R 30 %: SVG proporcional y mismo sentido",
+      "pass": true
+    },
+    {
+      "name": "R 60 %: 3D proporcional a RPM",
+      "pass": true
+    },
+    {
+      "name": "R 60 %: SVG proporcional y mismo sentido",
+      "pass": true
+    },
+    {
+      "name": "R 100 %: 3D proporcional a RPM",
+      "pass": true
+    },
+    {
+      "name": "R 100 %: SVG proporcional y mismo sentido",
+      "pass": true
+    },
+    {
+      "name": "R: se distinguen los tres escalones 3D",
+      "pass": true
+    },
+    {
+      "name": "Pausa conserva 3D y esquema",
+      "pass": true
+    },
+    {
+      "name": "Esquema visible acelera con la misma escala",
+      "pass": true
+    },
+    {
+      "name": "Movimiento reducido detiene el esquema",
+      "pass": true
+    },
+    {
+      "name": "Movimiento reducido detiene el 3D",
+      "pass": true
+    },
+    {
+      "name": "Pedal cero detiene las dos vistas",
+      "pass": true
+    },
+    {
+      "name": "Selector D/R y mandos sin desbordamiento móvil",
+      "pass": true
+    },
+    {
+      "name": "Sin escrituras al servidor",
+      "pass": true
+    },
+    {
+      "name": "Sin errores JavaScript",
+      "pass": true
+    },
+    {
+      "name": "Servidor desconectado del kart",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "writes": []
+}

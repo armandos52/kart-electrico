@@ -1,0 +1,122 @@
+[
+  {
+    "path": "07_DESARROLLO/panel_local/server.py",
+    "sha256": "3D8644A7795BD534E9AA8B8FDFEADE148B3075D74855F7874FF0F4398C3B4632"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/calibracion.py",
+    "sha256": "E7D3851E8170C3B0F92ACCD6EB0DB23D4B2543AA19A7C93FFDAC7EE9D1918E63"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/app.js",
+    "sha256": "449F1BA80F2600F28AB266D6746C7A2F7FF5350F9909467E3617C5F6491F1D19"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/nucleo.js",
+    "sha256": "A4F42F612280FAC41FF26B49AFEB286A0A0F0A0A49F1A8D4210613A884F60AEA"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/calibracion.js",
+    "sha256": "C7E9E9CCA45710EC0419219FBB6A844185536EAB7FC4CC275DE91C30CFC1008D"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/canales.js",
+    "sha256": "D4A2DB663CED869847474F536EAF1DFF893B966D607D0626BD5E77CBEE605CFC"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/graficas.js",
+    "sha256": "6CD310F23C2B3AFD96AC98ABCA6F5E7B985259272044D3E474FB5184ECD57777"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/vista_kart.js",
+    "sha256": "E20B2B0267F7476A8802C88E373215C6FDEAF24BDE42EDE1C6BF44A5C140D617"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/index.html",
+    "sha256": "5BEA9BCA53284202CE7DADE6AB0E67F968442CEF4DDCD16723D12E07999C0B56"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/style.css",
+    "sha256": "E36B033AB2534720859E7152D32BE8D5FA4EC661AF63E0698B0CDAD5433EA3D2"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/README.md",
+    "sha256": "779BF373F84F2B9351CBEB887DBCB2A28487B523E2D4D0E06706A4931BAA27A6"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/tests/test_calibration.py",
+    "sha256": "B6AD9BBFBA940455FEEFDE2670C30C9DC08BB283DA0F008981CC3A2D529AF25D"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/tests/test_reader.py",
+    "sha256": "4A8C1E40F0F0D2A7E23C8D5EE6AA6FDD5B249C5E02ECE58B047E8821AEEE3474"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/check-calibration.cjs",
+    "sha256": "A9C84BBE22913991AFE917FFF4CEFDE7FF4BEC9517058B2FC75CD4B4B3C9CFE4"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/calibration_fixture.py",
+    "sha256": "9870FE411A6B41C6E4A978A1DF7DF67E294DB24B1766139742D66A99C4A49323"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/smoke-calibration.cjs",
+    "sha256": "846E6BB6536363328DD06E12C824A2B21856A3D890C2A378F05CD2CFD1EFB822"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\asistente-1280.png",
+    "sha256": "6799A5CA3A6D4DCD2CC907B431A61D0B72EA8BD89E798E40B5AA5BDD614362D4"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\asistente-320.png",
+    "sha256": "454A8B18AB024F78388D7F63E582E27399BEF1061226A9FA8B06EE432D18B75F"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\asistente-375.png",
+    "sha256": "554907F7FFE732EC3E35070DFCBC817F0D12F892400E923DDD08A5358EE08B1A"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\estado_final_panel.json",
+    "sha256": "45B4064BAB1733319E3B9006D20CDA1C1246C61DB146331B829FB951B18614E6"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\exportacion_qa.zip",
+    "sha256": "DD1DC1F99B211A76FCA5A6EA68EED989C6DCFCD1208F6EA03996F98CEAB95626"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\firmware_sin_cambios.json",
+    "sha256": "A2E0BBDEB33E3CD0D1552915673E677D527C3BAE71E028151BC4533B46D35496"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\panel-real-desconectado.png",
+    "sha256": "82A4930D12A085155471218810A811A9943D5468376B4BFC1C93F645DA5C6525"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\procesos_finales.json",
+    "sha256": "9005A83213B651E287126FEFE820FAF728DA503AC1C35DA7E18DB3C042906BDD"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\procesos.json",
+    "sha256": "78C08CADAAAE3C28A1826CF054418EE0D740138E8F128198FFC0B4705E07EF81"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\pruebas_finales.txt",
+    "sha256": "353CF2971C2B99E0351F653F6A164E10B94A8FF52DFA7F1A7135893015F2540E"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\pruebas_intento_tcp.txt",
+    "sha256": "31BDF476BA67769EE3C742859ECAA52C989699FCA68B7021485F6D8CC7512AD9"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\pruebas.txt",
+    "sha256": "4C7010B1483B606466D48418DE2FF7AFEF781A64E9642307704207C9C85AA737"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\qa_interfaz.json",
+    "sha256": "833CD48C6194F431293C4FFA8112EC60139E63CFE0DD51F6E47ACDF28E9F46CB"
+  },
+  {
+    "path": "C:\\kart proyecto\\06_TRABAJO\\evidencias\\implementacion_calibracion_2026-10-08\\smoke_panel.json",
+    "sha256": "40B62FE91717C66491492B59C674E0865900DE131240B6FAEF378598F6CA0CF5"
+  }
+]

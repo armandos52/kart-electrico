@@ -132,9 +132,15 @@ class WifiTests(unittest.TestCase):
         url = "socket://127.0.0.1:%d" % listener.getsockname()[1]
         server.WIFI_URLS.append(url)
         received = []
+        reader_ready = threading.Event()
 
         def esp32():
             conn, _ = listener.accept()
+            # pySerial vacía el búfer al abrir. Sin sincronización, el fixture
+            # podía enviar sus únicas tramas antes de que el lector estuviera listo.
+            if not reader_ready.wait(timeout=3):
+                conn.close()
+                return
             conn.sendall(b"# kart esp32 fw=v1 reset=encendido\n" + FIRMWARE_V1.encode() + b"\n"
                          + FIRMWARE_V1.replace('"seq":7', '"seq":8').encode() + b"\n")
             conn.settimeout(0.5)
@@ -148,12 +154,13 @@ class WifiTests(unittest.TestCase):
                 pass
             conn.close()
 
-        thread = threading.Thread(target=esp32)
+        thread = threading.Thread(target=esp32, daemon=True)
         thread.start()
         with tempfile.TemporaryDirectory() as directory:
             monitor = Monitor(session_dir=directory)
             self.assertIn(url, [p["device"] for p in server.port_inventory()])
             monitor.connect(url, True)
+            reader_ready.set()
             thread.join(timeout=3)
             monitor.worker.join(timeout=3)
             self.assertEqual(monitor.stats["valid_frames"], 2)

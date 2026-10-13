@@ -8,7 +8,7 @@ resumen: Al encender, a veces el ESP32 no activa el contactor y solo se recupera
 
 Fecha: 2026-09-30.
 Estado: abierto.
-Configuración: kart 2025/26 ([[03_CATALOGO/fichas/DOC-0042|DOC-0042]]). El ESP32-WROOM-32D está en la PCB de la unidad trasera (DOC-0042 p. 50). Se supone cargado `ESP32-final.ino` del 21-07-2026, pero no se ha comprobado qué versión está grabada.
+Configuración: kart 2025/26 ([DOC-0042](../../03_CATALOGO/fichas/DOC-0042.md)). El ESP32-WROOM-32D está en la PCB de la unidad trasera (DOC-0042 p. 50). Se supone cargado `ESP32-final.ino` del 21-07-2026, pero no se ha comprobado qué versión está grabada.
 
 ## Síntoma y condiciones de la prueba
 
@@ -34,7 +34,7 @@ Configuración: kart 2025/26 ([[03_CATALOGO/fichas/DOC-0042|DOC-0042]]). El ESP3
 - Con el PC conectado al ESP32, este nunca se bloqueó, aunque el contactor seguía desconectándose (p. 91).
 - Los autores sospechan de fluctuaciones de tensión (p. 97).
 
-Estos datos proceden de extractos del buscador; la lectura completa de esas páginas está pendiente. Relación con la hipótesis 1 de la [[06_TRABAJO/AUDITORIA_2026-09-29|auditoría]]: causa común del contactor y del ESP32.
+Estos datos proceden de extractos del buscador; la lectura completa de esas páginas está pendiente. Relación con la hipótesis 1 de la [auditoría](../../06_TRABAJO/AUDITORIA_2026-09-29.md): causa común del contactor y del ESP32.
 
 **Código** (`ESP32-final.ino`, comprobado el 30-09 en el original):
 - **Pines de arranque.** Estos pines deciden cómo arranca el chip, y los cuatro tienen algo conectado:
@@ -44,7 +44,7 @@ Estos datos proceden de extractos del buscador; la lectura completa de esas pág
   - GPIO5: selección (CS) del chip CAN MCP2515 (línea 6).
 - **Entrada del cargador, IO35.** En el código está configurada como `INPUT` (línea 233), y IO34–IO39 no tienen resistencia interna. Si lee alto durante 2 s con los relés activos, apaga los relés (línea 314).
   - Según DOC-0042 p. 78 (extracto), IO35 va al relé de carga de la caja de barras, y se le añadió una resistencia de pull-down (fig. 22).
-  - La [[04_CONOCIMIENTO/integracion_del_kart/ESTADO_DOCUMENTADO_2025-26|síntesis 2025/26]] la describe como provisional (p. 97-98).
+  - La [síntesis 2025/26](../../04_CONOCIMIENTO/integracion_del_kart/ESTADO_DOCUMENTADO_2025-26.md) la describe como provisional (p. 97-98).
 - **Arranque.**
   1. Pone los relés a LOW.
   2. Arranca el CAN con `while (CAN.begin(...) != CAN_OK)`, un bucle sin salida (línea 240). Si el MCP2515 no responde, el programa no pasa de ahí y nunca activa los relés.
@@ -141,16 +141,18 @@ Son requisitos para discutir, no un diseño aprobado. Cada punto cubre una o var
    - LED de estado;
    - puntos de prueba en 3,3 V, 5 V, EN y GPIO clave.
 
-Firmware relacionado, para cuando se trabaje el código: registrar y enviar el motivo de reinicio (`esp_reset_reason`), watchdog, reintentos del CAN con aviso en lugar del bucle sin salida, y filtrar las lecturas de IO35 y START. Ver las mejoras 1, 3 y 5 del [[04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO|inventario del código]].
+Firmware relacionado, para cuando se trabaje el código: registrar y enviar el motivo de reinicio (`esp_reset_reason`), watchdog, reintentos del CAN con aviso en lugar del bucle sin salida, y filtrar las lecturas de IO35 y START. Ver las mejoras 1, 3 y 5 del [inventario del código](../../04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO.md).
 
 ## Intentos y resultados
 
-**07-10-2026, banco ([[06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi|ENS-0001]]):** ESP32 en su placa, alimentado por USB.
+**07-10-2026, noche ([ENS-0002](../../06_TRABAJO/ensayos/ENS-0002_recuperacion_esp32_tras_prueba_kart.md)):** Armando declara que con v1.1 los motores no funcionaron al probar en el kart y no pudo ver el panel. No hay captura en el vehículo ni confirmación de estado del contactor. Después conecta solo el módulo ESP32 fuera del kart: el error `CAN init failed` es esperable sin MCP2515 y no identifica la causa del fallo en el vehículo. **Imagen binaria original restaurada y verificada contra los 4 MB de flash**, conservando la flash previa en dos lecturas idénticas. Comprobación de motores pendiente.
+
+**07-10-2026, banco ([ENS-0001](../../06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi.md)):** ESP32 en su placa, alimentado por USB.
 
 - **Hipótesis 3 reproducida en parte.** En cuatro arranques, el MCP2515 respondió tras 19 s, ~35 s y ~77 s de «Entering Configuration Mode Failure / CAN init failed», y en uno no respondió en 40 s. Mientras tanto el programa sigue en el bucle de la línea 240: no se calibra el giróscopo ni se pueden activar los relés.
 - **Grabado del chip:** «Flash voltage set by a strapping pin: 3.3V», es decir, GPIO12 estaba bajo al arrancar en ese banco.
 - **Respaldo de la flash original:** contenía un **coredump**, así que el ESP32 se colgó alguna vez.
-  - Hay un mecanismo de cuelgue confirmado al leer mensajes CAN con DLC > 8 o lecturas SPI corruptas: [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0005_mcp_can_desborda_con_dlc_mayor_8|PROB-0005]], corregido en firmware v1.1.
+  - Hay un mecanismo de cuelgue confirmado al leer mensajes CAN con DLC > 8 o lecturas SPI corruptas: [PROB-0005](PROB-0005_mcp_can_desborda_con_dlc_mayor_8.md), corregido en firmware v1.1.
   - Un cuelgue así se recupera con un reset; no explica por sí solo la necesidad de sacar el ESP32.
 
 **Siguiente:** con el osciloscopio y mientras se reintenta, medir la alimentación del módulo CAN, GPIO19 (MISO), GPIO5 (CS), SCK y el cristal del MCP2515.

@@ -1,0 +1,80 @@
+const {chromium}=require('C:/Users/nandi/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('node:fs');
+const path=require('node:path');
+const evidence=process.argv[2];
+const url='http://127.0.0.1:8877';
+(async()=>{
+ const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+ const checks=[],errors=[];
+ const assert=(name,ok)=>{if(!ok)throw Error(name);checks.push(name);};
+ try{
+  const page=await browser.newPage({viewport:{width:1280,height:960}});
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(url);
+  const initial=await (await page.request.get(url+'/api/state')).json();
+  await page.request.post(url+'/qa/resume',{headers:{'X-Kart-Token':initial.token}});
+  await page.locator('#abrir-calibracion').click();
+  await page.waitForFunction(()=>document.querySelector('#cal-raw').textContent!=='—');
+  assert('Captura bloqueada sin preparación',await page.locator('#cal-capture').isDisabled());
+  await page.locator('#cal-config').fill('QA · montaje inventado · sin hardware');
+  await page.locator('#cal-alignment').fill('Referencia sintética');
+  await page.locator('#cal-conditions').fill('Ensayo automático, reloj simulado; no es una medición física');
+  await page.locator('#cal-ready').check();
+  await page.locator('#cal-begin').click();
+  await page.waitForFunction(()=>!document.querySelector('#cal-capture').disabled);
+  const state=await (await page.request.get(url+'/api/state')).json();
+  const headers={'X-Kart-Token':state.token};
+  const qa=async suffix=>{const r=await page.request.post(url+'/qa/'+suffix,{headers});if(!r.ok())throw Error(await r.text());};
+  const rejected=await page.request.post(url+'/api/calibration/capture',{data:{}});
+  assert('Escritura local requiere token',rejected.status()===403);
+  await page.locator('#cal-capture').click();
+  await page.waitForFunction(()=>!document.querySelector('#cal-cancel').disabled);
+  await qa('stale');
+  await page.waitForFunction(()=>document.querySelector('#cal-rows').textContent.includes('Rechazada'));
+  assert('Interrupción registrada sin avanzar paso',(await page.locator('#cal-next').innerText()).includes('1/13'));
+  await qa('resume');
+  for(let i=0;i<13;i++){
+    await page.waitForFunction(()=>!document.querySelector('#cal-capture').disabled);
+    await page.locator('#cal-capture').click();
+    await page.waitForFunction(()=>!document.querySelector('#cal-cancel').disabled);
+    await qa('finish-capture');
+    await page.waitForFunction(count=>document.querySelectorAll('#cal-rows tr').length===count,i+2);
+  }
+  assert('13 capturas completas y rechazo conservado',(await page.locator('#cal-rows tr').count())===14);
+  await page.locator('#cal-name').fill('QA · perfil de ejemplo');
+  await page.locator('#cal-max-noise').fill('10');
+  await page.locator('#cal-max-return').fill('5');
+  await page.locator('#cal-min-span').fill('100');
+  await page.locator('#cal-reviewed').check();
+  await page.locator('#cal-save').click();
+  await page.waitForFunction(()=>document.querySelector('#cal-profile').options.length>=2);
+  await page.waitForFunction(()=>document.querySelector('#cal-profile').value!=='');
+  await page.locator('#cal-compatible').check();
+  await page.locator('#cal-activate').click();
+  await page.waitForFunction(()=>document.querySelector('#cal-active-name').textContent.startsWith('Activo en PC'));
+  assert('Sin grados inventados al activar perfil sin referencias',(await page.locator('#cal-value').innerText()).includes('%'));
+  const zip=await page.request.get(url+await page.locator('#cal-export-profile').getAttribute('href'));
+  assert('Exportación ZIP con perfil y muestras',zip.ok()&&(await zip.body()).slice(0,2).toString()==='PK');
+  fs.writeFileSync(path.join(evidence,'exportacion_qa.zip'),await zip.body());
+  for(const width of [1280,375,320]){
+    await page.setViewportSize({width,height:960});
+    await page.locator('#calibracion').evaluate(e=>e.scrollTop=0);
+    const bounds=await page.locator('#calibracion').evaluate(e=>({w:e.clientWidth,s:e.scrollWidth}));
+    assert('Asistente sin desborde a '+width,bounds.s<=bounds.w+1);
+    const global=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));
+    assert('Panel completo sin desborde a '+width,global.scroll<=global.width+1);
+    await page.screenshot({path:path.join(evidence,`asistente-${width}.png`)});
+  }
+  await qa('outside');
+  await page.waitForFunction(()=>document.querySelector('#cal-value').textContent==='Fuera de rango');
+  assert('Fuera de rango visible sin saturación silenciosa',true);
+  await qa('stale');
+  await page.waitForFunction(()=>document.querySelector('#cal-active-name').textContent.startsWith('Sin perfil'));
+  assert('Pérdida de datos desactiva perfil',true);
+  assert('Se exige confirmar de nuevo el montaje',!await page.locator('#cal-compatible').isChecked());
+  assert('Sin errores JavaScript',errors.length===0);
+  const result={status:'PASS',scope:'QA sintético · reloj acelerado en servidor de prueba separado · sin hardware',checks,errors};
+  fs.writeFileSync(path.join(evidence,'qa_interfaz.json'),JSON.stringify(result,null,2));
+  console.log(JSON.stringify(result,null,2));
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

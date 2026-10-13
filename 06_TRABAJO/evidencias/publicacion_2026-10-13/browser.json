@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "name": "Inicio desconectado",
+      "ok": true
+    },
+    {
+      "name": "3D disponible sin hardware",
+      "ok": true
+    },
+    {
+      "name": "Frontal privada ausente con aviso",
+      "ok": true
+    },
+    {
+      "name": "Tres fotos públicas visibles",
+      "ok": true
+    },
+    {
+      "name": "Calibración bloqueada sin conexión",
+      "ok": true
+    },
+    {
+      "name": "Demo rotulada como sintética",
+      "ok": true
+    },
+    {
+      "name": "Demo bloquea calibración real",
+      "ok": true
+    },
+    {
+      "name": "Esquema accesible",
+      "ok": true
+    },
+    {
+      "name": "Sin errores JavaScript",
+      "ok": true
+    }
+  ],
+  "errors": []
+}

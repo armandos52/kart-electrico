@@ -1,0 +1,18 @@
+{
+  "07_DESARROLLO\\panel_local\\calibracion.py": "b573d406b53923e3a0a8aec1aa1c13ce44a80e05644501d4363f822c0c044c29",
+  "07_DESARROLLO\\panel_local\\server.py": "8f08700ae382957e4441451b25985463b9b45234914445ea10780d49dc0edc3b",
+  "07_DESARROLLO\\panel_local\\static\\calibracion.js": "b5fe1d14fabff9972b8f8e9de217f26db67fa55d20996845078d3f55f89d1ed4",
+  "07_DESARROLLO\\panel_local\\static\\style.css": "512f223fee73ee8a8435155dfd26e0ae5babd8ba687373814b8e9ab72ee99464",
+  "07_DESARROLLO\\panel_local\\static\\textos.js": "310ff59458dabfc95d8400a2e07eff61150b22c48b3ca57f930b68b5969a02ed",
+  "07_DESARROLLO\\panel_local\\tests\\test_guided_calibration.py": "6a354c3853eca607571cff92a7d06962a88d774b91b61e7266d5a659ccafe06b",
+  "07_DESARROLLO\\panel_local\\qa\\check-guided.cjs": "6c2d6096184194df43f49a4f030f0e3eeefe2f78858e377c780cbdd7d3e31611",
+  "07_DESARROLLO\\panel_local\\qa\\calibration_fixture.py": "a9980f841a3a84b582ea238dd0e5c746edd14ad9ce78c2bcdde84b8d99e8eaba",
+  "07_DESARROLLO\\panel_local\\qa\\check-idiomas.mjs": "094b960513f8129cd6d7bb91c2ec6d7c4ebeb272a18c4c77457915597a746857",
+  "07_DESARROLLO\\panel_local\\qa\\extraer_mensajes.py": "cb29ad23bb0ba8666daaf26536adbc723bee6bbaebd50d9ae2171b6aae579a8d",
+  "06_TRABAJO\\evidencias\\calibracion_pasos_2026-10-11\\antes\\calibracion.js": "e69905bcf398593f0e885976b0139d794e9230c6e9e53b596d0bb17978a27875",
+  "06_TRABAJO\\evidencias\\calibracion_pasos_2026-10-11\\antes\\calibracion.py": "056d4bba78086d00240f292b98caaf1c8a6867888ef8fa230419cf99aef805d4",
+  "06_TRABAJO\\evidencias\\calibracion_pasos_2026-10-11\\antes\\server.py": "08a274f58fd3551cdfb25fac1b7c36bca112e24e984ed3b66acc70d656d18e97",
+  "06_TRABAJO\\evidencias\\calibracion_pasos_2026-10-11\\antes\\style.css": "a4b17fa9a931a1b84bf3a4ec649786980380986764b70358c5a930ed155eae3e",
+  "06_TRABAJO\\evidencias\\calibracion_pasos_2026-10-11\\antes\\textos.js": "50cef6eac3c23ec6845492ffa249a5ab604da7c22c52ac6d6e06fb3c0ee4f2f3",
+  "07_DESARROLLO\\panel_local\\qa\\check-load.cjs": "ec8edb5f144400974b1b874927707ac032c6f0f4fd5e75049ca4d66af4252e40"
+}

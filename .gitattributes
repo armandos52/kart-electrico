@@ -9,3 +9,8 @@
 *.xlsx binary
 *.png binary
 *.jpg binary
+
+# Conservar bytes y espacios originales de registros, diffs y snapshots de ensayo.
+06_TRABAJO/evidencias/** -text -whitespace
+06_TRABAJO/ensayos/datos/** -text -whitespace
+07_DESARROLLO/respaldos/** -text -whitespace

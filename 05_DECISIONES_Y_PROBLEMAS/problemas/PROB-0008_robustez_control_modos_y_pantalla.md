@@ -1,10 +1,14 @@
 ---
 estado: abierto; correcciones implementadas, contraste físico pendiente
-actualizado: 2026-10-09
+actualizado: 2026-10-11
 resumen: Modos/pantalla poco funcionales declarados por Armando; auditoría v1.2 y frontal con defectos de estados, rampa, ESC y SD.
 ---
 
 # PROB-0008 · Robustez del control, modos y pantalla
+
+## Actualización 11-10 · STOP en lote CAN
+
+Armando confirma ESP32 físico v1.2 sin cambios, frontal todavía inaccesible y prioridad control/modos. [ENS-0011](../../06_TRABAJO/ensayos/ENS-0011_stop_en_lote_can.md) amplía A01: en dev2 un STOP seguido de START antes de `step` se perdía. Cuatro fallos reproducidos; dev3 conserva el STOP y descarta aquel START como habilitación de arranque. 56 comprobaciones sin fallos y compilación ESP32 correcta; solo PC. No atribuir este hallazgo a un fallo físico observado. STM32 dev2 y límites físicos de ESC/R/calibración permanecen; PROB-0008 sigue abierto.
 
 Armando reconfirma prueba positiva de motores con v1.2 y solicita investigar qué código sirve antes de modificarlo. Declara que los modos o la pantalla prácticamente no funcionan; acceso/observación detallada pendientes. El buen resultado de motores de [ENS-0004](../../06_TRABAJO/ensayos/ENS-0004_prueba_real_motores_confirmada.md) se conserva.
 

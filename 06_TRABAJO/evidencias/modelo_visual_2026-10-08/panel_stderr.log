@@ -1,0 +1,4 @@
+127.0.0.1 - - [08/Oct/2026 15:48:22] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [08/Oct/2026 15:55:11] "GET /server.py HTTP/1.1" 404 -
+127.0.0.1 - - [08/Oct/2026 15:57:19] "GET /server.py HTTP/1.1" 404 -
+127.0.0.1 - - [08/Oct/2026 16:14:30] "GET /esquema_kart.js HTTP/1.1" 404 -

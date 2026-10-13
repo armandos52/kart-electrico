@@ -70,6 +70,7 @@ private:
     Config cfg_;
     Command command_;
     bool received_=false, invalid_=false, rearm_=true, start_off_seen_=false;
+    bool stop_pending_=false; // STOP recibido debe aplicarse aunque otra trama lo siga en el lote.
     bool start_previous_=false, was_still_=false, motion_expected_=false;
     bool reverse_cut_=false, clock_started_=false;
     uint32_t last_command_=0, last_step_=0, relay_since_=0, still_since_=0, drive_since_=0;

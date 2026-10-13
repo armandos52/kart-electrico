@@ -12,7 +12,7 @@ Configuración: ESP32 trasero, biblioteca `coryjfowler/mcp_can` 1.5.1. La imagen
 
 ## Síntoma y condiciones de la prueba
 
-En [[06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi|ENS-0001]], la v1 publicó una trama y, en la vuelta siguiente de `loop()`, se colgó: `Guru Meditation Error: Core 1 panic'ed (LoadProhibited)` → `Rebooting...`. Antes, el MCP2515 había tardado 19 s en responder al iniciarse.
+En [ENS-0001](../../06_TRABAJO/ensayos/ENS-0001_telemetria_esp32_usb_wifi.md), la v1 publicó una trama y, en la vuelta siguiente de `loop()`, se colgó: `Guru Meditation Error: Core 1 panic'ed (LoadProhibited)` → `Rebooting...`. Antes, el MCP2515 había tardado 19 s en responder al iniciarse.
 
 ## Evidencias
 
@@ -36,9 +36,9 @@ En `mcp2515_read_canMsg`, `m_nDlc = registro & 0x0F` admite valores de 0 a 15. C
 
 Con un DLC de 12 a 15 se sobrescribe `mcpSPI`, y la siguiente transferencia SPI salta a una dirección basura. Además, `readMsgBuf()` copia `m_nDlc` bytes al `buf[8]` de `loop()`, lo que desborda también la pila.
 
-Un DLC de 9 a 15 es legal en CAN 2.0 (significa 8 bytes), pero aquí lo más probable es una lectura SPI corrupta del MCP2515: ese día tardaba entre 19 y 77 s en iniciarse ([[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0002_esp32_no_activa_contactor_al_encender|PROB-0002]]).
+Un DLC de 9 a 15 es legal en CAN 2.0 (significa 8 bytes), pero aquí lo más probable es una lectura SPI corrupta del MCP2515: ese día tardaba entre 19 y 77 s en iniciarse ([PROB-0002](PROB-0002_esp32_no_activa_contactor_al_encender.md)).
 
-Puede explicar el **coredump** que había guardado en la flash original ([[07_DESARROLLO/respaldos/esp32/2026-10-07_180133/RESPALDO|respaldo]]). Es una hipótesis: falta el ELF de esa compilación para descodificarlo.
+Puede explicar el **coredump** que había guardado en la flash original ([respaldo](../../07_DESARROLLO/respaldos/esp32/2026-10-07_180133/RESPALDO.md)). Es una hipótesis: falta el ELF de esa compilación para descodificarlo.
 
 ## Intentos y resultados
 

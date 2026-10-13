@@ -42,6 +42,20 @@ int main() {
     check(stop.out.relay==Relay::Precharge,"inicio precarga");
     stop.b[7]=0;stop.step(100);check(stop.out.relay==Relay::Off,"STOP a 100ms no se pierde");
     stop.step(4000);check(stop.out.relay==Relay::Off,"STOP persistente no reactiva");
+    // receiveCan drena varias tramas antes de step: un START posterior no puede borrar STOP.
+    Fixture burst;burst.drive();burst.b[7]=0;burst.c.receive(burst.b,8,burst.now);
+    burst.b[7]=4;burst.c.receive(burst.b,8,burst.now);burst.step(5,false);
+    check(burst.out.relay==Relay::Off && burst.out.effort_left==0 && burst.out.effort_right==0,
+        "STOP seguido de START en el mismo lote CAN corta traccion");
+    burst.throttle(0);burst.b[4]=1;burst.b[5]=0;burst.step();
+    check(burst.out.relay==Relay::Off,"START del lote descartado no inicia precarga al volver a N");
+    burst.b[7]=0;burst.step();burst.b[7]=4;burst.step();
+    check(burst.out.relay==Relay::Precharge,"nuevo OFF START deliberado permite precarga tras STOP de lote");
+    Fixture precharge;precharge.step();precharge.step(600);precharge.b[7]=4;precharge.step();
+    precharge.b[7]=0;precharge.c.receive(precharge.b,8,precharge.now);
+    precharge.b[7]=4;precharge.c.receive(precharge.b,8,precharge.now);precharge.step(5,false);
+    check(precharge.out.relay==Relay::Off,"STOP de lote interrumpe tambien precarga");
+    precharge.step();check(precharge.out.relay==Relay::Off,"precarga no reinicia por START ya recibido");
     Fixture f;f.drive();
     check(f.out.relay==Relay::Ready,"traccion solo tras PRONTO");
     check(f.out.effort_left>0 && f.out.effort_left<0.004f,"rampa aplicada primer paso 5ms");

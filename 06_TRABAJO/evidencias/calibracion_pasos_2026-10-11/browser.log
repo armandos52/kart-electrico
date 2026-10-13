@@ -1,0 +1,4 @@
+page.waitForFunction: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:8877/static/nucleo.js
+    at C:\kart proyecto\07_DESARROLLO\panel_local\qa\check-guided.cjs:13:14 {
+  log: []
+}

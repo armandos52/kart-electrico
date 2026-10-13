@@ -1,0 +1,117 @@
+[
+  {
+    "path": "07_DESARROLLO/panel_local/server.py",
+    "bytes": 26095,
+    "sha256": "6fed100017cae6298dd16597ff08ea5b0899893d0e451398514fc686f1f01881"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/index.html",
+    "bytes": 8279,
+    "sha256": "eb7aaefef740ae11c246f361b11bc76d62ada7c13d9cbc38e6559893caffddc9"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/style.css",
+    "bytes": 25425,
+    "sha256": "148212ee38298d65aa2667a40e2d6a97133f06c0e299936f9a2ad5619f1fbde3"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/vista_kart.js",
+    "bytes": 9899,
+    "sha256": "90ec33d20a26a46aae07ed91689b8dcecb0817fea72745e84ae2a73f25b158c0"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/esquema_kart.js",
+    "bytes": 11002,
+    "sha256": "443abfcc11cdd02238e17dff817444a4c7d086af2e553483b278543bd7c372ef"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/static/referencias/superior.jpg",
+    "bytes": 201371,
+    "sha256": "ec7c96af5971d92b62147342c012a91d98ef6ddb4a22b5b3d2ded57ab8db955d"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/check-esquema.cjs",
+    "bytes": 5559,
+    "sha256": "c53b6bf4d34d8f27cd82e0795ac4144782ea25428b957cb9abb4bba74dd0e116"
+  },
+  {
+    "path": "07_DESARROLLO/panel_local/qa/check-modelo.cjs",
+    "bytes": 8567,
+    "sha256": "0286dea5ef59c964b448e85f474fe2466dfde9c89002f2a7b68fced5bec79188"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/antes/server.py",
+    "bytes": 26064,
+    "sha256": "34f966fd57bfdae8e06f7c510db741235a1e420350258332d3503acc521be346"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/antes/static__index.html",
+    "bytes": 14208,
+    "sha256": "6d1fa917ba945e9c1c386db7136e20fc19608b47e77d2a1b0f422aa3a705e10a"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/antes/static__style.css",
+    "bytes": 22637,
+    "sha256": "810cb9556bda6b193dab8310cc22e4fa6db2a5cde9d120b276bb60cb767f6bd9"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/antes/static__vista_kart.js",
+    "bytes": 9463,
+    "sha256": "f99573cc8cd464a8f4392df7ccf42aa3d883b58685d559d374ae532ff7f46143"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/regresion_3d/modelo-lateral-final.png",
+    "bytes": 281803,
+    "sha256": "08cc6cb57cf4d282af436c092a6a4fb888fbf154c15528fb0618b5da6fce96e4"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/regresion_3d/panel-3d-demo.png",
+    "bytes": 528539,
+    "sha256": "b42a417e1d376de019e4ea961e89390cb88ce6ba10ad0b4fed101fb37620f8cf"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/regresion_3d/panel-3d-final.png",
+    "bytes": 501967,
+    "sha256": "7cd0fde0b6db6b699afc4cde95a8ad0df40266e56408a763d159e5372d7deb92"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/regresion_3d/panel-3d-movil.png",
+    "bytes": 282839,
+    "sha256": "c8d6ef761d0c58f2a16df413b622e2ed3dc9c3d2f0074a2c1896eec14880cb29"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/regresion_3d/qa_modelo.json",
+    "bytes": 1836,
+    "sha256": "479a4fb9f34f3fbf747a7d4180638e87b0632fae9b2a0c0f7d5b3606eec58785"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/esquema-demo.png",
+    "bytes": 306963,
+    "sha256": "0513207e3fe40ea054f62d686a59ddc40a2d07839ce51924c133284dd8066e4c"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/esquema-desconectado.png",
+    "bytes": 225653,
+    "sha256": "7a4b62b299e685c92b8b2febd48fb56add75914d2606f3d151c622890bebc1b7"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/esquema-movil.png",
+    "bytes": 103491,
+    "sha256": "88fd97f174ce4b93eb84f19ede390651334b7aa1510f44a05f17c29e955d1a3f"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/esquema-superior.png",
+    "bytes": 113762,
+    "sha256": "c76e198a4ff0a14c92b495bcee3e1847232d858c21f71b881d5aedf6fef7ee88"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/foto_sha256.json",
+    "bytes": 196,
+    "sha256": "23c2968ffa2ead0ebc98fe5ce332a42f193f3f9ebc9be19b12ed8dc0a47ff895"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/esquema_superior_2026-10-08/qa_esquema.json",
+    "bytes": 1818,
+    "sha256": "f5e8bf42a2c15574a1f3c545aa4210aeeb44deac36a44da105726337ec2da892"
+  }
+]

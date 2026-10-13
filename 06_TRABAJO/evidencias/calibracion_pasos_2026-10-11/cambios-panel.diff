@@ -1,0 +1,474 @@
+--- antes/calibracion.py
++++ despues/calibracion.py
+@@ -17,7 +17,7 @@
+ import zipfile
+ 
+ SCHEMA = "steering-cal-v1"
+-PANEL_VERSION = "0.3.0-direccion-guiada"
++PANEL_VERSION = "0.4.0-calibracion-pasos"
+ # Criterios de adquisición/consistencia del PC; no tolerancias mecánicas.
+ GUIDED_POLICY = {"stable_peak_cap":200, "minimum_move":80, "minimum_span":100,
+                  "noise_fraction":0.10, "return_fraction":0.03, "repeat_fraction":0.03}
+@@ -132,7 +132,7 @@
+     def interrupt(self, reason):
+         self.active = None
+         if self.guide and self.guide["state"]=="running":
+-            self.guide.update(state="paused", message="La lectura se ha interrumpido. Reintenta este paso cuando vuelva la conexión.", detail=reason)
++            self.guide.update(state="paused", progress=0, issue="connection", message="La lectura se ha interrumpido. Reintenta este paso cuando vuelva la conexión.", detail=reason)
+         if self.capture:
+             self.finish("rejected", reason)
+ 
+@@ -166,6 +166,8 @@
+         if previous and ctx != previous["context"]:
+             self.interrupt("Cambió la fuente, firmware o sesión; confirma de nuevo la configuración")
+         if not self.capture:
++            if self.run and self.guide and self.guide["state"]=="running":
++                self.append({"kind":"positioning_sample", "received_utc":utc(), "frame":frame})
+             return
+         cap=self.capture
+         reason=self.problem()
+@@ -252,18 +254,32 @@
+                     "alignment":"Usuario confirma ruedas rectas; método físico no indicado",
+                     "conditions":data.get("conditions") or "Kart parado y tracción inhabilitada declarados; otras condiciones no indicadas"})
+         self.active=None
+-        self.guide={"state":"running","phase":"holding","message":"Mantén las ruedas rectas. Estoy comprobando la lectura.",
+-                    "progress":0,"from_raw":None,"moved":True,"policy":GUIDED_POLICY.copy()}
++        self.guide={"state":"running","phase":"positioning","message":"Coloca las ruedas rectas y pulsa Medir cuando estés listo.",
++                    "progress":0,"from_raw":None,"moved":True,"policy":GUIDED_POLICY.copy(),"detail":"","issue":None}
+         self.run["mode"]="guided"
+         self.run["acquisition_policy"]=GUIDED_POLICY.copy()
+         self.persist()
++
++    def measure_guided(self):
++        if not self.guide or self.guide["state"]!="running" or self.guide["phase"]!="positioning":
++            raise ValueError("Coloca la dirección antes de iniciar la medición")
+         self.start_capture()
++        self.guide.update(phase="holding",progress=0,detail="",issue=None,
++                          message="Mantén la posición hasta que termine la cuenta atrás.")
+ 
+     def resume_guided(self):
+         if not self.guide or self.guide["state"]!="paused":
+             raise ValueError("No hay un paso pendiente de reintentar")
+-        self.start_capture()  # comprueba que sesión y firmware siguen siendo los mismos
+-        self.guide.update(state="running",progress=0,message="Mantén la posición indicada; volveré a comprobarla.")
++        if self.problem():
++            raise ValueError(self.problem())
++        if self.run["context"]!=self.latest["context"]:
++            raise ValueError("Fuente/sesión distinta: prepara un nuevo ensayo")
++        self.guide.update(state="running",phase="positioning",progress=0,detail="",issue=None,
++                          message="Coloca de nuevo la dirección y pulsa Medir cuando estés listo.")
++
++    def pause_step(self, issue, message):
++        self.finish("rejected",message)
++        self.guide.update(state="paused",progress=0,issue=issue,detail=message,message=message)
+ 
+     def cancel_guided(self):
+         if self.guide:
+@@ -274,6 +290,9 @@
+         cap=self.capture
+         g=self.guide
+         raw=row["frame"]["signals"]["steer_raw"]
++        if raw in (0,4095):
++            self.pause_step("limit", "La señal CAN ha llegado a 0 o 4095. No se puede distinguir más recorrido. Revisa la señal antes de repetir este paso.")
++            return
+         captures=self.run["captures"]
+         center=captures[0]["statistics"]["median"] if captures else None
+         noise=captures[0]["statistics"]["peak_to_peak"] if captures else 0
+@@ -281,8 +300,7 @@
+         if g["from_raw"] is not None and abs(raw-g["from_raw"])>=move:
+             g["moved"]=True
+         if not g["moved"]:
+-            cap["rows"].clear()
+-            g.update(phase="moving",progress=0,message="Mueve la dirección a la posición indicada.")
++            self.pause_step("position", "La lectura sigue en la posición anterior. Coloca la dirección en la nueva posición y repite este paso.")
+             return
+         # Repeticiones: impedir aceptar el centro en un extremo, un lado equivocado
+         # o una pausa a mitad del retorno. El usuario sigue identificando el tope físico.
+@@ -297,25 +315,25 @@
+         if cap["kind"]=="right" and right is None and left is not None:
+             wrong=(raw-center)*(center-left)<=0 or abs(raw-center)<move
+         if wrong:
+-            cap["rows"].clear()
+-            g.update(phase="moving",progress=0,message="Continúa hasta la posición indicada y mantenla quieta.")
+-            return
+-        # Guardamos todas las tramas en JSONL; las estadísticas usan solo la última
+-        # ventana quieta, identificada por sus secuencias en el resultado.
+-        cutoff=row["elapsed_s"]-cap["duration_s"]-0.05
+-        cap["rows"]=[r for r in cap["rows"] if r["elapsed_s"]>=cutoff]
++            self.pause_step("position", "La lectura no coincide con la posición pedida. Revisa el lado o alinea las ruedas y repite este paso.")
++            return
++        # Ventana explícita desde el clic del usuario: no mezcla el desplazamiento
++        # con la medición ni espera indefinidamente una ventana perfecta.
+         s=stats(cap["rows"])
+         values=[r["frame"]["signals"]["steer_raw"] for r in cap["rows"]]
+-        if min(values)<=0 or max(values)>=4095:
+-            self.finish("rejected","Saturación 0/4095 en adquisición guiada")
+-            g.update(state="failed",message="La señal llega a su límite. Hay que revisar el sensor antes de guardar.",progress=0)
+-            return
+         quarter=max(1,len(values)//4)
+         drift=abs(statistics.median(values[:quarter])-statistics.median(values[-quarter:]))
+         stable=s["peak_to_peak"]<=GUIDED_POLICY["stable_peak_cap"] and drift<=max(4,s["peak_to_peak"]*.30)
+-        g.update(phase="holding" if stable else "moving",progress=min(1,s["duration_s"]/cap["duration_s"],len(values)/cap["min_samples"]) if stable else 0,
+-                 message="Mantén ahí. Estoy comprobando la lectura." if stable else "La lectura todavía cambia. Mantén la dirección quieta.")
+-        if not stable or s["duration_s"]<cap["duration_s"] or len(values)<cap["min_samples"]:
++        g.update(phase="holding",progress=min(1,s["duration_s"]/cap["duration_s"],len(values)/cap["min_samples"]),
++                 stable=stable,peak_to_peak=s["peak_to_peak"],
++                 message="Mantén la posición hasta que termine la cuenta atrás.")
++        if self.clock()-cap["start"]>cap["duration_s"]+5 and len(values)<cap["min_samples"]:
++            self.pause_step("samples", "Llegan muy pocas muestras. Comprueba la conexión Wi-Fi y repite este paso.")
++            return
++        if s["duration_s"]<cap["duration_s"] or len(values)<cap["min_samples"]:
++            return
++        if not stable:
++            self.pause_step("noise", "La señal varía demasiado durante la medición. Si no moviste el volante, revisa el sensor o el cableado. Puedes repetir este paso.")
+             return
+         accepted=s["median"]
+         self.finish("completed")
+@@ -324,10 +342,10 @@
+                 self.guided_review()
+                 g.update(state="complete",progress=1,message="Las tres rondas son coherentes. Ya puedes usar esta calibración.")
+             except ValueError as exc:
+-                g.update(state="failed",progress=0,message="Las repeticiones no coinciden lo suficiente. Repite la calibración o revisa el sensor.",detail=str(exc))
+-            return
+-        g.update(from_raw=accepted,moved=False,phase="moving",progress=0,message="Posición guardada. Pasa a la siguiente.")
+-        self.start_capture()
++                g.update(state="failed",issue="consistency",progress=0,message="Las repeticiones no coinciden lo suficiente. Repite la calibración o revisa el sensor.",detail=str(exc))
++            return
++        g.update(from_raw=accepted,moved=False,phase="positioning",progress=0,detail="",issue=None,
++                 message="Posición guardada. Coloca la siguiente y pulsa Medir cuando estés listo.")
+ 
+     def guided_review(self):
+         captures=self.run["captures"]
+@@ -452,6 +470,8 @@
+                      "statistics":stats(cap["rows"]) if cap["rows"] else None}
+         value=None if reason else self.latest["frame"]["signals"]["steer_raw"]
+         return {"schema":SCHEMA,"ready":not bool(reason),"reason":reason,"error":self.error,
++                "same_context":bool(self.run and self.latest and self.run["context"]==self.latest["context"]),
++                "panel_version":PANEL_VERSION,
+                 "guide":self.guide,
+                 "load_errors":self.load_errors,"run":self.run,"capture":current,"total_steps":len(PLAN),
+                 "next":None if not step else {"label":LABELS[step[0]],"kind":step[0],"cycle":step[1],"duration_s":step[2],"min_samples":step[3]},
+--- antes/server.py
++++ despues/server.py
+@@ -291,12 +291,14 @@
+         """API del PC; nunca entrega estos mensajes a serial/TCP."""
+         with self.lock:
+             reason = self.calibration.tick(self.status == "connected")
+-            if action in {"begin", "capture", "activate", "guided-begin", "guided-resume", "guided-use"} and reason:
++            if action in {"begin", "capture", "activate", "guided-begin", "guided-measure", "guided-resume", "guided-use"} and reason:
+                 raise ValueError(reason)
+-            if self.log_error and action in {"begin", "capture", "guided-begin", "guided-resume"}:
++            if self.log_error and action in {"begin", "capture", "guided-begin", "guided-measure", "guided-resume"}:
+                 raise ValueError("Resuelve el error del registro de sesión antes de capturar")
+             if action == "guided-begin":
+                 self.calibration.begin_guided(data)
++            elif action == "guided-measure":
++                self.calibration.measure_guided()
+             elif action == "guided-resume":
+                 self.calibration.resume_guided()
+             elif action == "guided-cancel":
+@@ -503,6 +505,12 @@
+             super().log_message(fmt, *args)
+ 
+ 
++class PanelHTTPServer(ThreadingHTTPServer):
++    # Margen para los módulos que Chrome solicita en paralelo y varias pestañas,
++    # frente a la cola predeterminada de cinco conexiones de este runtime.
++    request_queue_size = 32
++
++
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--port", type=int, default=8765)
+@@ -515,7 +523,7 @@
+         print(json.dumps({"ports": port_inventory(), "serial_available": serial is not None}, ensure_ascii=False))
+         return
+     monitor = Monitor()
+-    server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
++    server = PanelHTTPServer(("127.0.0.1", args.port), Handler)
+     server.monitor = monitor
+     server.token = secrets.token_urlsafe(32)
+     print(f"Panel local: http://127.0.0.1:{server.server_port}/ — lectura sin TX; sin puerto serie abierto", flush=True)
+--- antes/static/calibracion.js
++++ despues/static/calibracion.js
+@@ -1,4 +1,4 @@
+-// Un paso cada vez. Adquisición y validación automáticas en el servicio del PC.
++// Un paso cada vez: el usuario coloca la dirección y después confirma la medición.
+ import {$,app,f,idioma,t,srv} from './nucleo.js';
+ import {applyDom} from './i18n.js';
+ let refresh,busy=false,lastConnection='',lastActive=null;
+@@ -10,15 +10,22 @@
+ export function initCalibration(poll){
+   refresh=poll;
+   const dialog=document.createElement('dialog');dialog.id='calibracion';dialog.setAttribute('aria-labelledby','cal-title');
+-  dialog.innerHTML=`<header class="cal-header"><span id="cal-title" data-i18n="calibrar">Calibrar dirección</span><button id="cal-close" type="button" aria-label="Cerrar calibración" data-i18n-aria="cal.cerrar_aria" data-i18n="cal.cerrar">Cerrar</button></header>
++  dialog.innerHTML=`<header class="cal-header"><div><span class="cal-eyebrow" data-i18n="cal.ui.asistente">ASISTENTE DE DIRECCIÓN</span><h1 id="cal-title" data-i18n="calibrar">Calibrar dirección</h1></div><button id="cal-close" type="button" aria-label="Cerrar calibración" data-i18n-aria="cal.cerrar_aria" data-i18n="cal.cerrar">Cerrar</button></header>
+   <div class="cal-body">
+-    <div class="cal-steps" aria-label="Progreso" data-i18n-aria="cal.progreso"><span id="cal-round" data-i18n="cal.ronda_antes">Antes de empezar</span><span id="cal-count"></span></div>
+-    <div id="cal-picture" class="cal-picture" aria-hidden="true"><div class="cal-wheel"><span></span></div><div id="cal-arrow">↑</div></div>
+-    <div class="cal-instruction" aria-live="polite"><h2 id="cal-heading" data-i18n="cal.indicacion">Una indicación cada vez</h2><p id="cal-help" data-i18n="cal.ayuda">Tú mueves el volante. El programa comprueba y guarda cada posición.</p></div>
++    <ol class="cal-stages" aria-label="Progreso" data-i18n-aria="cal.progreso">${['cal.ui.preparar','cal.ui.centro','cal.ui.recorrido','cal.ui.verificar','cal.ui.guardar'].map((key,i)=>`<li><b>${String(i+1).padStart(2,'0')}</b><span data-i18n="${key}">${t(key)}</span></li>`).join('')}</ol>
++    <div class="cal-workspace">
++    <div class="cal-visual"><div id="cal-picture" class="cal-picture" aria-hidden="true"><div class="cal-orbit"></div><svg class="cal-wheel" viewBox="0 0 200 200"><circle cx="100" cy="100" r="79" fill="none" stroke="currentColor" stroke-width="16"/><path d="M24 89L80 112L88 179M176 89L120 112L112 179" fill="none" stroke="currentColor" stroke-width="13" stroke-linejoin="round"/><circle cx="100" cy="109" r="22" fill="currentColor"/><path d="M100 15V30" stroke="#78bcae" stroke-width="8" stroke-linecap="round"/></svg><div id="cal-arrow">↑</div></div><span class="cal-caption" data-i18n="cal.ui.dibujo">Movimiento indicado · dibujo orientativo</span><div id="cal-position-chips" class="cal-position-chips" aria-hidden="true"><span>←</span><span>↑</span><span>→</span><span>↑</span></div></div>
++    <div class="cal-task">
++    <div class="cal-steps"><span id="cal-round" data-i18n="cal.ronda_antes">Antes de empezar</span><span id="cal-count"></span></div>
++    <div class="cal-instruction" aria-live="polite" aria-atomic="true"><h2 id="cal-heading" data-i18n="cal.indicacion">Una indicación cada vez</h2><p id="cal-help" data-i18n="cal.ayuda">Tú mueves el volante. El programa comprueba y guarda cada posición.</p></div>
+     <div id="cal-start"><label class="cal-check"><input id="cal-ready" type="checkbox"> <span data-i18n="cal.listo_check">Ruedas rectas, kart parado y tracción inhabilitada.</span></label></div>
+-    <div id="cal-measuring" hidden><progress id="cal-progress" max="100" value="0" aria-label="Comprobando posición" data-i18n-aria="cal.comprobando_aria"></progress><p id="cal-feedback" role="status" data-i18n="cal.esperando_pos">Esperando la posición…</p></div>
++    <div id="cal-measuring" hidden><div class="cal-time"><span data-i18n="cal.ui.midiendo">Midiendo esta posición</span><strong id="cal-timer"></strong></div><progress id="cal-progress" max="100" value="0" aria-label="Comprobando posición" data-i18n-aria="cal.comprobando_aria"></progress></div>
++    <p id="cal-feedback" role="status"></p>
++    <div id="cal-issue" class="cal-issue" role="alert" hidden><strong id="cal-issue-title"></strong><p id="cal-issue-detail"></p><span id="cal-issue-next"></span></div>
+     <p id="cal-error" role="alert" hidden></p>
+     <div class="cal-main-actions"><button id="cal-primary" class="primary" type="button" data-i18n="cal.empezar">Empezar</button><button id="cal-stop" class="cal-quiet" type="button" hidden data-i18n="cal.cancelar">Cancelar</button></div>
++    </div></div>
++    <div class="cal-readings"><div><span data-i18n="cal.ui.enlace">Lectura del kart</span><strong id="cal-link"></strong></div><div><span data-i18n="cal.ui.senal">Señal de dirección</span><strong id="cal-raw"></strong></div><div><span data-i18n="cal.ui.variacion">Variación en esta medición</span><strong id="cal-noise"></strong></div><div><span data-i18n="cal.ui.guardadas">Posiciones guardadas</span><strong id="cal-saved"></strong></div></div>
+     <p id="cal-connection" class="cal-caption"></p>
+     <details id="cal-details"><summary data-i18n="cal.detalles">Detalles y calibraciones anteriores</summary>
+       <div class="cal-detail-content">
+@@ -48,8 +55,9 @@
+   $('cal-primary').addEventListener('click',()=>{
+     const c=app.state?.calibration,g=c?.guide;
+     if(g?.state==='saved'){dialog.close();return;}
+-    if(g?.state==='paused'){send('guided-resume',{});return;}
+-    if(g?.state==='complete'){
++    if(g?.state==='paused'&&c.same_context){send('guided-resume',{});return;}
++    if(g?.state==='running'&&g.phase==='positioning'){send('guided-measure',{});return;}
++    if(g?.state==='complete'&&c.same_context){
+       const num=id=>$(id).value.trim()===''?null:Number($(id).value);
+       send('guided-use',{name:$('cal-name').value,angles:$('cal-target').value?{target:$('cal-target').value,left:num('cal-angle-left'),right:num('cal-angle-right'),resolution:num('cal-resolution'),instrument:$('cal-instrument').value}:null});return;
+     }
+@@ -75,35 +83,54 @@
+   if(!$('calibracion'))return;
+   const c=app.state?.calibration,g=c?.guide,state=g?.state,live=!app.demo&&app.backendOK&&c?.ready;
+   const connection=[app.state?.port,app.state?.nodes?.esp32?.session,app.state?.nodes?.esp32?.fw].join('|');
+-  if(connection!==lastConnection||(lastActive&&!c?.active))$('cal-compatible').checked=false;
++  if(connection!==lastConnection){$('cal-compatible').checked=false;$('cal-ready').checked=false;}
++  if(lastActive&&!c?.active)$('cal-compatible').checked=false;
+   lastConnection=connection;lastActive=c?.active?.id||null;
+   $('abrir-calibracion').disabled=app.demo;
+   if(!$('calibracion').open)return;
+-  const starting=!g||['cancelled','failed'].includes(state),work=state==='running';
++  const changed=!!g&&['paused','complete'].includes(state)&&!c?.same_context;
++  const starting=!g||['cancelled','failed'].includes(state)||changed,work=state==='running',holding=work&&g.phase==='holding';
+   const done=c?.run?.captures?.length||0,next=c?.next;
+   text('cal-round',work?(next?.cycle?t('cal.ronda_n',{n:next.cycle}):t('cal.ronda_centro')):state==='complete'?t('cal.ronda_fin'):state==='saved'?t('cal.ronda_guardada'):state==='paused'?t('cal.ronda_pausa'):t('cal.ronda_antes'));
+-  text('cal-count',work?t('cal.posiciones',{n:done,total:c.total_steps}):'');
++  text('cal-count',g?t('cal.posiciones',{n:done,total:c.total_steps}):'');
+   let heading=t('cal.indicacion'),help=t('cal.ayuda');
+-  if(work){heading=TITLES[next?.kind]?t(TITLES[next.kind]):t('cal.comprobando');help=next?.kind==='left'||next?.kind==='right'?t('cal.ayuda_tope'):t('cal.ayuda_centro');}
++  if(work){heading=holding?t('cal.ui.quieta'):TITLES[next?.kind]?t(TITLES[next.kind]):t('cal.comprobando');help=holding?t('cal.ui.no_girar'):t(next?.kind==='left'||next?.kind==='right'?'cal.ui.coloca_tope':'cal.ui.coloca_centro');}
+   if(state==='complete'){heading=t('cal.h.preparada');help=t('cal.ayuda_preparada');}
+   if(state==='saved'){heading=c?.active?.id===g.profile_id?t('cal.h.todo_listo'):t('cal.h.guardada');help=c?.active?.id===g.profile_id?t('cal.ayuda_todo_listo'):t('cal.ayuda_guardada');}
+-  if(state==='paused'){heading=t('cal.h.espera');help=t('cal.ayuda_espera');}
++  if(state==='paused'){heading=t('cal.ui.pausa');help=t('cal.ui.conservadas');}
+   if(state==='failed'){heading=t('cal.h.repetir');help=srv(g.message);}
+   if(state==='cancelled'){heading=t('cal.h.reiniciar');help=t('cal.ayuda_reiniciar');}
+   if(c?.error){heading=t('cal.h.error');help=t('cal.ayuda_error');}
++  if(changed){heading=t('cal.ui.sesion');help=t('cal.ui.sesion_ayuda');}
+   text('cal-heading',heading);text('cal-help',help);
+-  const direction=work?(next?.kind==='left'?'left':next?.kind==='right'?'right':'center'):'center';
++  const direction=work||state==='paused'?(next?.kind==='left'?'left':next?.kind==='right'?'right':'center'):'center';
+   $('cal-picture').dataset.direction=direction;
++  $('cal-picture').dataset.phase=holding?'holding':work?'positioning':'idle';
+   text('cal-arrow',state==='complete'||state==='saved'?'✓':direction==='left'?'←':direction==='right'?'→':'↑');
+-  $('cal-start').hidden=!starting;$('cal-measuring').hidden=!work;
++  $('cal-start').hidden=!starting;$('cal-measuring').hidden=!holding;
+   $('cal-progress').value=100*(g?.progress||0);
+-  text('cal-feedback',!live?t('cal.esperando_lecturas'):srv(g?.message)||'');
+-  $('cal-primary').hidden=work;
+-  text('cal-primary',state==='complete'?t('cal.p.usar'):state==='saved'?t('cal.p.terminar'):state==='paused'?t('cal.p.reintentar'):state==='failed'||state==='cancelled'?t('cal.p.reiniciar'):t('cal.empezar'));
+-  $('cal-primary').disabled=busy||(state!=='saved'&&(!live||starting&&!$('cal-ready').checked))||!!c?.error;
++  text('cal-timer',t('cal.ui.segundos',{n:Math.max(0,Math.ceil((c?.capture?.duration_s||0)-(c?.capture?.statistics?.duration_s||0)))}));
++  text('cal-feedback',!live?t('cal.esperando_lecturas'):work?srv(g?.message):state==='saved'?srv(g.message):'');
++  const limit=live&&(c.raw===0||c.raw===4095),issue=c?.error||g?.detail||(!live?c?.reason:'')||(limit?t('cal.ui.limite_ayuda'):'');
++  $('cal-issue').hidden=!issue;
++  text('cal-issue-title',c?.error?t('cal.h.error'):limit||g?.issue==='limit'?t('cal.ui.limite'):g?.issue==='noise'?t('cal.ui.ruido'):g?.issue==='position'?t('cal.ui.posicion'):t('cal.ui.revisar'));
++  text('cal-issue-detail',srv(issue)||'');
++  text('cal-issue-next',state==='paused'&&!changed?t('cal.ui.conservadas'):'');
++  $('cal-primary').hidden=holding;
++  text('cal-primary',changed?t('cal.p.reiniciar'):work?t('cal.ui.medir',{n:next.duration_s}):state==='complete'?t('cal.p.usar'):state==='saved'?t('cal.p.terminar'):state==='paused'?t('cal.p.reintentar'):state==='failed'||state==='cancelled'?t('cal.p.reiniciar'):t('cal.empezar'));
++  $('cal-primary').disabled=busy||(state!=='saved'&&(!live||starting&&!$('cal-ready').checked||work&&limit))||!!c?.error;
+   $('cal-stop').hidden=!work&&state!=='paused';$('cal-stop').disabled=busy;
+   $('cal-close').disabled=busy;
+   text('cal-connection',!app.backendOK?t('cal.conn.abrir'):!live?t('cal.conn.wifi'):t('cal.conn.visual'));
++  const stage=starting?0:state==='complete'||state==='saved'?4:done===0?1:done<=4?2:3;
++  document.querySelectorAll('.cal-stages li').forEach((el,i)=>{el.classList.toggle('current',i===stage);el.classList.toggle('done',i<stage);if(i===stage)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');});
++  $('cal-position-chips').hidden=!work||done===0;
++  [...$('cal-position-chips').children].forEach((el,i)=>{el.classList.toggle('current',i===(done-1)%4);el.classList.toggle('done',i<(done-1)%4);});
++  const measured=c?.capture?.statistics||(state==='paused'?c?.run?.attempts?.at(-1)?.statistics:null);
++  text('cal-link',live?t('cal.ui.recibiendo'):t('cal.ui.sin_datos'));
++  text('cal-raw',live?t('cal.ui.cuentas',{n:value(c.raw)}):'—');
++  text('cal-noise',measured?t('cal.ui.cuentas',{n:value(measured.peak_to_peak)}):'—');
++  text('cal-saved',`${done} / ${c?.total_steps||13}`);
+   const profiles=c?.profiles||[],selectedId=$('cal-profile').value,stamp=profiles.map(p=>p.id).join();
+   if($('cal-profile').dataset.stamp!==stamp){
+     const placeholder=new Option(t('cal.selecciona'),'');placeholder.dataset.i18n='cal.selecciona';
+--- antes/static/style.css
++++ despues/static/style.css
+@@ -1,7 +1,7 @@
+-/* Panel del kart · lenguaje HMI de alto rendimiento (ISA-101): gris cuando todo es normal, color solo para lo anormal. */
++/* Panel local: superficies suaves, señales legibles y alarmas diferenciadas. */
+ :root{color-scheme:light;
+-  --fondo:#d3d6d8;--panel:#e3e5e6;--panel-2:#eceeef;--campo:#f5f6f6;
+-  --borde:#b7bbbe;--borde-fuerte:#8d9296;
++  --fondo:#edf1f2;--panel:#fafcfc;--panel-2:#f1f5f5;--campo:#fff;
++  --borde:#d6dfe0;--borde-fuerte:#a3b2b7;
+   --texto:#1b1f23;--texto-2:#454b51;--texto-3:#646a70;--valor:#0d1013;
+   --serie-1:#24292e;--serie-2:#3467a0;--rejilla:#c5c8cb;--cursor:#1c5ea6;--seleccion:#1c5ea6;--seleccion-fondo:#d4e0ee;
+   --aviso:#875100;--aviso-fondo:#f1dca9;--aviso-borde:#c78a1c;
+@@ -13,7 +13,7 @@
+ body{margin:0;background:var(--fondo);color:var(--texto);font:13px/1.35 var(--letra);font-variant-numeric:tabular-nums}
+ h1,h2,p{margin:0}
+ button,select,input{font:inherit;color:inherit}
+-button{height:28px;padding:0 10px;border:1px solid var(--borde-fuerte);background:var(--campo);border-radius:3px;cursor:pointer;white-space:nowrap}
++button{height:30px;padding:0 10px;border:1px solid var(--borde-fuerte);background:var(--campo);border-radius:9px;cursor:pointer;white-space:nowrap;transition:background-color .18s,border-color .18s,box-shadow .18s}
+ button:hover{border-color:var(--texto-2)}
+ button:disabled{opacity:.45;cursor:default;border-color:var(--borde)}
+ button.primary{background:var(--texto);border-color:var(--texto);color:#fff}
+@@ -57,7 +57,7 @@
+ .nota{grid-column:1/-1;font-size:11px;color:var(--texto-3)}
+ 
+ .tablero{display:grid;grid-template-columns:250px minmax(0,1.05fr) minmax(0,1fr);gap:8px;padding:8px;min-height:0}
+-.tira,.vista,.graficas{background:var(--panel);border:1px solid var(--borde);min-width:0;min-height:0}
++.tira,.vista,.graficas{background:var(--panel);border:1px solid var(--borde);min-width:0;min-height:0;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px #20394006}
+ 
+ .tira{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+ .espacios{display:flex;flex-wrap:wrap;gap:3px;padding:6px;border-bottom:1px solid var(--borde)}
+@@ -331,3 +331,55 @@
+ @media(min-width:1740px){.tablero{grid-template-columns:230px minmax(0,1fr) 370px}.graficas{grid-column:auto;grid-template-columns:1fr;grid-template-rows:repeat(4,minmax(150px,1fr))}.grafica{border-right:0;border-bottom:1px solid var(--borde)}.vista{grid-template-rows:auto auto clamp(600px,calc(100vh - 210px),850px) auto}}
+ @media(max-width:1050px){.tablero{grid-template-columns:190px minmax(0,1fr)}.vista{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto 530px auto auto}.inspector{grid-column:1;grid-row:5;border-left:0;border-top:1px solid var(--borde);max-height:210px}.signal-list{grid-template-columns:repeat(3,minmax(0,1fr))}.selector-pieza{max-width:250px;margin-bottom:8px}.graficas{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,155px)}.modelo-ampliado .vista{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto 72vh auto auto}}
+ @media(max-width:760px){.tablero{grid-template-columns:minmax(0,1fr)}.vista{grid-row:1}.tira{max-height:350px}.graficas{grid-template-columns:1fr;grid-template-rows:repeat(4,155px)}.vista-acciones{gap:5px}.vista-acciones button{font-size:11px}.modelo-titulo strong{font-size:20px}.modelo-rpm{top:135px;left:16px;right:auto;text-align:left}.camaras{top:91px;flex-direction:row;gap:3px;right:10px;left:12px;flex-wrap:wrap}.camaras button{min-width:0;padding:0 7px}.modelo-pie{left:12px;font-size:10px}.fotos-grid{grid-template-columns:1fr}.fotos-grid img{height:auto;max-height:65vh}.fotos-cab{padding:14px}.signal-list{grid-template-columns:repeat(2,minmax(0,1fr))}#escena-3d{inset:90px 0 90px}}
++
++/* Asistente de dirección: movimiento ilustrativo separado de la señal recibida. */
++#calibracion{width:min(1020px,calc(100% - 28px));max-height:94dvh;border:1px solid #d9e3e3;border-radius:26px;background:#f8fbfa;box-shadow:0 24px 100px #102c3a38;overflow:auto}
++#calibracion::backdrop{background:#18313d85;backdrop-filter:blur(5px)}
++#calibracion[open]{animation:cal-enter .28s ease-out}
++.cal-header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px 30px 18px}
++.cal-eyebrow{font-size:10px;font-weight:600;letter-spacing:2px;color:#53716c}
++.cal-header h1{font-size:23px;font-weight:600;letter-spacing:-.6px;margin-top:5px}
++#calibracion button{border-radius:12px;min-height:42px;padding:9px 16px}
++#cal-close{background:transparent;border-color:#d6e1df}
++.cal-body{padding:0 30px 22px}
++.cal-stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:0 0 20px;padding:0;list-style:none}
++.cal-stages li{display:flex;gap:8px;align-items:center;padding:12px 10px;border-radius:12px;background:#edf2f1;color:#647675;font-size:12px;transition:background-color .3s,color .3s}
++.cal-stages b{font:11px var(--mono);opacity:.75}
++.cal-stages .current{background:#214e48;color:white}.cal-stages .done{background:#dcece6;color:#285d49}
++.cal-workspace{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;background:#fff;border:1px solid #dfe8e5;border-radius:22px;padding:24px}
++.cal-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(circle,#e5f0e9 0,#f4f8f5 65%);border-radius:17px;padding:24px 12px;min-height:330px}
++.cal-picture{width:220px;height:220px;position:relative;display:grid;place-items:center;color:#314e4a}
++.cal-orbit{position:absolute;inset:-6px;border:1px dashed #bfd3ca;border-radius:50%}
++.cal-wheel{width:178px;height:178px;z-index:1;filter:drop-shadow(0 8px 7px #1f463318);transition:transform .8s cubic-bezier(.22,1,.36,1);transform:rotate(var(--turn,0deg))}
++.cal-picture[data-direction=left]{--turn:-60deg}.cal-picture[data-direction=right]{--turn:60deg}
++.cal-picture[data-phase=positioning] .cal-orbit{animation:cal-breathe 2.6s ease-in-out infinite}
++#cal-arrow{position:absolute;bottom:-10px;background:#214e48;color:#fff;border:5px solid #f2f7f4;border-radius:50%;width:48px;height:48px;text-align:center;font:25px/38px var(--letra);z-index:2}
++.cal-position-chips{display:flex;gap:8px}.cal-position-chips span{display:grid;place-items:center;width:34px;height:28px;border-radius:9px;background:#e6eeea;color:#7b8f89}.cal-position-chips .current{background:#214e48;color:#fff}.cal-position-chips .done{background:#cde4d7;color:#214e48}
++.cal-task{min-width:0;display:flex;flex-direction:column;justify-content:center}
++.cal-steps{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:11px;color:#64766f;margin-bottom:14px}
++#cal-round{color:#285f52;font-weight:600}
++.cal-instruction h2{font-size:29px;font-weight:600;line-height:1.18;letter-spacing:-.7px;margin:0 0 12px}
++.cal-instruction p{font-size:14px;line-height:1.6;color:#55665f;max-width:440px}
++.cal-check{background:#f0f6f2;padding:14px;border:1px solid #d8e6dd;border-radius:12px;line-height:1.5;gap:10px;font-size:13px}
++.cal-check input{width:17px;height:17px;flex-shrink:0;accent-color:#285b4e}
++.cal-main-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:18px}
++#cal-primary{background:#214e48;border-color:#214e48;font-weight:600;min-width:170px;box-shadow:0 3px 9px #214e4820}
++#cal-primary:hover:enabled{background:#31665c;box-shadow:0 5px 14px #214e4830}
++#cal-stop{border-color:transparent;background:#f1f5f3;color:#52665c}
++#cal-feedback{color:#52695d;font-size:12px;line-height:1.5;margin-top:10px;min-height:18px}
++#cal-measuring{margin-top:20px}.cal-time{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#52685e}.cal-time strong{font:25px var(--mono);color:#214e48}
++#cal-progress{display:block;width:100%;height:8px;border:0;border-radius:20px;overflow:hidden;margin:12px 0;background:#e5ede8;accent-color:#2f7561}
++#cal-progress::-webkit-progress-bar{background:#e5ede8;border-radius:20px}#cal-progress::-webkit-progress-value{background:#2f7561;border-radius:20px;transition:width .22s linear}
++.cal-issue{background:#fff5df;border:1px solid #e9cf95;border-radius:13px;padding:13px 15px;margin:12px 0;color:#795119;font-size:12px;line-height:1.55}
++.cal-issue strong{font-size:14px}.cal-issue span{display:block;margin-top:6px}#cal-error{border-radius:12px;font-size:13px}
++.cal-readings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 10px}
++.cal-readings>div{border:1px solid #dfe7e3;border-radius:13px;padding:12px 14px;background:#f0f5f2;min-width:0}
++.cal-readings span{display:block;color:#5d7166;font-size:11px;margin-bottom:6px}.cal-readings strong{font-size:14px;font-weight:500;overflow-wrap:anywhere}
++.cal-caption{font-size:11px;color:#687b70;line-height:1.5}
++#cal-details{border-top:1px solid #dfe7e3;padding-top:16px}#cal-details>summary{color:#53675c;font-size:12px}
++.cal-detail-content{padding:16px 0;font-size:12px}.cal-detail-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
++#calibracion .cal-fields input,#calibracion .cal-fields select,#cal-profile{border-radius:9px;height:40px}
++@keyframes cal-enter{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
++@keyframes cal-breathe{50%{transform:scale(1.045);opacity:.45}}
++@media(max-width:700px){#calibracion{width:calc(100% - 16px);border-radius:20px}.cal-header{padding:19px 18px 16px}.cal-header h1{font-size:21px}.cal-body{padding:0 16px 16px}.cal-stages{gap:4px}.cal-stages li{flex-direction:column;gap:4px;padding:9px 3px;font-size:10px}.cal-workspace{grid-template-columns:1fr;gap:18px;padding:18px}.cal-visual{min-height:0;padding:14px;gap:9px}.cal-picture{width:115px;height:115px}.cal-wheel{width:100px;height:100px}#cal-arrow{width:34px;height:34px;line-height:26px;font-size:20px;border-width:4px;bottom:-6px}.cal-instruction h2{font-size:25px}.cal-readings{grid-template-columns:repeat(2,minmax(0,1fr))}.cal-readings>div{padding:10px}.cal-readings strong{font-size:13px}.cal-main-actions button{flex:1}.cal-steps{margin-bottom:10px}}
++@media(prefers-reduced-motion:reduce){#calibracion[open],.cal-picture .cal-orbit{animation:none!important}.cal-wheel,#cal-progress::-webkit-progress-value,button,.cal-stages li{transition:none!important}}
+--- antes/static/textos.js
++++ despues/static/textos.js
+@@ -2,6 +2,36 @@
+ // El español es el idioma por defecto y la columna de referencia (si falta otra columna se usa esta).
+ // Las claves con {parámetros} deben llevar los mismos parámetros en las tres columnas (lo comprueba qa/check-idiomas.mjs).
+ export const TEXTOS = {
++  'cal.ui.asistente': ['ASISTENTE DE DIRECCIÓN','ASSISTENTE DE DIREÇÃO','STEERING ASSISTANT'],
++  'cal.ui.preparar': ['Preparar','Preparar','Prepare'],
++  'cal.ui.centro': ['Centro','Centro','Centre'],
++  'cal.ui.recorrido': ['Recorrido','Curso','Travel'],
++  'cal.ui.verificar': ['Verificar','Verificar','Check'],
++  'cal.ui.guardar': ['Guardar','Guardar','Save'],
++  'cal.ui.dibujo': ['Movimiento indicado · dibujo orientativo','Movimento indicado · desenho ilustrativo','Requested movement · illustrative drawing'],
++  'cal.ui.midiendo': ['Midiendo esta posición','A medir esta posição','Measuring this position'],
++  'cal.ui.enlace': ['Lectura del kart','Leitura do kart','Kart data'],
++  'cal.ui.senal': ['Señal de dirección','Sinal de direção','Steering signal'],
++  'cal.ui.variacion': ['Variación en esta medición','Variação nesta medição','Variation in this measurement'],
++  'cal.ui.guardadas': ['Posiciones guardadas','Posições guardadas','Saved positions'],
++  'cal.ui.quieta': ['Mantén esta posición','Mantenha esta posição','Hold this position'],
++  'cal.ui.no_girar': ['Espera a que termine la medición. Después te indicaremos el siguiente movimiento.','Aguarde o fim da medição. Depois indicaremos o próximo movimento.','Wait for the measurement to finish. We will then show the next movement.'],
++  'cal.ui.coloca_tope': ['Desde el asiento del conductor, gira hasta ese lado sin forzar el tope. Cuando estés ahí, pulsa Medir.','A partir do lugar do condutor, rode para esse lado sem forçar o batente. Quando estiver nessa posição, prima Medir.','From the driver’s seat, turn to that side without forcing the stop. Once there, press Measure.'],
++  'cal.ui.coloca_centro': ['Alinea las ruedas para ir recto. Puedes mover el volante ahora; pulsa Medir cuando estén alineadas.','Alinhe as rodas para seguir em frente. Pode mover o volante agora; prima Medir quando estiverem alinhadas.','Align the wheels to go straight. You can move the steering wheel now; press Measure once aligned.'],
++  'cal.ui.pausa': ['Vamos a repetir este paso','Vamos repetir este passo','Let’s retry this step'],
++  'cal.ui.conservadas': ['Las posiciones anteriores siguen guardadas. Solo se repite la actual.','As posições anteriores continuam guardadas. Só se repete a atual.','Previous positions are saved. Only the current one needs repeating.'],
++  'cal.ui.sesion': ['La conexión ha cambiado','A ligação mudou','The connection has changed'],
++  'cal.ui.sesion_ayuda': ['Confirma de nuevo la preparación para iniciar otro ensayo. El registro anterior se conserva.','Confirme novamente a preparação para iniciar outro ensaio. O registo anterior é conservado.','Confirm preparation again to start another run. The previous record is retained.'],
++  'cal.ui.segundos': ['{n} s','{n} s','{n} s'],
++  'cal.ui.limite': ['La señal ha llegado a su límite','O sinal atingiu o limite','The signal has reached its limit'],
++  'cal.ui.limite_ayuda': ['La lectura es 0 o 4095 cuentas. Revisa la señal: el panel no puede medir más recorrido a partir de ese valor.','A leitura é 0 ou 4095 contagens. Verifique o sinal: o painel não consegue medir mais curso a partir desse valor.','The reading is 0 or 4095 counts. Check the signal: the panel cannot measure further travel beyond that value.'],
++  'cal.ui.ruido': ['La señal varía demasiado','O sinal varia demasiado','The signal varies too much'],
++  'cal.ui.posicion': ['Comprueba la posición del volante','Verifique a posição do volante','Check the steering wheel position'],
++  'cal.ui.revisar': ['Esto necesita tu atención','Isto precisa da sua atenção','This needs your attention'],
++  'cal.ui.medir': ['Ya está · medir {n} s','Já está · medir {n} s','Ready · measure for {n} s'],
++  'cal.ui.recibiendo': ['Recibiendo datos','A receber dados','Receiving data'],
++  'cal.ui.sin_datos': ['Sin datos recientes','Sem dados recentes','No recent data'],
++  'cal.ui.cuentas': ['{n} cuentas','{n} contagens','{n} counts'],
+   // ── Cabecera y conexión ───────────────────────────────────────────────────────────────────
+   'titulo': ['Kart · Panel de laboratorio', 'Kart · Painel de laboratório', 'Kart · Laboratory panel'],
+   'marca.nombre': ['Kart eléctrico', 'Kart elétrico', 'Electric kart'],
+@@ -405,7 +435,6 @@
+   'cal.ayuda': ['Tú mueves el volante. El programa comprueba y guarda cada posición.', 'Mova o volante. O programa verifica e guarda cada posição.', 'You move the steering wheel. The program checks and saves each position.'],
+   'cal.listo_check': ['Ruedas rectas, kart parado y tracción inhabilitada.', 'Rodas direitas, kart parado e tração desativada.', 'Wheels straight, kart stopped and traction disabled.'],
+   'cal.comprobando_aria': ['Comprobando posición', 'A verificar a posição', 'Checking position'],
+-  'cal.esperando_pos': ['Esperando la posición…', 'A aguardar a posição…', 'Waiting for the position…'],
+   'cal.empezar': ['Empezar', 'Começar', 'Start'],
+   'cal.cancelar': ['Cancelar', 'Cancelar', 'Cancel'],
+   'cal.detalles': ['Detalles y calibraciones anteriores', 'Detalhes e calibrações anteriores', 'Details and previous calibrations'],
+@@ -454,16 +483,12 @@
+   'cal.ronda_pausa': ['En pausa', 'Em pausa', 'Paused'],
+   'cal.posiciones': ['{n} de {total} posiciones', '{n} de {total} posições', '{n} of {total} positions'],
+   'cal.comprobando': ['Comprobando', 'A verificar', 'Checking'],
+-  'cal.ayuda_tope': ['Llévala hasta el tope, sin forzar. Después mantenla quieta.', 'Leve-a até ao batente, sem forçar. Depois mantenha-a imóvel.', 'Take it to the stop without forcing it. Then hold it still.'],
+-  'cal.ayuda_centro': ['Alinea las ruedas para ir recto y mantenlas quietas.', 'Alinhe as rodas para seguir em frente e mantenha-as imóveis.', 'Align the wheels to go straight and hold them still.'],
+   'cal.h.preparada': ['Calibración preparada', 'Calibração preparada', 'Calibration ready'],
+   'cal.ayuda_preparada': ['Hemos comparado las tres rondas y combinado sus lecturas.', 'Comparámos as três rondas e combinámos as suas leituras.', 'We compared the three rounds and combined their readings.'],
+   'cal.h.todo_listo': ['Todo listo', 'Tudo pronto', 'All set'],
+   'cal.h.guardada': ['Calibración guardada', 'Calibração guardada', 'Calibration saved'],
+   'cal.ayuda_todo_listo': ['El panel ya usa tu centro y el recorrido de cada lado.', 'O painel já usa o seu centro e o curso de cada lado.', 'The panel now uses your centre and the travel of each side.'],
+   'cal.ayuda_guardada': ['La sesión cambió. Puedes recuperarla en «Calibraciones anteriores».', 'A sessão mudou. Pode recuperá-la em «Calibrações anteriores».', 'The session changed. You can recover it under “Previous calibrations”.'],
+-  'cal.h.espera': ['Esperando la conexión', 'A aguardar a ligação', 'Waiting for the connection'],
+-  'cal.ayuda_espera': ['Este paso no se ha guardado. Cuando vuelva la lectura, puedes reintentarlo.', 'Este passo não foi guardado. Quando a leitura regressar, pode tentar de novo.', 'This step was not saved. When the reading returns, you can retry it.'],
+   'cal.h.repetir': ['Necesitamos repetir', 'Precisamos de repetir', 'We need to repeat'],
+   'cal.h.reiniciar': ['Puedes volver a empezar', 'Pode recomeçar', 'You can start again'],
+   'cal.ayuda_reiniciar': ['Las lecturas anteriores se han conservado.', 'As leituras anteriores foram conservadas.', 'The previous readings have been kept.'],
+@@ -488,6 +513,17 @@
+ // Mensajes y etiquetas que genera el servicio local (server.py, calibracion.py), siempre en español.
+ // Coincidencia exacta: [español, portugués, inglés]. Solo se traduce al mostrarlos; el registro de sesión conserva el texto original.
+ export const SERVIDOR = [
++  ["Coloca las ruedas rectas y pulsa Medir cuando estés listo.", "Coloque as rodas direitas e prima Medir quando estiver pronto.", "Straighten the wheels and press Measure when ready."],
++  ["Coloca la dirección antes de iniciar la medición", "Coloque a direção antes de iniciar a medição", "Position the steering before starting the measurement"],
++  ["Mantén la posición hasta que termine la cuenta atrás.", "Mantenha a posição até terminar a contagem decrescente.", "Hold the position until the countdown ends."],
++  ["Coloca de nuevo la dirección y pulsa Medir cuando estés listo.", "Volte a colocar a direção e prima Medir quando estiver pronto.", "Position the steering again and press Measure when ready."],
++  ["La señal CAN ha llegado a 0 o 4095. No se puede distinguir más recorrido. Revisa la señal antes de repetir este paso.", "O sinal CAN atingiu 0 ou 4095. Não é possível distinguir mais curso. Verifique o sinal antes de repetir este passo.", "The CAN signal reached 0 or 4095. Further travel cannot be distinguished. Check the signal before retrying this step."],
++  ["La lectura sigue en la posición anterior. Coloca la dirección en la nueva posición y repite este paso.", "A leitura continua na posição anterior. Coloque a direção na nova posição e repita este passo.", "The reading is still at the previous position. Move the steering to the new position and retry this step."],
++  ["La lectura no coincide con la posición pedida. Revisa el lado o alinea las ruedas y repite este paso.", "A leitura não corresponde à posição pedida. Verifique o lado ou alinhe as rodas e repita este passo.", "The reading does not match the requested position. Check the side or align the wheels and retry this step."],
++  ["Llegan muy pocas muestras. Comprueba la conexión Wi-Fi y repite este paso.", "Chegam muito poucas amostras. Verifique a ligação Wi-Fi e repita este passo.", "Too few samples are arriving. Check the Wi-Fi connection and retry this step."],
++  ["La señal varía demasiado durante la medición. Si no moviste el volante, revisa el sensor o el cableado. Puedes repetir este paso.", "O sinal varia demasiado durante a medição. Se não moveu o volante, verifique o sensor ou a cablagem. Pode repetir este passo.", "The signal varies too much during measurement. If you did not move the steering wheel, check the sensor or wiring. You can retry this step."],
++  ["Posición guardada. Coloca la siguiente y pulsa Medir cuando estés listo.", "Posição guardada. Coloque a seguinte e prima Medir quando estiver pronto.", "Position saved. Move to the next one and press Measure when ready."],
++
+   // Etiquetas de señal (SIGNALS) y unidades
+   ['cuentas', 'contagens', 'counts'],
+   ['Pedal procesado', 'Pedal processado', 'Processed pedal'],

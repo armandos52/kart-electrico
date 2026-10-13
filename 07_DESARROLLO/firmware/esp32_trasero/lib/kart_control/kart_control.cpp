@@ -37,6 +37,7 @@ float steeringDegrees(uint16_t raw,const Config& cfg) {
 bool Controller::receive(const uint8_t* b,uint8_t n,uint32_t now) {
     Command next;
     if(!decodeCommand(b,n,next)) {invalid_=true;rearm_=true;++rejected_;return false;}
+    if(!next.start) stop_pending_=true;
     command_=next;last_command_=now;received_=true;invalid_=false;++accepted_;return true;
 }
 Output Controller::stop(Output out,Inhibit why,bool require_rearm) {
@@ -62,9 +63,12 @@ Output Controller::step(const Sensors& s,uint32_t now) {
     // El estado detenido siempre anula inmediatamente las consignas.
     if(s.charger) {relay_=Relay::Off;start_off_seen_=false;start_previous_=false;return stop(out,Inhibit::Charger,true);}
     if(!s.outputs_ok) {relay_=Relay::Off;return stop(out,Inhibit::OutputFault,true);}
-    // Un STOP válido prevalece incluso si el diagnóstico frontal indica fallo de sensores.
-    if(fresh && !invalid_ && !command_.start) {
-        relay_=Relay::Off;start_off_seen_=true;start_previous_=false;gear_=Gear::Neutral;
+    // No perder STOP al drenar CAN: se aplica aunque una trama posterior pida START.
+    // Ese START previo a aplicar la parada no se reutiliza para arrancar en el siguiente ciclo.
+    if(stop_pending_ || (fresh && !invalid_ && !command_.start)) {
+        stop_pending_=false;relay_=Relay::Off;
+        start_off_seen_=fresh && !invalid_ && !command_.start;
+        start_previous_=false;gear_=Gear::Neutral;
         return stop(out,Inhibit::StartOff,true);
     }
     if(!fresh || invalid_ || !s.can_ok || !s.frontend_ok) {

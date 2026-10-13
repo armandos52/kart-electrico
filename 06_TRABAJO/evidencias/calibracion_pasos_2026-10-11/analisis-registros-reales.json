@@ -1,0 +1,275 @@
+{
+  "scope": "Registros ya existentes de Wi-Fi, sin nueva medición; posición física no registrada",
+  "runs": [
+    {
+      "id": "475b4f11c0824897a1954ef306ab29c8",
+      "created_utc_as_recorded": "2026-10-09T16:27:36.167659+00:00",
+      "source": "socket://192.168.4.1:3333",
+      "firmware": "esp32_trasero-v1.2-diagnostico",
+      "captures": 0,
+      "attempts": [
+        {
+          "id": "e7f7138b497b404f9750465818b40cd5",
+          "kind": "center",
+          "cycle": 0,
+          "duration_s": 10,
+          "min_samples": 50,
+          "started_utc": "2026-10-09T16:27:36.174769+00:00",
+          "status": "rejected",
+          "reason": "Calibración guiada cancelada por el usuario",
+          "ended_utc": "2026-10-09T16:27:47.562531+00:00",
+          "statistics": {
+            "n": 51,
+            "median": 2344,
+            "min": 2196,
+            "max": 2582,
+            "peak_to_peak": 386,
+            "stdev": 67.42026808771682,
+            "duration_s": 10.003544899998815
+          },
+          "window": {
+            "first_seq": 1186,
+            "last_seq": 1236,
+            "first_elapsed_s": 1.3104486999945948,
+            "last_elapsed_s": 11.31399359999341
+          }
+        }
+      ],
+      "samples": 57,
+      "min": 2196,
+      "max": 2582,
+      "zero_count": 0,
+      "full_scale_count": 0,
+      "sequence_gaps": 0,
+      "sources": {
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\475b4f11c0824897a1954ef306ab29c8\\run.json": "c0a298bfddf579d468b1753a05c3b9bd6702dd5a09d0253a655af26f2df02421",
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\475b4f11c0824897a1954ef306ab29c8\\samples.jsonl": "0e144599978903b866f644d5844113ffd12c2e504c016de085449f949e380ead"
+      }
+    },
+    {
+      "id": "4ac2f4f2253b41fba862450e9ec3873b",
+      "created_utc_as_recorded": "2026-10-09T16:29:02.290922+00:00",
+      "source": "socket://192.168.4.1:3333",
+      "firmware": "esp32_trasero-v1.2-diagnostico",
+      "captures": 0,
+      "attempts": [
+        {
+          "id": "e777e6298e4d476283581538fb918a8c",
+          "kind": "center",
+          "cycle": 0,
+          "duration_s": 10,
+          "min_samples": 50,
+          "started_utc": "2026-10-09T16:29:02.298676+00:00",
+          "status": "rejected",
+          "reason": "Calibración guiada cancelada por el usuario",
+          "ended_utc": "2026-10-09T16:29:14.589072+00:00",
+          "statistics": {
+            "n": 51,
+            "median": 2360,
+            "min": 2134,
+            "max": 3828,
+            "peak_to_peak": 1694,
+            "stdev": 644.9805602785675,
+            "duration_s": 10.001340600007097
+          },
+          "window": {
+            "first_seq": 1621,
+            "last_seq": 1671,
+            "first_elapsed_s": 2.185871699999552,
+            "last_elapsed_s": 12.18721230000665
+          }
+        }
+      ],
+      "samples": 61,
+      "min": 2134,
+      "max": 3828,
+      "zero_count": 0,
+      "full_scale_count": 0,
+      "sequence_gaps": 0,
+      "sources": {
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\4ac2f4f2253b41fba862450e9ec3873b\\run.json": "e700abb8274ddae9bf9ffff6b0b92cba99e54b9e84ac438d4ce31260860887a4",
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\4ac2f4f2253b41fba862450e9ec3873b\\samples.jsonl": "86fe414b6ef3bf0b7bad702a973484e47537620550cf2a375300415bbb6e55fe"
+      }
+    },
+    {
+      "id": "80f25a7d625e43ec8e2ff1602dea6054",
+      "created_utc_as_recorded": "2026-10-09T16:27:49.075365+00:00",
+      "source": "socket://192.168.4.1:3333",
+      "firmware": "esp32_trasero-v1.2-diagnostico",
+      "captures": 0,
+      "attempts": [
+        {
+          "id": "c40a99a76b68414fa72b7fdc10c1e499",
+          "kind": "center",
+          "cycle": 0,
+          "duration_s": 10,
+          "min_samples": 50,
+          "started_utc": "2026-10-09T16:27:49.083216+00:00",
+          "status": "rejected",
+          "reason": "Calibración guiada cancelada por el usuario",
+          "ended_utc": "2026-10-09T16:27:55.967738+00:00",
+          "statistics": {
+            "n": 35,
+            "median": 2381,
+            "min": 2208,
+            "max": 2546,
+            "peak_to_peak": 338,
+            "stdev": 71.80872117629438,
+            "duration_s": 6.800849700011895
+          },
+          "window": {
+            "first_seq": 1244,
+            "last_seq": 1278,
+            "first_elapsed_s": 0.002218399997218512,
+            "last_elapsed_s": 6.8030681000091136
+          }
+        }
+      ],
+      "samples": 35,
+      "min": 2208,
+      "max": 2546,
+      "zero_count": 0,
+      "full_scale_count": 0,
+      "sequence_gaps": 0,
+      "sources": {
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\80f25a7d625e43ec8e2ff1602dea6054\\run.json": "94cfd5475bcd00ab536d9668f752466127b92bd27ca21419a1f1c3f96d7ec610",
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\80f25a7d625e43ec8e2ff1602dea6054\\samples.jsonl": "a88afa4a121072a830cdb218b8e4ebb87a39d04467b5247681175e383da491d0"
+      }
+    },
+    {
+      "id": "86c72945e65c41eb8ff9597acc0a380e",
+      "created_utc_as_recorded": "2026-10-09T16:28:14.423128+00:00",
+      "source": "socket://192.168.4.1:3333",
+      "firmware": "esp32_trasero-v1.2-diagnostico",
+      "captures": 0,
+      "attempts": [
+        {
+          "id": "d4b2107f8c53451d91887814aaaadf35",
+          "kind": "center",
+          "cycle": 0,
+          "duration_s": 10,
+          "min_samples": 50,
+          "started_utc": "2026-10-09T16:28:14.430191+00:00",
+          "status": "rejected",
+          "reason": "Saturación 0/4095 en adquisición guiada",
+          "ended_utc": "2026-10-09T16:28:51.485324+00:00",
+          "statistics": {
+            "n": 51,
+            "median": 2371,
+            "min": 0,
+            "max": 2511,
+            "peak_to_peak": 2511,
+            "stdev": 484.30712018993347,
+            "duration_s": 9.999552099994617
+          },
+          "window": {
+            "first_seq": 1506,
+            "last_seq": 1556,
+            "first_elapsed_s": 27.055017100006808,
+            "last_elapsed_s": 37.054569200001424
+          }
+        }
+      ],
+      "samples": 186,
+      "min": 0,
+      "max": 2556,
+      "zero_count": 1,
+      "full_scale_count": 0,
+      "sequence_gaps": 0,
+      "sources": {
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\86c72945e65c41eb8ff9597acc0a380e\\run.json": "25ad40c89106df257236c44f6c7bc5c36f15e23a10f4ba1ecb67d490b7b283af",
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\86c72945e65c41eb8ff9597acc0a380e\\samples.jsonl": "45a1366b54836992cba69e373423fa94b77c46ce35beaa267c797958da793155"
+      }
+    },
+    {
+      "id": "c5833080d9494864ace4599046632fc5",
+      "created_utc_as_recorded": "2026-10-09T16:26:29.906041+00:00",
+      "source": "socket://192.168.4.1:3333",
+      "firmware": "esp32_trasero-v1.2-diagnostico",
+      "captures": 0,
+      "attempts": [
+        {
+          "id": "d25b11570368483789d70cddf1a3393f",
+          "kind": "center",
+          "cycle": 0,
+          "duration_s": 10,
+          "min_samples": 50,
+          "started_utc": "2026-10-09T16:26:29.913872+00:00",
+          "status": "rejected",
+          "reason": "Saturación 0/4095 en adquisición guiada",
+          "ended_utc": "2026-10-09T16:27:20.486470+00:00",
+          "statistics": {
+            "n": 51,
+            "median": 2255,
+            "min": 0,
+            "max": 2347,
+            "peak_to_peak": 2347,
+            "stdev": 392.4785384416005,
+            "duration_s": 10.000051800001529
+          },
+          "window": {
+            "first_seq": 1051,
+            "last_seq": 1101,
+            "first_elapsed_s": 40.57182009999815,
+            "last_elapsed_s": 50.57187189999968
+          }
+        }
+      ],
+      "samples": 253,
+      "min": 0,
+      "max": 2472,
+      "zero_count": 1,
+      "full_scale_count": 0,
+      "sequence_gaps": 0,
+      "sources": {
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\c5833080d9494864ace4599046632fc5\\run.json": "533a39f7bede474badf4e2f0511f7950dca5de6e846b733ef8d94d2d3e63bc1e",
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\c5833080d9494864ace4599046632fc5\\samples.jsonl": "71b9a528f06385ac287b7c69cd0c59710ab61009488135c935a144aaf7d5ba77"
+      }
+    },
+    {
+      "id": "d67c7b5c23184b21959ee471a1bacc74",
+      "created_utc_as_recorded": "2026-10-09T16:27:26.208386+00:00",
+      "source": "socket://192.168.4.1:3333",
+      "firmware": "esp32_trasero-v1.2-diagnostico",
+      "captures": 0,
+      "attempts": [
+        {
+          "id": "ae606521b1e944efa03983b8f7664b18",
+          "kind": "center",
+          "cycle": 0,
+          "duration_s": 10,
+          "min_samples": 50,
+          "started_utc": "2026-10-09T16:27:26.217492+00:00",
+          "status": "rejected",
+          "reason": "Calibración guiada cancelada por el usuario",
+          "ended_utc": "2026-10-09T16:27:35.310654+00:00",
+          "statistics": {
+            "n": 46,
+            "median": 1628.5,
+            "min": 7,
+            "max": 2500,
+            "peak_to_peak": 2493,
+            "stdev": 1029.4522329860672,
+            "duration_s": 8.999431799995364
+          },
+          "window": {
+            "first_seq": 1130,
+            "last_seq": 1175,
+            "first_elapsed_s": 0.06811910000396892,
+            "last_elapsed_s": 9.067550899999333
+          }
+        }
+      ],
+      "samples": 46,
+      "min": 7,
+      "max": 2500,
+      "zero_count": 0,
+      "full_scale_count": 0,
+      "sequence_gaps": 0,
+      "sources": {
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\d67c7b5c23184b21959ee471a1bacc74\\run.json": "9fbf84e49a6caccc64e185f25de43245c0587e6351b211412b6b6a4e56e7177e",
+        "07_DESARROLLO\\panel_local\\sesiones\\calibraciones\\d67c7b5c23184b21959ee471a1bacc74\\samples.jsonl": "8cdbbe9846df45d5e7af51e7e120e661dab5be94fff30f1fca9e55645a867184"
+      }
+    }
+  ]
+}
