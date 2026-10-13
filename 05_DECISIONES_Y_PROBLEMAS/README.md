@@ -25,3 +25,4 @@
 - [PROB-0007 · Variación de lectura y centro de dirección](problemas/PROB-0007_variacion_y_centro_direccion.md)
 - [PROB-0008 · Robustez del control, modos y pantalla](problemas/PROB-0008_robustez_control_modos_y_pantalla.md)
 - [PROB-0009 · Relé entra y sale al pulsar START](problemas/PROB-0009_start_pulsador_momentaneo.md)
+- [PROB-0010 · Identidad y carga de batería 16S](problemas/PROB-0010_identificacion_y_carga_bateria_16s.md)

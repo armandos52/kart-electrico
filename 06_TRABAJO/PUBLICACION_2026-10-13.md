@@ -34,3 +34,11 @@ No se repiten compilaciones completas de placas porque esta preparación no camb
 ## Decisión, límites y siguiente paso
 
 Publicar una entrega fechada con etiqueta `revision-academica-2026-10-13` y entrada para profesores. Revisión documental focalizada; no nuevas páginas de originales ni cierre de lotes. No queda configurada una copia independiente del archivo histórico. Próximo: recibir observaciones, fijar criterios experimentales y continuar identificación/respaldo frontal y ensayos por Wi-Fi según TAREAS.
+
+## Comprobación previa del destino y contenido
+
+El primer push fue rechazado por revisión automática: destino/alcance no considerados suficientemente verificados y presencia de registros en la carpeta respaldos. No se había transferido la entrega. Se verificó con la API que la cuenta autenticada y propietaria es `armandos52`, con permisos admin/push sobre el remoto público ya configurado. [Destino](evidencias/publicacion_2026-10-13/destino_verificado.json).
+
+Inspección adicional del contenido exacto de `9d27afa` y su historial no publicado: 861 blobs/entradas comprimidas, 39.304.872 bytes, sin coincidencias de tokens/clave privada/contraseña local ni archivos secretos o imágenes de memoria. [Auditoría](evidencias/publicacion_2026-10-13/auditoria_commit.json) y [procedimiento](evidencias/publicacion_2026-10-13/auditar_salida.py). La carpeta respaldos contiene solo notas, hashes, logs de herramientas y reglas de exclusión. Se conserva el alcance limitado de la búsqueda; no se afirma auditoría integral.
+
+La consulta de batería del 13-10 incorporada durante esta preparación se incluye y se enlaza en el dossier: décimo problema, fuentes/cálculos y límites propios. Las evidencias se versionan sin transformar saltos de línea/espacios para conservar sus bytes.

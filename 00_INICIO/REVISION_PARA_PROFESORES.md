@@ -64,6 +64,8 @@ Para dejar feedback: **[abrir una revisión académica](https://github.com/arman
 
 ## Fuentes y reproducibilidad
 
+También se incluye la [consulta documental de batería del 13-10](../04_CONOCIMIENTO/bateria_y_bms/TUTORIAL_CELDAS_Y_CARGA_16S.md), incorporada mientras se preparaba la entrega: cálculos 16S, diferencia entre tensión y SOC y discrepancia de capacidad entre fuentes. [PROB-0010](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0010_identificacion_y_carga_bateria_16s.md) mantiene pendiente la identificación del conjunto. No es una carga realizada ni una configuración aplicada.
+
 [Código y comandos](../07_DESARROLLO/README.md) · [versiones](../07_DESARROLLO/firmware/VERSIONES.md) · [diario](../06_TRABAJO/DIARIO_PARA_RELATORIO.md) · [catálogo](../03_CATALOGO/INDICE_DOCUMENTOS.md) · [alcance público](../02_ORIGINALES/README.md).
 
 Los informes históricos completos se conservan en la copia local; el catálogo mantiene nombres, hashes, páginas y cobertura. La revisión de publicación no amplía su lectura técnica ni acredita una copia de seguridad independiente.
