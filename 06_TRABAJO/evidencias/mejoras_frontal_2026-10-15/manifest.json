@@ -1,0 +1,87 @@
+{
+  "date_local": "2026-10-15",
+  "kind": "PC; sin grabacion",
+  "head": "43b0c299af47e30aabcf9b5acd7677b86754a00b",
+  "sources": {
+    "07_DESARROLLO/firmware/nucleo_f411_banco/capturar_pantallas.py": {
+      "before": "aae074a999cf1fc6410616412680ee82a9428b469ab2fa46de6c0c6dcf300bdd",
+      "after": "3b75d122e4c47ffb4b00435ee444b9d221e862f8c81b32234a752be058ea1f93"
+    },
+    "07_DESARROLLO/firmware/nucleo_f411_banco/src/bench_logic.cpp": {
+      "before": "e009902e2d8b3926d05da77bf788f4e9c8b11357ec88705cba51c7d35f28b54e",
+      "after": "f33f6f2d3c5153a350820d8b129d7286f3221c7ddbb877c32c40fea09d7719ff"
+    },
+    "07_DESARROLLO/firmware/nucleo_f411_banco/src/bench_logic.h": {
+      "before": "1b8b956373706fc69b7b2d09eba41cc2169bfe5f98a4233345533c8118238413",
+      "after": "0ae7121b82338cd5da96ede0ca3fdc0d4461a8a8a687eb57f0648e8ebfd9b51d"
+    },
+    "07_DESARROLLO/firmware/nucleo_f411_banco/src/main.cpp": {
+      "before": "4ef23a601962006ac2d88b8fe65b5baf75b5bfac3fb0c8cb16b33865c68456e5",
+      "after": "784225927a7b8d3198ac0fd9c83aa1c9f2cb6503de5e7e3da410dd4d372ddda6"
+    },
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h": {
+      "before": "8633cf132addbb9ea14d79d13957fc83c9e53ef1708e279013e9554d48204ddc",
+      "after": "6fa02b99ecde70c354cbd93d7a74b61506e49d7043b14145c52fdfaba1fc5ab7"
+    },
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c": {
+      "before": "2727188b6fa0bbad050164d2d7e2a12803a53491a363df0462cfb23898d2287f",
+      "after": "d82cdc1feb1923a43f1afe38f7fa3f66e1ba210dd19354c5c97749a761f3cd4d"
+    },
+    "07_DESARROLLO/firmware/stm32_frontal/tests/display_cases.h": {
+      "before": null,
+      "after": "deba3629061603daa9fe367fd05734431efc562f57ff17690860d8581eea44ee"
+    },
+    "07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp": {
+      "before": "4907b4e5e0c74ad2500440e127230b37eac68922481552c310cbda9e67941af2",
+      "after": "a7d6338f61f560b4b76a03e7d3ae68f744fbebaf2cb0cbfda09b88ae4297e158"
+    },
+    "07_DESARROLLO/firmware/stm32_frontal/tools/build.py": {
+      "before": "efe7d4a841348aa14b2ae05254bfa678024e76bc1eaf051c99f27918dd884582",
+      "after": "efe7d4a841348aa14b2ae05254bfa678024e76bc1eaf051c99f27918dd884582"
+    }
+  },
+  "artifacts": {
+    ".gitignore": "d4dfb9312d83561729e44fdb33b34c6de82f3769029ac69b3957f5870ffdcc02",
+    "banco_host.cmd": "da3b8ac741e17022474676c4201adab9392f437baba4a87c676e07422dcccd8c",
+    "banco_host.cpp": "8d5118db338b84d3186126c8de4e97468a54bec45767e9f49d336457933776a3",
+    "banco_host.log": "7ae2558b96fe4980741c826dda75ade9d87ac5828470731c4a532c50c9f36840",
+    "build_banco_v04.log": "7a5ae2bbac6979162b148e7c123eaf46c0e350d26b482045f2ed1ce12b756a4e",
+    "build_banco_v04_final.log": "787f05fed0203a8b465945dcc0605f65333104bc23bd042a63861a22953c4b76",
+    "build_stm32_dev4.log": "8bbab9ccf1a728bd2e9a8a964d3646878860ae40a7dd631b232838ad496898d3",
+    "cambios.patch": "d0bf40c110105b0aa7de6fff3f0b4f016f746f982d139d3636f4be150fe07178",
+    "capture_compatibility.log": "3fa9e02975f7920df45963e3ed1a6744d2e4996a62b6ffa53ab917d2e09d8ff7",
+    "commit_base.txt": "3a0ddce3b99cbb6e120c6c63e426a7393ca6c267ebc6a64ca8886c261bf3f18f",
+    "conservar_evidencia.py": "98c50a9aec0db806f0f0ce97f8e046f0ceec478b8c0d1436431de16d991a2acc",
+    "estado_git_inicial.txt": "065601514468a2d09354342fdf947a919e270ab367ebc6e80840798c6741b410",
+    "frontend_antes.log": "efc82744735b6a1d640d6f502da0c742d2109cd213af4e404dd5ffcaad2ba1b5",
+    "frontend_dev4.log": "379ce98c57cb56bd65d08341d578096039943ded850c4c03837306f68a509309",
+    "test_capture_compatibility.py": "20bbeb5bc43491d7472bbb0d687f2b4419bb6d76d04993644fc685b12888f730",
+    "compilacion/f411-v0.4-dev.bin": "2647a757e0b878465881f6929851e3f75249beccf5803891f8e6db32ab038a19",
+    "compilacion/f411-v0.4-dev.elf": "d5170c6b8038a57b73a612d8b2ca80c9d2a7fbccf7784ccb4cca3e5b4d29d46e",
+    "compilacion/hashes_build_stm32.json": "91703718a1547ddd8509bb8040864fb69bd13cf7d870966e384c0196bee0bdec",
+    "compilacion/stm32_dev4.map": "6dd196f2030342c3d39d432006b926d2719311d28cee7a189efe0afb7391ee48",
+    "compilacion/stm32_frontal-v1.3-dev4.elf": "5878e195c60631893ef0cbf6968a1f5ce02e50c093bb8c3b569d78238f20069a",
+    "compilacion/stm32_frontal-v1.3-dev4.hex": "b758edd7d09f8a651b5111b7854037b5869d3f5960e4e48fc6b8636c65f10316",
+    "captura_simulada/mixed_header/sesion.log": "5f600d10a26654ba75ee5e7f2ee119bea26d26791ad55fe2ced6b4ccf32e6bcf",
+    "captura_simulada/mixed_header/transporte.raw": "cbc69c37eba2007f94c2f6fc3308588bafef948d87af0b6a0d3958126f0ee395",
+    "captura_simulada/mixed_state/sesion.log": "72cf8569cfe1f97e5ec96db3639d6c8aab2f1a3dc1eb21f3277d1f7ef309ed3f",
+    "captura_simulada/mixed_state/transporte.raw": "f6748526d26a374fb9cfc476e171d8132c18abce753b90ae25943caa482304a3",
+    "captura_simulada/new/escena_01.json": "3fb7b0ef63db156f66da6e861bafef8f983df4500ed2affbc3c36310bb6d7629",
+    "captura_simulada/new/escena_01.png": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+    "captura_simulada/new/escena_01.rgb565": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "captura_simulada/new/sesion.log": "5769655af4da6dcec01fd54400a03b6d779d8b2f277fe860bd77645a9555a9b8",
+    "captura_simulada/new/transporte.raw": "7b71f27d62a07c5e477948fa387e24665b6c93de1501d07e13ccfd7fc39f2458",
+    "captura_simulada/old/escena_01.json": "cee3db500b52f1a9b9d11b594588c242ce136c5fdcea76ad5720bdbdd3a48364",
+    "captura_simulada/old/escena_01.png": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+    "captura_simulada/old/escena_01.rgb565": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "captura_simulada/old/sesion.log": "59bd85b4ffe811ac3fc218730e3421c1a3fedf091208b1ff0df3469c675d9ad7",
+    "captura_simulada/old/transporte.raw": "36c980b4e8db6409b016e3afdc1b429bc0157286726b8aaa9ee242d83defe9dd",
+    "captura_simulada/unknown/sesion.log": "88b4163cb1bfa9e127fc0d2f7d0196911815e9be47907b206342555ac1d3304d",
+    "captura_simulada/unknown/transporte.raw": "beb3671983a61b3643c1dfcaf1da0743d47c321654ec8aba6a706e7351ab15b2"
+  },
+  "unchanged_control_hashes": {
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c": "4c352bc56a37bde849d071a6184fe0d7b73fcf14f3d6c377ce453d21ddd30a84",
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp": "69101897723d487c66b31c812bc5a31cbdfd145ef6f6168190f674c80e43ebc1",
+    "07_DESARROLLO/firmware/common/kart_protocol.h": "d2edb6baafa21afe1a468d3ef66d790d338dab650bcb8b2f14cd794b7662bb22"
+  }
+}

@@ -1,0 +1,91 @@
+xPack Open On-Chip Debugger 0.12.0+dev-02228-ge5888bda3-dirty (2025-10-04-22:44)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : STLINK V2J47M34 (API v2) VID:PID 0483:374B
+Info : Target voltage: 3.214173
+Info : clock speed 1800 kHz
+Info : SWD DPIDR 0x5ba02477
+Info : [stm32f7x.cpu] Cortex-M7 r0p1 processor detected
+Warn : [stm32f7x.cpu] Erratum 702596: single stepping may enter pending exception handler!
+Warn : [stm32f7x.cpu] Erratum 3092511: Cortex-M7 can halt in an incorrect address when breakpoint and exception occurs simultaneously
+Info : [stm32f7x.cpu] The erratum 3092511 workaround will resume after an incorrect halt
+Info : [stm32f7x.cpu] target has 8 breakpoints, 4 watchpoints
+Info : [stm32f7x.cpu] Examination succeed
+Info : [stm32f7x.cpu] gdb port disabled
+INICIO=13:33:29
+CAMBIO t=16 ms tick=228457 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x0
+CAPTURA 1 fb=0xC003FC00 t=16
+LATIDO t=10167 ms tick=238607 filas=0
+LATIDO t=20182 ms tick=248622 filas=0
+LATIDO t=30230 ms tick=258672 filas=0
+LATIDO t=40398 ms tick=268837 filas=0
+LATIDO t=50463 ms tick=278902 filas=0
+LATIDO t=60607 ms tick=289047 filas=0
+CAMBIO t=67178 ms tick=295617 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x2 sderr=0x1 aviso=0x0
+CAPTURA 2 fb=0xC003FC00 t=67178
+CAMBIO t=69808 ms tick=298247 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x0
+CAPTURA 3 fb=0xC003FC00 t=69808
+LATIDO t=72442 ms tick=300882 filas=0
+LATIDO t=82584 ms tick=311022 filas=0
+LATIDO t=92586 ms tick=321027 filas=0
+CAMBIO t=97187 ms tick=325627 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x2 sderr=0x1 aviso=0x0
+CAPTURA 4 fb=0xC0000000 t=97187
+CAMBIO t=99905 ms tick=328342 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x0
+CAPTURA 5 fb=0xC003FC00 t=99905
+LATIDO t=102702 ms tick=331142 filas=0
+LATIDO t=112753 ms tick=341192 filas=0
+LATIDO t=122770 ms tick=351207 filas=0
+LATIDO t=132886 ms tick=361322 filas=0
+LATIDO t=142950 ms tick=371387 filas=0
+LATIDO t=153001 ms tick=381437 filas=0
+CAMBIO t=157331 ms tick=385767 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x2 sderr=0x1 aviso=0x0
+CAPTURA 6 fb=0xC0000000 t=157331
+CAMBIO t=159964 ms tick=388402 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x0
+CAPTURA 7 fb=0xC0000000 t=159964
+LATIDO t=163098 ms tick=391537 filas=0
+LATIDO t=173110 ms tick=401547 filas=0
+CAMBIO t=178314 ms tick=406752 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x2
+CAPTURA 8 fb=0xC003FC00 t=178314
+CAMBIO t=180939 ms tick=409377 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x0 sd=0x3 sderr=0x0 aviso=0x2
+CAPTURA 9 fb=0xC003FC00 t=180939
+CAMBIO t=183564 ms tick=412002 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x2
+CAPTURA 10 fb=0xC0000000 t=183564
+CAMBIO t=187196 ms tick=415632 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x0
+CAPTURA 11 fb=0xC0000000 t=187196
+LATIDO t=189831 ms tick=418267 filas=0
+LATIDO t=199861 ms tick=428297 filas=0
+LATIDO t=210034 ms tick=438467 filas=0
+CAMBIO t=217427 ms tick=445862 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x2 sderr=0x1 aviso=0x0
+CAPTURA 12 fb=0xC003FC00 t=217427
+CAMBIO t=220059 ms tick=448492 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x0
+CAPTURA 13 fb=0xC003FC00 t=220059
+LATIDO t=222691 ms tick=451127 filas=0
+LATIDO t=232749 ms tick=461182 filas=0
+LATIDO t=242756 ms tick=471192 filas=0
+LATIDO t=252840 ms tick=481272 filas=0
+LATIDO t=262888 ms tick=491322 filas=0
+LATIDO t=273019 ms tick=501452 filas=0
+LATIDO t=283184 ms tick=511617 filas=0
+LATIDO t=293298 ms tick=521732 filas=0
+LATIDO t=303313 ms tick=531747 filas=0
+CAMBIO t=307563 ms tick=535997 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x2 sderr=0x1 aviso=0x0
+CAPTURA 14 fb=0xC0000000 t=307563
+CAMBIO t=310196 ms tick=538627 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x0
+CAPTURA 15 fb=0xC0000000 t=310196
+LATIDO t=313329 ms tick=541762 filas=0
+LATIDO t=323464 ms tick=551897 filas=0
+LATIDO t=333491 ms tick=561922 filas=0
+LATIDO t=343644 ms tick=572072 filas=0
+LATIDO t=353659 ms tick=582092 filas=0
+LATIDO t=363810 ms tick=592242 filas=0
+CAMBIO t=367676 ms tick=596107 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x2 sderr=0x1 aviso=0x0
+CAPTURA 16 fb=0xC0000000 t=367676
+CAMBIO t=370307 ms tick=598737 filas=0 in=0x7 fr=0x0 st=0x0 mar=0x0 sol=0x0 rec=0xff apl=0xff inh=0xff sdreq=0x1 sd=0x3 sderr=0x0 aviso=0x0
+LATIDO t=373870 ms tick=602302 filas=0
+LATIDO t=383939 ms tick=612367 filas=0
+LATIDO t=394005 ms tick=622432 filas=0
+LATIDO t=404101 ms tick=632532 filas=0
+LATIDO t=414120 ms tick=642547 filas=0
+FIN=13:40:29
+shutdown command invoked

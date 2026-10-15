@@ -1,10 +1,45 @@
 ---
 estado: vigente
-actualizado: 2026-10-13
+actualizado: 2026-10-15
 resumen: Índice y diario de evidencias para el relatório final de ingeniería del kart.
 ---
 
 # Diario para el relatório final
+
+## ENS-0019 / PROB-0004 / PROB-0011 / PROB-0012 / PROB-0013 · Frontal dev4 en la F746 real · 15-10-2026
+
+Armando conecta la F746 frontal (USB del ST-LINK, bus CAN con ESP32 encendido, pedal/dirección, sin SD) y pide las pruebas reales del último código. Todo por SWD con OpenOCD local.
+
+- **Respaldo previo sin detener la CPU:** interna 1 MiB ×2 y QSPI 16 MiB ×3, idénticos. Un intento a 4 MHz falló por error SWD; se conserva y se repitió a 1,8 MHz.
+- **Firmware previo:** coincide byte a byte con el `STM32-final` original de la entrega, no con una v1.3.
+- **Grabación:** regresión de PC con 101/0. dev4 (interna + QSPI) Verified OK, relectura independiente con 0 diferencias.
+- **Funcionamiento observado (CPU en marcha):** framebuffer LTDC, snapshot `ui`, CAN y FT5336. 3 h 10 min sin reinicios.
+- **F01–F03:** vistos en el framebuffer y leídos por Armando. PROB-0011 cerrado.
+- **Táctil y START:** el táctil cambia el modo DIF→ESC→BLQ→DIF; START (pulsado por Armando) conmuta 0→1→0→1.
+- **CAN:** 0x123 y BMS recibidos; 0x124 nunca. Hipótesis: ESP32 v1.2 o anterior.
+- **Problemas nuevos:** PROB-0012, reposo del pedal 149–194 cuentas por encima del umbral de pedal libre, que bloquea modos y D/R; PROB-0013, sin SD el montaje bloquea ~30 s y el error dura ~50 ms.
+- **Franja (PROB-0004):** la interfaz original pinta blancas las filas 0–47. Con patrones solo en la RAM, Armando ve únicamente las filas 44–47: daño físico en 0–43, confirmado por él.
+- **Anomalía sin causa:** `sd_requested=1` apareció sin toque declarado.
+
+[ENS-0019](ensayos/ENS-0019_frontal_dev4_f746_real.md), [evidencias y manifiesto](evidencias/frontal_f746_2026-10-15/README.md), [respaldo](../07_DESARROLLO/respaldos/stm32_f746/2026-10-15/RESPALDO.md). Las imágenes son el framebuffer, no fotos del panel; lo visible en el panel lo declara Armando. Sin marcha, motores, relé observado, SD con tarjeta ni identificación del ESP32. Respaldo local, sin copia externa. Cambios sin commit ni push.
+
+## ENS-0018 / PROB-0011 / DEC-0010 · Correcciones de pantalla de desarrollo · 15-10-2026
+
+Armando autoriza F01–F03 y aclara que las pantallas finales quedan para terminar el proyecto. [DEC-0010](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0010_pantallas_desarrollo_y_usuario_final.md) conserva esa decisión en AGENTS/tareas. Frontal **dev4**: versión UI/CSV/build desde una definición, `R:--/LIM/INACT` según estado compatible reciente sin inventar umbral numérico y avisos de modo en quinta fila manteniendo siempre la causa. Banco fuente **v0.4-dev** adapta expectativas y elimina rótulo DEV3; capturador compatible con v0.3 y v0.4-dev, probado con puerto falso. [ENS-0018](ensayos/ENS-0018_mejoras_pantalla_desarrollo.md): 101 comprobaciones, 13 fallos antes → 0 después; 155 del banco ejecutadas en PC (incluyen 101), cinco casos de capturador sin hardware y compilaciones F746/F411 correctas. Primer build PlatformIO falló por acceso a caché; ejecución con permisos necesarios correcta, sin rechazo automático. [Evidencia](evidencias/mejoras_frontal_2026-10-15/README.md) conserva antes/después, diff, datos sintéticos, logs, versiones/binarios/mapas/hashes y límites. Control/adquisición ESP32/frontal y formato CAN intactos; solo software, sin grabación ni medida física. F01–F03 corregidos en código; LCD/táctil, respaldo F746+QSPI y ensayo Wi-Fi pendientes. Cambios locales sobre `43b0c29`, sin commit/push ni copia independiente. Última grabación F411 conocida permanece v0.3.
+
+## ENS-0017 / PROB-0011 · Revisión previa a instalar frontal · 15-10-2026
+
+Armando solicita analizar preparación del código y mejoras de pantalla para instalar después. [ENS-0017](ensayos/ENS-0017_revision_preinstalacion_frontal.md) revisa F746/TouchGFX dev3 y contrato con ESP32, distinguiendo el banco F411. Solo PC sobre `main`/`43b0c29`, cambios previos conservados; firmware fuente sin modificar. 83 comprobaciones frontales y 56 traseras sin fallos; configuración/build ARM correctos, ELF/HEX idénticos por SHA-256 a dev3 preservado. Nuevo arnés: cuatro comprobaciones, tres fallos de aceptación (versión visible DEV2, rótulo R20 con legado sin 0x124, aviso de modo que oculta cargador) y un control positivo. [PROB-0011](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0011_presentacion_frontal_preinstalacion.md) registra fuentes y criterios de cierre; [evidencia](evidencias/revision_frontal_2026-10-15/README.md) conserva 36 fuentes, logs positivos/negativos, mapa, binarios y hashes. Dictamen: base para continuar en banco, no entrega final validada. Pendientes ajustes, identificación/respaldo F746+QSPI, BMS, franja/táctil/calibraciones y ensayo físico conjunto por Wi-Fi. Sin conexión/grabación, nueva medición, commit/push ni copia independiente. Cobertura focalizada L4; no nuevas páginas de originales ni cierre de lote.
+
+## ENS-0016 · Adaptación visual del frontal a Nucleo · 14-10-2026
+
+Confirmación posterior del 14-10: Armando responde **«Sí, se leen bien y el recorrido funciona»** a la comprobación de legibilidad, diez escenas, vuelta 10→01 y ausencia de saltos múltiples por pulsación. [Declaración conservada](evidencias/nucleo_vistas_2026-10-14/confirmacion_visual_usuario.json). Aceptación visual/manual de v0.3; no nuevo registro serie, medición de rebotes/latencia ni modificación/grabación. Estado y tarea de aceptación actualizados; posibles transiciones adicionales quedan como continuación.
+
+Armando solicita vistas del frontal en la placa prestada, navegación B1 y capturas para el informe. Se adapta la vista principal F746 a diez estados en 320×240, con lógica/decodificador/formateador de trabajo dev3 y datos sintéticos. Banco v0.3 grabado/verificado en la misma F411, **137 comprobaciones sin fallos y RGB 3/3**; navegación B1 real registrada. Fuentes de producción F746/ESP32 sin cambios. [ENS-0016](ensayos/ENS-0016_vistas_frontal_nucleo.md) recoge configuración, procedimiento, versiones/BIN/ELF/hashes, resultados y límites; [galería](evidencias/nucleo_vistas_2026-10-14/GALERIA.md) conserva lecturas GRAM del LCD, PNG y pies de figura. Primera captura completa, lote interrumpido por reinicio registrado y acción manual RESET/USB confirmada por Armando; no se acredita pérdida espontánea del USB. Se incorpora confirmación por fila y se repite el lote. B1 ahora navega; START pertenece al escenario. CAN/ADC/SD/Hall/MPU y dinámica siguen sin validación física. Legibilidad/recorrido confirmados después por Armando; posible continuación con transiciones según necesidades. Sin commit/push ni copia externa nueva.
+
+## ENS-0015 / DEC-0009 · Banco Nucleo F411 + MCUFRIEND · 14-10-2026
+
+Armando solicita preparar placa prestada por profesor; confirma pantalla encima y solo USB, rótulo «MCUFRIEND 3.00 uno». SWD identifica NUCLEO-F411RE/ID 0x431/512 KiB; drivers existentes funcionan. Se instalan CubeIDE para VS Code, CubeProgrammer CLI/ST-LINK GDB y OpenOCD verificado. Tres lecturas de flash previa con dos herramientas coinciden; option bytes solo leídos. Diagnóstico grabado/verificado identifica LCD 0x9341 seis veces. Banco v0.2 reutiliza funciones/tests de trabajo dev3: **83 comprobaciones ejecutadas en F411, 0 fallos; píxeles RGB escritos/leídos 3/3**. CAN/ADC/SD/Hall/relés y tiempo de regresión simulados. LCD/CPU/serie físicos; B1 registra dos ciclos completos ON–OFF y un tercero hasta LISTOS. Armando confirma «Se ve bien y START cambia ON/OFF». [ENS-0015](ensayos/ENS-0015_nucleo_f411_pantalla_banco.md) reúne configuración, método, versiones, logs, resultados negativos, límites y siguiente paso; [DEC-0009](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0009_banco_nucleo_f411.md) separa banco del frontal F746. Primera compilación falló por dependencia GFX no declarada; resuelta explícitamente. Programa previo conservado localmente, no respaldo independiente. Sin cambios en fuentes/firmware del kart, motores, red, originales, commit o push. Hallado rótulo dev2 persistente en fuente de pantalla dev3: tarea abierta.
 
 ## ENS-0014 / PROB-0010 · Carga prevista esta semana · 13-10-2026
 
@@ -41,6 +76,10 @@ Regla permanente en [AGENTS.md](../AGENTS.md): documentar cambios y ensayos con 
 
 | Fecha | Trabajo y motivo | Evidencia / resultado | Límites y siguiente paso |
 |---|---|---|---|
+| 15-10-2026 | Corregir los tres hallazgos de pantalla, conservar fase de desarrollo | [ENS-0018](ensayos/ENS-0018_mejoras_pantalla_desarrollo.md), [DEC-0010](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0010_pantallas_desarrollo_y_usuario_final.md): STM32 dev4, banco fuente v0.4-dev; 13 fallos → 0, builds correctos | Sin grabar; comprobar hardware. Pantallas finales al terminar proyecto |
+| 15-10-2026 | Analizar pantalla frontal y preparación para instalar | [ENS-0017](ensayos/ENS-0017_revision_preinstalacion_frontal.md), [PROB-0011](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0011_presentacion_frontal_preinstalacion.md): 83+56 regresiones, build correcto, tres casos negativos de presentación reproducidos | Solo PC; ajustes pendientes, respaldo F746/QSPI y banco real antes de ensayo Wi-Fi |
+| 14-10-2026 | Adaptar vista frontal y recorrer casos con B1; conservar figuras para informe | [ENS-0016](ensayos/ENS-0016_vistas_frontal_nucleo.md): v0.3, 137/137, B1 real, capturas GRAM con CRC; reinicio manual registrado | Datos sintéticos; revisar legibilidad y después ensayar frontal real con identificación/respaldo |
+| 14-10-2026 | Identificar placa prestada, conservar firmware y comenzar pruebas con pantalla | [ENS-0015](ensayos/ENS-0015_nucleo_f411_pantalla_banco.md), [DEC-0009](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0009_banco_nucleo_f411.md): F411/ILI9341, respaldo triple, banco v0.2, 83/83, RGB 3/3, B1 y visual confirmados | Lógica con periféricos simulados en MCU; ampliar modos/táctil. No CAN físico ni kart |
 | 11-10-2026 | Calibración con medición explícita y diagnóstico visible | [ENS-0012](ensayos/ENS-0012_calibracion_por_pasos.md), [DEC-0007](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0007_calibracion_con_medicion_explicita.md); seis registros previos y pruebas de PC | Sin nueva medida física; comprobar nuevo flujo por Wi-Fi y origen de límites/variación |
 | 11-10-2026 | Retomar control y conservar STOP en lote CAN | [ENS-0011](ensayos/ENS-0011_stop_en_lote_can.md), [análisis](RETOMA_PROGRAMA_2026-10-11.md): dev3, 4 fallos → 0, compilación correcta | PC; v1.2 física declarada, frontal aún inaccesible; contrato conjunto y banco pendientes |
 | 07-10-2026, tarde | Preservar firmware previo a cambios | [Respaldo original](../07_DESARROLLO/respaldos/esp32/2026-10-07_180133/RESPALDO.md): tres lecturas de 4 MB con mismo SHA-256 | No identifica con certeza el fuente exacto; copia externa pendiente |

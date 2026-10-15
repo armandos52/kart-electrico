@@ -1,0 +1,15 @@
+{
+  "scene": 3,
+  "state": "VIEW v=0.3 id=3 name=MARCHA BLQ tick_sim=1220 speed=18 speed_valid=1 gear=1 start=1 brake=0 requested=2 received=2 applied=2 inhibit=0 feedback_fresh=1 status_fresh=1 sd=1 sd_error=0 sd_rows=1 bms_valid=0",
+  "utc": "2026-10-14T19:44:36.668630+00:00",
+  "source": "ILI9341_GRAM",
+  "format": "RGB565LE",
+  "flow": "ROWACK",
+  "width": 320,
+  "height": 240,
+  "bytes": 153600,
+  "crc32": "93869CC1",
+  "sha256_rgb565": "7a4ff2276ad7078d05855fb8f0b15030e919dbc6253459d8c067bde5cbeac326",
+  "sha256_png": "6c68d09808e6b42530e32773c2b8257b09982225d0853633610932ef3ac78b1b",
+  "binary_version": "v0.3"
+}

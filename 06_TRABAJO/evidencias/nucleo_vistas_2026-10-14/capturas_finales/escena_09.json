@@ -1,0 +1,15 @@
+{
+  "scene": 8,
+  "state": "VIEW v=0.3 id=8 name=ERROR SD tick_sim=1220 speed=24 speed_valid=1 gear=1 start=1 brake=0 requested=0 received=0 applied=0 inhibit=0 feedback_fresh=1 status_fresh=1 sd=2 sd_error=1 sd_rows=0 bms_valid=0",
+  "utc": "2026-10-14T19:45:47.212424+00:00",
+  "source": "ILI9341_GRAM",
+  "format": "RGB565LE",
+  "flow": "ROWACK",
+  "width": 320,
+  "height": 240,
+  "bytes": 153600,
+  "crc32": "DF0AE2AB",
+  "sha256_rgb565": "e56f5575c19abe56ee805dd69b308e837d199b830ada25a9160f1db37977899c",
+  "sha256_png": "7cfda4401906c35f2e0efd640c802cf932cd42e90ca8e78c683504f4455e4967",
+  "binary_version": "v0.3"
+}

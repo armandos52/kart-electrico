@@ -1,0 +1,22 @@
+[
+  {
+    "file": "flash_cubeprogrammer.bin",
+    "bytes": 524288,
+    "sha256": "8d88e79ec69e18e0d3038e93306b7bb4e4ad0ef1cd04b2f73c3d7b9ce3ac3722"
+  },
+  {
+    "file": "flash_lectura1.bin",
+    "bytes": 524288,
+    "sha256": "8d88e79ec69e18e0d3038e93306b7bb4e4ad0ef1cd04b2f73c3d7b9ce3ac3722"
+  },
+  {
+    "file": "flash_lectura2.bin",
+    "bytes": 524288,
+    "sha256": "8d88e79ec69e18e0d3038e93306b7bb4e4ad0ef1cd04b2f73c3d7b9ce3ac3722"
+  },
+  {
+    "file": "option_bytes_lectura.bin",
+    "bytes": 16,
+    "sha256": "d292558017cf9ca0a2e40e262a5c1daa4b305ccf084ce06128133d282f905115"
+  }
+]

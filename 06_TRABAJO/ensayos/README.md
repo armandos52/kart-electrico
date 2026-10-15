@@ -1,6 +1,6 @@
 # Índice de ensayos
 
-Corte de revisión: 13-10-2026. Cada ficha contiene objetivo, configuración, procedimiento, resultados, limitaciones y enlaces a datos. Los fallos también forman parte de la evidencia.
+Corte de revisión: 15-10-2026. Cada ficha contiene objetivo, configuración, procedimiento, resultados, limitaciones y enlaces a datos. Los fallos también forman parte de la evidencia.
 
 | Ensayo | Tipo de evidencia |
 |---|---|
@@ -18,5 +18,10 @@ Corte de revisión: 13-10-2026. Cada ficha contiene objetivo, configuración, pr
 | [ENS-0012 · Calibración por pasos y diagnóstico visible](ENS-0012_calibracion_por_pasos.md) | Registros Wi-Fi anteriores + pruebas nuevas en PC |
 | [ENS-0013 · START/STOP con pulsador momentáneo](ENS-0013_start_stop_momentaneo.md) | PC / datos sintéticos |
 | [ENS-0014 · Carga completa y comprobación del SOC 16S](ENS-0014_carga_completa_bateria_16s.md) | Planificado para 12–18 de octubre; sin mediciones ni ejecución |
+| [ENS-0015 · Nucleo F411 + MCUFRIEND ILI9341](ENS-0015_nucleo_f411_pantalla_banco.md) | CPU/LCD/B1 reales; 83 comprobaciones con periféricos simulados; confirmación visual de Armando |
+| [ENS-0016 · Vistas del frontal en Nucleo F411](ENS-0016_vistas_frontal_nucleo.md) | Diez escenas sintéticas en LCD físico, navegación B1, 137 comprobaciones y capturas GRAM para informe |
+| [ENS-0017 · Revisión del frontal antes de instalar](ENS-0017_revision_preinstalacion_frontal.md) | PC: 83+56 regresiones correctas, build dev3 reproducido y tres hallazgos de presentación; sin grabar |
+| [ENS-0018 · Correcciones de pantalla de desarrollo](ENS-0018_mejoras_pantalla_desarrollo.md) | PC: 101 comprobaciones, 13 fallos → 0; 155 del banco y cinco casos de captura simulada; STM32 dev4/F411 v0.4-dev compilados sin grabar |
+| [ENS-0019 · Frontal dev4 en la F746 real](ENS-0019_frontal_dev4_f746_real.md) | **Placa real:** respaldo interna+QSPI, firmware previo identificado (original STM32-final), dev4 grabado/verificado; framebuffer, táctil, START, CAN con ESP32, SD sin tarjeta y franja medida |
 
 [Diario para el relatório](../DIARIO_PARA_RELATORIO.md) · [Versiones de firmware](../../07_DESARROLLO/firmware/VERSIONES.md) · [Tareas pendientes](../TAREAS.md). No equivale a validación física completa ni a certificación del vehículo.

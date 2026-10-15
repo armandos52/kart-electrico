@@ -1,0 +1,220 @@
+# UTC=2026-10-14T19:42:58.689994+00:00 port=COM5 baud=115200 RX_only
+   18.907s BENCH_F411_v0.3 ID=9341 cpu_hz=100000000 HAL_CAN_ADC_SD=SIMULATED
+   19.485s LCD_PIXEL expected=F800 actual=F800 pass=1
+   19.485s LCD_PIXEL expected=07E0 actual=07E0 pass=1
+   19.485s LCD_PIXEL expected=001F actual=001F pass=1
+   19.500s PASS Pulsador sostenido al encender no solicita START
+   19.500s PASS Liberacion inicial menor de 40 ms no habilita START
+   19.500s PASS START espera 40 ms continuos, no solo un flanco
+   19.500s PASS START estable llega a CAN y snapshot
+   19.516s PASS Mantener pulsado no repite ni apaga
+   19.516s PASS Soltar pulsador mantiene START enclavado por software
+   19.516s PASS Rebotes al soltar no generan una segunda pulsacion
+   19.532s PASS Segunda pulsacion pide STOP en primera lectura, sin 40 ms
+   19.532s PASS Mantener STOP no vuelve a arrancar
+   19.532s PASS Rebotes despues de STOP no rearman START
+   19.532s PASS Soltar estable y pulsar otra vez permite nuevo START
+   19.532s PASS STOP llega aun con ADC invalido
+   19.547s PASS Cien pulsos de 5 ms no acumulan tiempo para arrancar
+   19.563s PASS Despues del ruido un START estable funciona
+   19.563s PASS Reinicializar borra memoria y exige soltar el pulsador
+   19.563s PASS Liberacion funciona cruzando desbordamiento del tick
+   19.563s PASS Antirrebote START funciona cruzando desbordamiento del tick
+   19.563s PASS STOP conserva bits de modo CAN
+   19.579s TRACE tick_ms=1000 raw=0 start=0 relay=0 inhibit=start_off
+   19.579s TRACE tick_ms=1600 raw=0 start=0 relay=0 inhibit=start_off
+   19.594s TRACE tick_ms=1600 raw=1 start=0 relay=0 inhibit=start_off
+   19.594s TRACE tick_ms=1640 raw=1 start=1 relay=1 inhibit=relays
+   19.594s PASS Integracion: pulsacion estable inicia precarga
+   19.594s TRACE tick_ms=1645 raw=0 start=1 relay=1 inhibit=relays
+   19.594s PASS Integracion: soltar no cancela precarga
+   19.610s TRACE tick_ms=1650 raw=1 start=1 relay=1 inhibit=relays
+   19.625s TRACE tick_ms=1655 raw=0 start=1 relay=1 inhibit=relays
+   19.625s TRACE tick_ms=1695 raw=0 start=1 relay=1 inhibit=relays
+   19.625s PASS Integracion: rebotes de liberacion no ciclan rele
+   19.625s TRACE tick_ms=3695 raw=0 start=1 relay=2 inhibit=relays
+   19.641s PASS Integracion: precarga completa llega a solapamiento
+   19.641s TRACE tick_ms=4695 raw=0 start=1 relay=3 inhibit=brake
+   19.641s PASS Integracion: rele queda listo con pulsador suelto
+   19.657s TRACE tick_ms=4700 raw=1 start=0 relay=0 inhibit=start_off
+   19.657s PASS Integracion: siguiente pulsacion corta reles y consignas
+   19.657s TRACE tick_ms=4705 raw=0 start=0 relay=0 inhibit=start_off
+   19.657s TRACE tick_ms=4710 raw=1 start=0 relay=0 inhibit=start_off
+   19.672s TRACE tick_ms=4910 raw=1 start=0 relay=0 inhibit=start_off
+   19.672s PASS Integracion: rebote tras STOP no reinicia precarga
+   19.688s TRACE tick_ms=4910 raw=0 start=0 relay=0 inhibit=start_off
+   19.688s TRACE tick_ms=4950 raw=0 start=0 relay=0 inhibit=start_off
+   19.688s TRACE tick_ms=4950 raw=1 start=0 relay=0 inhibit=start_off
+   19.704s TRACE tick_ms=4990 raw=1 start=1 relay=1 inhibit=relays
+   19.704s PASS Integracion: nuevo ciclo deliberado permite precarga
+   19.704s TRACE tick_ms=4990 raw=0 start=1 relay=1 inhibit=relays
+   19.719s TRACE tick_ms=5030 raw=0 start=1 relay=1 inhibit=relays
+   19.719s TRACE tick_ms=5035 raw=1 start=0 relay=0 inhibit=start_off
+   19.719s PASS Integracion: segunda pulsacion para tambien durante precarga
+   19.735s TRACE tick_ms=5035 raw=0 start=0 relay=0 inhibit=start_off
+   19.735s TRACE tick_ms=5075 raw=0 start=0 relay=0 inhibit=start_off
+   19.735s TRACE tick_ms=5075 raw=1 start=0 relay=0 inhibit=start_off
+   19.750s TRACE tick_ms=5115 raw=1 start=1 relay=1 inhibit=relays
+   19.750s TRACE tick_ms=5120 raw=1 start=1 relay=0 inhibit=can_fault
+   19.750s TRACE tick_ms=5125 raw=0 start=1 relay=0 inhibit=relays
+   19.750s TRACE tick_ms=5165 raw=0 start=1 relay=0 inhibit=relays
+   19.766s PASS Integracion: recuperacion CAN no reutiliza START para arrancar
+   19.766s TRACE tick_ms=5165 raw=1 start=0 relay=0 inhibit=start_off
+   19.766s TRACE tick_ms=5170 raw=0 start=0 relay=0 inhibit=start_off
+   19.782s TRACE tick_ms=5210 raw=0 start=0 relay=0 inhibit=start_off
+   19.782s TRACE tick_ms=5210 raw=1 start=0 relay=0 inhibit=start_off
+   19.797s TRACE tick_ms=5250 raw=1 start=1 relay=1 inhibit=relays
+   19.797s PASS Integracion: tras fallo se exige OFF y START deliberados
+   19.797s PASS Sin feedback transmite N freno pedal cero
+   19.797s PASS ADC validos y CAN fresco
+   19.797s PASS Ext 0x101 conserva ADC fisico
+   19.797s PASS Secuencia avanza por muestra
+   19.813s PASS D exige freno quietud pedal libre
+   19.813s PASS Pedal superior normalizado
+   19.829s PASS D a R con movimiento pasa N, no conserva D
+   19.829s PASS Fallo conversion ADC inhibe y publica centinela
+   19.829s PASS ADC fuera de plausibilidad se rechaza
+   19.829s PASS D R simultaneos invalidos
+   19.829s PASS Modo avanza parado en N
+   19.829s PASS Modo con D se rechaza visible
+   19.844s PASS 0 km/h entero no acredita quietud
+   19.844s PASS Estado extendido caducado no vuelve a legado
+   19.844s PASS Feedback caduca
+   19.844s PASS DLC incorrecto contado
+   19.860s PASS Buzones llenos abortan y cuentan
+   19.860s PASS Errores TX visibles
+   19.860s PASS SD abre al solicitar grabacion
+   19.860s PASS CSV versionado con cabeceras reales
+   19.860s PASS Primera fila registrada
+   19.860s PASS Pausa sincroniza y cierra
+   19.875s PASS Reanudar vuelve a montar y abrir
+   19.875s PASS Fallo montaje visible
+   19.875s PASS Fallo SD no reintenta en bucle rapido
+   19.875s PASS SD puede recuperar al reinsertar
+   19.891s PASS Escritura parcial es error y no fila valida
+   19.891s PASS Error sync cierra y se publica
+   19.891s PASS Error cierre no se oculta como pausa
+   19.891s PASS Hall usa periodo real a traves de wrap DWT
+   19.891s PASS Hall no revive por wrap DWT sin pulsos
+   19.891s PASS Pantalla no inventa modo ni bateria ni CAN
+   19.891s PASS Limite R y fallo SD visibles
+   19.891s PASS Motivo cabe en pantalla
+   19.891s PASS Motivo cabe en pantalla
+   19.907s PASS Motivo cabe en pantalla
+   19.922s PASS Motivo cabe en pantalla
+   19.922s PASS Motivo cabe en pantalla
+   19.922s PASS Motivo cabe en pantalla
+   19.922s PASS Motivo cabe en pantalla
+   19.922s PASS Motivo cabe en pantalla
+   19.922s PASS Motivo cabe en pantalla
+   19.938s PASS Motivo cabe en pantalla
+   19.938s PASS Motivo cabe en pantalla
+   19.938s PASS Motivo cabe en pantalla
+   19.938s PASS Motivo cabe en pantalla
+   19.938s PASS Motivo cabe en pantalla
+   19.938s PASS Motivo cabe en pantalla
+   19.954s PASS Motivo cabe en pantalla
+   19.954s PASS Motivo cabe en pantalla
+   19.954s PASS Motivo cabe en pantalla
+   19.954s PASS Motivo cabe en pantalla
+   19.954s PASS Motivo cabe en pantalla
+   19.954s PASS Motivo cabe en pantalla
+   19.954s TOTAL 83; FALLOS 0
+   19.969s PASS Escena conserva BMS desconocido
+   19.969s PASS Escena aplica validez de velocidad del frontal
+   19.969s PASS Marcha sale de logica frontal con interbloqueo
+   19.969s PASS DIF BLQ ESC solicitados por API real en N
+   19.985s PASS Escena conserva BMS desconocido
+   19.985s PASS Escena aplica validez de velocidad del frontal
+   19.985s PASS Marcha sale de logica frontal con interbloqueo
+   20.000s PASS DIF BLQ ESC solicitados por API real en N
+   20.000s PASS Precarga no presenta modo aplicado
+   20.000s PASS Escena conserva BMS desconocido
+   20.000s PASS Escena aplica validez de velocidad del frontal
+   20.000s PASS Marcha sale de logica frontal con interbloqueo
+   20.016s PASS DIF BLQ ESC solicitados por API real en N
+   20.016s PASS Grabacion simulada abre y registra una fila
+   20.016s PASS Escena conserva BMS desconocido
+   20.032s PASS Escena aplica validez de velocidad del frontal
+   20.032s PASS Marcha sale de logica frontal con interbloqueo
+   20.032s PASS DIF BLQ ESC solicitados por API real en N
+   20.032s PASS Escena conserva BMS desconocido
+   20.047s PASS Escena aplica validez de velocidad del frontal
+   20.047s PASS Marcha sale de logica frontal con interbloqueo
+   20.047s PASS DIF BLQ ESC solicitados por API real en N
+   20.047s PASS Escena conserva BMS desconocido
+   20.063s PASS Escena aplica validez de velocidad del frontal
+   20.063s PASS Marcha sale de logica frontal con interbloqueo
+   20.063s PASS DIF BLQ ESC solicitados por API real en N
+   20.079s PASS Reversa muestra limite de propulsion sintetico
+   20.079s PASS Escena conserva BMS desconocido
+   20.079s PASS Escena aplica validez de velocidad del frontal
+   20.079s PASS Marcha sale de logica frontal con interbloqueo
+   20.094s PASS DIF BLQ ESC solicitados por API real en N
+   20.094s PASS Frenado conserva indicador y motivo
+   20.094s PASS Escena conserva BMS desconocido
+   20.094s PASS Escena aplica validez de velocidad del frontal
+   20.110s PASS Marcha sale de logica frontal con interbloqueo
+   20.110s PASS DIF BLQ ESC solicitados por API real en N
+   20.110s PASS CAN caducado oculta datos antiguos
+   20.110s PASS Escena conserva BMS desconocido
+   20.125s PASS Escena aplica validez de velocidad del frontal
+   20.125s PASS Marcha sale de logica frontal con interbloqueo
+   20.125s PASS DIF BLQ ESC solicitados por API real en N
+   20.125s PASS Fallo FATFS simulado llega a pantalla
+   20.125s PASS Escena conserva BMS desconocido
+   20.141s PASS Escena aplica validez de velocidad del frontal
+   20.141s PASS Marcha sale de logica frontal con interbloqueo
+   20.141s PASS DIF BLQ ESC solicitados por API real en N
+   20.157s PASS Cambio en D rechazado sin alterar DIF
+   20.157s PASS CAN fresco sin SPEED_VALID oculta velocidad
+   20.157s PASS Estado viejo con feedback fresco oculta velocidad
+   20.172s PASS B1 sostenido al arrancar exige soltar sin avanzar
+   20.172s PASS B1 cien rebotes cortos no avanzan
+   20.172s PASS B1 mantenido no repite
+   20.172s PASS B1 una liberacion estable avanza una vez
+   20.172s PASS B1 cruza desbordamiento de milisegundos
+   20.188s VISUAL_CHECKS 54; TOTAL 137; FALLOS 0
+   20.250s NAV source=BOOT id=0 uptime_ms=4699
+   20.266s VIEW v=0.3 id=0 name=REPOSO tick_sim=1000 speed=0 speed_valid=1 gear=0 start=0 brake=1 requested=0 received=0 applied=255 inhibit=4 feedback_fresh=1 status_fresh=1 sd=0 sd_error=0 sd_rows=0 bms_valid=0
+   20.266s LINE0 SOL:DIF REC:DIF APL:---
+   20.282s LINE1 START APAGADO
+   20.282s LINE2 CAN:OK MPU:OK FRENO:SI R:20KM/H
+   20.282s LINE3 BMS:-- SD:PAUSA E:0
+   20.282s LINE4 F411 V0.3 / CORE DEV3 / SD FILAS:0
+   20.297s READY v0.3: B1 soltar=pagina; UART 0-9=pagina C=GRAM ?=estado N=siguiente. SIMULACION
+   25.094s NAV source=B1 id=1 uptime_ms=9542
+   25.125s VIEW v=0.3 id=1 name=PRECARGA tick_sim=1120 speed=0 speed_valid=1 gear=0 start=1 brake=1 requested=0 received=0 applied=255 inhibit=5 feedback_fresh=1 status_fresh=1 sd=0 sd_error=0 sd_rows=0 bms_valid=0
+   25.125s LINE0 SOL:DIF REC:DIF APL:---
+   25.125s LINE1 PREPARANDO RELES
+   25.125s LINE2 CAN:OK MPU:OK FRENO:SI R:20KM/H
+   25.125s LINE3 BMS:-- SD:PAUSA E:0
+   25.125s LINE4 F411 V0.3 / CORE DEV3 / SD FILAS:0
+   26.141s NAV source=B1 id=2 uptime_ms=10576
+   26.157s VIEW v=0.3 id=2 name=MARCHA DIF tick_sim=1220 speed=24 speed_valid=1 gear=1 start=1 brake=0 requested=0 received=0 applied=0 inhibit=0 feedback_fresh=1 status_fresh=1 sd=1 sd_error=0 sd_rows=1 bms_valid=0
+   26.157s LINE0 SOL:DIF REC:DIF APL:DIF
+   26.157s LINE1 TRACCION PERMITIDA
+   26.157s LINE2 CAN:OK MPU:OK FRENO:NO R:20KM/H
+   26.157s LINE3 BMS:-- SD:GRABA E:0
+   26.172s LINE4 F411 V0.3 / CORE DEV3 / SD FILAS:1
+   27.094s NAV source=B1 id=3 uptime_ms=11535
+   27.110s VIEW v=0.3 id=3 name=MARCHA BLQ tick_sim=1220 speed=18 speed_valid=1 gear=1 start=1 brake=0 requested=2 received=2 applied=2 inhibit=0 feedback_fresh=1 status_fresh=1 sd=1 sd_error=0 sd_rows=1 bms_valid=0
+   27.110s LINE0 SOL:BLQ REC:BLQ APL:BLQ
+   27.110s LINE1 TRACCION PERMITIDA
+   27.125s LINE2 CAN:OK MPU:OK FRENO:NO R:20KM/H
+   27.125s LINE3 BMS:-- SD:GRABA E:0
+   27.125s LINE4 F411 V0.3 / CORE DEV3 / SD FILAS:1
+   28.563s NAV source=B1 id=4 uptime_ms=13012
+   28.594s VIEW v=0.3 id=4 name=MARCHA ESC tick_sim=1220 speed=22 speed_valid=1 gear=1 start=1 brake=0 requested=1 received=1 applied=1 inhibit=0 feedback_fresh=1 status_fresh=1 sd=1 sd_error=0 sd_rows=1 bms_valid=0
+   28.594s LINE0 SOL:ESC REC:ESC APL:ESC
+   28.594s LINE1 TRACCION PERMITIDA
+   28.594s LINE2 CAN:OK MPU:OK FRENO:NO R:20KM/H
+   28.594s LINE3 BMS:-- SD:GRABA E:0
+   28.610s LINE4 F411 V0.3 / CORE DEV3 / SD FILAS:1
+   29.750s NAV source=B1 id=5 uptime_ms=14200
+   29.782s VIEW v=0.3 id=5 name=LIMITE REVERSA tick_sim=1220 speed=20 speed_valid=1 gear=2 start=1 brake=0 requested=0 received=0 applied=0 inhibit=17 feedback_fresh=1 status_fresh=1 sd=0 sd_error=0 sd_rows=0 bms_valid=0
+   29.782s LINE0 SOL:DIF REC:DIF APL:DIF
+   29.782s LINE1 LIMITE R 20 KM/H
+   29.782s LINE2 CAN:OK MPU:OK FRENO:NO R:20KM/H
+   29.782s LINE3 BMS:-- SD:PAUSA E:0
+   29.797s LINE4 F411 V0.3 / CORE DEV3 / SD FILAS:0

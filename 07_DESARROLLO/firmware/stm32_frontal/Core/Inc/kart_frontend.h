@@ -5,7 +5,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev3"
+#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev4"
 enum { KART_SD_STOPPED=0,KART_SD_RECORDING=1,KART_SD_ERROR=2,KART_SD_OPENING=3 };
 enum { KART_UI_OK=0,KART_UI_REQUIRE_N=1,KART_UI_REQUIRE_STOP=2,KART_UI_CAN_OLD=3,KART_UI_INPUT_BAD=4 };
 typedef struct {

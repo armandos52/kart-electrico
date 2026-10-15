@@ -1,0 +1,29 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.35
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+audit_display.cpp
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tests\../Core/Src/kart_frontend.c(82): warning C4459: declaration of 'tick' hides global declaration
+C:\kart proyecto\06_TRABAJO\evidencias\revision_frontal_2026-10-15\../../../07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp(7): note: see declaration of 'tick'
+C:\kart proyecto\06_TRABAJO\evidencias\revision_frontal_2026-10-15\../../../07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp(20): warning C4244: '=': conversion from 'uint32_t' to 'uint16_t', possible loss of data
+kart_control.cpp
+Generating Code...
+SOURCE_VERSION stm32_frontal-v1.3-dev3
+DISPLAY_VERSION STM V1.3-DEV2  SD FILAS:0
+FAIL F01: version visible coincide con frontend dev3
+SCENARIO ESP_LEGADO_SIN_0x124
+LINE 0 SOL:DIF REC:--- APL:---
+LINE 1 ESP SIN ESTADO RECIENTE
+LINE 2 CAN:OK MPU:-- FRENO:SI R:20KM/H
+LINE 3 BMS:-- SD:PAUSA E:0
+LINE 4 STM V1.3-DEV2  SD FILAS:0
+FAIL F02: no atribuir limite R20 a controlador legado sin estado extendido
+SCENARIO MODO_RECHAZADO_Y_CARGADOR
+LINE 0 SOL:DIF REC:DIF APL:---
+LINE 1 MODO: PONER N
+LINE 2 CAN:OK MPU:OK FRENO:SI R:20KM/H
+LINE 3 BMS:-- SD:PAUSA E:0
+LINE 4 STM V1.3-DEV2  SD FILAS:0
+FAIL F03: causa de inhibicion prioritaria visible durante aviso de modo
+PASS F03 control: la causa aparece despues de caducar aviso temporal
+AUDIT TOTAL 4; FALLOS 3

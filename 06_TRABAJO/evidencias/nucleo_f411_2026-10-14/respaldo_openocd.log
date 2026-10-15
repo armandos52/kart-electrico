@@ -1,0 +1,30 @@
+xPack Open On-Chip Debugger 0.12.0+dev-02228-ge5888bda3-dirty (2025-10-04-22:44)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : STLINK V2J46M33 (API v2) VID:PID 0483:374B
+Info : Target voltage: 3.241803
+Info : clock speed 950 kHz
+Info : SWD DPIDR 0x2ba01477
+Info : [stm32f4x.cpu] Cortex-M4 r0p1 processor detected
+Info : [stm32f4x.cpu] target has 6 breakpoints, 4 watchpoints
+Info : [stm32f4x.cpu] Examination succeed
+Info : [stm32f4x.cpu] gdb port disabled
+DBGMCU_IDCODE=0x10006431
+ESTADO_ANTES=unknown
+FLASH_OPTCR=0xfffaaed
+FLASH_SIZE_KiB=0x200
+Info : device id = 0x10006431
+Info : flash size = 512 KiB
+#0 : stm32f2x at 0x08000000, size 0x00080000, buswidth 0, chipwidth 0
+	#  0: 0x00000000 (0x4000 16kB) not protected
+	#  1: 0x00004000 (0x4000 16kB) not protected
+	#  2: 0x00008000 (0x4000 16kB) not protected
+	#  3: 0x0000c000 (0x4000 16kB) not protected
+	#  4: 0x00010000 (0x10000 64kB) not protected
+	#  5: 0x00020000 (0x20000 128kB) not protected
+	#  6: 0x00040000 (0x20000 128kB) not protected
+	#  7: 0x00060000 (0x20000 128kB) not protected
+STM32F4xx (Low Power) - Rev: A
+ESTADO_DESPUES=running
+shutdown command invoked

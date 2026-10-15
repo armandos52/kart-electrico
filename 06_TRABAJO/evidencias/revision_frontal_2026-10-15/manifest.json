@@ -1,0 +1,70 @@
+{
+  "date_local": "2026-10-15",
+  "kind": "PC; hardware simulado; sin grabacion",
+  "commit": "43b0c299af47e30aabcf9b5acd7677b86754a00b",
+  "source_files": {
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h": "8633cf132addbb9ea14d79d13957fc83c9e53ef1708e279013e9554d48204ddc",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_display.h": "03b1075bc2ef43d466e483339841706a7c09a8c71a43e2c92068e105b9616b6b",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/FreeRTOSConfig.h": "14c948914c0a973f08dbc0e3e3cfa8491b1959cbce9c5afb73749880d8f50fa4",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/stm32f7xx_hal_conf.h": "50378ed25336e65582dc73bfe1bb19f34502b979de347dd4687d79c3e82d21bb",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c": "4c352bc56a37bde849d071a6184fe0d7b73fcf14f3d6c377ce453d21ddd30a84",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c": "2727188b6fa0bbad050164d2d7e2a12803a53491a363df0462cfb23898d2287f",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/main.c": "1d2275cbe045ad9e032277b311aea36c44cfd1f65d96f2feb1c0a679956a5d5b",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/freertos.c": "5f8bb0275d6748b26916b509def320f8bb951b8f114a791ce69ddb51659c8c56",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/stm32f7xx_it.c": "3b01acf6471c3f68e1dc594567825b1e36bdf0eefeaa1a8ff6e256b747d6fdf2",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/model/Model.cpp": "19f24ead7835ee79314024212c975fc8df00ef0db0428ce956873c63cab8a6c5",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/screen1_screen/Screen1Presenter.cpp": "f771e1898abe898dc7686ca967bda032e37c0bf3e275e21e6aae08414ea80cd2",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/screen1_screen/Screen1View.cpp": "9fcaa61d439b83fb06ce25c8734c1a645a25c2dc77ccef38766264cfd9eed474",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp": "643d5ea43fc722096f650ef5e5483ee2554739e42713bd9649b92b5bcb3bf3cf",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/common/KartStatus.cpp": "f38682f755b69628beb5795a2facff078d7f033c0b7f727aa9538d41cd90ac60",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp": "42f57fe474d8a620b25c224c07f98f7baf1b46b8dce8915fa69dfcd92e442bf4",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/generated/fonts/src/Table_verdana_50_4bpp.cpp": "4a4e2ba20f1aef58af593e3bb19aae8a662c2ce5b2e55b595b9f53cfd6e85084",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/assets/texts/texts.xml": "38b8769af2821f73c9fe9e0e5aa6559d1e9f32e878be7eb2cf2209b8619187f0",
+    "07_DESARROLLO/firmware/stm32_frontal/FATFS/Target/sd_diskio.c": "cf0d0ab85a76901fd0f722dbe8b1669d61b3327c98872715d42dacdbed307958",
+    "07_DESARROLLO/firmware/stm32_frontal/FATFS/Target/bsp_driver_sd.c": "f0d5b46f3bff431428c11f59c5e8a117bbcb2600e622ac51ffed32da449169b5",
+    "07_DESARROLLO/firmware/stm32_frontal/FATFS/Target/ffconf.h": "05520a184063bf1f89590676ae459a14cccff7bb91d34a88b152bd77b94283f9",
+    "07_DESARROLLO/firmware/stm32_frontal/FATFS/App/fatfs.c": "12605169bed679d240c49f6e342e41a9c283b54d570d0eb696b27633b5326ac6",
+    "07_DESARROLLO/firmware/stm32_frontal/STM32F746XX_FLASH.ld": "56b255d151fec6502d4ca7305b95a7d86261a0d61ce4cacc3288b2e7b7f00602",
+    "07_DESARROLLO/firmware/stm32_frontal/STM32F746G_DISCO.ioc": "8ad75bc0bdac416fda0030bd86b4040e8f37ad06116e62d89dbf141289923364",
+    "07_DESARROLLO/firmware/stm32_frontal/tools/build.py": "efe7d4a841348aa14b2ae05254bfa678024e76bc1eaf051c99f27918dd884582",
+    "07_DESARROLLO/firmware/stm32_frontal/tools/verify_configuration.py": "8fc14605572c9c810292d8a39c61c42e7977f94823cb2f9287374d9305fb537e",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp": "4907b4e5e0c74ad2500440e127230b37eac68922481552c310cbda9e67941af2",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/compilar.cmd": "e94725019f1a30ab2390a507051ee4164762ec1e4cd3c1a0d65be55d99924a05",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/main.h": "79bb935a5d536495e13604aa07f27388a32a884b6a27488bbd0d453afbaa6125",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/cmsis_os.h": "aecb9819eb04bf5ad6cd2535cfac9b1bed5ef7946e551eff2224759862e16294",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/fatfs.h": "02968e08d899bb4e4033f7c6507fa0460c05092fb6a8a5fa55818621bf5fc3a2",
+    "07_DESARROLLO/firmware/common/kart_protocol.h": "d2edb6baafa21afe1a468d3ef66d790d338dab650bcb8b2f14cd794b7662bb22",
+    "07_DESARROLLO/firmware/common/PROTOCOLO_V13.md": "a2f6c218ebba5a0cca5ee8f973b120f1534ad0a78c8e0fb3dd0d52a472ecd2fc",
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp": "69101897723d487c66b31c812bc5a31cbdfd145ef6f6168190f674c80e43ebc1",
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h": "026c9555b49fc08c8f68524bb8b0420d6c1093219cf66b6355dbd841b9835132",
+    "07_DESARROLLO/firmware/esp32_trasero/tests/control_test.cpp": "8629f3da72906b4951717c716989e7f9e79e3e14d9bac61b2ce2864d86bb549c",
+    "07_DESARROLLO/firmware/esp32_trasero/tests/compilar.cmd": "ba02a528ea58ae0e679bb69abb6573ac219faf3057d323ffb3d2f8f90555b2ed"
+  },
+  "artifacts": {
+    "compilacion/stm32_frontal-v1.3-dev3.elf": "a61913643aa0d977c20687f8803cbb64986f8b350b04c64f17140112ac12a3ee",
+    "compilacion/stm32_frontal-v1.3-dev3.hex": "6455904ae01f27fca2df7e74fcae57a1a8428576b7b9382a4f1a1297e9522291",
+    "compilacion/firmware.map": "b5ed935348c9b6073615f50722498d1e3f57b0c95289008767d1948c73186de0",
+    "compilacion/hashes.json": "a6cdb9345cd8aab14e67ebd3f245f8323ed9121e6356987405b3b3b7b4f9505e",
+    "frontend_tests.log": "61ba4ffcc331a95ea41f36ed18d2072264b5863fb2c006445f31b753c8ae2d1c",
+    "backend_tests.log": "f51e916308e54363e85ceddf567a630e169fc05bbcdc5bcaaf143609b59e7855",
+    "build_stm32.log": "2fec184f7623e4b9aade346c62f0e2f595d239e6c93e83cb8a79dc54a62b70ff",
+    "audit_display.log": "9183b6e5a073391d174f576aace50702d0a0f69f63b0587a55cef43e3162d08d",
+    "audit_display.cpp": "696ef3697669a7613c6009745446147f754ce79a64028bf23f827138ecb50ec7",
+    "compilar_audit.cmd": "cfd112a406cc973a8c7f65706e49d72cdf531f100ef14816878a275430bf355d",
+    "conservar_evidencia.py": "5342cc439e5e05fc89a384df6fbe30c7d6c33ae064da59b6e6c22a73158acbd8",
+    "estado_git_inicial.txt": "62809d779c053e5511663bdca3801f2b94a8c1ccd17dbc9507b1bb0df0e4a08f",
+    "commit_base.txt": "3a0ddce3b99cbb6e120c6c63e426a7393ca6c267ebc6a64ca8886c261bf3f18f"
+  },
+  "comparison_preserved_dev3": {
+    "stm32_frontal-v1.3-dev3.elf": {
+      "new_sha256": "a61913643aa0d977c20687f8803cbb64986f8b350b04c64f17140112ac12a3ee",
+      "preserved_sha256": "a61913643aa0d977c20687f8803cbb64986f8b350b04c64f17140112ac12a3ee",
+      "equal": true
+    },
+    "stm32_frontal-v1.3-dev3.hex": {
+      "new_sha256": "6455904ae01f27fca2df7e74fcae57a1a8428576b7b9382a4f1a1297e9522291",
+      "preserved_sha256": "6455904ae01f27fca2df7e74fcae57a1a8428576b7b9382a4f1a1297e9522291",
+      "equal": true
+    }
+  }
+}

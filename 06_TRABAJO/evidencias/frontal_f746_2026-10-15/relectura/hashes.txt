@@ -1,0 +1,2 @@
+01f710c1cd3a888d94290c6604ac5e0287cd0c2823385ca08e36613501ecf7c9 *06_TRABAJO/evidencias/frontal_f746_2026-10-15/relectura/interna_0x08000000.bin
+2ce6a7a77f798369f56a84c961f50e07a2dd0eb2a8c6ce2bd4e7e60c3f5378f4 *06_TRABAJO/evidencias/frontal_f746_2026-10-15/relectura/qspi_0x90000000.bin

@@ -1,0 +1,274 @@
+--- antes/07_DESARROLLO/firmware/nucleo_f411_banco/capturar_pantallas.py
++++ despues/07_DESARROLLO/firmware/nucleo_f411_banco/capturar_pantallas.py
+@@ -1,4 +1,4 @@
+-"""Lee GRAM del banco v0.3 por UART. Guarda RGB565, PNG, CRC y log original.
++"""Lee GRAM del banco v0.3/v0.4-dev por UART. Guarda RGB565, PNG, CRC y log original.
+ 
+ No recrea la interfaz: los pixeles vienen del controlador ILI9341. Esta captura
+ no es una fotografia del cristal. Requiere pyserial; PNG usa biblioteca estandar.
+@@ -65,20 +65,23 @@
+             raise TimeoutError(prefix)
+         def send(command):
+             note('TX ' + command);ser.write(command.encode('ascii'));ser.flush()
+-        # Drena solo texto pendiente (se conserva); no envia nada hasta reconocer v0.3.
++        # Drena texto pendiente; primero consulta identidad antes de seleccionar/capturar.
+         time.sleep(0.2)
+         pending = read(ser.in_waiting)
+         if pending: note('RX_PENDING ' + pending.decode('ascii', errors='replace'))
+         send('?'); identity = line_until('VIEW ')
+-        if 'v=0.3 ' not in identity: raise RuntimeError('Version incorrecta: ' + identity)
++        version_match = re.match(r'VIEW v=(0\.3|0\.4-dev) ', identity)
++        if not version_match: raise RuntimeError('Version incorrecta: ' + identity)
++        version = version_match[1]
+         line_until('LINE4 ')
+         for digit in args.scenes:
+             send(digit)
+             state = line_until('VIEW ')
+-            if f'id={digit} ' not in state: raise RuntimeError('Escena inesperada: ' + state)
++            if not state.startswith(f'VIEW v={version} ') or f'id={digit} ' not in state:
++                raise RuntimeError('Escena/version inesperada: ' + state)
+             line_until('LINE4 ')
+             send('C'); header = line_until('CAPTURE_BEGIN ')
+-            match = re.fullmatch(r'CAPTURE_BEGIN v=0.3 scene=(\d) w=320 h=240 bytes=153600 format=RGB565LE source=ILI9341_GRAM flow=ROWACK', header)
++            match = re.fullmatch(r'CAPTURE_BEGIN v=' + re.escape(version) + r' scene=(\d) w=320 h=240 bytes=153600 format=RGB565LE source=ILI9341_GRAM flow=ROWACK', header)
+             if not match or match[1] != digit: raise RuntimeError(header)
+             payload = bytearray()
+             for y in range(240):
+@@ -99,7 +102,7 @@
+             record = dict(scene=int(digit), state=state, utc=datetime.now(timezone.utc).isoformat(),
+                           source='ILI9341_GRAM', format='RGB565LE', flow='ROWACK', width=320, height=240,
+                           bytes=len(payload), crc32=f'{crc:08X}', sha256_rgb565=hashlib.sha256(payload).hexdigest(),
+-                          sha256_png=hashlib.sha256(png).hexdigest(), binary_version='v0.3')
++                          sha256_png=hashlib.sha256(png).hexdigest(), binary_version='v'+version)
+             base.with_suffix('.json').write_text(json.dumps(record, indent=2)+'\n', encoding='utf-8')
+             results.append(record);note(f'OK escena={int(digit)+1} bytes={len(payload)} CRC={crc:08X}')
+         send('0');line_until('LINE4 ')
+--- antes/07_DESARROLLO/firmware/nucleo_f411_banco/src/bench_logic.cpp
++++ despues/07_DESARROLLO/firmware/nucleo_f411_banco/src/bench_logic.cpp
+@@ -88,8 +88,7 @@
+     if(index==9) {Kart_RequestNextMode();Kart_ControlTick();}
+     BenchScene scene={};scene.title=titles[index];Kart_CopySnapshot(&scene.snapshot);
+     Kart_FormatDisplay(&scene.snapshot,scene.lines);
+-    // Etiqueta propia: no copiar el literal DEV2 obsoleto del frontal.
+-    snprintf(scene.lines[4],41,"F411 V0.3 / CORE DEV3 / SD FILAS:%lu",(unsigned long)scene.snapshot.sd_rows);
++    // Conservar version del nucleo frontal y avisos de desarrollo del formateador.
+     return scene;
+ }
+ int benchVisualTests() {
+@@ -102,11 +101,11 @@
+         check(s.mode_requested==(i==3?2:i==4?1:0),"DIF BLQ ESC solicitados por API real en N");
+         if(i==1)check(s.start && s.inhibit==5 && s.mode_applied==255,"Precarga no presenta modo aplicado");
+         if(i==2)check(s.sd_state==KART_SD_RECORDING && s.sd_rows==1,"Grabacion simulada abre y registra una fila");
+-        if(i==5)check(s.speed_kph==20 && s.inhibit==17 && strstr(scene.lines[1],"20 KM/H"),"Reversa muestra limite de propulsion sintetico");
++        if(i==5)check(s.speed_kph==20 && s.inhibit==17 && strstr(scene.lines[1],"LIMITE R ACTIVO") && strstr(scene.lines[2],"R:LIM"),"Reversa muestra actuacion sintetica sin inventar umbral CAN");
+         if(i==6)check(s.brake && s.inhibit==8,"Frenado conserva indicador y motivo");
+         if(i==7)check(!s.feedback_fresh && !s.status_fresh && s.mode_received==255 && strstr(scene.lines[1],"SIN DATOS"),"CAN caducado oculta datos antiguos");
+         if(i==8)check(s.sd_state==KART_SD_ERROR && s.sd_error==1,"Fallo FATFS simulado llega a pantalla");
+-        if(i==9)check(s.ui_notice==KART_UI_REQUIRE_N && s.mode_requested==0,"Cambio en D rechazado sin alterar DIF");
++        if(i==9)check(s.ui_notice==KART_UI_REQUIRE_N && s.mode_requested==0 && strstr(scene.lines[4],"MODO: PONER N"),"Cambio en D rechazado visible sin alterar DIF ni ocultar motivo");
+     }
+     auto s=benchScene(2).snapshot;s.backend_flags&=~KART_STATUS_SPEED_VALID;
+     check(!benchSpeedVisible(s),"CAN fresco sin SPEED_VALID oculta velocidad");
+--- antes/07_DESARROLLO/firmware/nucleo_f411_banco/src/bench_logic.h
++++ despues/07_DESARROLLO/firmware/nucleo_f411_banco/src/bench_logic.h
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include <stdint.h>
++#define BENCH_VERSION "0.4-dev"
+ struct BenchState {
+     uint32_t tick_ms;
+     uint8_t raw_pressed, start, relay, mode, inhibit;
+--- antes/07_DESARROLLO/firmware/nucleo_f411_banco/src/main.cpp
++++ despues/07_DESARROLLO/firmware/nucleo_f411_banco/src/main.cpp
+@@ -26,7 +26,7 @@
+ }
+ static void report() {
+     const auto& s=scene.snapshot;
+-    benchPrintf("VIEW v=0.3 id=%u name=%s tick_sim=%lu speed=%d speed_valid=%u gear=%u start=%u brake=%u requested=%u received=%u applied=%u inhibit=%u feedback_fresh=%u status_fresh=%u sd=%u sd_error=%u sd_rows=%lu bms_valid=%u\n",
++    benchPrintf("VIEW v=" BENCH_VERSION " id=%u name=%s tick_sim=%lu speed=%d speed_valid=%u gear=%u start=%u brake=%u requested=%u received=%u applied=%u inhibit=%u feedback_fresh=%u status_fresh=%u sd=%u sd_error=%u sd_rows=%lu bms_valid=%u\n",
+         page,scene.title,(unsigned long)s.tick,s.speed_kph,benchSpeedVisible(s),s.gear,s.start,s.brake,
+         s.mode_requested,s.mode_received,s.mode_applied,s.inhibit,s.feedback_fresh,s.status_fresh,
+         s.sd_state,s.sd_error,(unsigned long)s.sd_rows,s.soc_valid && s.temp_valid);
+@@ -70,7 +70,7 @@
+     // Solo 640 B RAM; la imagen se lee del LCD por filas, no se renderiza en PC.
+     // La vista queda fija durante la transferencia y B1 no cambia de escena.
+     uint16_t row[320];uint32_t crc=0xFFFFFFFFu;
+-    benchPrintf("CAPTURE_BEGIN v=0.3 scene=%u w=320 h=240 bytes=153600 format=RGB565LE source=ILI9341_GRAM flow=ROWACK\n",page);
++    benchPrintf("CAPTURE_BEGIN v=" BENCH_VERSION " scene=%u w=320 h=240 bytes=153600 format=RGB565LE source=ILI9341_GRAM flow=ROWACK\n",page);
+     for(int y=0;y<240;y++) {
+         lcd.readGRAM(0,y,row,320,1);
+         const uint8_t* bytes=reinterpret_cast<const uint8_t*>(row);
+@@ -89,7 +89,7 @@
+ void setup() {
+     Serial.begin(115200);pinMode(USER_BTN,INPUT_PULLUP);delay(3000);
+     lcd.reset();const uint16_t id=lcd.readID();
+-    benchPrintf("BENCH_F411_v0.3 ID=%04X cpu_hz=%lu HAL_CAN_ADC_SD=SIMULATED\n",id,(unsigned long)SystemCoreClock);
++    benchPrintf("BENCH_F411_v" BENCH_VERSION " ID=%04X cpu_hz=%lu HAL_CAN_ADC_SD=SIMULATED\n",id,(unsigned long)SystemCoreClock);
+     if(id!=0x9341){Serial.println("ERROR LCD_ID");return;}
+     lcd.begin(id);lcd.setRotation(1);lcd.fillScreen(BG);
+     bool rgb=true;const uint16_t colors[]={0xF800,0x07E0,0x001F};
+@@ -100,7 +100,7 @@
+     const int original=benchRunTests();const int visual=benchVisualTests();healthy=rgb && !original && !visual;
+     if(!healthy){lcd.fillScreen(BG);textAt(10,80,2,RED,"ERROR: VER LOG SERIE");Serial.println("ERROR SELFTEST");return;}
+     show(0,"BOOT");navigation.reset(millis());
+-    Serial.println("READY v0.3: B1 soltar=pagina; UART 0-9=pagina C=GRAM ?=estado N=siguiente. SIMULACION");
++    Serial.println("READY v" BENCH_VERSION ": B1 soltar=pagina; UART 0-9=pagina C=GRAM ?=estado N=siguiente. SIMULACION");
+ }
+ void loop() {
+     if(!healthy)return;
+--- antes/07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h
++++ despues/07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h
+@@ -5,7 +5,7 @@
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+-#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev3"
++#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev4"
+ enum { KART_SD_STOPPED=0,KART_SD_RECORDING=1,KART_SD_ERROR=2,KART_SD_OPENING=3 };
+ enum { KART_UI_OK=0,KART_UI_REQUIRE_N=1,KART_UI_REQUIRE_STOP=2,KART_UI_CAN_OLD=3,KART_UI_INPUT_BAD=4 };
+ typedef struct {
+--- antes/07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c
++++ despues/07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c
+@@ -1,19 +1,34 @@
+ #include "kart_display.h"
+ #include <stdio.h>
++#include <string.h>
+ const char* Kart_ModeName(uint8_t mode) {return mode==0?"DIF":mode==1?"ESC":mode==2?"BLQ":"---";}
+ void Kart_FormatDisplay(const KartUiSnapshot* s,char lines[5][41]) {
+     static const char* causes[]={"TRACCION PERMITIDA","SIN MANDO CAN","CAN CADUCADO","MANDO INVALIDO","START APAGADO",
+         "PREPARANDO RELES","CARGADOR CONECTADO","REARME: N FRENO PEDAL LIBRE","FRENO","PEDAL LIBRE","NEUTRO",
+         "PARAR PARA CAMBIAR SENTIDO","PARAR EN N PARA CAMBIAR MODO","VELOCIDAD INVALIDA","REVISAR HALL","MPU NO DISPONIBLE",
+-        "ENTRADAS FRONTALES INVALIDAS","LIMITE R 20 KM/H","FALLO SALIDA","FALLO CAN","CONFIGURACION INVALIDA"};
++        "ENTRADAS FRONTALES INVALIDAS","LIMITE R ACTIVO","FALLO SALIDA","FALLO CAN","CONFIGURACION INVALIDA"};
+     static const char* notices[]={"","MODO: PONER N","MODO: PARAR Y SOLTAR PEDAL","MODO: SIN CAN RECIENTE","MODO: REVISAR ENTRADAS"};
+     snprintf(lines[0],41,"SOL:%s REC:%s APL:%s",Kart_ModeName(s->mode_requested),Kart_ModeName(s->mode_received),Kart_ModeName(s->mode_applied));
+     const char* reason=!s->feedback_fresh?"SIN DATOS CAN RECIENTES":!s->status_fresh?"ESP SIN ESTADO RECIENTE":s->inhibit<21?causes[s->inhibit]:"ESTADO DESCONOCIDO";
+-    if(s->ui_notice>0 && s->ui_notice<5)reason=notices[s->ui_notice];
++    // La causa nunca se sustituye por un aviso de interaccion del desarrollador.
+     snprintf(lines[1],41,"%s",reason);
+-    snprintf(lines[2],41,"CAN:%s MPU:%s FRENO:%s R:20KM/H",s->feedback_fresh?"OK":"--",s->status_fresh?(s->backend_flags&KART_STATUS_YAW_VALID?"OK":"NO"):"--",s->brake?"SI":"NO");
++    // 0x124 valida version/formato al recibir, pero no comunica un umbral numerico.
++    // INACT significa que el ESP no anuncia actuacion, no que falte la proteccion.
++    const char* reverse=!s->status_seen || !s->status_fresh || !s->feedback_fresh?"--":
++        (s->backend_flags&KART_STATUS_REVERSE_LIMIT)?"LIM":"INACT";
++    snprintf(lines[2],41,"CAN:%s MPU:%s FRENO:%s R:%s",s->feedback_fresh?"OK":"--",s->status_fresh?(s->backend_flags&KART_STATUS_YAW_VALID?"OK":"NO"):"--",s->brake?"SI":"NO",reverse);
+     const char* sd=s->sd_state==KART_SD_RECORDING?"GRABA":s->sd_state==KART_SD_ERROR?"ERROR":s->sd_state==KART_SD_OPENING?"ABRE":"PAUSA";
+     if(s->soc_valid && s->temp_valid)snprintf(lines[3],41,"BMS:%u%% %dC SD:%s E:%u",s->soc_pct,s->battery_temp_c,sd,s->sd_error);
+     else snprintf(lines[3],41,"BMS:-- SD:%s E:%u",sd,s->sd_error);
+-    snprintf(lines[4],41,"STM V1.3-DEV2  SD FILAS:%lu",(unsigned long)s->sd_rows);
++    // Una sola version para pantalla, CSV y nombre de ELF/HEX. El widget usa mayusculas.
++    const char* release=strchr(KART_FRONTEND_VERSION,'-');
++    release=release?release+1:KART_FRONTEND_VERSION;
++    char version[sizeof(KART_FRONTEND_VERSION)];
++    unsigned i=0;
++    do {
++        const char c=release[i];version[i]=(c>='a' && c<='z')?(char)(c-'a'+'A'):c;
++    } while(release[i++]);
++    if(s->ui_notice>0 && s->ui_notice<5)
++        snprintf(lines[4],41,"STM %s %s",version,notices[s->ui_notice]);
++    else snprintf(lines[4],41,"STM %s SD FILAS:%lu",version,(unsigned long)s->sd_rows);
+ }
+--- antes/07_DESARROLLO/firmware/stm32_frontal/tests/display_cases.h
++++ despues/07_DESARROLLO/firmware/stm32_frontal/tests/display_cases.h
+@@ -0,0 +1,79 @@
++// Regresiones ENS-0018: UI de desarrollo con funciones reales y CAN simulado.
++static bool display_fits(const char lines[5][41]) {
++    const char* supported="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:-.%/ ";
++    for(unsigned row=0;row<5;row++) {
++        const char* end=(const char*)memchr(lines[row],0,41);
++        if(!end)return false;
++        for(const char* p=lines[row];p<end;p++)if(!strchr(supported,*p))return false;
++    }
++    return true;
++}
++static void test_display_developer() {
++    char lines[5][41]={};
++    reset();feedback();Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    std::string visible=lines[4];
++    const size_t end=visible.find(' ',4);
++    std::string release=visible.substr(4,end-4);
++    for(char& c:release)if(c>='A' && c<='Z')c=char(c-'A'+'a');
++    check("stm32_frontal-"+release==KART_FRONTEND_VERSION,
++          "F01 version visible identifica la misma version que el CSV y build");
++    ui.sd_rows=UINT32_MAX;Kart_FormatDisplay(&ui,lines);
++    check(strstr(lines[4],"4294967295") && display_fits(lines),
++          "F01 version y contador SD maximo caben y usan glifos disponibles");
++
++    reset();Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    check(strstr(lines[2],"R:--") && !strstr(lines[2],"20"),"F02 sin CAN no afirma limite R");
++    const uint8_t legacy[8]={};rx(KART_CAN_FEEDBACK,legacy);Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    check(!ui.status_seen && strstr(lines[2],"R:--"),"F02 legado sin 0x124 deja limitador desconocido");
++    const uint8_t incompatible[8]={2,0,0,0,32,3,2,0};rx(KART_CAN_STATUS,incompatible);
++    Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    check(!ui.status_seen && strstr(lines[2],"R:--"),"F02 version CAN incompatible no acredita limitador");
++    feedback();Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    check(strstr(lines[2],"R:INACT") && !strstr(lines[2],"20"),"F02 estado compatible sin actuacion indica INACT");
++    const uint8_t limited[8]={1,17,0,0,KART_STATUS_SPEED_VALID|KART_STATUS_REVERSE_LIMIT,3,2,0};
++    rx(KART_CAN_STATUS,limited);Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    check(strstr(lines[2],"R:LIM") && strcmp(lines[1],"LIMITE R ACTIVO")==0,
++          "F02 limitacion confirmada muestra LIM sin inventar umbral numerico");
++    tick+=301;rx(KART_CAN_FEEDBACK,legacy);Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    check(strstr(lines[2],"R:--"),"F02 estado caducado oculta limitacion anterior");
++    rx(KART_CAN_STATUS,limited);tick+=200;rx(KART_CAN_STATUS,limited);tick+=200;
++    rx(KART_CAN_STATUS,limited);tick+=101;rx(KART_CAN_STATUS,limited);Kart_ControlTick();
++    Kart_FormatDisplay(&ui,lines);
++    check(!ui.feedback_fresh && ui.status_fresh && strstr(lines[2],"R:--"),
++          "F02 feedback caducado con estado fresco no acredita limitacion vigente");
++
++    reset();feedback();pins[2]=1;Kart_RequestNextMode();Kart_ControlTick();
++    const uint8_t charger[8]={1,6,0,255,4|16|8,0,0,0};rx(KART_CAN_STATUS,charger);
++    tick+=100;Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    printf("DISPLAY charger: %s / %s\n",lines[1],lines[4]);
++    check(strcmp(lines[1],"CARGADOR CONECTADO")==0 && strstr(lines[4],"MODO: PONER N"),
++          "F03 cargador y rechazo de modo se ven a la vez sin ocultar inhibicion");
++    check(strncmp(lines[4],"STM ",4)==0 && strstr(lines[3],"SD:PAUSA"),
++          "F03 durante aviso conserva version y estado SD");
++    tick+=501;Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    check(strcmp(lines[1],"SIN DATOS CAN RECIENTES")==0 && strstr(lines[4],"MODO: PONER N"),
++          "F03 perdida CAN conserva prioridad frente al aviso pendiente");
++    tick+=3001;feedback();Kart_ControlTick();Kart_FormatDisplay(&ui,lines);
++    check(strstr(lines[4],"SD FILAS:") && !strstr(lines[4],"MODO:"),
++          "F03 tras caducar aviso reaparece contador SD");
++
++    bool causes_preserved=true,notices_visible=true,layout_valid=true;
++    for(unsigned cause=0;cause<=21;cause++)for(unsigned note=1;note<=4;note++) {
++        KartUiSnapshot s={};s.feedback_fresh=s.status_fresh=s.status_seen=1;
++        s.inhibit=(uint8_t)cause;s.sd_rows=UINT32_MAX;
++        char base[5][41]={};Kart_FormatDisplay(&s,base);
++        s.ui_notice=(uint8_t)note;Kart_FormatDisplay(&s,lines);
++        causes_preserved&=strcmp(base[1],lines[1])==0;
++        notices_visible&=strstr(lines[4],"MODO:")!=nullptr;
++        layout_valid&=display_fits(lines);
++    }
++    check(causes_preserved,"F03 todos los motivos y el desconocido conservan prioridad");
++    check(notices_visible,"F03 los cuatro avisos siguen visibles en fila de desarrollo");
++    check(layout_valid,"F03 combinaciones de aviso e inhibicion caben en cinco filas de 40");
++    KartUiSnapshot s={};s.feedback_fresh=1;s.ui_notice=KART_UI_REQUIRE_STOP;
++    Kart_FormatDisplay(&s,lines);
++    check(strcmp(lines[1],"ESP SIN ESTADO RECIENTE")==0 && strstr(lines[4],"SOLTAR PEDAL"),
++          "F03 estado ESP antiguo mantiene motivo y aviso completo");
++    s.ui_notice=255;Kart_FormatDisplay(&s,lines);
++    check(strstr(lines[4],"SD FILAS:"),"F03 aviso desconocido no indexa fuera ni borra diagnostico");
++}
+--- antes/07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp
++++ despues/07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp
+@@ -93,8 +93,10 @@
+     sample(1,0);sample(0,5);sample(0,40);sample(1,0);sample(1,40);
+     check(output.relay==kart::Relay::Precharge,"Integracion: tras fallo se exige OFF y START deliberados");
+ }
++#include "display_cases.h"
+ int main(){
+     test_start_stop();
++    test_display_developer();
+     reset();Kart_ControlTick();check(ui.gear==0 && sent_command[4]==1 && sent_command[0]==0,"Sin feedback transmite N freno pedal cero");
+     feedback();Kart_ControlTick();check(ui.input_flags==7 && ui.feedback_fresh && ui.status_fresh,"ADC validos y CAN fresco");
+     check(sent_health[0]==1 && sent_health[1]==7 && kart_u16be(sent_health+2)==124,"Ext 0x101 conserva ADC fisico");
+@@ -132,7 +134,7 @@
+     KartUiSnapshot s={};s.mode_received=s.mode_applied=255;char lines[5][41]={};Kart_FormatDisplay(&s,lines);
+     check(strstr(lines[0],"REC:---") && strstr(lines[1],"SIN DATOS") && strstr(lines[3],"BMS:--"),"Pantalla no inventa modo ni bateria ni CAN");
+     s.feedback_fresh=s.status_fresh=1;s.inhibit=17;s.sd_state=KART_SD_ERROR;s.sd_error=1;Kart_FormatDisplay(&s,lines);
+-    check(strstr(lines[1],"20 KM/H") && strstr(lines[3],"ERROR E:1"),"Limite R y fallo SD visibles");
++    check(strstr(lines[1],"LIMITE R ACTIVO") && strstr(lines[3],"ERROR E:1"),"Limite R y fallo SD visibles sin inventar umbral");
+     for(unsigned i=0;i<=20;i++){s.inhibit=(uint8_t)i;Kart_FormatDisplay(&s,lines);check(strlen(lines[1])<40,"Motivo cabe en pantalla");}
+     printf("TOTAL %d; FALLOS %d\n",checks,failures);return failures?1:0;
+ }

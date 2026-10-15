@@ -1,6 +1,6 @@
 ---
 estado: vigente
-actualizado: 2026-10-13
+actualizado: 2026-10-15
 resumen: Mapa de la bóveda del kart: por dónde empezar y dónde guardar cada cosa.
 ---
 
@@ -9,6 +9,10 @@ resumen: Mapa de la bóveda del kart: por dónde empezar y dónde guardar cada c
 Esta base reúne el conocimiento y el trabajo del kart. La entrega histórica está catalogada: 42 documentos y 1.007 páginas PDF; con la propuesta personal y el conjunto de cuatro fotos del 08-10 son 44 entradas. La lectura técnica completa se hará por lotes.
 
 ## Para empezar
+
+- [Frontal dev4 en la F746 real](../06_TRABAJO/ensayos/ENS-0019_frontal_dev4_f746_real.md): respaldo e identificación del firmware previo, dev4 grabado y probado en placa (pantalla, táctil, START, CAN, SD, franja). Correcciones de software en [ENS-0018](../06_TRABAJO/ensayos/ENS-0018_mejoras_pantalla_desarrollo.md). Pantallas de usuario final pendientes para el cierre según [DEC-0010](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0010_pantallas_desarrollo_y_usuario_final.md).
+
+- [Banco Nucleo F411 + pantalla MCUFRIEND](../07_DESARROLLO/firmware/nucleo_f411_banco/README.md): preparación/respaldo en ENS-0015; diez vistas, navegación B1 y capturas del LCD en [ENS-0016](../06_TRABAJO/ensayos/ENS-0016_vistas_frontal_nucleo.md). No sustituye al frontal F746 del kart.
 
 - [Dossier para profesores](REVISION_PARA_PROFESORES.md): avances al 13-10, evidencias, límites y preguntas de revisión.
 - [Índice de ensayos](../06_TRABAJO/ensayos/README.md) y [guía de desarrollo](../07_DESARROLLO/README.md): datos y reproducción en PC.

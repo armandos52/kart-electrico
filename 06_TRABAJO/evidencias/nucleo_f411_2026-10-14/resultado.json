@@ -1,0 +1,123 @@
+{
+  "utc": "2026-10-14T13:43:12.185833+00:00",
+  "physical_board": "NUCLEO-F411RE",
+  "bench_firmware": "v0.2",
+  "lcd_id": "0x9341",
+  "checks": 83,
+  "failures": 0,
+  "lcd_rgb_matches": 3,
+  "synthetic_peripherals": [
+    "CAN",
+    "ADC",
+    "SD",
+    "Hall",
+    "MPU",
+    "relays"
+  ],
+  "button_records": 189,
+  "start_edges": [
+    {
+      "ms": 198840,
+      "raw": 1,
+      "start": 1,
+      "relay": 1,
+      "inhibit": 5,
+      "checks": 83,
+      "failures": 0
+    },
+    {
+      "ms": 199880,
+      "raw": 1,
+      "start": 0,
+      "relay": 0,
+      "inhibit": 4,
+      "checks": 83,
+      "failures": 0
+    },
+    {
+      "ms": 200588,
+      "raw": 1,
+      "start": 1,
+      "relay": 1,
+      "inhibit": 5,
+      "checks": 83,
+      "failures": 0
+    },
+    {
+      "ms": 201390,
+      "raw": 1,
+      "start": 0,
+      "relay": 0,
+      "inhibit": 4,
+      "checks": 83,
+      "failures": 0
+    },
+    {
+      "ms": 202122,
+      "raw": 1,
+      "start": 1,
+      "relay": 1,
+      "inhibit": 5,
+      "checks": 83,
+      "failures": 0
+    }
+  ],
+  "complete_on_off_cycles_captured": 2,
+  "third_cycle_ready_captured": true,
+  "third_cycle_stop_captured": false,
+  "user_confirmation": "Se ve bien y START cambia ON/OFF",
+  "base_git_commit": "43b0c299af47e30aabcf9b5acd7677b86754a00b",
+  "sources": {
+    "07_DESARROLLO/firmware/nucleo_f411_banco/src/backend.cpp": "b99ac59afa2ba085a8ad58a2b4d8058e49acc284db680ff1ac5007f9f12d5fb9",
+    "07_DESARROLLO/firmware/nucleo_f411_banco/src/bench_logic.cpp": "2b3b9eb6d24bb2a14891b42e5b0e9b34ce69e320439ad6d96eaea91ef100a716",
+    "07_DESARROLLO/firmware/nucleo_f411_banco/src/bench_logic.h": "1b8b956373706fc69b7b2d09eba41cc2169bfe5f98a4233345533c8118238413",
+    "07_DESARROLLO/firmware/nucleo_f411_banco/src/main.cpp": "0fafd08e5c0cbcc5b85db186afb84be277cc8cd96d147598b56327a386889da0",
+    "07_DESARROLLO/firmware/nucleo_f411_banco/platformio.ini": "3c788a8bac2c7ef7a57e6d30eeee4cf4185dabbe0c7f39eab5e4e939ddab8cd8",
+    "07_DESARROLLO/firmware/nucleo_f411_banco/capturar_serie.py": "425b759284a2a7b08bb28ec9dfc90af1b5efbd4d1e887e0af7dd1888e8e21a98",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp": "4907b4e5e0c74ad2500440e127230b37eac68922481552c310cbda9e67941af2",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/main.h": "79bb935a5d536495e13604aa07f27388a32a884b6a27488bbd0d453afbaa6125",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/fatfs.h": "02968e08d899bb4e4033f7c6507fa0460c05092fb6a8a5fa55818621bf5fc3a2",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/cmsis_os.h": "aecb9819eb04bf5ad6cd2535cfac9b1bed5ef7946e551eff2224759862e16294",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c": "4c352bc56a37bde849d071a6184fe0d7b73fcf14f3d6c377ce453d21ddd30a84",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c": "2727188b6fa0bbad050164d2d7e2a12803a53491a363df0462cfb23898d2287f",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h": "8633cf132addbb9ea14d79d13957fc83c9e53ef1708e279013e9554d48204ddc",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_display.h": "03b1075bc2ef43d466e483339841706a7c09a8c71a43e2c92068e105b9616b6b",
+    "07_DESARROLLO/firmware/common/kart_protocol.h": "d2edb6baafa21afe1a468d3ef66d790d338dab650bcb8b2f14cd794b7662bb22",
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp": "69101897723d487c66b31c812bc5a31cbdfd145ef6f6168190f674c80e43ebc1",
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h": "026c9555b49fc08c8f68524bb8b0420d6c1093219cf66b6355dbd841b9835132"
+  },
+  "binaries": {
+    "banco_v0.2.bin": {
+      "bytes": 52292,
+      "sha256": "09aef186f0cbb7cc8c2f084072039baa2a3942c02528983571fc18ce06c2b10c"
+    },
+    "banco_v0.2.elf": {
+      "bytes": 101784,
+      "sha256": "03d2fc1521abca14539952aa12738c7db52e4bde57d339fbc4a58d301f96094a"
+    },
+    "diagnostico_v0.1.bin": {
+      "bytes": 20240,
+      "sha256": "50c4b848bff574d6febcc95cd530f9880a7d0d72437a0ea0994696a80c1d1b0a"
+    },
+    "diagnostico_v0.1.elf": {
+      "bytes": 53984,
+      "sha256": "7d3b8b049fe928f6844ad2175706b55ab370c7100823cf63b94ab391f3aad163"
+    },
+    "flash_cubeprogrammer.bin": {
+      "bytes": 524288,
+      "sha256": "8d88e79ec69e18e0d3038e93306b7bb4e4ad0ef1cd04b2f73c3d7b9ce3ac3722"
+    },
+    "flash_lectura1.bin": {
+      "bytes": 524288,
+      "sha256": "8d88e79ec69e18e0d3038e93306b7bb4e4ad0ef1cd04b2f73c3d7b9ce3ac3722"
+    },
+    "flash_lectura2.bin": {
+      "bytes": 524288,
+      "sha256": "8d88e79ec69e18e0d3038e93306b7bb4e4ad0ef1cd04b2f73c3d7b9ce3ac3722"
+    },
+    "option_bytes_lectura.bin": {
+      "bytes": 16,
+      "sha256": "d292558017cf9ca0a2e40e262a5c1daa4b305ccf084ce06128133d282f905115"
+    }
+  }
+}

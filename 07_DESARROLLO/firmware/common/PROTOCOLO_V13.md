@@ -1,4 +1,6 @@
-# Contrato CAN v1.3 · dev2/dev3
+# Contrato CAN v1.3 · frontal dev4 / ESP32 dev3
+
+Actualización 15-10: frontend dev4 solo cambia presentación y versión; **formatos CAN y control intactos**. Pantalla de desarrollo: limitador `R:--` si no hay estado compatible/feedback recientes, `R:LIM` si el bit 5 de 0x124 anuncia actuación, `R:INACT` en caso contrario. No anuncia umbral numérico: 0x124 no transporta esa cifra ni identifica la versión exacta del binario. Causa 17 `LIMITE R ACTIVO`; avisos de modo separados de la causa. [ENS-0018](../../../06_TRABAJO/ensayos/ENS-0018_mejoras_pantalla_desarrollo.md). Pantallas finales pendientes por decisión de Armando.
 
 Actualización 13-10: frontal dev3 adapta el pulsador momentáneo a una **petición memorizada**: START tras alto estable 40 ms, liberación estable 40 ms para otra pulsación y STOP al primer alto de esta. Soltar no envía STOP. Bit 2 de 0x100 y todos los formatos permanecen; `start_requested`/CSV `Start` no son lectura del pin. El ESP32 sigue dev3, con STOP prioritario. [ENS-0013](../../../06_TRABAJO/ensayos/ENS-0013_start_stop_momentaneo.md); versiones instaladas por identificar.
 

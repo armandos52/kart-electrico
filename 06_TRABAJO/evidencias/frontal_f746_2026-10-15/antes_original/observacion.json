@@ -1,0 +1,26 @@
+{
+ "inicio_local": "2026-10-15T13:27:42",
+ "registros": {
+  "L1CR": "0x00000001",
+  "L1WHPCR": "0x02150036",
+  "L1WVPCR": "0x011b000c",
+  "L1PFCR": "0x00000002",
+  "L1CFBAR": "0xc003fc00",
+  "L1CFBLR": "0x03c003c3",
+  "L1CFBLNR": "0x00000110",
+  "LTDC_GCR": "0x00002221",
+  "UWTICK_A": "0x000743b5",
+  "UWTICK_B": "0x000745af"
+ },
+ "framebuffer": {
+  "direccion": "0xc003fc00",
+  "ancho": 480,
+  "lineas": 272,
+  "pitch": 960
+ },
+ "uwTick_500ms": [
+  476085,
+  476591,
+  506
+ ]
+}

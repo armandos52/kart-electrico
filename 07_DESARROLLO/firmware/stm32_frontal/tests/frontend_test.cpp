@@ -93,8 +93,10 @@ void test_start_stop(){
     sample(1,0);sample(0,5);sample(0,40);sample(1,0);sample(1,40);
     check(output.relay==kart::Relay::Precharge,"Integracion: tras fallo se exige OFF y START deliberados");
 }
+#include "display_cases.h"
 int main(){
     test_start_stop();
+    test_display_developer();
     reset();Kart_ControlTick();check(ui.gear==0 && sent_command[4]==1 && sent_command[0]==0,"Sin feedback transmite N freno pedal cero");
     feedback();Kart_ControlTick();check(ui.input_flags==7 && ui.feedback_fresh && ui.status_fresh,"ADC validos y CAN fresco");
     check(sent_health[0]==1 && sent_health[1]==7 && kart_u16be(sent_health+2)==124,"Ext 0x101 conserva ADC fisico");
@@ -132,7 +134,7 @@ int main(){
     KartUiSnapshot s={};s.mode_received=s.mode_applied=255;char lines[5][41]={};Kart_FormatDisplay(&s,lines);
     check(strstr(lines[0],"REC:---") && strstr(lines[1],"SIN DATOS") && strstr(lines[3],"BMS:--"),"Pantalla no inventa modo ni bateria ni CAN");
     s.feedback_fresh=s.status_fresh=1;s.inhibit=17;s.sd_state=KART_SD_ERROR;s.sd_error=1;Kart_FormatDisplay(&s,lines);
-    check(strstr(lines[1],"20 KM/H") && strstr(lines[3],"ERROR E:1"),"Limite R y fallo SD visibles");
+    check(strstr(lines[1],"LIMITE R ACTIVO") && strstr(lines[3],"ERROR E:1"),"Limite R y fallo SD visibles sin inventar umbral");
     for(unsigned i=0;i<=20;i++){s.inhibit=(uint8_t)i;Kart_FormatDisplay(&s,lines);check(strlen(lines[1])<40,"Motivo cabe en pantalla");}
     printf("TOTAL %d; FALLOS %d\n",checks,failures);return failures?1:0;
 }

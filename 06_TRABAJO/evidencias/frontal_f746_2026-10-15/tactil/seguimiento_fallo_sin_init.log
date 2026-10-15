@@ -1,0 +1,8 @@
+xPack Open On-Chip Debugger 0.12.0+dev-02228-ge5888bda3-dirty (2025-10-04-22:44)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+INICIO=13:33:08
+seguir_tactil.cfg:19: Error: invalid command name "read_memory"
+Traceback (most recent call last):
+  File "seguir_tactil.cfg", line 19, in script

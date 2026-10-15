@@ -1,10 +1,34 @@
 ---
 estado: vigente
-actualizado: 2026-10-13
+actualizado: 2026-10-15
 resumen: Registro de versiones de firmware del kart (DEC-0001) — qué cambia, si se grabó y con qué ensayo.
 ---
 
 # Versiones de firmware
+
+## Frontal F746 grabado · 15-10-2026
+
+**Instalado ahora en la F746: STM32 v1.3-dev4**, HEX `b758edd7…0316`, grabado con OpenOCD (interna + QSPI), `Verified OK` y relectura independiente sin diferencias. [ENS-0019](../../06_TRABAJO/ensayos/ENS-0019_frontal_dev4_f746_real.md).
+
+- **Antes:** había el firmware **original de la entrega** (`STM32-final/STM32CubeIDE/Debug/STM32F746G_DISCO.hex`, coincidencia byte a byte), no una v1.3. Respaldo completo en [RESPALDO.md](../respaldos/stm32_f746/2026-10-15/RESPALDO.md).
+- **ESP32 en el bus:** no emite 0x124, compatible con v1.2 o anterior; no identificado.
+- **Comprobado en placa:** dev4 funciona más de 3 h sin reinicios. Se cierran F01–F03 en hardware y se abren [PROB-0012](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0012_pedal_reposo_fuera_de_pedal_libre.md) (pedal) y [PROB-0013](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0013_sd_sin_tarjeta_bloqueo_y_error_invisible.md) (SD).
+
+## Pantalla de desarrollo · 15-10-2026
+
+**STM32 v1.3-dev4**, compilado este día y grabado después en ENS-0019: versión visible/CSV/paquete unificada, limitador R según estado CAN sin umbral supuesto y causas siempre visibles con avisos de modo aparte. [ENS-0018](../../06_TRABAJO/ensayos/ENS-0018_mejoras_pantalla_desarrollo.md): 101 comprobaciones, 13 fallos antes → 0 después; ARM ELF/HEX preservados en `07_DESARROLLO/respaldos/stm32/v1.3-dev4/`, hashes en evidencia. Control y protocolo binario intactos; ESP32 continúa dev3. Cambios locales sobre `43b0c29`, sin commit/push.
+
+**Banco F411 v0.4-dev de fuente**, compilado sin grabar: adapta el formateador compartido y capturador, 155 comprobaciones en PC (incluyen las 101 frontales) y cinco casos de captura con serie falsa. BIN SHA-256 `2647a757e0b878465881f6929851e3f75249beccf5803891f8e6db32ab038a19`. Última imagen grabada/verificada conocida sigue v0.3 del 14-10; no se atribuyen a ella las correcciones nuevas. [DEC-0010](../../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0010_pantallas_desarrollo_y_usuario_final.md): pantallas finales pendientes para cierre del proyecto.
+
+## Revisión frontal · 15-10-2026
+
+Sin nueva versión ni grabación. [ENS-0017](../../06_TRABAJO/ensayos/ENS-0017_revision_preinstalacion_frontal.md): STM32 dev3 recompilado; ELF/HEX idénticos por SHA-256 a los preservados el 13-10, 83 comprobaciones frontales y 56 traseras correctas. Tres casos adicionales de presentación reproducidos en [PROB-0011](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0011_presentacion_frontal_preinstalacion.md). Ajustes y validación F746 pendientes; no inferir firmware físico del rótulo DEV2 mostrado por este código.
+
+## Banco Nucleo F411 · 14-10-2026
+
+**Actual en banco: v0.3 visual**, binario `vistas_v0.3_02.bin`, SHA-256 `fbf86237a4888b81c80508a69d8648d6ae25fa0596848108d972be4f159031a1`, grabado y verificado. Diez escenas adaptadas del frontal, B1 navega, 137 comprobaciones sin fallos, capturas GRAM con confirmación por fila/CRC. [ENS-0016](../../06_TRABAJO/ensayos/ENS-0016_vistas_frontal_nucleo.md). Primera compilación v0.3 y v0.2 quedan conservadas; no cambia firmware de producción F746/ESP32. Trabajo local sin nuevo commit/etiqueta.
+
+**Antecedente, destino separado del kart.** Firmware previo conservado en tres lecturas idénticas. Diagnóstico `v0.1`: LCD MCUFRIEND ILI9341 (`0x9341`). Banco **v0.2**, después sustituido por v0.3: 83 comprobaciones de funciones frontal/trasera dev3 en F411 sin fallos, periféricos simulados, LCD/B1 físicos y visual/START ON–OFF confirmados por Armando. [ENS-0015](../../06_TRABAJO/ensayos/ENS-0015_nucleo_f411_pantalla_banco.md), [proyecto](nucleo_f411_banco/README.md), [respaldo previo](../respaldos/nucleo_f411/2026-10-14/RESPALDO.md). BIN/ELF, fuentes y hashes conservados; sin nuevo commit/etiqueta. No se grabaron las placas del kart ni se migró TouchGFX.
 
 ## Entrega pública · 13-10-2026
 

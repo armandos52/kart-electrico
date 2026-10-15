@@ -2,6 +2,12 @@
 
 Fecha de preparación: 2026-09-28. El inventario y la extracción inicial están completados; la síntesis exhaustiva sigue pendiente.
 
+15-10-2026, continuación posterior L4: [ENS-0018](ensayos/ENS-0018_mejoras_pantalla_desarrollo.md) implementa F01–F03 tras autorización; consulta de ficha DOC-0042/notas existentes, formateador/cabecera/tests y dependencias directas banco/capturador/build. Nuevas pruebas exclusivamente en PC y compilaciones, sin revisión visual física ni páginas originales. No cierra L1/L4 ni formatos visuales/Loop. Nueve archivos de alcance antes/después, no lectura integral de bibliotecas.
+
+15-10-2026, continuación L4: [ENS-0017](ensayos/ENS-0017_revision_preinstalacion_frontal.md), revisión de preparación F746/TouchGFX dev3. Estado/mapa, catálogo/ficha DOC-0042, inventario/notas/problemas/ensayos; frontend/formateador, View/Model/Presenter, widget/base/fuente gráfica, enganches de tareas, configuración, tests y build; consulta focalizada de inicio SD/driver/linker. Se conservan 36 archivos de alcance; compilar 151 unidades no acredita leerlas todas. Sin nuevas páginas originales, revisión visual del F746 ni cierre L1/L4; formatos visuales/Loop pendientes.
+
+14-10-2026, continuación L4: [ENS-0016](ensayos/ENS-0016_vistas_frontal_nucleo.md) consulta selectivamente código de trabajo `Screen1View`, base generada, `KartStatus`, frontend/formateador, stubs y biblioteca LCD para adaptar vistas/capturar GRAM. Sin nuevas páginas originales ni lectura integral adicional; fuentes consultadas conservadas en la evidencia del ensayo.
+
 ## Orden de trabajo
 
 | Lote | Material | Resultado que debe quedar guardado | Estado |
@@ -34,6 +40,8 @@ La primera pasada ya cubre la portada, el resumen, el índice y las conclusiones
 Se preparó la [guía personal](GUIA_DE_ESTUDIO_DEL_KART.md). Cobertura exacta en la [sesión](SESION_ESTUDIO_2026-10-07.md): texto seleccionado de L1 (pantalla, alimentación, contactor y fallos), L3 (manual Kelly) y conclusiones/resúmenes de L5. No se cierra ningún lote; no hubo nueva revisión visual de figuras/tablas. Próximo: respuestas del montaje y continuar las secciones coherentes de L1, sin repetir estos extractos salvo necesidad de contexto.
 
 ## Regla de economía de contexto
+
+Banco F411 (14-10): estado/mapa, índice/ficha DOC-0034, inventario, `.ioc`/linker y funciones/tests de trabajo. Buscador: **texto de DOC-0034 PDF 7**, sin nueva inspección visual. Consulta externa focalizada ST/MCUFRIEND/PlatformIO para placa, herramientas y bus LCD. [ENS-0015](ensayos/ENS-0015_nucleo_f411_pantalla_banco.md): identificación y respaldo físicos, pantalla/botón y pruebas lógicas en MCU con periféricos simulados. No cierra L1/L4, no lee nuevos originales completos ni resuelve formatos visuales/Loop.
 
 Batería (13-10): índice, fichas y notas; buscador DOC-0030 PDF 1/DOC-0042 PDF 69. Revisión visual completa de ambas páginas (tabla, §3.4/figura 17). [Tutorial y cobertura](../04_CONOCIMIENTO/bateria_y_bms/TUTORIAL_CELDAS_Y_CARGA_16S.md). Discrepancia 60/70 Ah; ficha de una página revisada pero correspondencia física pendiente. No se cierran L1/L2 ni se revisa el resto/Loop.
 

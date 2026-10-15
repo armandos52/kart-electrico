@@ -1,0 +1,5 @@
+VIEW v=0.4-dev id=0 synthetic=1
+LINE4 SIMULADO
+VIEW v=0.4-dev id=0 synthetic=1
+LINE4 SIMULADO
+CAPTURE_BEGIN v=0.3 scene=0 w=320 h=240 bytes=153600 format=RGB565LE source=ILI9341_GRAM flow=ROWACK

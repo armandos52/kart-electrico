@@ -1,0 +1,38 @@
+[
+  {
+    "DeviceName": "STMicroelectronics STLink Virtual COM Port",
+    "DeviceID": "USB\\VID_0483&PID_374B&MI_02\\6&15E8C06A&0&0002",
+    "DriverVersion": "2.2.0.0",
+    "DriverDate": "2021-04-01T01:00:00+01:00",
+    "DriverProviderName": "STMicroelectronics",
+    "InfName": "oem256.inf",
+    "IsSigned": false
+  },
+  {
+    "DeviceName": "USB Mass Storage Device",
+    "DeviceID": "USB\\VID_0483&PID_374B&MI_01\\6&15E8C06A&0&0001",
+    "DriverVersion": "10.0.26100.9444",
+    "DriverDate": "2006-06-21T01:00:00+01:00",
+    "DriverProviderName": "Microsoft",
+    "InfName": "usbstor.inf",
+    "IsSigned": true
+  },
+  {
+    "DeviceName": "STMicroelectronics STLink dongle",
+    "DeviceID": "USB\\VID_0483&PID_374B&MI_00\\6&15E8C06A&0&0000",
+    "DriverVersion": "2.2.0.0",
+    "DriverDate": "2021-04-01T01:00:00+01:00",
+    "DriverProviderName": "STMicroelectronics",
+    "InfName": "oem189.inf",
+    "IsSigned": false
+  },
+  {
+    "DeviceName": "USB Composite Device",
+    "DeviceID": "USB\\VID_0483&PID_374B\\0672FF564881774867244057",
+    "DriverVersion": "10.0.26100.9549",
+    "DriverDate": "2006-06-21T01:00:00+01:00",
+    "DriverProviderName": "Microsoft",
+    "InfName": "usb.inf",
+    "IsSigned": true
+  }
+]
