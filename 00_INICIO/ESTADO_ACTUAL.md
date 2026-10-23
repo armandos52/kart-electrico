@@ -6,6 +6,10 @@ resumen: Estado consolidado, configuración y siguiente paso; historia enlazada 
 
 # Estado actual · 15-10-2026
 
+## Aprendizaje PID e IMU · 23-10
+
+Fase de estudio pedida por Armando. [Guía](../04_CONOCIMIENTO/software_y_telemetria/GUIA_PID_E_IMU.md) y [simulador en vista superior](../04_CONOCIMIENTO/software_y_telemetria/simulador_pid_imu.html) con fuerzas, giróscopo y acelerómetro. Hallazgo de código: ESC v1.3 = solo P con zona muerta (deja error estacionario) y consigna sin límite de adherencia. Recomendación futura: PI con anti-windup. Simulación sintética con valores supuestos; sin cambios de firmware; IMU sigue no disponible (PROB-0017).
+
 ## Frontal F746 · dev4 grabado y probado en placa
 
 **STM32 v1.3-dev4 grabado y verificado en la F746 real (15-10)**, [ENS-0019](../06_TRABAJO/ensayos/ENS-0019_frontal_dev4_f746_real.md).

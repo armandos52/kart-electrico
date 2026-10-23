@@ -8,6 +8,9 @@ resumen: Tareas próximas y completadas del proyecto del kart.
 
 ## Próximas
 
+- [x] Aprender PID e IMU con la web de Steppe School y dejar [guía](../04_CONOCIMIENTO/software_y_telemetria/GUIA_PID_E_IMU.md) y [simulador](../04_CONOCIMIENTO/software_y_telemetria/simulador_pid_imu.html) aplicados al ESC (23-10). Sin cambios de firmware.
+- [ ] IMU futura: resolver [PROB-0017](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0017_imu_no_disponible.md); en banco (módulo fuera del kart) medir sesgo/ruido/ejes/`yaw_sign`, valorar rango ±500 °/s, medir `dt` real del lazo; después proponer PI con anti-windup y consigna limitada por μ·g/v, probado en PC antes del kart.
+
 - [ ] Calibrar el reposo y el recorrido del pedal con dev4 instalado ([PROB-0012](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0012_pedal_reposo_fuera_de_pedal_libre.md)). En reposo se leen 149–194 cuentas frente al umbral de pedal libre (≤ ~141), lo que bloquea modos y D/R. Medir con registro antes de cambiar `ACCEL_MIN` o el margen.
 - [ ] Decidir el tratamiento de la SD sin tarjeta ([PROB-0013](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0013_sd_sin_tarjeta_bloqueo_y_error_invisible.md)) y probar la grabación con microSD en la F746 con dev4.
 - [ ] Identificar el firmware del ESP32 instalado por Wi-Fi. El 15-10 no emitía 0x124, compatible con v1.2 o anterior ([ENS-0019](ensayos/ENS-0019_frontal_dev4_f746_real.md)). Decidir después si se graba dev3.

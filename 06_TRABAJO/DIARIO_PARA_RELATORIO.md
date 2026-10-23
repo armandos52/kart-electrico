@@ -6,6 +6,14 @@ resumen: Índice y diario de evidencias para el relatório final de ingeniería 
 
 # Diario para el relatório final
 
+## APR-PID-IMU / PROB-0017 · Aprendizaje de PID e IMU y simulador · 23-10-2026
+
+Objetivo: fase de aprendizaje solicitada por Armando para preparar la futura IMU, a partir del artículo de PID en C de Steppe School, su visor IMU y el artículo de orientación enlazado (consultados el 23-10). [Guía](../04_CONOCIMIENTO/software_y_telemetria/GUIA_PID_E_IMU.md) y [simulador local](../04_CONOCIMIENTO/software_y_telemetria/simulador_pid_imu.html). Configuración de referencia: fuente local `kart_control` v1.3 (sin grabar); ESP32 físico v1.2-diagnostico con `mpu_ok=0` (PROB-0017). No se modifica firmware, binario ni hardware.
+
+Resultado de la revisión de código (análisis, no ensayo): el ESC v1.3 equivale a un control **P** (Kp 1/200 por °/s, zona muerta 2 °/s, tope ±10 % × esfuerzo base), sin I ni D. La consigna `v·tan δ/L` no está limitada por adherencia: a 10 m/s y 20° pide ≈160 °/s, ≈2,85 g, frente a ≈56 °/s físicamente posibles con μ≈1. Signo de montaje del MPU y periodo real del lazo, pendientes.
+
+Simulador: modelo de bicicleta plano con neumáticos saturables. Masa, inercia, rigideces y fuerza por rueda **supuestas**; geometría del firmware. Comprobaciones automáticas en el navegador (sintéticas): en círculo, firmware 6,4 °/s de error medio, P 6,2, PI 0,6 a 20 s; con *windup*, integral 4,63 sin anti-windup frente a 0,24 con él. Negativos corregidos durante la prueba: el ángulo de dirección no llegaba a la física, la brújula usaba otro origen y el escenario de motor débil en recta producía un error <1 °/s, poco didáctico (se sustituyó por el círculo). Las ganancias no son transferibles al kart. Siguiente: PROB-0017 en banco con el módulo fuera del kart; medir sesgo/ruido/signo y `dt`; diseñar el PI con Armando antes de tocar el firmware.
+
 ## ENS-0019 / PROB-0004 / PROB-0011 / PROB-0012 / PROB-0013 · Frontal dev4 en la F746 real · 15-10-2026
 
 Armando conecta la F746 frontal (USB del ST-LINK, bus CAN con ESP32 encendido, pedal/dirección, sin SD) y pide las pruebas reales del último código. Todo por SWD con OpenOCD local.

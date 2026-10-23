@@ -1,6 +1,6 @@
 ---
 estado: vigente
-actualizado: 2026-10-15
+actualizado: 2026-10-23
 resumen: Mapa de la bóveda del kart: por dónde empezar y dónde guardar cada cosa.
 ---
 
@@ -19,6 +19,7 @@ Esta base reúne el conocimiento y el trabajo del kart. La entrega histórica es
 
 - [Panel del portátil · Wi-Fi/USB y modelo 3D](../07_DESARROLLO/panel_local/README.md): lectura, kart basado en fotos, calibración visual por pasos ([ENS-0012](../06_TRABAJO/ensayos/ENS-0012_calibracion_por_pasos.md)), consola y gráficas. [Modelo y pruebas](../06_TRABAJO/ensayos/ENS-0006_modelo_visual_fotografias.md); [velocidad visual de ruedas](../06_TRABAJO/ensayos/ENS-0010_velocidad_visual_ruedas.md); cotas y validación física pendientes. USB solo con módulo fuera del kart; iPad aplazado.
 - [Aprender el kart: historia, funcionamiento y mejoras](../06_TRABAJO/GUIA_DE_ESTUDIO_DEL_KART.md): guía personal del 07-10, con explicaciones, fuentes, ejercicios y preguntas del montaje.
+- [Guía de PID e IMU](../04_CONOCIMIENTO/software_y_telemetria/GUIA_PID_E_IMU.md) (vigente, 23-10): PID, anti-windup, sintonía, filtros de orientación y lectura del ESC v1.3 como control P; con [simulador del kart en vista superior](../04_CONOCIMIENTO/software_y_telemetria/simulador_pid_imu.html) (modelo didáctico, valores supuestos).
 
 - [Inicio de tu investigación 2026/27](../06_TRABAJO/INICIO_INVESTIGACION_2026-27.md): cronograma personal incorporado, análisis y organización recomendada.
 
