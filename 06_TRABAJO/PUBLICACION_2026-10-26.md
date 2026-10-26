@@ -12,6 +12,8 @@ Verificación local completada. [Evidencias](evidencias/publicacion_2026-10-26/)
 
 Primer intento del panel: errores de acceso a temporales del entorno restringido; repetición en host satisfactoria. Idiomas: primer intento bloqueado por alias Python; con runtime explícito se detectaron 30 claves IMU y tres mensajes de historial sin traducción (30/33). Corregidos en `textos.js`; repetición 33/33. No se modifica lógica de control ni firmware. Se corrigieron cuatro enlaces Obsidian y referencias a binarios locales. Se conservan logs negativos y advertencias de compilación.
 
-Rama de entrega: `codex/publicacion-avances-2026-10-26`; subida y CI pendientes de comprobación. Pruebas PC no equivalen a aceptación del kart ni del replay con archivos reales. Se conserva el diagnóstico negativo de reversa de ENS-0025 y los pendientes de ENS-0029.
+Rama publicada: `codex/publicacion-avances-2026-10-26`, contenido `76ba5c3` y auditoría `904797e`. [PR #3](https://github.com/armandos52/kart-electrico/pull/3). [CI Linux satisfactoria en 904797e](https://github.com/armandos52/kart-electrico/actions/runs/40393405699): panel, JavaScript, control/frontal y navegación. Auditoría acotada: 1.384 blobs/entradas, 37.262.270 bytes, sin hallazgos ni archivos prohibidos; [informe](evidencias/publicacion_2026-10-26/auditoria_commit.json). No sustituye auditoría exhaustiva.
+
+El conector GitHub devolvió 403 al crear la PR; se creó con GitHub CLI autenticado. Las referencias finales y el estado de integración se consultan en PR #3. No se fuerza ni reescribe el historial. Pruebas PC no equivalen a aceptación del kart ni del replay con archivos reales. Se conserva el diagnóstico negativo de reversa de ENS-0025 y los pendientes de ENS-0029.
 
 Incidencia de entorno: primer fetch no pudo escribir `.git/FETCH_HEAD` y la consulta GitHub no tuvo red en el entorno restringido. Repetidos con permisos del host, ambos correctos. Sin pérdida de archivos.
