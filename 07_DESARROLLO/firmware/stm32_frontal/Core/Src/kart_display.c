@@ -7,7 +7,7 @@ void Kart_FormatDisplay(const KartUiSnapshot* s,char lines[5][41]) {
         "PREPARANDO RELES","CARGADOR CONECTADO","REARME: N FRENO PEDAL LIBRE","FRENO","PEDAL LIBRE","NEUTRO",
         "PARAR PARA CAMBIAR SENTIDO","PARAR EN N PARA CAMBIAR MODO","VELOCIDAD INVALIDA","REVISAR HALL","MPU NO DISPONIBLE",
         "ENTRADAS FRONTALES INVALIDAS","LIMITE R ACTIVO","FALLO SALIDA","FALLO CAN","CONFIGURACION INVALIDA"};
-    static const char* notices[]={"","MODO: PONER N","MODO: PARAR Y SOLTAR PEDAL","MODO: SIN CAN RECIENTE","MODO: REVISAR ENTRADAS"};
+    static const char* notices[]={"","MODO: PONER N","PARAR Y SOLTAR PEDAL","MODO: CAN CADUCADO","MODO: VER ENTRADAS"};
     snprintf(lines[0],41,"SOL:%s REC:%s APL:%s",Kart_ModeName(s->mode_requested),Kart_ModeName(s->mode_received),Kart_ModeName(s->mode_applied));
     const char* reason=!s->feedback_fresh?"SIN DATOS CAN RECIENTES":!s->status_fresh?"ESP SIN ESTADO RECIENTE":s->inhibit<21?causes[s->inhibit]:"ESTADO DESCONOCIDO";
     // La causa nunca se sustituye por un aviso de interaccion del desarrollador.

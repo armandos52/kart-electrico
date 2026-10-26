@@ -2,7 +2,9 @@
 
 Preparación del 14-10-2026. Es un destino de banco separado del frontal STM32F746G-DISCO del kart.
 
-**Fuentes de desarrollo al 15-10: v0.4-dev, compiladas sin grabar.** Se adaptan a las correcciones compartidas del frontal dev4; conservan versión y aviso de modo en quinta fila, estado R sin umbral CAN inventado y causas prioritarias. 155 comprobaciones ejecutadas en **PC**, build F411 correcto; [ENS-0018](../../../06_TRABAJO/ensayos/ENS-0018_mejoras_pantalla_desarrollo.md). La última imagen grabada conocida sigue siendo **v0.3**, descrita abajo. El capturador acepta ambas versiones y conserva la identidad recibida; nuevas capturas físicas pendientes. Pantallas de usuario final aplazadas según DEC-0010.
+Retoma local del 15-10: la fuente 0.4-dev incorpora ahora el núcleo frontal dev5 y sus pruebas SD; 174 comprobaciones en PC sin fallos (120 frontales + 54 visuales), F411 compilado sin grabar. [ENS-0021](../../../06_TRABAJO/ensayos/ENS-0021_sd_reintentos_locales.md) conserva el nuevo BIN/ELF con hashes. La última imagen instalada sigue v0.3; los resultados de 155 comprobaciones siguientes corresponden al corte previo con dev4.
+
+**Último build 0.4-dev al 16-10, sin grabar:** usa el corte frontal dev7-ui; 204 comprobaciones PC sin fallos (150 frontales + 54 visuales), flash 68.160 B y RAM estática 2.328 B. [ENS-0023](../../../06_TRABAJO/ensayos/ENS-0023_bugs_e_instalacion_dashboard.md) conserva BIN/ELF/hash. El dashboard de siete páginas pertenece a la F746; este banco conserva sus escenas. Última imagen instalada F411 sigue v0.3. Antecedente dev6-ui en ENS-0022. La fuente compartida posterior pasa a dev8-ui en ENS-0024; no se recompila F411 en esa continuación.
 
 La Nucleo conectada se identifica por ST-LINK `0672FF564881774867244057`, COM5 y unidad `NOD_F411RE`. El MCU devuelve ID `0x431` y 512 KiB de flash. Armando declara una pantalla rotulada «MCUFRIEND 3.00 uno», conectada sobre la placa y únicamente un USB al portátil. El diagnóstico lee **ILI9341 (0x9341)** seis veces: se configura a 320×240 horizontal. La diagonal no está medida.
 

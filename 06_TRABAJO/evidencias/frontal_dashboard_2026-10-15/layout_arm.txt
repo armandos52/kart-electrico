@@ -1,0 +1,62 @@
+Undefined item: "UTF-8".
+warning: could not convert 'KartUiSnapshot' from the host encoding (CP1252) to UTF-32.
+This normally should not happen, please file a bug report.
+type = struct {
+/*      0      |       4 */    uint32_t tick;
+/*      4      |       4 */    uint32_t can_age;
+/*      8      |       4 */    uint32_t status_age;
+/*     12      |       4 */    uint32_t bms_soc_age;
+/*     16      |       4 */    uint32_t bms_temp_age;
+/*     20      |       4 */    uint32_t can_tx_errors;
+/*     24      |       4 */    uint32_t can_rx_errors;
+/*     28      |       4 */    uint32_t adc_errors;
+/*     32      |       4 */    uint32_t sd_rows;
+/*     36      |       2 */    uint16_t accel_adc;
+/*     38      |       2 */    uint16_t steer_adc;
+/*     40      |       2 */    uint16_t accel_raw;
+/*     42      |       2 */    uint16_t steer_raw;
+/*     44      |       2 */    int16_t speed_kph;
+/*     46      |       2 */    int16_t rpm_left;
+/*     48      |       2 */    int16_t rpm_right;
+/*     50      |       2 */    int16_t yaw_deci_dps;
+/*     52      |       2 */    int16_t rpm_front_left;
+/*     54      |       2 */    int16_t rpm_front_right;
+/*     56      |       2 */    uint16_t soc_pct;
+/*     58      |       2 */    int16_t battery_temp_c;
+/*     60      |       1 */    uint8_t input_flags;
+/*     61      |       1 */    uint8_t brake;
+/*     62      |       1 */    uint8_t start;
+/*     63      |       1 */    uint8_t gear;
+/*     64      |       1 */    uint8_t mode_requested;
+/*     65      |       1 */    uint8_t mode_received;
+/*     66      |       1 */    uint8_t mode_applied;
+/*     67      |       1 */    uint8_t inhibit;
+/*     68      |       1 */    uint8_t backend_flags;
+/*     69      |       1 */    uint8_t feedback_fresh;
+/*     70      |       1 */    uint8_t status_fresh;
+/*     71      |       1 */    uint8_t status_seen;
+/*     72      |       1 */    uint8_t soc_valid;
+/*     73      |       1 */    uint8_t temp_valid;
+/*     74      |       1 */    uint8_t sd_requested;
+/*     75      |       1 */    uint8_t sd_state;
+/*     76      |       1 */    uint8_t sd_error;
+/*     77      |       1 */    uint8_t ui_notice;
+/*     78      |       8 */    uint8_t bms355[8];
+/*     86      |       8 */    uint8_t bms356[8];
+/* XXX  2-byte hole      */
+/*     96      |       4 */    uint32_t front_left_age;
+/*    100      |       4 */    uint32_t front_right_age;
+/*    104      |       1 */    uint8_t drive_input;
+/*    105      |       1 */    uint8_t reverse_input;
+/*    106      |       1 */    uint8_t start_input;
+/*    107      |       1 */    uint8_t pedal_free;
+/*    108      |       1 */    uint8_t stationary;
+/*    109      |       1 */    uint8_t feedback_usable;
+/*    110      |       1 */    uint8_t front_left_valid;
+/*    111      |       1 */    uint8_t front_right_valid;
+/*    112      |       1 */    uint8_t relay_state;
+/*    113      |       1 */    uint8_t backend_gear;
+/* XXX  2-byte padding   */
+
+                               /* total size (bytes):  116 */
+                             }

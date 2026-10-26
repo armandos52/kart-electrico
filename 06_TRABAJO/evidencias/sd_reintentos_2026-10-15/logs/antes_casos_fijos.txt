@@ -1,0 +1,165 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.35
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+frontend_test.cpp
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tests\../Core/Src/kart_frontend.c(82): warning C4459: declaration of 'tick' hides global declaration
+frontend_test.cpp(7): note: see declaration of 'tick'
+frontend_test.cpp(21): warning C4244: '=': conversion from 'uint32_t' to 'uint16_t', possible loss of data
+kart_control.cpp
+Generating Code...
+PASS Pulsador sostenido al encender no solicita START
+PASS Liberacion inicial menor de 40 ms no habilita START
+PASS START espera 40 ms continuos, no solo un flanco
+PASS START estable llega a CAN y snapshot
+PASS Mantener pulsado no repite ni apaga
+PASS Soltar pulsador mantiene START enclavado por software
+PASS Rebotes al soltar no generan una segunda pulsacion
+PASS Segunda pulsacion pide STOP en primera lectura, sin 40 ms
+PASS Mantener STOP no vuelve a arrancar
+PASS Rebotes despues de STOP no rearman START
+PASS Soltar estable y pulsar otra vez permite nuevo START
+PASS STOP llega aun con ADC invalido
+PASS Cien pulsos de 5 ms no acumulan tiempo para arrancar
+PASS Despues del ruido un START estable funciona
+PASS Reinicializar borra memoria y exige soltar el pulsador
+PASS Liberacion funciona cruzando desbordamiento del tick
+PASS Antirrebote START funciona cruzando desbordamiento del tick
+PASS STOP conserva bits de modo CAN
+TRACE tick_ms=1000 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=1600 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=1600 raw=1 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=1640 raw=1 start=1 relay=1 inhibit=relays
+PASS Integracion: pulsacion estable inicia precarga
+TRACE tick_ms=1645 raw=0 start=1 relay=1 inhibit=relays
+PASS Integracion: soltar no cancela precarga
+TRACE tick_ms=1650 raw=1 start=1 relay=1 inhibit=relays
+TRACE tick_ms=1655 raw=0 start=1 relay=1 inhibit=relays
+TRACE tick_ms=1695 raw=0 start=1 relay=1 inhibit=relays
+PASS Integracion: rebotes de liberacion no ciclan rele
+TRACE tick_ms=3695 raw=0 start=1 relay=2 inhibit=relays
+PASS Integracion: precarga completa llega a solapamiento
+TRACE tick_ms=4695 raw=0 start=1 relay=3 inhibit=brake
+PASS Integracion: rele queda listo con pulsador suelto
+TRACE tick_ms=4700 raw=1 start=0 relay=0 inhibit=start_off
+PASS Integracion: siguiente pulsacion corta reles y consignas
+TRACE tick_ms=4705 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=4710 raw=1 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=4910 raw=1 start=0 relay=0 inhibit=start_off
+PASS Integracion: rebote tras STOP no reinicia precarga
+TRACE tick_ms=4910 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=4950 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=4950 raw=1 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=4990 raw=1 start=1 relay=1 inhibit=relays
+PASS Integracion: nuevo ciclo deliberado permite precarga
+TRACE tick_ms=4990 raw=0 start=1 relay=1 inhibit=relays
+TRACE tick_ms=5030 raw=0 start=1 relay=1 inhibit=relays
+TRACE tick_ms=5035 raw=1 start=0 relay=0 inhibit=start_off
+PASS Integracion: segunda pulsacion para tambien durante precarga
+TRACE tick_ms=5035 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=5075 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=5075 raw=1 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=5115 raw=1 start=1 relay=1 inhibit=relays
+TRACE tick_ms=5120 raw=1 start=1 relay=0 inhibit=can_fault
+TRACE tick_ms=5125 raw=0 start=1 relay=0 inhibit=relays
+TRACE tick_ms=5165 raw=0 start=1 relay=0 inhibit=relays
+PASS Integracion: recuperacion CAN no reutiliza START para arrancar
+TRACE tick_ms=5165 raw=1 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=5170 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=5210 raw=0 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=5210 raw=1 start=0 relay=0 inhibit=start_off
+TRACE tick_ms=5250 raw=1 start=1 relay=1 inhibit=relays
+PASS Integracion: tras fallo se exige OFF y START deliberados
+PASS F01 version visible identifica la misma version que el CSV y build
+PASS F01 version y contador SD maximo caben y usan glifos disponibles
+PASS F02 sin CAN no afirma limite R
+PASS F02 legado sin 0x124 deja limitador desconocido
+PASS F02 version CAN incompatible no acredita limitador
+PASS F02 estado compatible sin actuacion indica INACT
+PASS F02 limitacion confirmada muestra LIM sin inventar umbral numerico
+PASS F02 estado caducado oculta limitacion anterior
+PASS F02 feedback caducado con estado fresco no acredita limitacion vigente
+DISPLAY charger: CARGADOR CONECTADO / STM V1.3-DEV4 MODO: PONER N
+PASS F03 cargador y rechazo de modo se ven a la vez sin ocultar inhibicion
+PASS F03 durante aviso conserva version y estado SD
+PASS F03 perdida CAN conserva prioridad frente al aviso pendiente
+PASS F03 tras caducar aviso reaparece contador SD
+PASS F03 todos los motivos y el desconocido conservan prioridad
+PASS F03 los cuatro avisos siguen visibles en fila de desarrollo
+PASS F03 combinaciones de aviso e inhibicion caben en cinco filas de 40
+PASS F03 estado ESP antiguo mantiene motivo y aviso completo
+PASS F03 aviso desconocido no indexa fuera ni borra diagnostico
+PASS SD reproduce montaje de 30 s y desmontaje de 500 ms
+FAIL SD no reintenta inmediatamente despues de fallo lento
+FAIL SD espera 1000 ms completos desde fin del fallo
+FAIL SD conserva ultimo error visible durante montaje de reintento
+FAIL SD reintenta al cumplir espera y conserva error si vuelve a fallar
+PASS SD recuperacion borra error solo al grabar y escribe primera fila
+FAIL SD montaje lento no adelanta fila ni sync siguientes
+FAIL SD mantiene periodo de filas tras montaje lento
+FAIL SD espera tambien tras apertura lenta fallida
+FAIL SD escritura parcial espera desde cierre y desmontaje completos
+FAIL SD escritura fallida permite reintentar tras espera
+FAIL SD sync fallido no permite reabrir antes de espera tras cierre
+FAIL SD pausa durante montaje evita abrir y escribir al volver
+FAIL SD pausa durante apertura cierra sin escribir cabecera ni filas
+FAIL SD pausa durante cabecera cierra sin registrar fila posterior
+FAIL SD pausa durante recuperacion conserva ultimo error sin afirmar grabacion
+PASS SD pausada no reintenta aunque pase el tiempo
+FAIL SD espera correcta si tick desborda durante montaje
+FAIL SD reintenta tras wrap del tick
+PASS Sin feedback transmite N freno pedal cero
+PASS ADC validos y CAN fresco
+PASS Ext 0x101 conserva ADC fisico
+PASS Secuencia avanza por muestra
+PASS D exige freno quietud pedal libre
+PASS Pedal superior normalizado
+PASS D a R con movimiento pasa N, no conserva D
+PASS Fallo conversion ADC inhibe y publica centinela
+PASS ADC fuera de plausibilidad se rechaza
+PASS D R simultaneos invalidos
+PASS Modo avanza parado en N
+PASS Modo con D se rechaza visible
+PASS 0 km/h entero no acredita quietud
+PASS Estado extendido caducado no vuelve a legado
+PASS Feedback caduca
+PASS DLC incorrecto contado
+PASS Buzones llenos abortan y cuentan
+PASS Errores TX visibles
+PASS SD abre al solicitar grabacion
+PASS CSV versionado con cabeceras reales
+PASS Primera fila registrada
+PASS Pausa sincroniza y cierra
+PASS Reanudar vuelve a montar y abrir
+PASS Fallo montaje visible
+PASS Fallo SD no reintenta en bucle rapido
+PASS SD puede recuperar al reinsertar
+PASS Escritura parcial es error y no fila valida
+PASS Error sync cierra y se publica
+PASS Error cierre no se oculta como pausa
+PASS Hall usa periodo real a traves de wrap DWT
+PASS Hall no revive por wrap DWT sin pulsos
+PASS Pantalla no inventa modo ni bateria ni CAN
+PASS Limite R y fallo SD visibles sin inventar umbral
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+PASS Motivo cabe en pantalla
+TOTAL 120; FALLOS 16

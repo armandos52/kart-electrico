@@ -1,0 +1,20 @@
+{
+  "fecha": "2026-10-17",
+  "tipo": "declaracion del usuario, no medicion instrumental recibida",
+  "reversa": {
+    "condicion": "banco de pruebas, ruedas siempre elevadas",
+    "observacion": "pantalla indica aproximadamente 50 km/h en R en cualquiera de DIF, BLQ y ESC; ruedas se escuchan muy rapidas",
+    "velocidad_sobre_suelo": null,
+    "rpm_independiente": null,
+    "version_esp32_identificada_en_sesion": null
+  },
+  "interferencia": {
+    "observacion": "mucho ruido electromagnetico afecta direccion y otros sensores; referencia turbia e inconsistente",
+    "atribucion_usuario": "causado por los diferenciales",
+    "causa_confirmada_por_instrumentacion": false,
+    "frecuencias_hz": null,
+    "amplitudes": null,
+    "propuesta_usuario": "observar con osciloscopio para elegir filtro"
+  },
+  "alcance_final_solicitado": "revisar programa, dar soluciones y mostrar plan; implementar despues"
+}

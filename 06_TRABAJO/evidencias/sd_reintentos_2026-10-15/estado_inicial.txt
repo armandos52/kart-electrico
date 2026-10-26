@@ -1,0 +1,5 @@
+ M 06_TRABAJO/DIARIO_PARA_RELATORIO.md
+?? 06_TRABAJO/evidencias/pedal_f746_2026-10-15/
+?? 06_TRABAJO/evidencias/sd_reintentos_2026-10-15/
+?? 07_DESARROLLO/firmware/stm32_frontal/tools/compilar_frontal.ps1
+?? 07_DESARROLLO/firmware/stm32_frontal/tools/registrar_pedal_swd.py

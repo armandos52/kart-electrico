@@ -1,0 +1,37 @@
+ok   Cada clave tiene tres textos no vacíos (es, pt, en)
+ok   Los parámetros {…} coinciden en los tres idiomas
+ok   Ningún texto largo queda sin traducir (ni en portugués ni en inglés)
+ok   Servidor: filas [es, pt, en] completas y sin duplicados
+ok   Patrones del servidor: regex con (.*) y $1 en pt y en
+FAIL El código usa claves que están todas definidas
+       → btn.imu, imu.aria, imu.titulo, imu.sub, imu.ley.traccion, imu.ley.lateral, imu.ley.imu, imu.ley.vel, imu.ley.giro, imu.gg.titulo, imu.rumbo.titulo, imu.requiere, imu.activar, demo.fisica, imu.modo, imu.modo.dif, imu.modo.fw, imu.modo.pid, imu.modo.equal, imu.mu, imu.cmax, imu.aw, imu.cap, imu.ruido_dir, imu.debil, imu.sesgo, imu.empujon, imu.calibrar, imu.reiniciar, imu.teclas
+ok   Familias dinámicas completas (w.*, part.*, plan.*, loc.*, dir.*)
+ok   12 piezas con título, etiqueta y nota
+ok   Nombres cortos: las 48 señales del catálogo de presentación, todas con su clave de telemetría
+ok   No sobran claves en el diccionario
+FAIL Los textos en español del HTML coinciden con el diccionario
+       → index.html texto btn.imu: «IMU» | index.html aria-label imu.aria | index.html texto imu.titulo: «IMU simulada · vista superior» | index.html texto imu.sub: «Modelo didáctico con valores supuestos · datos sintéticos» | index.html texto imu.ley.traccion: «tracción» | index.html texto imu.ley.lateral: «fuerza lateral» | index.html texto imu.ley.imu: «aceleración IMU» | index.html texto imu.ley.vel: «velocidad» | index.html texto imu.ley.giro: «guiñada» | index.html title imu.gg.titulo | index.html title imu.rumbo.titulo | index.html texto imu.requiere: «La IMU simulada funciona dentro de la demostración. No mezcla datos con una conexión real.» | index.html texto imu.activar: «Activar demostración con IMU» | index.html texto demo.fisica: «Dinámica e IMU simuladas» | index.html texto imu.modo: «Control del diferencial» | index.html texto imu.modo.dif: «DIF · reparto geométrico» | index.html texto imu.modo.fw: «ESC v1.3 · P con zona muerta» | index.html texto imu.modo.pid: «ESC PI(D) · guía» | index.html texto imu.modo.equal: «Igual en ambas ruedas» | index.html texto imu.mu: «Adherencia μ» | index.html texto imu.cmax: «Corrección máxima» | index.html texto imu.aw: «Anti-windup» | index.html texto imu.cap: «Limitar consigna por adherencia» | index.html texto imu.ruido_dir: «Ruido del ADC de dirección» | index.html texto imu.debil: «Motor izquierdo al 80 %» | index.html texto imu.sesgo: «Sesgo del giróscopo» | index.html texto imu.empujon: «Empujón de guiñada» | index.html texto imu.calibrar: «Calibrar giróscopo en reposo» | index.html texto imu.reiniciar: «Reiniciar simulación» | index.html texto imu.teclas: «En la vista IMU: ↑/↓ pedal, ←/→ dirección, espacio freno»
+ok   Los textos en español de la plantilla de calibración coinciden con el diccionario
+ok   El selector de idioma tiene tres botones ES · PT · EN
+ok   Español por defecto: aria-pressed solo en ES
+ok   Todas las etiquetas/unidades de SIGNALS tienen traducción
+FAIL Todos los mensajes del servicio (ValueError, eventos, guía, interrupciones) tienen traducción
+       → Archivo mayor de 32 MiB o vacío | Carga incompleta | Ruta de historial desconocida
+ok   Cobertura: 56 etiquetas y 102 mensajes del servicio
+ok   es: t() devuelve el texto original
+ok   es: srv() no cambia el texto del servicio
+ok   t() con clave desconocida devuelve la clave; parámetro ausente queda visible
+ok   word() traduce valores conocidos y devuelve undefined si no los conoce
+ok   pt: t() y parámetros
+ok   pt: srv() exacto, unidades y patrones anidados
+ok   pt: valores de texto y estados binarios
+ok   pt: números con el formato de Portugal
+ok   en: t(), srv() y word()
+ok   en: números con punto decimal y separador de miles
+ok   Cada idioma da un título distinto
+ok   pt: activeSignals traduce etiqueta y unidad
+ok   pt: dirección calibrada con etiquetas traducidas
+ok   pt: ángulo interpolado indica la rueda
+ok   en: ángulo interpolado y fuera de rango
+ok   es: la dirección sigue como antes
+30/33 comprobaciones; 480 claves, 155 mensajes del servicio, 11 patrones. FAIL

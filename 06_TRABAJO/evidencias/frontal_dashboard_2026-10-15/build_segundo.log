@@ -1,0 +1,56 @@
+Configuraci�n comprobada: control, CAN, IWDG, IRQ y RTOS.
+arm-none-eabi-gcc.exe (Arm GNU Toolchain 14.3.Rel1 (Build arm-14.174)) 14.3.1 20250623
+Compilando 155 unidades en C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\.build
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\common\KartDashboard.cpp:5:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tools\build.py", line 79, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tools\build.py", line 57, in main
+    for obj,output in pool.map(compile_one,sorted(sources)):
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\nandi\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tools\build.py", line 51, in compile_one
+    if result.returncode:raise RuntimeError(str(source)+'\n'+result.stdout)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\screen1_screen\Screen1View.cpp
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/Screen.hpp:25,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:27,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/common/FrontendApplicationBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/common/FrontendApplication.hpp:4,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\generated\gui_generated\include/gui_generated/screen1_screen/Screen1ViewBase.hpp:7,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\include/gui/screen1_screen/Screen1View.hpp:3,
+                 from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\screen1_screen\Screen1View.cpp:1:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp: In member function 'virtual void touchgfx::HAL::waitForLTDCLines(uint16_t)':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/hal/HAL.hpp:828:44: warning: unused parameter 'numberOfLines' [-Wunused-parameter]
+  828 |     virtual void waitForLTDCLines(uint16_t numberOfLines)
+      |                                   ~~~~~~~~~^~~~~~~~~~~~~
+In file included from C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/mvp/MVPApplication.hpp:29:
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp: In member function 'virtual void touchgfx::Transition::FullSolidRect::draw(const touchgfx::Rect&) const':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\Middlewares\ST\touchgfx\framework\include/touchgfx/transitions/Transition.hpp:117:39: warning: unused parameter 'area' [-Wunused-parameter]
+  117 |         virtual void draw(const Rect& area) const
+      |                           ~~~~~~~~~~~~^~~~
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\screen1_screen\Screen1View.cpp: In member function 'virtual void Screen1View::setupScreen()':
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\TouchGFX\gui\src\screen1_screen\Screen1View.cpp:6:5: error: 'removeAll' was not declared in this scope; did you mean 'remove'?
+    6 |     removeAll();__background.setPosition(0,0,480,272);
+      |     ^~~~~~~~~
+      |     remove
+

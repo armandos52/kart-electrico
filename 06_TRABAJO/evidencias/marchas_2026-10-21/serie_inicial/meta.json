@@ -1,0 +1,42 @@
+{
+ "herramienta": "registrar_pedal_swd.py",
+ "guion": "prueba",
+ "serie_stlink": "0670FF3332584B3043206038",
+ "elf": "06_TRABAJO/evidencias/bms_dashboard_2026-10-16/binarios/stm32_frontal-v1.3-dev8-ui.elf",
+ "elf_sha256": "ec8b3b9dd74297e53f2aa9b7a0c739b46de91ccad94e2b5997708d4e8a892c0d",
+ "ui": {
+  "direccion": "0x20000854",
+  "tamano": 116,
+  "desplazamientos": {
+   "tick": 0,
+   "adc_errors": 28,
+   "accel_adc": 36,
+   "steer_adc": 38,
+   "accel_raw": 40,
+   "steer_raw": 42,
+   "input_flags": 60,
+   "brake": 61,
+   "start": 62,
+   "gear": 63,
+   "ui_notice": 77
+  }
+ },
+ "version_esperada": "stm32_frontal-v1.3-dev8-ui",
+ "hz_objetivo": 20,
+ "guarda_s": 1.0,
+ "firmware_criterio": {
+  "ACCEL_MIN": 124,
+  "ACCEL_MAX": 1861,
+  "ADC_MARGIN": 100,
+  "pedal_libre_normalizado_max": 40
+ },
+ "inicio_local": "2026-10-21T11:05:08",
+ "identidad_vec": true,
+ "identidad_ver": true,
+ "fin_local": "2026-10-21T11:05:17",
+ "muestras": 160,
+ "duracion_s": 7.951,
+ "fases_completadas": 1,
+ "fases_plan": 1,
+ "hz_medido": 20.0
+}

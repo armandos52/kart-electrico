@@ -1,0 +1,62 @@
+{
+  "fecha": "2026-10-15",
+  "head": "bebe4528747bc6e05dc1ba244cd3ce9a090a7942",
+  "configuracion": "F746 dev4 documentada; fuente local dev5; ESP32 físico sin identificar; análisis solo PC",
+  "fuentes": [
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c",
+      "sha256": "C8F08C6A64B0298A75CFEEC3CA4750AEBB0C2D8DF821B126A4D2364A0C12A854",
+      "bytes": 18259
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h",
+      "sha256": "56F1DAC97E2E2DF12DFAAA63C7582A4987A21A807A94DB41E2682FA927DDE7B4",
+      "bytes": 1299
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c",
+      "sha256": "D82CDC1FEB1923A43F1AFE38F7FA3F66E1BA210DD19354C5C97749A761F3CD4D",
+      "bytes": 2734
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/main.c",
+      "sha256": "1D2275CBE045AD9E032277B311AEA36C44CFD1F65D96F2FEB1C0A679956A5D5B",
+      "bytes": 30720
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/common/kart_protocol.h",
+      "sha256": "D2EDB6BAAFA21AFE1A468D3EF66D790D338DAB650BCB8B2F14CD794B7662BB22",
+      "bytes": 828
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/screen1_screen/Screen1View.cpp",
+      "sha256": "9FCAA61D439B83FB06CE25C8734C1A645A25C2DC77CCEF38766264CFD9EED474",
+      "bytes": 1890
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp",
+      "sha256": "643D5EA43FC722096F650EF5E5483EE2554739E42713BD9649B92B5BCB3BF3CF",
+      "bytes": 591
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/model/Model.cpp",
+      "sha256": "19F24EAD7835EE79314024212C975FC8DF00EF0DB0428CE956873C63CAB8A6C5",
+      "bytes": 449
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/common/KartStatus.cpp",
+      "sha256": "F38682F755B69628BEB5795A2FACFF078D7F033C0B7F727AA9538D41CD90AC60",
+      "bytes": 2503
+    },
+    {
+      "ruta": "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp",
+      "sha256": "42F57FE474D8A620B25C224C07F98F7BAF1B46B8DCE8915FA69DFCD92E442BF4",
+      "bytes": 8132
+    },
+    {
+      "ruta": "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/pantalla.png",
+      "sha256": "688609FCC5B1E80414CEB363B69B85DB1B56A0E60C081305EF3240DF0115E189",
+      "bytes": 5406
+    }
+  ]
+}

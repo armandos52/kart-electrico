@@ -1,23 +1,45 @@
 ---
 estado: vigente
-actualizado: 2026-10-15
+actualizado: 2026-10-23
 resumen: Tareas próximas y completadas del proyecto del kart.
 ---
 
 # Tareas
+
+## Prioridad comunicada · 26-10-2026
+
+- [ ] Contrastar condensador masa–REF / masa–VCC y pérdida aproximada de medio rango ADC declarados por Armando: esquema, fotos, componente y medidas antes/después; no dar reparación por realizada.
+- [ ] Identificar IMU existente y comparar candidatos conforme a señales, interfaz, alimentación, ruido y latencia; sin modelo elegido ni modos habilitados.
+- [ ] Completar lectura microSD/replay real y diagnóstico de errores ADC/reversa.
+
+[Contexto, configuración y criterios](AVANCES_2026-10-26.md).
 
 ## Próximas
 
 - [x] Aprender PID e IMU con la web de Steppe School y dejar [guía](../04_CONOCIMIENTO/software_y_telemetria/GUIA_PID_E_IMU.md) y [simulador](../04_CONOCIMIENTO/software_y_telemetria/simulador_pid_imu.html) aplicados al ESC (23-10). Sin cambios de firmware.
 - [ ] IMU futura: resolver [PROB-0017](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0017_imu_no_disponible.md); en banco (módulo fuera del kart) medir sesgo/ruido/ejes/`yaw_sign`, valorar rango ±500 °/s, medir `dt` real del lazo; después proponer PI con anti-windup y consigna limitada por μ·g/v, probado en PC antes del kart.
 
-- [ ] Calibrar el reposo y el recorrido del pedal con dev4 instalado ([PROB-0012](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0012_pedal_reposo_fuera_de_pedal_libre.md)). En reposo se leen 149–194 cuentas frente al umbral de pedal libre (≤ ~141), lo que bloquea modos y D/R. Medir con registro antes de cambiar `ACCEL_MIN` o el margen.
-- [ ] Decidir el tratamiento de la SD sin tarjeta ([PROB-0013](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0013_sd_sin_tarjeta_bloqueo_y_error_invisible.md)) y probar la grabación con microSD en la F746 con dev4.
-- [ ] Identificar el firmware del ESP32 instalado por Wi-Fi. El 15-10 no emitía 0x124, compatible con v1.2 o anterior ([ENS-0019](ensayos/ENS-0019_frontal_dev4_f746_real.md)). Decidir después si se graba dev3.
-- [ ] Ampliar transiciones del banco visual según nuevas necesidades. Legibilidad y recorrido completo de las diez escenas v0.3 confirmados por Armando; [ENS-0016](ensayos/ENS-0016_vistas_frontal_nucleo.md). Datos del kart sintéticos; no acredita CAN/motores/SD físicos ni TouchGFX real. Táctil fuera de este ensayo.
-- [ ] Banco F411: grabar v0.4-dev si se vuelve a usar (última imagen conocida v0.3). F01–F03 ya validados en la F746 real ([ENS-0019](ensayos/ENS-0019_frontal_dev4_f746_real.md)).
-- [ ] **Al terminar el proyecto:** diseñar y validar las pantallas de usuario final. Por instrucción de Armando del 15-10, las actuales siguen siendo de desarrollo/diagnóstico; [DEC-0010](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0010_pantallas_desarrollo_y_usuario_final.md). No iniciar ese rediseño en esta fase salvo nueva indicación.
-- [ ] Completar la instalación del frontal según [ENS-0017](ensayos/ENS-0017_revision_preinstalacion_frontal.md). Hecho en ENS-0019: respaldo interna+QSPI, frontal identificado y dev4 grabado con LCD/táctil/CAN comprobados. Faltan ESP32 identificado, SD con tarjeta, calibración y ensayo integrado por Wi-Fi. BMS oculto hasta confirmar protocolo; la aceptación visual F411 no sustituye estas comprobaciones.
+- [x] Implementación del plan e instalación autorizadas por Armando. Frontal **dev12-log** instalado, oscuro fijo/botón global y escritura microSD observada; fallo real SD de dev11 corregido con DMA. [ENS-0029](ensayos/ENS-0029_instalacion_historial_sd.md).
+- [ ] Continuidad y cierre/reanudación comprobados en ENS-0029; completar retirada/reinserción y replay con archivos reales (usuario sin lector); extender cobertura de pruebas del nuevo importador/reproductor. ESP32 diagnóstico ampliado compilado, **sin instalar**. Sensibilidad del pedal dev10 incluida en dev12, pendiente de aceptación específica. Estos puntos sustituyen las tareas inferiores que aún describen plan sin aprobar y dev9 instalada.
+
+- [ ] **Ruido general/PCB (23-10):** caracterizar señales/alimentación/masas; revisar planos GND, retornos, desacoplo y arquitectura/trazado de placas. Estudiar únicamente pasabajos según banda útil, conservando continua de dirección/pedal (corrección expresa de Armando del 23-10); registrar comparación antes/después. [Propuesta para el informe](INVESTIGACION_ADC_DIRECCION_2026-10-23.md#ampliación-para-el-informe-ruido-general-filtrado-y-placas--23-10-2026), PROB-0015 abierto; sin filtro/PCB implementados.
+
+- [x] Investigar ADC de dirección y registrar observación de osciloscopio del 23-10: [tabla/diagnóstico](INVESTIGACION_ADC_DIRECCION_2026-10-23.md).
+- [ ] Medir cursor/PF10, alimentación/referencia, resistencias y centro/topes; contrastar ≈1–2 V declarado con ADC 813 del 21-10. Evaluar ajuste mecánico/calibración o sensor adecuado; no aplicar 5 V directamente. Causa del ruido/divisor pendiente; PROB-0007/0015 abiertos.
+
+- [x] Revisar grabación/panel y preparar [plan de oscuro fijo e historial SD](PLAN_HISTORIAL_SD_Y_PANTALLA_2026-10-22.md) el 22-10. Solo revisión/documentación; [DEC-0011](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0011_oscuro_fijo_y_acceso_grabacion.md), [PROB-0018](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0018_historial_sd_y_reproduccion_incompletos.md).
+- [ ] **Petición 22-10:** aprobar plan antes de implementar; soporte/ubicación y panel 3D confirmados por Armando, capacidad/formato pendientes. Orden propuesto: registro fiable/sesiones + botón global → importación/historial/replay → cobertura trasera autónoma → ensayo completo. Autograbación propuesta, pendiente de aprobar. No formatear ni sobrescribir la tarjeta.
+- [ ] Validar filtro/sensibilidad **dev10-ui**, compilado en PC y sin instalar ([ENS-0027](ensayos/ENS-0027_pedal_media_ponderada.md)); última instalada **dev9-ui**, ESP32 **v1.2-diagnostico** identificado por Wi-Fi en [ENS-0026](ensayos/ENS-0026_diagnostico_bloqueo_marchas.md). Mantener separado del cambio de registrador. Las tareas antiguas que dicen «sin identificar» describen su corte histórico.
+
+- [x] Revisar arquitectura/matemática DIF/BLQ/ESC y reversa; registrar ruido declarado. [ENS-0025](ensayos/ENS-0025_revision_diferencial_y_reversa.md): diagnóstico PC y [plan presentado](REVISION_DIFERENCIAL_Y_REVERSA_2026-10-17.md), sin modificar firmware.
+- [ ] **Prioridad 17-10:** revisar el plan con Armando antes de implementar, según su última indicación. Identificar ESP32/configuración Kelly/PPR, corregir supervisión común R y rampa, verificar modos; [PROB-0014](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0014_reversa_y_arquitectura_diferencial.md). Los 50 km/h son indicación de pantalla en banco elevado en todos los modos, no velocidad de desplazamiento. Esta indicación prevalece sobre autorizaciones históricas para continuar código.
+- [ ] Caracterizar EMI de dirección y otros sensores con osciloscopio; [PROB-0015](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0015_ruido_electromagnetico_sensores.md). Conservar señal bruta, alimentación/referencia, espectro y condiciones; dimensionar filtro después de medir y verificar retardo. Fuente/frecuencias/amplitudes pendientes, sin filtro implementado.
+
+- [x] Instalar y validar manualmente navegación/temas de la pantalla: Armando confirma funcionamiento y prefiere oscuro. **Dev8-ui instalada**, SOC/temperatura provisionales visibles en Resumen/BMS; [ENS-0024](ensayos/ENS-0024_bms_visible_diagnostico.md). Respaldo y cuatro bugs corregidos en ENS-0023.
+- [ ] Medir carga/latencia GUI y contrastar SOC/temperatura/protocolo con el BMS. La aceptación manual no sustituye estas medidas. Oscuro fijo solicitado el 22-10; retirar claro junto con el acceso global SD según el plan pendiente.
+
+- [ ] Completar aceptación de pedal y medir centro/topes/retorno de dirección ([PROB-0012](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0012_pedal_reposo_fuera_de_pedal_libre.md), ENS-0026/0027). Medición y corrección dev9 ya realizadas; dev10 y rango de dirección pendientes de banco.
+- [ ] Probar SD con/sin microSD sobre versión identificada y resolver detección/latencia del driver ([PROB-0013](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0013_sd_sin_tarjeta_bloqueo_y_error_invisible.md)). Dev9 última instalada, dev10 local; reintentos/pausa de ENS-0021 y rechazo de CSV parcial de ENS-0023 conservados. Memoria declarada disponible el 22-10; escritura real todavía sin acreditar.
 
 - [ ] **Esta semana (12–18 de octubre):** preparar y realizar [ENS-0014 · carga completa 16S](ensayos/ENS-0014_carga_completa_bateria_16s.md), solicitado por Armando el 13-10. Identificar equipos y criterio de terminación; conservar 16 tensiones, corriente final, temperatura y balanceo para verificar final de carga y referencia del SOC. Día/hora pendientes; no marcar 100 % alcanzado hasta disponer de evidencia.
 
@@ -45,7 +67,9 @@ resumen: Tareas próximas y completadas del proyecto del kart.
 - [ ] Evaluar ideas de ajuste a partir de necesidades y ensayos. Armando aclara que «autofrenado» era regeneración para recargar batería, sin saber si el Kelly lo permite: comprobar modelo/configuración/controlador y batería/BMS antes de decidir. Las ideas aún no son funciones comprometidas; priorizar diagnóstico/registro.
 - [ ] Diseñar las pantallas finales sin contenido en las filas 0–47 (daño físico medido en 0–43 el 15-10); táctil por zonas sin medir. [PROB-0004](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0004_franja_blanca_pantalla_frontal.md).
 - [ ] Estudio solicitado el 07-10: comenzar por historia y mapa físico de la [guía](GUIA_DE_ESTUDIO_DEL_KART.md); registrar aprendizaje y respuestas en la [sesión](SESION_ESTUDIO_2026-10-07.md). No marcar como completada lectura integral ni aprendizaje del usuario.
-- [ ] Concretar mejora de pantalla: prioridades de Armando, capturas actuales, legibilidad, avisos de datos antiguos y estado de SD; propuesta en [ideas](IDEAS.md).
+- [x] Describir el programa frontal y concretar propuestas visuales de desarrollo solicitadas el 15-10: [análisis, pendientes y dos vistas navegables](PROPUESTA_PANTALLA_FRONTAL_2026-10-15.md). Diseño aceptado posteriormente por Armando e implementado en ENS-0022; maqueta no equivale a validación física.
+- [x] Corregir cuatro fallos reproducidos e instalar dashboard **dev7-ui** en la F746: respaldo doble, verificación y arranque real. [ENS-0023](ensayos/ENS-0023_bugs_e_instalacion_dashboard.md). Validación manual y pruebas integradas pendientes arriba.
+- [x] Implementar la ampliación de pantalla de desarrollo aprobada, con temas claro/oscuro y siete páginas. [ENS-0022](ensayos/ENS-0022_dashboard_frontal_claro_oscuro.md): TouchGFX dev6-ui, causa/aviso separados, condiciones D/R, edades/validez Hall, pruebas y build locales terminados. Instalación, consumo/latencias y LCD/táctil pendientes en tarea superior. Pantallas finales siguen aplazadas.
 - [ ] Caracterizar el apagado y energía residual declarados el 07-10: síntoma, tiempo, recuperación, USB y rutas de alimentación; preparar ensayo con el orientador según [PROB-0003](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0003_energia_residual_al_abrir_contactor.md) antes de diseñar la nueva PCB.
 
 - [ ] Compra, actualización 01-10: usuario confirma 16 celdas funcionales y preferencia Leiria. Verificar en SmartBMS configuración actual 16S (tabla histórica es 15S); contrastar candidato 58,4 V/10 A y adaptar conector conservando bloqueo de marcha. Ver [investigación](COMPRA_CARGADOR_Y_NEUMATICOS.md).

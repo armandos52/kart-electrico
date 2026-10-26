@@ -1,0 +1,103 @@
+--- antes/tests/dashboard_test.cpp
++++ despues/tests/dashboard_test.cpp
+@@ -59,6 +59,7 @@
+         for(char c:o.text){if(c=='"'||c=='\\')fputc('\\',file);fputc(c,file);}fprintf(file,"\"}");
+     }fprintf(file,"]}\n");
+ }
++#include "bms_dashboard_cases.h"
+ int main(int argc,char** argv){
+     KartDashboardState st;KartDashboard_Init(&st);
+     check(!st.light && st.page==KART_PAGE_HOME,"Arranque oscuro en resumen");
+@@ -98,6 +99,7 @@
+             if(output)save_json(output,scenario,theme,page,wheel);
+         }
+     }
++    test_bms_dashboard(output);
+     if(output)fclose(output);
+     st.page=KART_PAGE_HOME;render(st,sample(1));
+     check(contains("falta estado 0x124") && !contains("Tracción permitida"),"Feedback legado no inventa estado aplicado");
+--- antes/Core/Inc/kart_frontend.h
++++ despues/Core/Inc/kart_frontend.h
+@@ -5,10 +5,11 @@
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+-#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev7-ui"
++#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev8-ui"
+ #define KART_PEDAL_FREE_MAX 40u
+ #define KART_FEEDBACK_MAX_AGE_MS 500u
+ #define KART_STATUS_MAX_AGE_MS 300u
++#define KART_BMS_MAX_AGE_MS 2000u
+ enum { KART_SD_STOPPED=0,KART_SD_RECORDING=1,KART_SD_ERROR=2,KART_SD_OPENING=3 };
+ // Fuera del rango FRESULT: archivo existente incompleto o esquema no compatible.
+ #define KART_SD_CSV_INVALID 128u
+--- antes/Core/Src/kart_dashboard.c
++++ despues/Core/Src/kart_dashboard.c
+@@ -59,6 +59,20 @@
+ static const char* sd_name(const KartUiSnapshot* s){return s->sd_state==KART_SD_RECORDING?"Grabando":s->sd_state==KART_SD_ERROR?"Error":s->sd_state==KART_SD_OPENING?"Abriendo":"Pausa";}
+ static const char* gear_name(unsigned gear){return gear==1?"D":gear==2?"R":gear==0?"N":"--";}
+ static int state_ok(const KartUiSnapshot* s){return s->feedback_fresh&&s->status_seen&&s->status_fresh;}
++// Interpretacion historica solo para diagnostico: no modifica flags ni control.
++// Comprobar el entero CAN ANTES de dividir para no aceptar 100.01 % o 150.1 C.
++static int bms_soc_value(const KartUiSnapshot* s,int* value){
++    if(s->bms_soc_age>KART_BMS_MAX_AGE_MS)return 0;
++    if(s->soc_valid){if(s->soc_pct>100)return 0;*value=s->soc_pct;}
++    else {const unsigned raw=((unsigned)s->bms355[5]<<8)|s->bms355[4];if(raw>10000)return 0;*value=(int)(raw/100);}
++    return 1;
++}
++static int bms_temp_value(const KartUiSnapshot* s,int* value){
++    if(s->bms_temp_age>KART_BMS_MAX_AGE_MS)return 0;
++    if(s->temp_valid){if(s->battery_temp_c<-50||s->battery_temp_c>150)return 0;*value=s->battery_temp_c;}
++    else {const int raw=(int16_t)(((uint16_t)s->bms356[5]<<8)|s->bms356[4]);if(raw<-500||raw>1500)return 0;*value=raw/10;}
++    return 1;
++}
+ static void reason(const KartUiSnapshot* s,char* main,char* detail){
+     static const char* const reasons[]={"Tracción permitida","Sin mando CAN","Mando CAN caducado","Mando inválido","START apagado","Preparando relés","Cargador conectado","Rearme pendiente","Freno activo","Pedal libre","Neutro","Parar para cambiar sentido","Parar en N para cambiar modo","Velocidad inválida","Revisar Hall","MPU no disponible","Entradas frontales inválidas","Límite R activo","Fallo de salida","Fallo CAN","Configuración inválida"};
+     if(!s->feedback_fresh)snprintf(main,64,"Sin datos CAN recientes");
+@@ -90,7 +104,13 @@
+     snprintf(value,sizeof(value),"START %s (pet.)",s->start?"ON":"OFF");txt(p,340,116,132,KART_FONT_SMALL,c->text,value);
+     snprintf(value,sizeof(value),"Freno %s",s->brake?"SÍ":"NO");txt(p,340,141,132,KART_FONT_BODY,c->text,value);
+     snprintf(value,sizeof(value),"SD %s",sd_name(s));txt(p,340,167,132,KART_FONT_BODY,c->text,value);
+-    txt(p,340,195,132,KART_FONT_SMALL,c->muted,s->soc_valid&&s->temp_valid?"BMS válido":"BMS sin validar");
++    int soc=0,temp=0;const int has_soc=bms_soc_value(s,&soc),has_temp=bms_temp_value(s,&temp);
++    const int provisional=(has_soc&&!s->soc_valid)||(has_temp&&!s->temp_valid);
++    char charge[12],heat[12];
++    if(has_soc)snprintf(charge,sizeof(charge),"%d%%",soc);else snprintf(charge,sizeof(charge),"--%%");
++    if(has_temp)snprintf(heat,sizeof(heat),"%d°C",temp);else snprintf(heat,sizeof(heat),"--°C");
++    snprintf(value,sizeof(value),"Bat%s %s  %s",provisional?"*":"",charge,heat);txt(p,340,190,132,KART_FONT_SMALL,c->text,value);
++    txt(p,340,208,132,KART_FONT_SMALL,c->muted,provisional?"*BMS por validar":has_soc&&has_temp?"BMS validado":"BMS sin dato válido");
+ }
+ static void draw_inputs(const KartUiSnapshot* s,const KartDashboardPainter* p,const Palette* c){
+     char v[64];
+@@ -170,13 +190,15 @@
+ }
+ static void draw_bms(const KartUiSnapshot* s,const KartDashboardPainter* p,const Palette* c){
+     char v[96],age[24],hex[24];
+-    if(s->soc_valid)snprintf(v,sizeof(v),"SOC %u %%",s->soc_pct);else snprintf(v,sizeof(v),"SOC -- %%");txt(p,10,112,225,KART_FONT_VALUE,c->text,v);
+-    if(s->temp_valid)snprintf(v,sizeof(v),"%d °C",s->battery_temp_c);else snprintf(v,sizeof(v),"-- °C");txt(p,250,112,220,KART_FONT_VALUE,c->text,v);
++    int soc=0,temp=0;const int has_soc=bms_soc_value(s,&soc),has_temp=bms_temp_value(s,&temp);
++    const int provisional=(has_soc&&!s->soc_valid)||(has_temp&&!s->temp_valid);
++    if(has_soc)snprintf(v,sizeof(v),"SOC%s %d %%",s->soc_valid?"":"*",soc);else snprintf(v,sizeof(v),"SOC -- %%");txt(p,10,112,225,KART_FONT_VALUE,c->text,v);
++    if(has_temp)snprintf(v,sizeof(v),"%d °C%s",temp,s->temp_valid?"":"*");else snprintf(v,sizeof(v),"-- °C");txt(p,250,112,220,KART_FONT_VALUE,c->text,v);
+     age_string(age,sizeof(age),s->bms_soc_age);for(unsigned i=0;i<8;i++)snprintf(hex+2*i,3,"%02X",s->bms355[i]);
+     snprintf(v,sizeof(v),"0x355  %s  · %s",hex,age);txt(p,10,146,460,KART_FONT_SMALL,c->muted,v);
+     age_string(age,sizeof(age),s->bms_temp_age);for(unsigned i=0;i<8;i++)snprintf(hex+2*i,3,"%02X",s->bms356[i]);
+     snprintf(v,sizeof(v),"0x356  %s  · %s",hex,age);txt(p,10,167,460,KART_FONT_SMALL,c->muted,v);
+-    txt(p,10,192,460,KART_FONT_BODY,c->text,s->soc_valid&&s->temp_valid?"Datos recibidos y validados":"Protocolo BMS pendiente de validar");
++    txt(p,10,192,460,KART_FONT_BODY,c->text,provisional?"* Lectura provisional; formato por confirmar":has_soc&&has_temp?"Datos recibidos y validados":"Sin datos recientes o dentro de rango");
+     txt(p,10,212,460,KART_FONT_SMALL,c->muted,"Celdas individuales, tensión y corriente: no disponibles");
+ }
+ void KartDashboard_Draw(const KartDashboardState* st,const KartUiSnapshot* s,const KartDashboardPainter* p){
+--- antes/Core/Src/kart_frontend.c
++++ despues/Core/Src/kart_frontend.c
+@@ -15,8 +15,8 @@
+ #define ADC_MARGIN 100u
+ #define FEEDBACK_MAX_AGE KART_FEEDBACK_MAX_AGE_MS
+ #define STATUS_MAX_AGE KART_STATUS_MAX_AGE_MS
+-#define BMS_MAX_AGE 2000u
+-// Hasta verificar protocolo del BMS instalado, conservar bytes y ocultar valores no acreditados.
++#define BMS_MAX_AGE KART_BMS_MAX_AGE_MS
++// Flags sin confirmar hasta contrastar el BMS; el dashboard distingue lectura provisional.
+ #define BMS_FORMAT_CONFIRMED 0
+ // Pulsador momentaneo activo alto, confirmado por Armando (13-10-2026).
+ // Valores de desarrollo: contrastar rebotes y latencias reales en banco.

@@ -1,0 +1,178 @@
+{
+  "ensayo": "ENS-0021",
+  "generado_local": "2026-10-15T21:59:43.800082+01:00",
+  "archivos": {
+    ".gitignore": {
+      "bytes": 22,
+      "sha256": "5468982bf408588f3d325590e4bbac304b181ba6ef860299ab040fcd306b0a8d"
+    },
+    "antes/Core/Inc/kart_frontend.h": {
+      "bytes": 1299,
+      "sha256": "6fa02b99ecde70c354cbd93d7a74b61506e49d7043b14145c52fdfaba1fc5ab7"
+    },
+    "antes/Core/Src/kart_frontend.c": {
+      "bytes": 17537,
+      "sha256": "4c352bc56a37bde849d071a6184fe0d7b73fcf14f3d6c377ce453d21ddd30a84"
+    },
+    "antes/tests/frontend_test.cpp": {
+      "bytes": 11811,
+      "sha256": "a7d6338f61f560b4b76a03e7d3ae68f744fbebaf2cb0cbfda09b88ae4297e158"
+    },
+    "antes/tests/stubs/fatfs.h": {
+      "bytes": 920,
+      "sha256": "02968e08d899bb4e4033f7c6507fa0460c05092fb6a8a5fa55818621bf5fc3a2"
+    },
+    "backend.obj": {
+      "bytes": 18364,
+      "sha256": "f5d09dddfbc24792c7e9d5f8e11747146621e9e408449eccd4817efa31f5838f"
+    },
+    "banco_host.cmd": {
+      "bytes": 639,
+      "sha256": "da3b8ac741e17022474676c4201adab9392f437baba4a87c676e07422dcccd8c"
+    },
+    "banco_host.cpp": {
+      "bytes": 668,
+      "sha256": "8d5118db338b84d3186126c8de4e97468a54bec45767e9f49d336457933776a3"
+    },
+    "banco_host.exe": {
+      "bytes": 230912,
+      "sha256": "68d8860abf5d352f30e1c8b9980de0d3cb5ac5ec02c2f1c1f9d4fce927d21f4d"
+    },
+    "banco_host.obj": {
+      "bytes": 4079,
+      "sha256": "72ec791b95c00dd50eb5011719e2f14c66abcdf2cdaf3a4018d2228ea4f69fa7"
+    },
+    "base_commit.txt": {
+      "bytes": 42,
+      "sha256": "f1eb5875a9121da0675e9f135bd3c441efd78d2e1779f07c4aec4709f5617720"
+    },
+    "bench_logic.obj": {
+      "bytes": 165872,
+      "sha256": "f0f44b0db27c0e2de7c82f309279c18f8de0392072c4b74d1dec39fc8b43566e"
+    },
+    "binarios/f411_0.4-dev_core-dev5.bin": {
+      "bytes": 62880,
+      "sha256": "4e91d20886f6db9ec424969b9ced2908f5d85bf190a4336b7d5497b19573df9e"
+    },
+    "binarios/f411_0.4-dev_core-dev5.elf": {
+      "bytes": 116980,
+      "sha256": "2cbc0b18fa2b5024a299b3e24574dd781fb74e87a6f8aec9e6bd7be162afbf7b"
+    },
+    "binarios/firmware.map": {
+      "bytes": 3638821,
+      "sha256": "f08837d9ea610abb513788abea828877318f5067abf8205ba186fdd0bb94cf4c"
+    },
+    "binarios/hashes.json": {
+      "bytes": 19319,
+      "sha256": "a8c1056d260c2e0b8bae01e2da14a7cab17025af4d2f1df50b4338054122b5e6"
+    },
+    "binarios/stm32_frontal-v1.3-dev5.elf": {
+      "bytes": 10098104,
+      "sha256": "4067a2879ad787ecc7c5b01ceedc3c62b55d08bc58283a5544398320fbf93c43"
+    },
+    "binarios/stm32_frontal-v1.3-dev5.hex": {
+      "bytes": 18566942,
+      "sha256": "e09430df63d3e7676ba2e3d2f178836b1d38d7fe9feda0ad519939a37cbbb1cf"
+    },
+    "cambios.patch": {
+      "bytes": 8092,
+      "sha256": "4ce9af15a766a53fb1426ce6f88239aafe5191d4bfaf493f61e200c86583ebd0"
+    },
+    "conservar.py": {
+      "bytes": 3120,
+      "sha256": "43ff6de3000d80f52b71cbf22a2543ab2c5162785843334029eb7b5ace2de02f"
+    },
+    "continuidad.json": {
+      "bytes": 795,
+      "sha256": "f562e19cc22c4738a61904b0195f10336b28abc9c53ca28c94767c0dbc8edcbc"
+    },
+    "despues/Core/Inc/kart_frontend.h": {
+      "bytes": 1299,
+      "sha256": "56f1dac97e2e2df12dfaaa63c7582a4987a21a807a94db41e2682fa927dde7b4"
+    },
+    "despues/Core/Src/kart_display.c": {
+      "bytes": 2734,
+      "sha256": "d82cdc1feb1923a43f1afe38f7fa3f66e1ba210dd19354c5c97749a761f3cd4d"
+    },
+    "despues/Core/Src/kart_frontend.c": {
+      "bytes": 18259,
+      "sha256": "c8f08c6a64b0298a75cfeec3ca4750aebb0c2d8df821b126a4d2364a0c12a854"
+    },
+    "despues/tests/compilar.cmd": {
+      "bytes": 406,
+      "sha256": "e94725019f1a30ab2390a507051ee4164762ec1e4cd3c1a0d65be55d99924a05"
+    },
+    "despues/tests/display_cases.h": {
+      "bytes": 5091,
+      "sha256": "deba3629061603daa9fe367fd05734431efc562f57ff17690860d8581eea44ee"
+    },
+    "despues/tests/frontend_test.cpp": {
+      "bytes": 11983,
+      "sha256": "2bbbb07bacde8d9864d47be3c769c763ce38085bd0d12f9174da237a35bd516b"
+    },
+    "despues/tests/sd_cases.h": {
+      "bytes": 4400,
+      "sha256": "0fae1a45ec406a98ef3ce2bb5bb8cefdb4775703ccf425b845c14a68e15f8f85"
+    },
+    "despues/tests/stubs/fatfs.h": {
+      "bytes": 1290,
+      "sha256": "9e0cb89f17a9e75aa1c5ffbb574747798c86b56ef1abcbfc588b2af797f51914"
+    },
+    "despues/tests/stubs/main.h": {
+      "bytes": 3964,
+      "sha256": "79bb935a5d536495e13604aa07f27388a32a884b6a27488bbd0d453afbaa6125"
+    },
+    "despues/tools/build.py": {
+      "bytes": 5528,
+      "sha256": "efe7d4a841348aa14b2ae05254bfa678024e76bc1eaf051c99f27918dd884582"
+    },
+    "estado_inicial.txt": {
+      "bytes": 279,
+      "sha256": "ca989d876f9b1d401184b0215d501ceb8848253eb875d7b2a18878f26591daa0"
+    },
+    "logs/antes.txt": {
+      "bytes": 8475,
+      "sha256": "9d5edb3e39b63e1c98eac81e07fac8b03969caeda1ebc190760bb2a3a16eca8e"
+    },
+    "logs/antes_casos_fijos.txt": {
+      "bytes": 8475,
+      "sha256": "9d5edb3e39b63e1c98eac81e07fac8b03969caeda1ebc190760bb2a3a16eca8e"
+    },
+    "logs/banco_host.txt": {
+      "bytes": 13664,
+      "sha256": "a7731241d7cc53a737635ba7333a42fde4298fa05134820101f21c55dca81ef1"
+    },
+    "logs/banco_host_inicial.txt": {
+      "bytes": 13871,
+      "sha256": "3ded66b3545e210e6f5a1c2b0da4c8243c1a866dc63e32b158972b16a5181872"
+    },
+    "logs/build_f411.txt": {
+      "bytes": 1403,
+      "sha256": "4e6e09bb39ebe2b5156c44944d6d33b42749ff276808e5e6e291236a123ab40b"
+    },
+    "logs/build_f411_inicial.txt": {
+      "bytes": 1549,
+      "sha256": "2714e2f899e649c1adab611fefee27841f5ee6d76210f3db0f18f59d2416e743"
+    },
+    "logs/build_f746.txt": {
+      "bytes": 452,
+      "sha256": "fb809d7ca794a00a7e384efe1d873192a8b626e8340dad95e40793498c43c34d"
+    },
+    "logs/build_f746_inicial.txt": {
+      "bytes": 62623,
+      "sha256": "8ca427cf1ca19aa101b58afd036a3628823aafdbd5757dcbd27827942bc7403d"
+    },
+    "logs/despues.txt": {
+      "bytes": 8474,
+      "sha256": "411f8d201b63bbbb576651f2e2dfea9ad9dcb69f99ca98351cbaba950b7ac7d1"
+    },
+    "logs/despues_inicial.txt": {
+      "bytes": 8681,
+      "sha256": "14b3b44fa1b97606ce349b7899f7d55c90e3a3566696bd1137665568f994fba7"
+    },
+    "README.md": {
+      "bytes": 2168,
+      "sha256": "5154cea7150042d58b34a0ff63dc1d2ff05dc2bb4a3e4c8a7ea8d75b8fd0b088"
+    }
+  }
+}

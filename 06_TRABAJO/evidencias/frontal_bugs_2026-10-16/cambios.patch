@@ -1,0 +1,265 @@
+--- antes/Core/Inc/kart_dashboard.h
++++ despues/Core/Inc/kart_dashboard.h
+@@ -16,7 +16,8 @@
+ } KartDashboardPainter;
+ void KartDashboard_Init(KartDashboardState* state);
+ uint8_t KartDashboard_Touch(KartDashboardState* state,int event,int x,int y);
+-// event: 0 presión, 1 liberación, 2 cancelar/arrastrar. Efectos solo al liberar en la misma zona.
++// event: 0 presión, 1 liberación, 2 cancelar, 3 movimiento.
++// Efectos solo al liberar en la misma zona; tolerancia de 8 px desde la presión inicial.
+ void KartDashboard_Draw(const KartDashboardState* state,const KartUiSnapshot* snapshot,const KartDashboardPainter* painter);
+ const char* KartDashboard_PageName(uint8_t page);
+ #ifdef __cplusplus
+--- antes/Core/Inc/kart_frontend.h
++++ despues/Core/Inc/kart_frontend.h
+@@ -5,11 +5,13 @@
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+-#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev6-ui"
++#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev7-ui"
+ #define KART_PEDAL_FREE_MAX 40u
+ #define KART_FEEDBACK_MAX_AGE_MS 500u
+ #define KART_STATUS_MAX_AGE_MS 300u
+ enum { KART_SD_STOPPED=0,KART_SD_RECORDING=1,KART_SD_ERROR=2,KART_SD_OPENING=3 };
++// Fuera del rango FRESULT: archivo existente incompleto o esquema no compatible.
++#define KART_SD_CSV_INVALID 128u
+ enum { KART_UI_OK=0,KART_UI_REQUIRE_N=1,KART_UI_REQUIRE_STOP=2,KART_UI_CAN_OLD=3,KART_UI_INPUT_BAD=4 };
+ typedef struct {
+     uint32_t tick,can_age,status_age,bms_soc_age,bms_temp_age,can_tx_errors,can_rx_errors,adc_errors,sd_rows;
+--- antes/Core/Src/kart_dashboard.c
++++ despues/Core/Src/kart_dashboard.c
+@@ -27,6 +27,11 @@
+ void KartDashboard_Init(KartDashboardState* st){memset(st,0,sizeof(*st));st->pressed=-1;st->wheel=2;}
+ uint8_t KartDashboard_Touch(KartDashboardState* st,int event,int x,int y){
+     if(event==0){st->pressed=(int16_t)hit(st,x,y);st->press_x=(int16_t)x;st->press_y=(int16_t)y;return KART_ACTION_NONE;}
++    // Comparar con el origen, no con el movimiento anterior: el desplazamiento se acumula.
++    if(event==3 || event==1){
++        if(x<st->press_x-8 || x>st->press_x+8 || y<st->press_y-8 || y>st->press_y+8 || hit(st,x,y)!=st->pressed)st->pressed=-1;
++        if(event==3)return KART_ACTION_NONE;
++    }
+     if(event!=1){st->pressed=-1;return KART_ACTION_NONE;}
+     const int action=st->pressed;st->pressed=-1;
+     if(action<0||action!=hit(st,x,y))return KART_ACTION_NONE;
+@@ -158,10 +163,10 @@
+     char v[64];txt(p,10,111,310,KART_FONT_SMALL,c->muted,"Registro SD / kart_v13.csv");
+     txt(p,10,130,310,KART_FONT_VALUE,c->text,sd_name(s));
+     snprintf(v,sizeof(v),"Petición: %s · filas: %lu",s->sd_requested?"grabar":"pausa",(unsigned long)s->sd_rows);txt(p,10,160,315,KART_FONT_BODY,c->text,v);
+-    snprintf(v,sizeof(v),"Último error: %u%s",s->sd_error,s->sd_error==1?" · error de disco":"");txt(p,10,182,315,KART_FONT_SMALL,c->text,v);
++    snprintf(v,sizeof(v),"Último error: %u%s",s->sd_error,s->sd_error==KART_SD_CSV_INVALID?" · revisar CSV":s->sd_error==1?" · error de disco":"");txt(p,10,182,315,KART_FONT_SMALL,c->text,v);
+     button(p,c,338,116,132,48,s->sd_requested?"Pedir pausa":"Grabar SD",s->sd_requested);
+     txt(p,338,175,132,KART_FONT_SMALL,c->muted,"Petición local");
+-    txt(p,10,208,460,KART_FONT_SMALL,c->muted,s->sd_state==KART_SD_OPENING?"Apertura pendiente; pausa atendida al retornar del driver":"Estado real de registro; tarjeta ausente no confirmada");
++    txt(p,10,208,460,KART_FONT_SMALL,c->muted,s->sd_error==KART_SD_CSV_INVALID?"CSV no compatible: conservar archivo y usar uno nuevo":s->sd_state==KART_SD_OPENING?"Apertura pendiente; pausa atendida al retornar del driver":"Estado real de registro; tarjeta ausente no confirmada");
+ }
+ static void draw_bms(const KartUiSnapshot* s,const KartDashboardPainter* p,const Palette* c){
+     char v[96],age[24],hex[24];
+--- antes/Core/Src/kart_frontend.c
++++ despues/Core/Src/kart_frontend.c
+@@ -98,7 +98,9 @@
+     for(unsigned i=0;i<3 && HAL_CAN_GetRxFifoFillLevel(hcan,CAN_RX_FIFO0)>0;i++) {
+         CAN_RxHeaderTypeDef header={0};uint8_t bytes[8]={0};
+         if(HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&header,bytes)!=HAL_OK) {received.rx_errors++;break;}
+-        if(header.IDE!=CAN_ID_STD || header.RTR!=CAN_RTR_DATA || header.DLC!=8) {received.rx_errors++;continue;}
++        // El filtro físico recibe todo el bus. Solo validar el formato de los IDs consumidos.
++        if(header.IDE!=CAN_ID_STD || (header.StdId!=KART_CAN_FEEDBACK && header.StdId!=KART_CAN_STATUS && header.StdId!=0x355 && header.StdId!=0x356))continue;
++        if(header.RTR!=CAN_RTR_DATA || header.DLC!=8) {received.rx_errors++;continue;}
+         const uint32_t now=HAL_GetTick();
+         if(header.StdId==KART_CAN_FEEDBACK) {
+             const int16_t speed=(int16_t)kart_u16be(bytes),left=(int16_t)kart_u16be(bytes+2),right=(int16_t)kart_u16be(bytes+4);
+@@ -216,10 +218,12 @@
+     key=lock_data();
+     const uint32_t tick_l=hall_l_tick,tick_r=hall_r_tick,period_l=hall_l_period,period_r=hall_r_period;
+     const uint8_t seen_l=hall_l_seen,seen_r=hall_r_seen;
++    // Un EXTI puede haber llegado después de `now`, durante la transmisión CAN.
++    const uint32_t hall_now=HAL_GetTick();
+     unlock_data(key);
+-    next.front_left_age=age(seen_l,now,tick_l);next.front_right_age=age(seen_r,now,tick_r);
+-    if(seen_l && period_l && now-tick_l<=500){uint32_t rpm=(uint32_t)((uint64_t)SystemCoreClock*15u/period_l);next.rpm_front_left=rpm<=2000?(int16_t)rpm:0;next.front_left_valid=rpm<=2000;}
+-    if(seen_r && period_r && now-tick_r<=500){uint32_t rpm=(uint32_t)((uint64_t)SystemCoreClock*15u/period_r);next.rpm_front_right=rpm<=2000?(int16_t)rpm:0;next.front_right_valid=rpm<=2000;}
++    next.front_left_age=age(seen_l,hall_now,tick_l);next.front_right_age=age(seen_r,hall_now,tick_r);
++    if(seen_l && period_l && next.front_left_age<=500){uint32_t rpm=(uint32_t)((uint64_t)SystemCoreClock*15u/period_l);next.rpm_front_left=rpm<=2000?(int16_t)rpm:0;next.front_left_valid=rpm<=2000;}
++    if(seen_r && period_r && next.front_right_age<=500){uint32_t rpm=(uint32_t)((uint64_t)SystemCoreClock*15u/period_r);next.rpm_front_right=rpm<=2000?(int16_t)rpm:0;next.front_right_valid=rpm<=2000;}
+     next.bms_soc_age=age(rx.soc_seen,now,rx.soc_tick);next.bms_temp_age=age(rx.temp_seen,now,rx.temp_tick);
+     memcpy(next.bms355,rx.soc,8);memcpy(next.bms356,rx.temp,8);
+     const uint16_t soc=(uint16_t)(((uint16_t)rx.soc[5]<<8)|rx.soc[4]);
+@@ -253,6 +257,34 @@
+     if(result!=FR_OK || actual!=expected) {sd_publish(KART_SD_ERROR,(uint8_t)(result!=FR_OK?result:FR_DISK_ERR));return 0;}
+     return 1;
+ }
++#define KART_CSV_COLUMNS "Firmware,Tick_ms,AccelADC,SteerADC,AccelCAN,SteerCAN,InputFlags,Brake,Start,GearReq,ModeReq,ModeRecv,ModeApplied,Inhibit,BackendFlags,Vel_kmh,RpmFL,RpmFR,RpmRL,RpmRR,Yaw_deci_dps,CanAge_ms,StatusAge_ms,SOC_valid,SOC_pct,Temp_valid,Temp_C,BMS355Age_ms,BMS356Age_ms,BMS355_hex,BMS356_hex,CanTxErr,CanRxErr,AdcErr\r\n"
++static const char csv_columns[]=KART_CSV_COLUMNS;
++static uint8_t sd_csv_error(uint8_t error){sd_publish(KART_SD_ERROR,error);return 0;}
++static uint8_t sd_validate_csv(void){
++    // No reparar ni truncar datos del ensayo: conservar el archivo si quedó incompleto.
++    const FSIZE_t size=f_size(&sd_file);
++    if(size==0)return 1;
++    char prefix[512];UINT count=0;
++    FRESULT result=f_lseek(&sd_file,0);
++    if(result!=FR_OK)return sd_csv_error((uint8_t)result);
++    result=f_read(&sd_file,prefix,sizeof(prefix)-1,&count);
++    if(result!=FR_OK)return sd_csv_error((uint8_t)result);
++    prefix[count]=0;
++    const char* end=(const char*)memchr(prefix,'\n',count);
++    const char marker[]=",schema=2,BMS_format_confirmed=0\r\n";
++    if(!end || strncmp(prefix,"# firmware=stm32_frontal-v",sizeof("# firmware=stm32_frontal-v")-1)!=0 ||
++       end+1-prefix<(int)(sizeof(marker)-1) ||
++       memcmp(end+1-(sizeof(marker)-1),marker,sizeof(marker)-1)!=0 ||
++       (size_t)(prefix+count-(end+1))<sizeof(csv_columns)-1 ||
++       memcmp(end+1,csv_columns,sizeof(csv_columns)-1)!=0)return sd_csv_error(KART_SD_CSV_INVALID);
++    result=f_lseek(&sd_file,size-1);
++    if(result!=FR_OK)return sd_csv_error((uint8_t)result);
++    char last=0;result=f_read(&sd_file,&last,1,&count);
++    if(result!=FR_OK)return sd_csv_error((uint8_t)result);
++    if(count!=1 || last!='\n')return sd_csv_error(KART_SD_CSV_INVALID);
++    result=f_lseek(&sd_file,size);
++    return result==FR_OK?1:sd_csv_error((uint8_t)result);
++}
+ void Kart_SdTick(void) {
+     uint32_t now=HAL_GetTick();
+     if(!record_request) {sd_pause();return;}
+@@ -263,11 +295,13 @@
+         FRESULT result=f_mount(&sd_fs,"",1);
+         if(result!=FR_OK) {f_mount(NULL,"",0);sd_publish(KART_SD_ERROR,(uint8_t)result);return;}
+         if(!record_request) {sd_close();sd_pause();return;}
+-        result=f_open(&sd_file,"kart_v13.csv",FA_OPEN_APPEND|FA_WRITE);
++        result=f_open(&sd_file,"kart_v13.csv",FA_OPEN_APPEND|FA_WRITE|FA_READ);
+         if(result!=FR_OK) {f_mount(NULL,"",0);sd_publish(KART_SD_ERROR,(uint8_t)result);return;}
+         sd_open=1;
+         if(!record_request) {sd_pause();return;}
+-        if(f_size(&sd_file)==0 && !sd_write("# firmware=" KART_FRONTEND_VERSION ",schema=2,BMS_format_confirmed=0\r\nFirmware,Tick_ms,AccelADC,SteerADC,AccelCAN,SteerCAN,InputFlags,Brake,Start,GearReq,ModeReq,ModeRecv,ModeApplied,Inhibit,BackendFlags,Vel_kmh,RpmFL,RpmFR,RpmRL,RpmRR,Yaw_deci_dps,CanAge_ms,StatusAge_ms,SOC_valid,SOC_pct,Temp_valid,Temp_C,BMS355Age_ms,BMS356Age_ms,BMS355_hex,BMS356_hex,CanTxErr,CanRxErr,AdcErr\r\n")) {sd_close();return;}
++        if(!sd_validate_csv()){sd_close();return;}
++        if(!record_request) {sd_pause();return;}
++        if(f_size(&sd_file)==0 && !sd_write("# firmware=" KART_FRONTEND_VERSION ",schema=2,BMS_format_confirmed=0\r\n" KART_CSV_COLUMNS)) {sd_close();return;}
+         if(!record_request) {sd_pause();return;}
+         now=HAL_GetTick();
+         sd_publish(KART_SD_RECORDING,0);sd_last_log=now-200;sd_last_sync=now;
+--- antes/tests/dashboard_test.cpp
++++ despues/tests/dashboard_test.cpp
+@@ -73,6 +73,16 @@
+     KartDashboard_Touch(&st,0,200,130);
+     check(KartDashboard_Touch(&st,1,400,130)==0,"Salir del boton cancela modo");
+     check(tap(st,200,130)==KART_ACTION_MODE && KartDashboard_Touch(&st,1,200,130)==0,"Un toque completo produce una sola solicitud de modo");
++    KartDashboard_Touch(&st,0,200,130);KartDashboard_Touch(&st,3,201,131);
++    check(KartDashboard_Touch(&st,1,201,131)==KART_ACTION_MODE,"B01 oscilacion de un pixel no pierde el toque");
++    KartDashboard_Touch(&st,0,200,130);KartDashboard_Touch(&st,3,208,138);
++    check(KartDashboard_Touch(&st,1,208,138)==KART_ACTION_MODE,"B01 tolerancia de ocho pixeles en cada eje");
++    KartDashboard_Touch(&st,0,200,130);
++    check(KartDashboard_Touch(&st,1,220,130)==0,"B01 desplazamiento grande sin muestras intermedias tampoco activa");
++    KartDashboard_Touch(&st,0,200,130);KartDashboard_Touch(&st,3,204,130);KartDashboard_Touch(&st,3,209,130);KartDashboard_Touch(&st,3,200,130);
++    check(KartDashboard_Touch(&st,1,200,130)==0,"B01 desplazamiento acumulado cancela aunque regrese al origen");
++    KartDashboard_Touch(&st,0,143,130);KartDashboard_Touch(&st,3,141,130);KartDashboard_Touch(&st,3,143,130);
++    check(KartDashboard_Touch(&st,1,143,130)==0,"B01 salir de la zona cancela incluso dentro de la tolerancia");
+     st.page=KART_PAGE_SD;check(tap(st,400,140)==KART_ACTION_RECORD,"Boton SD solicita grabacion o pausa");
+     st.page=KART_PAGE_DRIVE;check(tap(st,400,175)==KART_ACTION_MODE,"Todo el boton Marcha corresponde a su area tactil");
+     st.page=KART_PAGE_WHEELS;check(tap(st,150,120)==0 && st.wheel==1,"Seleccion de rueda sin efectos en control");
+@@ -94,6 +104,8 @@
+     render(st,sample(4));check(contains("Estado ESP caducado") && contains("revisar entradas") && contains("Sin dato válido"),"Causa, aviso y velocidad invalida permanecen diferenciados");
+     st.page=KART_PAGE_WHEELS;st.wheel=0;render(st,sample(0));check(contains("-- RPM") && contains("no afirmar parada"),"Hall sin pulsos no se presenta como cero medido");
+     st.page=KART_PAGE_SD;render(st,sample(2));check(contains("Error") && contains("Petición: grabar") && contains("Pedir pausa"),"Fallo SD no se confunde con grabacion solicitada");
++    auto bad_csv=sample(2);bad_csv.sd_error=KART_SD_CSV_INVALID;render(st,bad_csv);
++    check(contains("revisar CSV") && contains("conservar archivo") && within_screen(),"B04 CSV incompleto visible sin ocultar causa ni recortar textos");
+     st.page=KART_PAGE_BMS;render(st,sample(0));check(contains("SOC --") && contains("-- °C"),"BMS ausente permanece desconocido");
+     st.page=KART_PAGE_HOME;bool reasons_fit=true;
+     for(int i=0;i<21;i++)for(int n=0;n<5;n++){auto s=sample(2);s.inhibit=(uint8_t)i;s.ui_notice=(uint8_t)n;render(st,s);reasons_fit &= within_screen();}
+--- antes/tests/frontend_test.cpp
++++ despues/tests/frontend_test.cpp
+@@ -9,8 +9,10 @@
+ int adc_ok=1,pins[4]={0,0,0,0},mailboxes=3,tx_ok=1,tx_count=0,rx_pending=0,wd_refresh=0;
+ uint8_t sent_command[8]={},sent_health[8]={},rx_bytes[8]={};CAN_RxHeaderTypeDef rx_header={};
+ int mount_result=0,open_result=0,write_result=0,sync_result=0,close_result=0,short_write=0;
++int read_result=0,seek_result=0;
+ int mounts=0,opens=0,closes=0,syncs=0;std::string file_content;
+ uint32_t fs_delays[FS_OP_COUNT]={};void (*fs_hook)(FakeFsOp)=nullptr;
++void (*tx_hook)(uint32_t)=nullptr;
+ #include "../Core/Src/kart_frontend.c"
+ #include "../Core/Src/kart_display.c"
+ int checks=0,failures=0;
+@@ -21,7 +23,8 @@
+     sd_last_try=sd_last_log=sd_last_sync=sd_rows=sample_sequence=adc_errors=tx_errors=0;
+     hall_l_seen=hall_r_seen=0;tick=1000;adc_ok=tx_ok=1;adc_accel_value=124;adc_steer_value=2177;
+     memset(pins,0,sizeof(pins));mailboxes=3;mount_result=open_result=write_result=sync_result=close_result=short_write=0;
+-    mounts=opens=closes=syncs=0;memset(fs_delays,0,sizeof(fs_delays));fs_hook=nullptr;file_content.clear();Kart_Init();
++    read_result=seek_result=0;
++    mounts=opens=closes=syncs=0;memset(fs_delays,0,sizeof(fs_delays));fs_hook=nullptr;tx_hook=nullptr;file_content.clear();Kart_Init();
+ }
+ void rx(unsigned id,const uint8_t* b,unsigned len=8){rx_header={id,0,0,len};memcpy(rx_bytes,b,8);rx_pending=1;HAL_CAN_RxFifo0MsgPendingCallback(&hcan1);}
+ void feedback(){const uint8_t b[8]={0,0,0,0,0,0,0,0};rx(0x123,b);const uint8_t s[8]={1,10,0,255,4|16|8,3,0,0};rx(0x124,s);}
+@@ -97,11 +100,13 @@
+ #include "display_cases.h"
+ #include "sd_cases.h"
+ #include "dashboard_snapshot_cases.h"
++#include "bugfix_cases.h"
+ int main(){
+     test_start_stop();
+     test_display_developer();
+     test_sd_retries();
+     test_dashboard_snapshot();
++    test_bugfixes();
+     reset();Kart_ControlTick();check(ui.gear==0 && sent_command[4]==1 && sent_command[0]==0,"Sin feedback transmite N freno pedal cero");
+     feedback();Kart_ControlTick();check(ui.input_flags==7 && ui.feedback_fresh && ui.status_fresh,"ADC validos y CAN fresco");
+     check(sent_health[0]==1 && sent_health[1]==7 && kart_u16be(sent_health+2)==124,"Ext 0x101 conserva ADC fisico");
+--- antes/tests/stubs/fatfs.h
++++ despues/tests/stubs/fatfs.h
+@@ -1,21 +1,29 @@
+ #pragma once
+ #include <stdint.h>
+ #include <string>
+-typedef unsigned UINT;typedef int FRESULT;struct FATFS{};struct FIL{};
++typedef unsigned UINT;typedef uint32_t FSIZE_t;typedef int FRESULT;struct FATFS{};struct FIL{FSIZE_t pos;};
+ #define FR_OK 0
+ #define FR_DISK_ERR 1
+ #define FR_INT_ERR 2
+-#define FA_OPEN_APPEND 1
++#define FA_OPEN_APPEND 0x30
+ #define FA_WRITE 2
++#define FA_READ 1
+ extern int mount_result,open_result,write_result,sync_result,close_result,short_write;
++extern int read_result,seek_result;
+ extern int mounts,opens,closes,syncs;extern std::string file_content;
+-enum FakeFsOp {FS_MOUNT,FS_OPEN,FS_WRITE,FS_SYNC,FS_CLOSE,FS_UNMOUNT,FS_OP_COUNT};
++enum FakeFsOp {FS_MOUNT,FS_OPEN,FS_WRITE,FS_SYNC,FS_CLOSE,FS_UNMOUNT,FS_READ,FS_SEEK,FS_OP_COUNT};
+ extern uint32_t tick,fs_delays[FS_OP_COUNT];
+ extern void (*fs_hook)(FakeFsOp);
+ inline void fs_simulate(FakeFsOp op){tick+=fs_delays[op];if(fs_hook)fs_hook(op);}
+ inline FRESULT f_mount(FATFS* fs,const char*,int){if(fs)mounts++;fs_simulate(fs?FS_MOUNT:FS_UNMOUNT);return fs?mount_result:0;}
+-inline FRESULT f_open(FIL*,const char*,int){opens++;fs_simulate(FS_OPEN);return open_result;}
++inline FRESULT f_open(FIL* file,const char*,int){opens++;fs_simulate(FS_OPEN);file->pos=(FSIZE_t)file_content.size();return open_result;}
+ inline unsigned f_size(FIL*){return (unsigned)file_content.size();}
+-inline FRESULT f_write(FIL*,const char* data,UINT len,UINT* actual){fs_simulate(FS_WRITE);*actual=short_write?len-1:len;if(!write_result)file_content.append(data,*actual);return write_result;}
++inline FRESULT f_write(FIL* file,const char* data,UINT len,UINT* actual){fs_simulate(FS_WRITE);*actual=short_write?len-1:len;if(!write_result){file_content.replace(file->pos,*actual,data,*actual);file->pos+=*actual;}return write_result;}
++inline FRESULT f_lseek(FIL* file,FSIZE_t pos){fs_simulate(FS_SEEK);if(seek_result)return seek_result;if(pos>file_content.size())return FR_INT_ERR;file->pos=pos;return FR_OK;}
++inline FRESULT f_read(FIL* file,void* data,UINT len,UINT* actual){
++    fs_simulate(FS_READ);*actual=0;if(read_result)return read_result;
++    const size_t available=file_content.size()-file->pos;*actual=(UINT)(available<len?available:len);
++    memcpy(data,file_content.data()+file->pos,*actual);file->pos+=*actual;return FR_OK;
++}
+ inline FRESULT f_sync(FIL*){syncs++;fs_simulate(FS_SYNC);return sync_result;}
+ inline FRESULT f_close(FIL*){closes++;fs_simulate(FS_CLOSE);return close_result;}
+--- antes/tests/stubs/main.h
++++ despues/tests/stubs/main.h
+@@ -60,6 +60,7 @@
+ extern uint16_t adc_accel_value,adc_steer_value;
+ extern int adc_ok,pins[4],mailboxes,tx_ok,tx_count,rx_pending,wd_refresh;
+ extern uint8_t sent_command[8],sent_health[8],rx_bytes[8];extern CAN_RxHeaderTypeDef rx_header;
++extern void (*tx_hook)(uint32_t);
+ inline uint32_t __get_PRIMASK(){return 0;}inline void __disable_irq(){}inline void __set_PRIMASK(uint32_t){}inline void __NOP(){}
+ inline uint32_t HAL_GetTick(){return tick;}
+ inline unsigned HAL_CAN_GetRxFifoFillLevel(CAN_HandleTypeDef*,int){return rx_pending;}
+@@ -70,7 +71,7 @@
+ inline uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef*){return adc_channel==0?adc_accel_value:adc_steer_value;}
+ inline int HAL_ADC_Stop(ADC_HandleTypeDef*){return 0;}
+ inline unsigned HAL_CAN_GetTxMailboxesFreeLevel(CAN_HandleTypeDef*){return mailboxes;}
+-inline int HAL_CAN_AddTxMessage(CAN_HandleTypeDef*,CAN_TxHeaderTypeDef* h,uint8_t* b,uint32_t*){memcpy(h->StdId==0x100?sent_command:sent_health,b,8);tx_count++;return tx_ok?0:1;}
++inline int HAL_CAN_AddTxMessage(CAN_HandleTypeDef*,CAN_TxHeaderTypeDef* h,uint8_t* b,uint32_t*){memcpy(h->StdId==0x100?sent_command:sent_health,b,8);tx_count++;if(tx_hook)tx_hook(h->StdId);return tx_ok?0:1;}
+ inline int HAL_CAN_AbortTxRequest(CAN_HandleTypeDef*,int){mailboxes=3;return 0;}
+ inline int HAL_CAN_ConfigFilter(CAN_HandleTypeDef*,CAN_FilterTypeDef*){return 0;}
+ inline int HAL_CAN_Start(CAN_HandleTypeDef*){return 0;}
+--- antes/TouchGFX/gui/src/common/KartDashboard.cpp
++++ despues/TouchGFX/gui/src/common/KartDashboard.cpp
+@@ -69,4 +69,4 @@
+     else if(action==KART_ACTION_RECORD)Kart_ToggleRecording();
+     if(type==1){touchgfx::Rect all(0,48,480,224);invalidateRect(all);}
+ }
+-void KartDashboard::handleDragEvent(const touchgfx::DragEvent&){KartDashboard_Touch(&state,2,0,0);}
++void KartDashboard::handleDragEvent(const touchgfx::DragEvent& event){KartDashboard_Touch(&state,3,event.getNewX(),event.getNewY());}

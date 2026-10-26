@@ -12,8 +12,8 @@ resumen: Guía de aprendizaje del PID y la IMU (Steppe School) aplicada al ESC d
 - **Hallazgo principal (análisis de código, sin ensayo):** el ESC v1.3 ya es un lazo cerrado, pero solo con término **P**. Tiene zona muerta de 2 °/s, ganancia 1/200 por °/s y corrección máxima del 10 %. No tiene I ni D. Por eso deja **error estacionario**: el kart gira algo menos de lo que pide la consigna.
 - **Segundo hallazgo:** la consigna de guiñada `v·tan(δ)/L` no está limitada por adherencia. A 36 km/h y 20° pide ≈160 °/s, que exigiría ≈2,8 g laterales. Es imposible, y con un término I provocaría *windup*.
 - **Recomendación para cuando haya IMU:** un **PI** sobre la guiñada con anti-windup, consigna limitada por μ·g/v, sin D al principio (el ADC de dirección tiene ruido, PROB-0015) y lazo a periodo fijo.
-- **Simulador:** [[04_CONOCIMIENTO/software_y_telemetria/simulador_pid_imu.html|simulador_pid_imu.html]] muestra el kart desde arriba girando, con sus fuerzas, el giróscopo, el acelerómetro y los modos DIF/ESC/PID. Es un **modelo didáctico con valores supuestos**, no la dinámica medida del kart.
-- **Límites:** no se ha tocado firmware ni hardware. La IMU sigue sin funcionar en el kart ([[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0017_imu_no_disponible|PROB-0017]]). Las cifras del simulador son sintéticas.
+- **Simulador:** [simulador_pid_imu.html](simulador_pid_imu.html) muestra el kart desde arriba girando, con sus fuerzas, el giróscopo, el acelerómetro y los modos DIF/ESC/PID. Es un **modelo didáctico con valores supuestos**, no la dinámica medida del kart.
+- **Límites:** no se ha tocado firmware ni hardware. La IMU sigue sin funcionar en el kart ([PROB-0017](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0017_imu_no_disponible.md)). Las cifras del simulador son sintéticas.
 
 ## Fuentes consultadas (23-10-2026)
 
@@ -185,7 +185,7 @@ En una curva normal la guiñada está limitada por la adherencia: unos 56 °/s a
 
 ## 12. Simulador
 
-[[04_CONOCIMIENTO/software_y_telemetria/simulador_pid_imu.html|Abrir el simulador]] (archivo local; se abre con doble clic en el navegador).
+[Abrir el simulador](simulador_pid_imu.html) (archivo local; se abre con doble clic en el navegador).
 
 - **Muestra:** vista superior con estela; fuerzas de tracción de cada rueda, fuerzas laterales de los neumáticos, la aceleración que siente la IMU, la velocidad y la guiñada; círculo de adherencia (acelerómetro); brújula con el rumbo real frente al integrado del giróscopo; gráficas de consigna, giróscopo, corrección, término I y aceleración lateral.
 - **Modos:** DIF, ESC firmware v1.3 (copia de la fórmula), ESC PID (con anti-windup, D sobre la medida y filtro activables) e Igual.
@@ -204,7 +204,7 @@ En una curva normal la guiñada está limitada por la adherencia: unos 56 °/s a
 
 ## 13. Siguientes pasos propuestos (no ejecutados)
 
-1. Resolver [[05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0017_imu_no_disponible|PROB-0017]]: alimentación, masa, I²C e identidad del módulo.
+1. Resolver [PROB-0017](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0017_imu_no_disponible.md): alimentación, masa, I²C e identidad del módulo.
 2. **Banco (módulo fuera del kart):** firmware de lectura que envíe el paquete del visor; registrar sesgo, ruido y deriva térmica en reposo; verificar ejes y `yaw_sign` girando a mano.
 3. Medir que el lazo de control corre a periodo fijo y registrar `dt` real.
 4. En el simulador, ajustar el modelo con datos reales cuando existan (respuesta a escalón de dirección registrada por Wi-Fi).

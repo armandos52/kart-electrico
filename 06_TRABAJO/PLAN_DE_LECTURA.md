@@ -1,6 +1,22 @@
 # Plan de lectura por lotes
 
+26-10-2026: preparación de publicación y síntesis de avances; consulta focalizada de estado, problemas, diario y ENS-0029. Sin nuevas páginas de originales ni cierre de lotes/formatos visuales/Loop.
+
+23-10-2026: [investigación ADC dirección](INVESTIGACION_ADC_DIRECCION_2026-10-23.md). Consulta focalizada de índice, fichas DOC-0014/0042, notas y fuentes dev9/local dev11-log. Reconsulta textual DOC-0042 PDF 28 mediante buscador; sin inspección visual nueva ni lectura de DOC-0014. ST DS10916 tabla 63 como contraste externo. No cierra lotes ni formatos visuales/Loop.
+
+17-10-2026, L1/L3/L4 focalizados: [ENS-0025](ensayos/ENS-0025_revision_diferencial_y_reversa.md), índice/fichas DOC-0042/0031, notas software/dirección/control y fuentes propias ESP32 v1.2/dev3, frontend dev8-ui, contrato y arneses. Buscador: texto DOC-0042 PDF 43,45,55–57 y DOC-0031 PDF 4–5; sin nueva inspección visual de figuras/ecuaciones. Cálculos del plan derivados del código; valores históricos no adoptados como calibración actual. Kelly/Analog Devices como fuentes primarias externas. Sin lectura integral de bibliotecas/originales, capturas Kelly/formatos visuales/Loop ni cierre de lotes. Solo diagnóstico PC, plan antes de implementar.
+
+16-10-2026, L4/L2 focalizado: [ENS-0024](ensayos/ENS-0024_bms_visible_diagnostico.md), catálogo L2, ficha DOC-0035, inventario software/BMS, código y CAN real. Buscador devuelve referencias DOC-0042 PDF 65/68; no se leen tablas visuales ni se declara protocolo confirmado. No cierre de lote, lectura integral, formatos visuales o Loop.
+
 Fecha de preparación: 2026-09-28. El inventario y la extracción inicial están completados; la síntesis exhaustiva sigue pendiente.
+
+16-10-2026, L4: [ENS-0023](ensayos/ENS-0023_bugs_e_instalacion_dashboard.md), revisión focalizada de CAN/Hall/SD, renderer y adaptador táctil, regresiones/stubs y scripts OpenOCD/SWD. Cuatro defectos reproducidos y corregidos, paquetes compilados; usuario habilita instalación física después. Sin nuevas páginas originales ni lectura integral de middleware/documentos. Formatos visuales/Loop y cierre de lote pendientes.
+
+15-10-2026, propuesta visual del frontal: consulta focalizada del estado, índice/ficha DOC-0042, inventario, DEC-0010, ENS-0018/0019/0021 y PROB-0012/0013; código propio frontend/protocolo/formateador/View/Model/widget, callbacks generados y arranque de tareas; framebuffer `dev4_final/pantalla.png`. [Descripción y propuesta](PROPUESTA_PANTALLA_FRONTAL_2026-10-15.md) con maqueta sintética en navegador. Sin nuevas páginas originales, cambios de firmware, mediciones físicas ni cierre L1/L4. Formatos visuales históricos y Loop pendientes.
+
+15–16-10-2026, continuación L4: [ENS-0022](ensayos/ENS-0022_dashboard_frontal_claro_oscuro.md), propuesta aceptada y dashboard implementado. Lectura focalizada de frontend/View/Model, APIs locales Font/LCD/Widget/Screen, herramientas SWD y pruebas compartidas; render geométrico de código y glifos en PC. Sin nuevas páginas originales, conexión física ni cierre de lote; formatos visuales/Loop pendientes.
+
+15-10-2026, retoma L4: ENS-0019/PROB-0012/0013, relectura y snapshot final, intento técnico de pedal, frontend SD/FatFs simulado, driver de detección, build y consumidor F411 consultados de forma focalizada. [ENS-0020](ensayos/ENS-0020_registro_pedal_f746.md) registra captura pendiente; [ENS-0021](ensayos/ENS-0021_sd_reintentos_locales.md) corrige SD parcialmente con pruebas sintéticas y compilación dev5. Sin nuevas páginas originales, hardware ni cierre de L1/L4; formatos visuales y Loop pendientes.
 
 15-10-2026, continuación posterior L4: [ENS-0018](ensayos/ENS-0018_mejoras_pantalla_desarrollo.md) implementa F01–F03 tras autorización; consulta de ficha DOC-0042/notas existentes, formateador/cabecera/tests y dependencias directas banco/capturador/build. Nuevas pruebas exclusivamente en PC y compilaciones, sin revisión visual física ni páginas originales. No cierra L1/L4 ni formatos visuales/Loop. Nueve archivos de alcance antes/después, no lectura integral de bibliotecas.
 
@@ -40,6 +56,8 @@ La primera pasada ya cubre la portada, el resumen, el índice y las conclusiones
 Se preparó la [guía personal](GUIA_DE_ESTUDIO_DEL_KART.md). Cobertura exacta en la [sesión](SESION_ESTUDIO_2026-10-07.md): texto seleccionado de L1 (pantalla, alimentación, contactor y fallos), L3 (manual Kelly) y conclusiones/resúmenes de L5. No se cierra ningún lote; no hubo nueva revisión visual de figuras/tablas. Próximo: respuestas del montaje y continuar las secciones coherentes de L1, sin repetir estos extractos salvo necesidad de contexto.
 
 ## Regla de economía de contexto
+
+Historial microSD (22-10): estado/mapa, índice/fichas DOC-0034/0042, inventario, PROB-0013 y ENS-0026/0027; revisión focalizada del registrador/UI, FatFs y panel/QA. Buscador: **DOC-0034 PDF 21 §6.11 y PDF 29 §7.7/tabla 10**, solo texto; sin inspección visual ni hardware. [Plan](PLAN_HISTORIAL_SD_Y_PANTALLA_2026-10-22.md), fuentes/hashes y límites enlazados. No cierre L4, no lectura integral ni resolución de formatos visuales/Loop. Implementación pendiente de aprobación.
 
 Banco F411 (14-10): estado/mapa, índice/ficha DOC-0034, inventario, `.ioc`/linker y funciones/tests de trabajo. Buscador: **texto de DOC-0034 PDF 7**, sin nueva inspección visual. Consulta externa focalizada ST/MCUFRIEND/PlatformIO para placa, herramientas y bus LCD. [ENS-0015](ensayos/ENS-0015_nucleo_f411_pantalla_banco.md): identificación y respaldo físicos, pantalla/botón y pruebas lógicas en MCU con periféricos simulados. No cierra L1/L4, no lee nuevos originales completos ni resuelve formatos visuales/Loop.
 

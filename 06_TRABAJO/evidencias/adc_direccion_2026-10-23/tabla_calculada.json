@@ -1,0 +1,62 @@
+{
+  "supuesto_vref_V": 3.3,
+  "tipo": "calculo ideal, no medicion",
+  "filas": [
+    {
+      "punto": "Límite inferior admisible",
+      "adc": 942,
+      "voltios": 0.7591208791208791,
+      "normalizado": 0,
+      "grados_calculados": -20
+    },
+    {
+      "punto": "Extremo inferior calibrado",
+      "adc": 1042,
+      "voltios": 0.8397069597069596,
+      "normalizado": 0,
+      "grados_calculados": -20
+    },
+    {
+      "punto": "Entrada ≈1 V",
+      "adc": 1241,
+      "voltios": 1.00007326007326,
+      "normalizado": 358,
+      "grados_calculados": -20
+    },
+    {
+      "punto": "Entrada ≈1,5 V",
+      "adc": 1861,
+      "voltios": 1.4997069597069594,
+      "normalizado": 1476,
+      "grados_calculados": -11.920668058455115
+    },
+    {
+      "punto": "Centro matemático aproximado",
+      "adc": 2177,
+      "voltios": 1.7543589743589743,
+      "normalizado": 2046,
+      "grados_calculados": -0.020876826722338204
+    },
+    {
+      "punto": "Entrada ≈2 V",
+      "adc": 2482,
+      "voltios": 2.00014652014652,
+      "normalizado": 2596,
+      "grados_calculados": 11.461377870563675
+    },
+    {
+      "punto": "Extremo superior calibrado",
+      "adc": 3313,
+      "voltios": 2.6698168498168497,
+      "normalizado": 4095,
+      "grados_calculados": 20
+    },
+    {
+      "punto": "Límite superior admisible",
+      "adc": 3413,
+      "voltios": 2.7504029304029305,
+      "normalizado": 4095,
+      "grados_calculados": 20
+    }
+  ]
+}

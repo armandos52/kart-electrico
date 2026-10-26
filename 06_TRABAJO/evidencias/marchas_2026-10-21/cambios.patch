@@ -1,0 +1,84 @@
+--- antes/frontend_test.cpp
++++ despues/tests/frontend_test.cpp
+@@ -101,7 +101,9 @@
+ #include "sd_cases.h"
+ #include "dashboard_snapshot_cases.h"
+ #include "bugfix_cases.h"
++#include "pedal_cases.h"
+ int main(){
++    test_pedal_zero();
+     test_start_stop();
+     test_display_developer();
+     test_sd_retries();
+--- antes/kart_dashboard.c
++++ despues/Core/Src/kart_dashboard.c
+@@ -118,7 +118,7 @@
+     if(s->input_flags&KART_INPUT_ACCEL_OK)snprintf(v,sizeof(v),"%u / %u",s->accel_adc,s->accel_raw);else snprintf(v,sizeof(v),"Inválido (ADC %u)",s->accel_adc);
+     txt(p,10,129,218,KART_FONT_VALUE,c->text,v);
+     box(p,10,158,216,5,c->panel);if(s->input_flags&KART_INPUT_ACCEL_OK)box(p,10,158,(int)((uint32_t)s->accel_raw*216/4095),5,c->active);
+-    snprintf(v,sizeof(v),"Libre: %s · umbral %u / 4095",!(s->input_flags&KART_INPUT_ACCEL_OK)?"--":s->pedal_free?"SÍ":"NO",(unsigned)KART_PEDAL_FREE_MAX);txt(p,10,170,226,KART_FONT_SMALL,c->text,v);
++    snprintf(v,sizeof(v),"Libre: %s · cero hasta ADC %u",!(s->input_flags&KART_INPUT_ACCEL_OK)?"--":s->pedal_free?"SÍ":"NO",(unsigned)KART_ACCEL_ZERO_ADC);txt(p,10,170,226,KART_FONT_SMALL,c->text,v);
+     txt(p,250,111,220,KART_FONT_SMALL,c->muted,"Dirección · ADC físico / normalizado");
+     if(s->input_flags&KART_INPUT_STEER_OK)snprintf(v,sizeof(v),"%u / %u",s->steer_adc,s->steer_raw);else snprintf(v,sizeof(v),"Inválida (ADC %u)",s->steer_adc);
+     txt(p,250,129,220,KART_FONT_VALUE,c->text,v);
+--- antes/kart_frontend.c
++++ despues/Core/Src/kart_frontend.c
+@@ -126,7 +126,7 @@
+ void HAL_CAN_ErrorCallback(CAN_HandleTypeDef* hcan) {
+     if(hcan->Instance==CAN1)received.rx_errors++;
+ }
+-static uint8_t read_adc(uint32_t channel,uint16_t* raw,uint16_t low,uint16_t high,uint16_t* normalized) {
++static uint8_t read_adc(uint32_t channel,uint16_t* raw,uint16_t low,uint16_t high,uint16_t zero,uint16_t* normalized) {
+     ADC_ChannelConfTypeDef conf={0};conf.Channel=channel;conf.Rank=ADC_REGULAR_RANK_1;conf.SamplingTime=ADC_SAMPLETIME_28CYCLES;
+     uint8_t ok=HAL_ADC_ConfigChannel(&hadc3,&conf)==HAL_OK;
+     if(ok)ok=HAL_ADC_Start(&hadc3)==HAL_OK;
+@@ -135,8 +135,10 @@
+     if(ok) *raw=(uint16_t)HAL_ADC_GetValue(&hadc3);
+     if(HAL_ADC_Stop(&hadc3)!=HAL_OK)ok=0;
+     if(!ok || *raw<low-ADC_MARGIN || *raw>high+ADC_MARGIN) {adc_errors++;return 0;}
+-    uint16_t bounded=*raw;if(bounded<low)bounded=low;if(bounded>high)bounded=high;
+-    *normalized=(uint16_t)(((uint32_t)(bounded-low)*4095u)/(high-low));return 1;
++    // Plausibilidad electrica historica independiente de la zona cero: no ocultar
++    // desconexion/saturacion ni rechazar el reposo antiguo por desplazar el cero.
++    uint16_t bounded=*raw;if(bounded<zero)bounded=zero;if(bounded>high)bounded=high;
++    *normalized=(uint16_t)(((uint32_t)(bounded-zero)*4095u)/(high-zero));return 1;
+ }
+ static void transmit(uint32_t id,uint8_t bytes[8]) {
+     CAN_TxHeaderTypeDef header={0};uint32_t mailbox=0;
+@@ -166,8 +168,8 @@
+     KartUiSnapshot next={0};CanData rx;
+     uint32_t key=lock_data();memcpy(&rx,(const void*)&received,sizeof(rx));next.sd_state=sd_state;next.sd_error=sd_error;next.sd_rows=sd_rows;unlock_data(key);
+     uint32_t now=HAL_GetTick();
+-    next.input_flags=read_adc(ADC_CHANNEL_0,&next.accel_adc,ACCEL_MIN,ACCEL_MAX,&next.accel_raw)?KART_INPUT_ACCEL_OK:0;
+-    if(read_adc(ADC_CHANNEL_8,&next.steer_adc,STEER_MIN,STEER_MAX,&next.steer_raw))next.input_flags|=KART_INPUT_STEER_OK;
++    next.input_flags=read_adc(ADC_CHANNEL_0,&next.accel_adc,ACCEL_MIN,ACCEL_MAX,KART_ACCEL_ZERO_ADC,&next.accel_raw)?KART_INPUT_ACCEL_OK:0;
++    if(read_adc(ADC_CHANNEL_8,&next.steer_adc,STEER_MIN,STEER_MAX,STEER_MIN,&next.steer_raw))next.input_flags|=KART_INPUT_STEER_OK;
+     next.brake=HAL_GPIO_ReadPin(BRAKE_GPIO_Port,BRAKE_Pin)==GPIO_PIN_RESET;
+     const uint8_t start_pressed=HAL_GPIO_ReadPin(START_STOP_GPIO_Port,START_STOP_Pin)==GPIO_PIN_SET;
+     next.start=read_start_button(start_pressed,HAL_GetTick());
+@@ -183,7 +185,7 @@
+     // Si hay estado extendido, se exige siempre fresco. Cero entero km/h nunca basta.
+     const uint8_t feedback_ok=next.feedback_fresh && (!rx.status_seen || (next.status_fresh && (next.backend_flags&KART_STATUS_SPEED_VALID)));
+     const uint8_t stationary=feedback_ok && (rx.status_seen?(next.backend_flags&KART_STATUS_STATIONARY):(!rx.left&&!rx.right));
+-    const uint8_t pedal_free=next.accel_raw<=KART_PEDAL_FREE_MAX;
++    const uint8_t pedal_free=(next.input_flags&KART_INPUT_ACCEL_OK) && next.accel_raw<=KART_PEDAL_FREE_MAX;
+     // Observabilidad: se publican las mismas condiciones usadas abajo, sin alterar permisos.
+     next.drive_input=drive;next.reverse_input=reverse;next.start_input=start_pressed;
+     next.pedal_free=pedal_free;next.stationary=stationary;next.feedback_usable=feedback_ok;
+--- antes/kart_frontend.h
++++ despues/Core/Inc/kart_frontend.h
+@@ -5,8 +5,12 @@
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+-#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev8-ui"
+-#define KART_PEDAL_FREE_MAX 40u
++#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev9-ui"
++// ENS-0026, banco 21-10: reposo observado hasta 302 ADC; margen provisional 18.
++// Zona cero fija, sin autoajuste al arrancar ni filtrado que retrase soltar.
++#define KART_ACCEL_ZERO_ADC 320u
++// El permiso de marcha y el mando CAN comparten exactamente el mismo cero.
++#define KART_PEDAL_FREE_MAX 0u
+ #define KART_FEEDBACK_MAX_AGE_MS 500u
+ #define KART_STATUS_MAX_AGE_MS 300u
+ #define KART_BMS_MAX_AGE_MS 2000u

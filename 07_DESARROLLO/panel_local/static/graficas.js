@@ -1,5 +1,5 @@
 // Gráficas en canvas: minigráficas de la tira y gráficas apiladas con cursor de tiempo común.
-import {f, t} from './nucleo.js';
+import {f, t, chartNow} from './nucleo.js';
 
 const DASH = {medida:[], orden:[5,3], estimacion:[1.5,3]};
 let palette=null;
@@ -29,7 +29,7 @@ function range(values) {
 export function sparkline(canvas, points, kind='medida', windowMs=30000) {
   canvas.hidden=false;
   const c=context(canvas);if(!c)return;
-  const {ctx,w,h}=c, now=Date.now(), visible=points.filter(p=>p.t>=now-windowMs), values=visible.filter(p=>p.v!==null).map(p=>p.v);
+  const {ctx,w,h}=c, now=chartNow(), visible=points.filter(p=>p.t>=now-windowMs), values=visible.filter(p=>p.v!==null).map(p=>p.v);
   if(!values.length)return;
   const [min,max]=range(values), x=t=>(t-(now-windowMs))/windowMs*w, y=v=>2+(max-v)/(max-min)*(h-4);
   ctx.strokeStyle=colors().spark;ctx.lineWidth=1.2;ctx.setLineDash(DASH[kind]||[]);path(ctx,visible,x,y);
@@ -44,7 +44,7 @@ export function buildCharts(container, specs, helpers) {
     box.innerHTML='<div class="g-cab"><span class="g-titulo"></span><span class="g-leyenda"></span></div><div class="lienzo"><canvas role="img"></canvas></div>';
     box.querySelector('.g-titulo').textContent=spec.title;
     const canvas=box.querySelector('canvas');canvas.setAttribute('aria-label',t('graf.aria',{titulo:spec.title}));
-    canvas.addEventListener('pointermove',event=>{const r=canvas.getBoundingClientRect(), left=46, pw=r.width-left-8, frac=(event.clientX-r.left-left)/pw;cursorT=frac<0||frac>1?null:Date.now()-tools.windowMs*(1-frac);drawCharts();});
+    canvas.addEventListener('pointermove',event=>{const r=canvas.getBoundingClientRect(), left=46, pw=r.width-left-8, frac=(event.clientX-r.left-left)/pw;cursorT=frac<0||frac>1?null:chartNow()-tools.windowMs*(1-frac);drawCharts();});
     canvas.addEventListener('pointerleave',()=>{cursorT=null;drawCharts();});
     container.appendChild(box);
     charts.push({...spec,canvas,legend:box.querySelector('.g-leyenda')});
@@ -56,7 +56,7 @@ function valueAt(points, t) {
   for(const p of points){const d=Math.abs(p.t-t);if(d<distance){distance=d;best=p;}}
   return best&&distance<1500?best.v:null;
 }
-export function drawCharts(now=Date.now()) {
+export function drawCharts(now=chartNow()) {
   const pal=colors(), windowMs=tools?.windowMs||60000;
   for(const chart of charts) {
     const signals=chart.keys.map((key,i)=>{const s=tools.signal(key);return {key,s,kind:tools.nature(key,s),color:pal.series[i%2],points:tools.history(key).filter(p=>p.t>=now-windowMs)};});

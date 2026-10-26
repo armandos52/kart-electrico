@@ -1,6 +1,6 @@
 # Kart eléctrico · revisión académica 2026/27
 
-**Avances hasta el 13 de octubre de 2026.** Documentación, software y evidencias de la continuación del Smart Electric Kart: diagnóstico del sistema heredado, telemetría por Wi-Fi, panel del portátil y mejoras de control STM32/ESP32.
+**Avances hasta el 26 de octubre de 2026.** Documentación, software y evidencias de la continuación del Smart Electric Kart: diagnóstico del sistema heredado, telemetría por Wi-Fi, panel del portátil y mejoras de control STM32/ESP32.
 
 **[Empezar por el dossier para profesores](00_INICIO/REVISION_PARA_PROFESORES.md)** · [Estado actual](00_INICIO/ESTADO_ACTUAL.md) · [Dejar una observación](https://github.com/armandos52/kart-electrico/issues/new/choose)
 
@@ -8,7 +8,11 @@
 
 *Montaje fotografiado por el usuario; dimensiones, componentes ocultos y firmware instalado pendientes de contraste. [Procedencia: DOC-0044](03_CATALOGO/fichas/DOC-0044.md).*
 
-## Qué se ha trabajado
+## Avances del 15 al 26 de octubre
+
+[Resumen de estas semanas, capturas y próximos pasos](06_TRABAJO/AVANCES_2026-10-26.md): dashboard y BMS, marchas/pedal, historial microSD dev12, panel/replay, investigación de dirección y búsqueda de IMU. El hallazgo del condensador comunicado el 26-10 queda registrado con su evidencia pendiente.
+
+## Base del primer corte (13 de octubre)
 
 | Área | Resultado disponible | Evidencia y límites |
 |---|---|---|
@@ -19,7 +23,7 @@
 | Trazabilidad | 13 fichas con resultados y 1 ensayo planificado, 10 problemas y 8 decisiones, con resultados favorables y fallidos | [Diario de ingeniería](06_TRABAJO/DIARIO_PARA_RELATORIO.md), [prioridades](06_TRABAJO/TAREAS.md) |
 | Batería y carga | Tutorial documental 16S, cálculos y discrepancias de identificación | [Consulta del 13-10](04_CONOCIMIENTO/bateria_y_bms/TUTORIAL_CELDAS_Y_CARGA_16S.md). Sin carga, ajuste BMS ni SOC medido |
 
-**Estado del vehículo:** el 08-10 Armando confirmó marcha satisfactoria tras preparar v1.2; el 13-10 comunicó un problema de relé con «B1.3». Esta última denominación no identifica los binarios de las placas. Las correcciones dev3 publicadas están comprobadas en PC; falta identificar/resguardar el frontal y validar en banco y kart. La publicación es una entrega para revisión, no una versión de firmware validada para circular.
+**Estado del vehículo:** F746 dev12-log instalada y verificada el 23-10; ESP32 v1.2-diagnostico identificado por Wi-Fi el 21-10. Grabación/cierre SD observados; archivos reales y replay pendientes. Dirección, reversa e IMU siguen abiertos. [Estado detallado](00_INICIO/ESTADO_ACTUAL.md).
 
 ## Ver el panel
 

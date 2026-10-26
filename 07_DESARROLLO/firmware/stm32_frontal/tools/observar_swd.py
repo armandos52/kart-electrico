@@ -29,6 +29,23 @@ UI_CAMPOS = ("tick can_age status_age bms_soc_age bms_temp_age can_tx_errors can
              "mode_applied inhibit backend_flags feedback_fresh status_fresh status_seen soc_valid temp_valid "
              "sd_requested sd_state sd_error ui_notice").split()
 UI_FORMATO = "<9I4H6hHh18B8s8s2x"  # 96 B, disposición comprobada con `ptype /o KartUiSnapshot`
+UI_EXTRA_CAMPOS = ("front_left_age front_right_age drive_input reverse_input start_input pedal_free "
+                   "stationary feedback_usable front_left_valid front_right_valid relay_state backend_gear").split()
+
+
+def decodificar_ui(raw):
+    # dev4/dev5: 96 B; dev6-ui añade diagnóstico sin desplazar los campos previos.
+    if len(raw) not in (96, 116, 212):
+        raise ValueError(f"KartUiSnapshot de {len(raw)} B no reconocido; comprobar ELF y disposición")
+    values = struct.unpack(UI_FORMATO, raw[:96])
+    result = dict(zip(UI_CAMPOS, values[:len(UI_CAMPOS)]))
+    result["bms355"], result["bms356"] = values[-2].hex(), values[-1].hex()
+    if len(raw) >= 116:
+        result.update(zip(UI_EXTRA_CAMPOS, struct.unpack_from("<2I10B2x", raw, 96)))
+    if len(raw) == 212:
+        result.update(zip("sd_session sd_dropped sd_elapsed_ms sd_free_kib sd_last_save sd_max_call_ms sd_queued log_age".split(),struct.unpack_from("<8I",raw,116)))
+        result["log_words"]=list(struct.unpack_from("<16I",raw,148))
+    return result
 
 
 def simbolos(elf):
@@ -110,9 +127,7 @@ def main():
     if tabla:
         datos = {n: (a.salida / f"sym_{n}.bin").read_bytes() for n in tabla}
         if "ui" in datos:
-            res["ui"] = dict(zip(UI_CAMPOS, struct.unpack(UI_FORMATO, datos["ui"])[:len(UI_CAMPOS)]))
-            bms = struct.unpack(UI_FORMATO, datos["ui"])[len(UI_CAMPOS):]
-            res["ui"]["bms355"], res["ui"]["bms356"] = bms[0].hex(), bms[1].hex()
+            res["ui"] = decodificar_ui(datos["ui"])
         if "received" in datos:
             rx = struct.unpack("<5I4B8s8s8s4h", datos["received"])
             res["received"] = dict(zip("feedback_tick status_tick soc_tick temp_tick rx_errors feedback_seen "

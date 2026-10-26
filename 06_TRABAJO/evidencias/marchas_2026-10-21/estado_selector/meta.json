@@ -1,0 +1,133 @@
+{
+  "inicio_utc": "2026-10-21T10:08:08.134609+00:00",
+  "etiqueta_operador": "observacion_pasiva_sin_posicion_confirmada",
+  "solo_lectura": true,
+  "elf_sha256": "ec8b3b9dd74297e53f2aa9b7a0c739b46de91ccad94e2b5997708d4e8a892c0d",
+  "version_esperada": "stm32_frontal-v1.3-dev8-ui",
+  "serie_stlink": "0670FF3332584B3043206038",
+  "exige_off_neutro": false,
+  "duracion_plan_s": 20,
+  "identidad": {
+    "VEC": true,
+    "VER": true
+  },
+  "muestras": 400,
+  "salida_openocd": 0,
+  "fin_utc": "2026-10-21T10:08:28.515112+00:00",
+  "resumen": {
+    "accel_adc": {
+      "n": 400,
+      "min": 176,
+      "max": 238,
+      "media": 208.13,
+      "desv": 10.52,
+      "p1": 181.0,
+      "p5": 192.0,
+      "p50": 208.0,
+      "p95": 225.0,
+      "p99": 230.0
+    },
+    "accel_raw": {
+      "n": 400,
+      "min": 122,
+      "max": 268,
+      "media": 197.91,
+      "desv": 24.79,
+      "p1": 134.0,
+      "p5": 160.0,
+      "p50": 198.0,
+      "p95": 238.0,
+      "p99": 249.0
+    },
+    "steer_adc": {
+      "n": 400,
+      "min": 1923,
+      "max": 2159,
+      "media": 2053.7,
+      "desv": 32.1,
+      "p1": 1953.9,
+      "p5": 1994.0,
+      "p50": 2058.0,
+      "p95": 2100.0,
+      "p99": 2131.2
+    },
+    "can_age": {
+      "n": 400,
+      "min": 1,
+      "max": 196,
+      "media": 85.16,
+      "desv": 57.55,
+      "p1": 1.0,
+      "p5": 1.0,
+      "p50": 101.0,
+      "p95": 161.0,
+      "p99": 196.0
+    },
+    "can_tx_errors": {
+      "n": 400,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "can_rx_errors": {
+      "n": 400,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "adc_errors": {
+      "n": 400,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "pedal_free": {
+      "0": 400
+    },
+    "brake": {
+      "0": 400
+    },
+    "start": {
+      "1": 400
+    },
+    "gear": {
+      "0": 400
+    },
+    "drive_input": {
+      "1": 400
+    },
+    "reverse_input": {
+      "0": 400
+    },
+    "feedback_usable": {
+      "1": 400
+    },
+    "stationary": {
+      "1": 400
+    },
+    "mode_requested": {
+      "0": 400
+    },
+    "input_flags": {
+      "7": 400
+    }
+  }
+}

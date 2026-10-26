@@ -55,3 +55,15 @@ node_modules/
 !/07_DESARROLLO/panel_local/static/referencias/superior.jpg
 # Volcados RGB565 del framebuffer F746 (ENS-0019): locales; PNG equivalentes y SHA-256 versionados.
 /06_TRABAJO/evidencias/frontal_f746_2026-10-15/**/*.raw
+
+# Configuración local del asistente; sin contenido del proyecto.
+/.claude/
+
+# Evidencias: conservar fuentes, imágenes, logs y hashes; derivados binarios locales.
+/06_TRABAJO/evidencias/**/*.bin
+/06_TRABAJO/evidencias/**/*.raw
+/06_TRABAJO/evidencias/**/*.elf
+/06_TRABAJO/evidencias/**/*.hex
+/06_TRABAJO/evidencias/**/*.exe
+/06_TRABAJO/evidencias/**/*.obj
+/06_TRABAJO/evidencias/**/*.map

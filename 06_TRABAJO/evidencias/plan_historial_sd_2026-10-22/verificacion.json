@@ -1,0 +1,11 @@
+{
+  "kind": "verificacion_documental_no_ensayo",
+  "source_hashes_unchanged": true,
+  "sources_changed": [],
+  "local_links_checked": 278,
+  "broken_links": [],
+  "diff_check_returncode": 0,
+  "diff_check_output": "warning: in the working copy of '00_INICIO/ESTADO_ACTUAL.md', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0013_sd_sin_tarjeta_bloqueo_y_error_invisible.md', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '06_TRABAJO/DIARIO_PARA_RELATORIO.md', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '06_TRABAJO/PLAN_DE_LECTURA.md', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '06_TRABAJO/TAREAS.md', CRLF will be replaced by LF the next time Git touches it\n",
+  "new_hardware_tests": false,
+  "new_behavior_tests": false
+}

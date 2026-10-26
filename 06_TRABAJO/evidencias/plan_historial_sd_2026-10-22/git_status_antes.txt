@@ -1,0 +1,74 @@
+ M 00_INICIO/ESTADO_ACTUAL.md
+ M 03_CATALOGO/fichas/DOC-0031.md
+ M 03_CATALOGO/fichas/DOC-0042.md
+ M 04_CONOCIMIENTO/software_y_telemetria/INVENTARIO_CODIGO.md
+ M 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0008_robustez_control_modos_y_pantalla.md
+ M 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0012_pedal_reposo_fuera_de_pedal_libre.md
+ M 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0013_sd_sin_tarjeta_bloqueo_y_error_invisible.md
+ M 06_TRABAJO/DIARIO_PARA_RELATORIO.md
+ M 06_TRABAJO/PLAN_DE_LECTURA.md
+ M 06_TRABAJO/TAREAS.md
+ M 06_TRABAJO/ensayos/README.md
+ M 07_DESARROLLO/firmware/VERSIONES.md
+ M 07_DESARROLLO/firmware/nucleo_f411_banco/README.md
+ M 07_DESARROLLO/firmware/stm32_frontal/.gitignore
+ M 07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h
+ M 07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c
+ M 07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c
+ M 07_DESARROLLO/firmware/stm32_frontal/README_ROBUSTEZ.md
+ M 07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp
+ M 07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/screen1_screen/Screen1View.cpp
+ M 07_DESARROLLO/firmware/stm32_frontal/tests/display_cases.h
+ M 07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp
+ M 07_DESARROLLO/firmware/stm32_frontal/tests/stubs/fatfs.h
+ M 07_DESARROLLO/firmware/stm32_frontal/tests/stubs/main.h
+ M 07_DESARROLLO/firmware/stm32_frontal/tools/observar_swd.py
+?? .claude/
+?? 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0014_reversa_y_arquitectura_diferencial.md
+?? 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0015_ruido_electromagnetico_sensores.md
+?? 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0016_brownout_reportado_esp32.md
+?? 05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0017_imu_no_disponible.md
+?? 06_TRABAJO/PROPUESTA_PANTALLA_FRONTAL_2026-10-15.md
+?? 06_TRABAJO/REVISION_DIFERENCIAL_Y_REVERSA_2026-10-17.md
+?? 06_TRABAJO/ensayos/ENS-0020_registro_pedal_f746.md
+?? 06_TRABAJO/ensayos/ENS-0021_sd_reintentos_locales.md
+?? 06_TRABAJO/ensayos/ENS-0022_dashboard_frontal_claro_oscuro.md
+?? 06_TRABAJO/ensayos/ENS-0023_bugs_e_instalacion_dashboard.md
+?? 06_TRABAJO/ensayos/ENS-0024_bms_visible_diagnostico.md
+?? 06_TRABAJO/ensayos/ENS-0025_revision_diferencial_y_reversa.md
+?? 06_TRABAJO/ensayos/ENS-0026_diagnostico_bloqueo_marchas.md
+?? 06_TRABAJO/ensayos/ENS-0027_pedal_media_ponderada.md
+?? 06_TRABAJO/evidencias/bms_dashboard_2026-10-16/
+?? 06_TRABAJO/evidencias/frontal_bugs_2026-10-16/
+?? 06_TRABAJO/evidencias/frontal_dashboard_2026-10-15/
+?? 06_TRABAJO/evidencias/marchas_2026-10-21/
+?? 06_TRABAJO/evidencias/pedal_f746_2026-10-15/
+?? 06_TRABAJO/evidencias/pedal_filtrado_2026-10-21/
+?? 06_TRABAJO/evidencias/plan_historial_sd_2026-10-22/
+?? 06_TRABAJO/evidencias/propuesta_frontal_2026-10-15/
+?? 06_TRABAJO/evidencias/revision_diferencial_2026-10-17/
+?? 06_TRABAJO/evidencias/sd_reintentos_2026-10-15/
+?? 07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_dashboard.h
+?? 07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_ui_font.h
+?? 07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_dashboard.c
+?? 07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_ui_font.c
+?? 07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_ui_font_data.c
+?? 07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/include/gui/common/KartDashboard.hpp
+?? 07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/common/KartDashboard.cpp
+?? 07_DESARROLLO/firmware/stm32_frontal/assets/
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/bms_dashboard_cases.h
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/bugfix_cases.h
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/compilar_dashboard.cmd
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/dashboard_snapshot_cases.h
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/dashboard_test.cpp
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/pedal_cases.h
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/pedal_filter_cases.h
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/sd_cases.h
+?? 07_DESARROLLO/firmware/stm32_frontal/tests/test_observar_swd.py
+?? 07_DESARROLLO/firmware/stm32_frontal/tools/compilar_frontal.ps1
+?? 07_DESARROLLO/firmware/stm32_frontal/tools/generar_fuente_dashboard.py
+?? 07_DESARROLLO/firmware/stm32_frontal/tools/registrar_marcha_swd.py
+?? 07_DESARROLLO/firmware/stm32_frontal/tools/registrar_pedal_swd.py
+?? 07_DESARROLLO/firmware/stm32_frontal/tools/renderizar_dashboard.py
+?? 07_DESARROLLO/respaldos/stm32_f746/2026-10-16/
+?? 07_DESARROLLO/respaldos/stm32_f746/2026-10-21/

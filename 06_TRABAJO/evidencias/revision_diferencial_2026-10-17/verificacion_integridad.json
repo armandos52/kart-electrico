@@ -1,0 +1,17 @@
+{
+  "verificaciones": {
+    "intacto:07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h": true,
+    "intacto:07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp": true,
+    "intacto:07_DESARROLLO/firmware/esp32_trasero/tests/control_test.cpp": true,
+    "intacto:07_DESARROLLO/firmware/esp32_trasero/src/main.cpp": true,
+    "intacto:07_DESARROLLO/firmware/esp32_trasero/include/hardware_kart.h": true,
+    "intacto:07_DESARROLLO/firmware/esp32_trasero/platformio.ini": true,
+    "intacto:07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c": true,
+    "intacto:07_DESARROLLO/firmware/stm32_frontal/Core/Src/main.c": true,
+    "host_v12_equivale_a_git_905b09e_salvo_includes_de_dispositivos": true,
+    "reverse_speed_limit_solo_definido_una_vez": true,
+    "enlaces_locales_documentos_de_entrega": true
+  },
+  "enlaces_rotos": [],
+  "nota": "Ninguna verificacion de hardware; hashes prueban preservacion del alcance de firmware revisado."
+}

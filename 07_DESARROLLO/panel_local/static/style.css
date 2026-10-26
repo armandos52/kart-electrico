@@ -106,6 +106,29 @@ body.modo-demo .lamina,body.modo-demo .lienzo{background-image:repeating-linear-
 #demo-controls label{display:grid;font-size:12px;color:var(--texto-2)}
 #demo-controls output{color:var(--aviso)}
 .rodadura-nota{grid-column:1/-1;margin:0;font-size:11px;color:var(--texto-2)}
+/* IMU simulada: lámina propia dentro de la vista; solo datos sintéticos de la demo. */
+#vista-imu{position:absolute;inset:0;background:var(--panel-2)}
+#imu-pista{position:absolute;inset:0;width:100%;height:100%;display:block}
+.imu-rotulo{position:absolute;left:10px;top:8px;display:grid;gap:1px;padding:4px 8px;background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--borde);border-radius:6px;font-size:12px}
+.imu-rotulo span{font-size:11px;color:var(--aviso)}
+.imu-leyenda{position:absolute;left:10px;top:52px;display:flex;flex-wrap:wrap;gap:4px 10px;max-width:60%;font-size:11px;color:var(--texto-2)}
+.imu-leyenda i{display:inline-block;width:12px;height:3px;margin-right:4px;vertical-align:middle}
+.imu-mini{position:absolute;bottom:8px;width:130px;height:130px;background:color-mix(in srgb,var(--panel) 90%,transparent);border:1px solid var(--borde);border-radius:6px}
+#imu-gg{left:8px}#imu-brujula{left:146px}
+.imu-lecturas{position:absolute;right:8px;top:8px;margin:0;display:grid;grid-template-columns:auto auto;gap:2px 10px;padding:6px 8px;background:color-mix(in srgb,var(--panel) 92%,transparent);border:1px solid var(--borde);border-radius:6px;font-size:12px}
+.imu-lecturas dt{color:var(--texto-3)}.imu-lecturas dd{margin:0;text-align:right;color:var(--valor);font-weight:600}
+.imu-avisos{position:absolute;right:8px;bottom:8px;max-width:45%;font-size:12px;color:var(--alarma);text-align:right}
+.imu-requiere{position:absolute;inset:0;display:grid;place-content:center;gap:10px;justify-items:center;padding:16px;text-align:center;background:color-mix(in srgb,var(--panel-2) 85%,transparent)}
+.imu-requiere p{max-width:360px;color:var(--texto-2)}
+.demo-fisica{align-self:end}
+#imu-controles{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 10px;padding-top:6px;border-top:1px dashed var(--borde)}
+#imu-controles label{display:grid;font-size:12px;color:var(--texto-2)}
+#imu-controles output{color:var(--aviso)}
+.imu-opciones,.imu-botones{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+.imu-opciones label{display:flex!important;gap:4px;align-items:center}
+.imu-botones button{height:26px;font-size:12px}
+.imu-teclas{font-size:11px;color:var(--texto-3)}
+@media(max-width:600px){#imu-controles{grid-template-columns:1fr}.imu-mini{width:96px;height:96px}#imu-brujula{left:110px}.imu-lecturas{font-size:11px}.imu-leyenda{display:none}}
 @media(max-width:600px){#demo-controls{grid-template-columns:1fr}#demo-controls select{width:100%}}
 .inspector{min-height:0;overflow:auto;padding:6px 8px 8px 10px;border-left:1px solid var(--borde)}
 .insp-cab{display:flex;flex-direction:column}
@@ -383,3 +406,10 @@ tr.stale td:nth-child(4){color:var(--aviso)}
 @keyframes cal-breathe{50%{transform:scale(1.045);opacity:.45}}
 @media(max-width:700px){#calibracion{width:calc(100% - 16px);border-radius:20px}.cal-header{padding:19px 18px 16px}.cal-header h1{font-size:21px}.cal-body{padding:0 16px 16px}.cal-stages{gap:4px}.cal-stages li{flex-direction:column;gap:4px;padding:9px 3px;font-size:10px}.cal-workspace{grid-template-columns:1fr;gap:18px;padding:18px}.cal-visual{min-height:0;padding:14px;gap:9px}.cal-picture{width:115px;height:115px}.cal-wheel{width:100px;height:100px}#cal-arrow{width:34px;height:34px;line-height:26px;font-size:20px;border-width:4px;bottom:-6px}.cal-instruction h2{font-size:25px}.cal-readings{grid-template-columns:repeat(2,minmax(0,1fr))}.cal-readings>div{padding:10px}.cal-readings strong{font-size:13px}.cal-main-actions button{flex:1}.cal-steps{margin-bottom:10px}}
 @media(prefers-reduced-motion:reduce){#calibracion[open],.cal-picture .cal-orbit{animation:none!important}.cal-wheel,#cal-progress::-webkit-progress-value,button,.cal-stages li{transition:none!important}}
+
+/* Historial: usa el lenguaje de diagnóstico existente. */
+.history-panel,.replay-controls{margin:12px 20px;padding:16px;border:1px solid #475569;border-radius:10px;background:#15212b;color:#edf4f5}
+.history-panel[hidden],.replay-controls[hidden]{display:none}
+.history-panel h2{margin:0 0 8px}.history-panel p{margin:8px 0}.history-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0}.history-tools select{max-width:100%;min-width:180px}.history-tools input[type=file]{max-width:300px}
+.replay-controls{border-color:#60c8df}.replay-controls>span{display:block;color:#b1c5ce;margin-top:6px}#replay-seek{width:100%}
+.history-panel details{margin-top:10px}.history-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:260px;overflow:auto;font-size:12px}.history-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;padding:12px 0}.history-notes label{display:flex;flex-direction:column;gap:5px}.history-notes textarea{min-height:70px}#history-events{display:flex;flex-direction:column;gap:5px;max-height:260px;overflow:auto;padding:8px 0}#history-events button{text-align:left}

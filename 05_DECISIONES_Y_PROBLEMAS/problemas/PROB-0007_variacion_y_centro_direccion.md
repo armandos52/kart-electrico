@@ -1,10 +1,14 @@
 ---
 estado: abierto
-actualizado: 2026-10-11
+actualizado: 2026-10-23
 resumen: El usuario observa grados variables en el portátil con ruedas quietas; centro, recorridos y causa pendientes de medir.
 ---
 
 # PROB-0007 · Variación de lectura y centro de dirección
+
+## Actualización · 26-10-2026
+
+[Declaración de Armando y plan de contraste](../../06_TRABAJO/AVANCES_2026-10-26.md): informa de conexión incorrecta del condensador de dirección entre masa y REF, prevista entre masa y VCC, y atribuye pérdida aproximada de medio rango ADC. Sin esquema ni medidas antes/después; reparación y relación con ruido general pendientes. Además busca una IMU para modos dependientes y telemetría; sin selección, instalación ni validación nueva. Este problema continúa abierto.
 
 ## Declaración del usuario · 08-10-2026
 
@@ -29,3 +33,8 @@ Registrar por Wi-Fi centro con ruedas alineadas, extremos independientes y retor
 ## Estado y criterio de cierre
 
 Etapa A aprobada por Armando e implementada el 08-10-2026, según [DEC-0004](../decisiones/DEC-0004_proponer_calibracion_antes_de_aplicar.md) y [ENS-0005](../../06_TRABAJO/ensayos/ENS-0005_calibracion_direccion_panel.md). Para cerrar: disponer de registros reales, tolerancias acordadas, centro/referencias contrastados y resultado repetible; documentar por separado causa confirmada o limitación residual. Las pruebas de software no resuelven la causa física. Calibración del panel no corrige automáticamente el control del ESP32.
+
+
+## Investigación · 23-10-2026
+
+Armando declara ≈1–casi 2 V con osciloscopio y atribuye el problema a recorrido limitado del potenciómetro/divisor incorrecto. [Revisión ADC, tabla y plan de contraste](../../06_TRABAJO/INVESTIGACION_ADC_DIRECCION_2026-10-23.md): rango estrecho compatible con pérdida de aprovechamiento; no confirma causa del ruido ni divisor sin esquema/medidas. ADC3 CH8 PF10, 12 bits, límites 1042–3313 (942–3413 admisibles) confirmados en dev9 preservada y fuente local dev11-log. 3,3 V nominal, no medido. No aplicar 0–5 V directamente. Pendientes captura/punto de medida, centro/topes, VREF y conciliación con ADC 813 del 21-10. Sin cambios ni ensayo físico; problema abierto.

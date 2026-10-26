@@ -1,0 +1,6 @@
+Configuraci�n comprobada: control, CAN, IWDG, IRQ y RTOS.
+arm-none-eabi-gcc.exe (Arm GNU Toolchain 14.3.Rel1 (Build arm-14.174)) 14.3.1 20250623
+Compilando 151 unidades en C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\.build
+   text	   data	    bss	    dec	    hex	filename
+6600132	    804	1406280	8007216	 7a2e30	C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\.build\stm32_frontal-v1.3-dev5.elf
+BUILD OK: ELF + HEX; sin upload.

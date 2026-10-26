@@ -1,0 +1,11 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.35
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+replay.cpp
+C:\kart proyecto\06_TRABAJO\evidencias\pedal_filtrado_2026-10-21\fuentes\stm32_frontal\tests\../Core/Src/kart_frontend.c(88): warning C4459: declaration of 'tick' hides global declaration
+C:\kart proyecto\06_TRABAJO\evidencias\pedal_filtrado_2026-10-21\fuentes/stm32_frontal/tests/frontend_test.cpp(7): note: see declaration of 'tick'
+C:\kart proyecto\06_TRABAJO\evidencias\pedal_filtrado_2026-10-21\fuentes/stm32_frontal/tests/frontend_test.cpp(23): warning C4244: '=': conversion from 'uint32_t' to 'uint16_t', possible loss of data
+kart_control.cpp
+Generating Code...
+ADC historico, resto simulado: 2061 muestras; 0 incumplimientos reposo cero/permiso D

@@ -1,0 +1,42 @@
+{
+  "reposo_OFF_N_2": {
+    "fuente": "06_TRABAJO\\evidencias\\marchas_2026-10-21\\reposo_OFF_N_2\\muestras.csv",
+    "sha256": "f6111a19443d3fcdd12383d2357ff7338d84fcc5b3d142338d581d8da425e7e0",
+    "n": 600,
+    "min_adc": 156,
+    "max_adc": 215,
+    "media_adc": 187.13333333333333,
+    "sigma_adc": 9.817444790892496,
+    "duracion_s": 29.966
+  },
+  "retorno_1": {
+    "fuente": "06_TRABAJO\\evidencias\\marchas_2026-10-21\\retorno_1\\muestras.csv",
+    "sha256": "4b99979a6e2d4098ba37e69dd53d77dfac224e6498252ed000eebe71248b3877",
+    "n": 400,
+    "min_adc": 187,
+    "max_adc": 245,
+    "media_adc": 218.555,
+    "sigma_adc": 9.726611691642676,
+    "duracion_s": 19.962
+  },
+  "transicion_selector_freno": {
+    "fuente": "06_TRABAJO\\evidencias\\marchas_2026-10-21\\transicion_selector_freno\\muestras.csv",
+    "sha256": "092a07ad4eaf905eaf24f48002032096eb4cd9463da9ec0c8f9bb0746a1bc0ee",
+    "n": 799,
+    "min_adc": 178,
+    "max_adc": 302,
+    "media_adc": 232.50187734668336,
+    "sigma_adc": 34.985134464824874,
+    "duracion_s": 39.996
+  },
+  "dev9_reposo": {
+    "fuente": "06_TRABAJO\\evidencias\\marchas_2026-10-21\\dev9_reposo\\muestras.csv",
+    "sha256": "9c61e7264b9cc882f6a13a57c7b5dc54df67af9f87c1f5d1127da9bbe162f0ec",
+    "n": 262,
+    "min_adc": 158,
+    "max_adc": 218,
+    "media_adc": 188.6412213740458,
+    "sigma_adc": 8.863742685012243,
+    "duracion_s": 13.049
+  }
+}

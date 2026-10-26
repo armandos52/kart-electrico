@@ -1,0 +1,11 @@
+{
+  "version": "stm32_frontal-v1.3-dev10-ui",
+  "instalada": false,
+  "elf_sha256": "bbc9955d69a3c6a5be551930d38c99a4780944e55d5b8737a53a81bf68696257",
+  "hex_sha256": "0ad5c22995668b28d477b28a378c61476f70b687dc293927ac28515bae6ff600",
+  "qspi_identica_dev9": true,
+  "regiones": {
+    "0x8000000": 349852,
+    "0x90000000": 6351932
+  }
+}

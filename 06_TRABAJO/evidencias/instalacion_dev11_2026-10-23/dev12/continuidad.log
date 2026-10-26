@@ -1,0 +1,217 @@
+t=0.0s ADC=132 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=5.0s ADC=152 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=10.0s ADC=148 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=15.0s ADC=160 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=20.1s ADC=154 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=25.1s ADC=134 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=30.1s ADC=133 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=35.1s ADC=154 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=40.1s ADC=186 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=45.1s ADC=160 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=50.2s ADC=136 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+t=55.2s ADC=128 libre=1 freno=0 START=0 selector=0/0 marcha=0 CAN=1
+{
+  "inicio_utc": "2026-10-23T13:44:50.626733+00:00",
+  "etiqueta_operador": "registro_SD_y_detener_solicitado",
+  "solo_lectura": true,
+  "elf_sha256": "b5c9e28880810eef7c6b082d841101ae149db017f70d51711cdc81621e8929e7",
+  "version_esperada": "stm32_frontal-v1.3-dev12-log",
+  "serie_stlink": "0670FF3332584B3043206038",
+  "exige_off_neutro": true,
+  "duracion_plan_s": 60,
+  "identidad": {
+    "VEC": true,
+    "VER": true
+  },
+  "muestras": 1198,
+  "salida_openocd": 0,
+  "fin_utc": "2026-10-23T13:45:51.026511+00:00",
+  "resumen": {
+    "accel_adc": {
+      "n": 1198,
+      "min": 72,
+      "max": 209,
+      "media": 144.45,
+      "desv": 16.15,
+      "p1": 100.0,
+      "p5": 121.8,
+      "p50": 144.0,
+      "p95": 169.0,
+      "p99": 190.0
+    },
+    "accel_raw": {
+      "n": 1198,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "steer_adc": {
+      "n": 1198,
+      "min": 1829,
+      "max": 2151,
+      "media": 1992.5,
+      "desv": 34.76,
+      "p1": 1893.0,
+      "p5": 1936.0,
+      "p50": 1993.0,
+      "p95": 2047.0,
+      "p99": 2097.2
+    },
+    "can_age": {
+      "n": 1198,
+      "min": 3,
+      "max": 198,
+      "media": 115.41,
+      "desv": 56.29,
+      "p1": 8.0,
+      "p5": 38.0,
+      "p50": 103.0,
+      "p95": 193.0,
+      "p99": 198.0
+    },
+    "can_tx_errors": {
+      "n": 1198,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "can_rx_errors": {
+      "n": 1198,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "adc_errors": {
+      "n": 1198,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "sd_rows": {
+      "n": 1198,
+      "min": 240,
+      "max": 1184,
+      "media": 1034.77,
+      "desv": 268.05,
+      "p1": 269.9,
+      "p5": 389.6,
+      "p50": 1184.0,
+      "p95": 1184.0,
+      "p99": 1184.0
+    },
+    "sd_dropped": {
+      "n": 1198,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "sd_max_call_ms": {
+      "n": 1198,
+      "min": 203,
+      "max": 203,
+      "media": 203.0,
+      "desv": 0.0,
+      "p1": 203.0,
+      "p5": 203.0,
+      "p50": 203.0,
+      "p95": 203.0,
+      "p99": 203.0
+    },
+    "sd_queued": {
+      "n": 1198,
+      "min": 0,
+      "max": 3,
+      "media": 0.43,
+      "desv": 0.79,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 2.0,
+      "p99": 3.0
+    },
+    "sd_session": {
+      "n": 1198,
+      "min": 2,
+      "max": 2,
+      "media": 2.0,
+      "desv": 0.0,
+      "p1": 2.0,
+      "p5": 2.0,
+      "p50": 2.0,
+      "p95": 2.0,
+      "p99": 2.0
+    },
+    "sd_state": {
+      "n": 1198,
+      "min": 1,
+      "max": 5,
+      "media": 3.74,
+      "desv": 1.86,
+      "p1": 1.0,
+      "p5": 1.0,
+      "p50": 5.0,
+      "p95": 5.0,
+      "p99": 5.0
+    },
+    "pedal_free": {
+      "1": 1198
+    },
+    "brake": {
+      "0": 1198
+    },
+    "start": {
+      "0": 1198
+    },
+    "gear": {
+      "0": 1198
+    },
+    "drive_input": {
+      "0": 1198
+    },
+    "reverse_input": {
+      "0": 1198
+    },
+    "feedback_usable": {
+      "1": 1198
+    },
+    "stationary": {
+      "1": 1198
+    },
+    "mode_requested": {
+      "0": 1198
+    },
+    "input_flags": {
+      "7": 1198
+    }
+  }
+}

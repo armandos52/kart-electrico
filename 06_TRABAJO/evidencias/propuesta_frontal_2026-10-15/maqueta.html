@@ -1,0 +1,147 @@
+<style>
+#kart-frontal-propuesta { container-type:inline-size; }
+#kart-frontal-propuesta .kf-stage { min-height:350px; display:flex; align-items:center; justify-content:center; padding:20px 6px; }
+#kart-frontal-propuesta .kf-device { --kf-bg:light-dark(#f5f7f8,#10181e); --kf-panel:light-dark(#e6edf0,#1b2932); --kf-fg:light-dark(#162c36,#edf4f5); --kf-muted:light-dark(#415b66,#b1c5ce); --kf-border:light-dark(#c0d0d7,#394e59); --kf-active:light-dark(#155d72,#b0e2eb); --kf-active-text:light-dark(#ffffff,#102b35); --kf-warn:light-dark(#f4e6c0,#423a25); --kf-warn-text:light-dark(#654800,#ffe1a2); width:480px; max-width:100%; color:var(--kf-fg); font:400 12px/1.25 system-ui,sans-serif; background:var(--kf-bg); border:8px solid var(--kf-panel); border-radius:16px; box-sizing:content-box; box-shadow:0 10px 28px light-dark(#172c361c,#00000040); overflow:hidden; }
+#kart-frontal-propuesta .kf-device * { box-sizing:border-box; }
+#kart-frontal-propuesta .kf-reserved { height:48px; background:repeating-linear-gradient(135deg,var(--kf-panel),var(--kf-panel) 6px,var(--kf-bg) 6px,var(--kf-bg) 12px); }
+#kart-frontal-propuesta .kf-header { height:24px; padding:0 10px; display:flex; align-items:center; justify-content:space-between; gap:8px; border-bottom:1px solid var(--kf-border); font-size:11px; }
+#kart-frontal-propuesta .kf-header strong { font-weight:500; letter-spacing:.8px; }
+#kart-frontal-propuesta .kf-banner { height:34px; padding:3px 10px; background:var(--kf-warn); color:var(--kf-warn-text); display:flex; flex-direction:column; justify-content:center; }
+#kart-frontal-propuesta .kf-banner b { font-size:13px; font-weight:500; }
+#kart-frontal-propuesta .kf-banner span { font-size:11px; }
+#kart-frontal-propuesta .kf-content { height:122px; padding:8px 10px; }
+#kart-frontal-propuesta .kf-nav { height:44px; display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--kf-border); }
+#kart-frontal-propuesta button { font:inherit; color:var(--kf-fg); }
+#kart-frontal-propuesta .kf-nav button { background:var(--kf-bg); border:0; padding:0 3px; font-size:12px; }
+#kart-frontal-propuesta .kf-nav button[aria-pressed=true] { background:var(--kf-active); color:var(--kf-active-text); }
+#kart-frontal-propuesta .kf-summary { display:grid; grid-template-columns:112px 1fr 124px; gap:10px; height:100%; }
+#kart-frontal-propuesta .kf-speed { display:flex; flex-direction:column; justify-content:center; background:var(--kf-panel); border-radius:5px; padding:5px 9px; }
+#kart-frontal-propuesta .kf-speed b { font-size:34px; line-height:1.05; font-weight:500; font-variant-numeric:tabular-nums; }
+#kart-frontal-propuesta .kf-sub { color:var(--kf-muted); font-size:11px; }
+#kart-frontal-propuesta .kf-modes { display:flex; flex-direction:column; justify-content:space-around; }
+#kart-frontal-propuesta .kf-pair { display:flex; align-items:center; justify-content:space-between; gap:5px; }
+#kart-frontal-propuesta .kf-pair strong { font-weight:500; }
+#kart-frontal-propuesta .kf-applied { border-top:1px solid var(--kf-border); padding-top:6px; }
+#kart-frontal-propuesta .kf-applied strong { font-size:19px; }
+#kart-frontal-propuesta .kf-signals { display:flex; flex-direction:column; justify-content:space-around; border-left:1px solid var(--kf-border); padding-left:8px; font-size:11px; }
+#kart-frontal-propuesta .kf-signals b { font-weight:500; }
+#kart-frontal-propuesta .kf-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+#kart-frontal-propuesta .kf-value { font-size:20px; font-weight:500; font-variant-numeric:tabular-nums; }
+#kart-frontal-propuesta .kf-meter { height:5px; margin-top:5px; background:var(--kf-panel); }
+#kart-frontal-propuesta .kf-meter span { display:block; height:100%; background:var(--kf-active); }
+#kart-frontal-propuesta .kf-footnote { margin-top:7px; font-size:11px; color:var(--kf-muted); }
+#kart-frontal-propuesta .kf-table { width:100%; border-collapse:collapse; font-size:12px; }
+#kart-frontal-propuesta .kf-table td { padding:4px 0; border-bottom:1px solid var(--kf-border); }
+#kart-frontal-propuesta .kf-table td:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+#kart-frontal-propuesta .kf-sd { display:grid; grid-template-columns:1fr 128px; gap:12px; height:100%; }
+#kart-frontal-propuesta .kf-action { width:100%; min-height:44px; padding:7px; border:1px solid var(--kf-border); border-radius:5px; background:var(--kf-panel); }
+#kart-frontal-propuesta .kf-map-layout { display:grid; grid-template-columns:192px 1fr; gap:12px; height:100%; }
+#kart-frontal-propuesta .kf-car { position:relative; display:grid; grid-template-columns:64px 1fr 64px; grid-template-rows:1fr 1fr; gap:12px 6px; }
+#kart-frontal-propuesta .kf-axle { position:absolute; top:22px; bottom:22px; left:32px; right:32px; border-top:2px solid var(--kf-border); border-bottom:2px solid var(--kf-border); }
+#kart-frontal-propuesta .kf-center { grid-column:2; grid-row:1 / 3; display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--kf-panel); border-radius:12px; z-index:1; gap:4px; }
+#kart-frontal-propuesta .kf-center b { font-size:24px; font-weight:500; }
+#kart-frontal-propuesta .kf-wheel { z-index:1; min-height:44px; border:1px solid var(--kf-border); border-radius:8px; background:var(--kf-bg); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:2px; font-variant-numeric:tabular-nums; }
+#kart-frontal-propuesta .kf-wheel[aria-pressed=true] { border-color:var(--kf-active); background:var(--kf-panel); }
+#kart-frontal-propuesta .kf-map-detail { display:flex; flex-direction:column; justify-content:space-around; }
+#kart-frontal-propuesta .kf-map-detail b { font-weight:500; }
+#kart-frontal-propuesta .kf-blank { display:flex; align-items:center; justify-content:center; flex-direction:column; gap:5px; height:100%; text-align:center; }
+@container (max-width:500px) {
+  #kart-frontal-propuesta .kf-stage { min-height:370px; padding:12px 4px; }
+  #kart-frontal-propuesta .kf-device { box-sizing:border-box; }
+  #kart-frontal-propuesta .kf-banner { height:auto; min-height:34px; }
+  #kart-frontal-propuesta .kf-content { height:auto; min-height:150px; }
+  #kart-frontal-propuesta .kf-summary { grid-template-columns:82px 1fr; gap:8px; }
+  #kart-frontal-propuesta .kf-signals { grid-column:1 / 3; flex-direction:row; flex-wrap:wrap; border-left:0; border-top:1px solid var(--kf-border); padding:6px 0 0; gap:5px; }
+  #kart-frontal-propuesta .kf-speed b { font-size:30px; }
+  #kart-frontal-propuesta .kf-map-layout { grid-template-columns:150px 1fr; gap:8px; min-height:134px; }
+  #kart-frontal-propuesta .kf-car { grid-template-columns:48px 1fr 48px; gap:16px 3px; }
+  #kart-frontal-propuesta .kf-map-detail { font-size:11px; }
+  #kart-frontal-propuesta .kf-map-detail .kf-value { font-size:17px; }
+  #kart-frontal-propuesta .kf-nav button { font-size:11px; }
+  #kart-frontal-propuesta .kf-sd { grid-template-columns:1fr 100px; }
+  #kart-frontal-propuesta .kf-grid { gap:10px 8px; }
+}
+</style>
+<div id="kart-frontal-propuesta">
+  <div class="viz-carousel viz-dotted-background" aria-label="Propuestas de pantalla frontal de desarrollo" data-previous-label="Anterior" data-next-label="Siguiente">
+    <section data-variant="Estado y causa" aria-label="Pantalla con prioridad de estado">
+      <div class="kf-stage"><div class="kf-device" data-design="estado" aria-label="Estado y causa: demostración con datos sintéticos">
+        <div class="kf-reserved" role="img" aria-label="48 filas reservadas por daño del panel, sin controles"></div>
+        <div class="kf-header"><strong>KART / DESARROLLO</strong><span>DEMO · SIN CONEXIÓN</span></div>
+        <div class="kf-banner" aria-live="polite"><b>Estado ESP sin confirmar</b><span>Hay velocidad recibida; falta la trama 0x124</span></div>
+        <div class="kf-content" aria-live="polite"></div>
+        <nav class="kf-nav" aria-label="Páginas de Estado y causa">
+          <button type="button" data-page="Resumen" aria-pressed="true">Resumen</button><button type="button" data-page="Entradas" aria-pressed="false">Entradas</button><button type="button" data-page="CAN" aria-pressed="false">CAN</button><button type="button" data-page="SD" aria-pressed="false">SD</button><button type="button" data-page="BMS" aria-pressed="false">BMS</button>
+        </nav>
+      </div></div>
+    </section>
+    <section data-variant="Kart y señales" aria-label="Pantalla con mapa de ruedas" hidden>
+      <div class="kf-stage"><div class="kf-device" data-design="mapa" aria-label="Kart y señales: demostración con datos sintéticos">
+        <div class="kf-reserved" role="img" aria-label="48 filas reservadas por daño del panel, sin controles"></div>
+        <div class="kf-header"><strong>KART / DIAGNÓSTICO</strong><span>DEMO · SIN CONEXIÓN</span></div>
+        <div class="kf-banner" aria-live="polite"><b>Estado ESP sin confirmar</b><span>Hay velocidad recibida; falta la trama 0x124</span></div>
+        <div class="kf-content" aria-live="polite"></div>
+        <nav class="kf-nav" aria-label="Páginas de Kart y señales">
+          <button type="button" data-page="Resumen" aria-pressed="true">Ruedas</button><button type="button" data-page="Entradas" aria-pressed="false">Entradas</button><button type="button" data-page="CAN" aria-pressed="false">CAN</button><button type="button" data-page="SD" aria-pressed="false">SD</button><button type="button" data-page="BMS" aria-pressed="false">BMS</button>
+        </nav>
+      </div></div>
+    </section>
+  </div>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('kart-frontal-propuesta');
+  const scenarios = {
+    'Sin estado ESP': { title:'Estado ESP sin confirmar', detail:'Hay velocidad recibida; falta la trama 0x124', speed:'0', gear:'N', req:'DIF', rec:'--', applied:'--', age:'80 ms', status:'No recibida', pedal:170, normalized:108, free:false, sd:'ERROR', error:1, rows:0, rpm:'0', mpu:'--' },
+    'Pedal no libre': { title:'Cambio de modo bloqueado', detail:'Pedal no libre · revisar reposo antes de calibrar', speed:'0', gear:'N', req:'DIF', rec:'DIF', applied:'--', age:'40 ms', status:'40 ms', pedal:170, normalized:108, free:false, sd:'PAUSA', error:0, rows:0, rpm:'0', mpu:'Válido' },
+    'CAN caducado': { title:'Sin datos CAN recientes', detail:'Velocidad y estado desconocidos · no mostrar cero', speed:'--', gear:'N', req:'DIF', rec:'--', applied:'--', age:'1.240 ms', status:'1.240 ms', pedal:124, normalized:0, free:true, sd:'PAUSA', error:0, rows:42, rpm:'--', mpu:'--' },
+    'Modo confirmado': { title:'Tracción permitida · ejemplo', detail:'Solicitado DIF / recibido DIF / aplicado DIF', speed:'12', gear:'D', req:'DIF', rec:'DIF', applied:'DIF', age:'40 ms', status:'40 ms', pedal:320, normalized:462, free:false, sd:'GRABANDO', error:0, rows:152, rpm:'180', mpu:'Válido' }
+  };
+  const names = ['Delantera izquierda','Delantera derecha','Trasera izquierda','Trasera derecha'];
+  const states = {};
+  const panels = Array.from(root.querySelectorAll('.kf-device'));
+  function restore(saved) {
+    const content = saved?.privateContent;
+    panels.forEach(el => {
+      const key = el.dataset.design, next = content?.[key] || {};
+      states[key] = { scenario:scenarios[next.scenario] ? next.scenario:'Sin estado ESP', page:['Resumen','Entradas','CAN','SD','BMS'].includes(next.page)?next.page:'Resumen', wheel:Number.isInteger(next.wheel)&&next.wheel>=0&&next.wheel<4?next.wheel:2, sdOverride:null };
+    });
+  }
+  function save(key) {
+    if (window.openai?.setWidgetState) window.openai.setWidgetState({ modelContent:{ propuesta:'Pantalla frontal de desarrollo', diseño:key, escenario:states[key].scenario, página:states[key].page, datos:'sintéticos; sin conexión al kart' }, privateContent:states }).catch(() => {});
+  }
+  function common(page,s,st) {
+    if(page==='Entradas') return `<div class="kf-grid"><div><div class="kf-sub">Pedal · ADC físico</div><span class="kf-value">${s.pedal}</span> cuentas<div class="kf-meter"><span style="width:${s.normalized/4095*100}%"></span></div></div><div><div class="kf-sub">Pedal normalizado</div><span class="kf-value">${s.normalized}</span> / 4095<div class="kf-sub">Libre ≤ 40 · ${s.free?'SÍ':'NO'}</div></div><div>Dirección: <strong>2178</strong> cuentas</div><div>Freno: <strong>${s.gear==='D'?'NO':'SÍ'}</strong> · START: <strong>ON</strong></div></div><div class="kf-footnote">Umbral actual de desarrollo · calibración pendiente</div>`;
+    if(page==='CAN') return `<table class="kf-table" aria-label="Estado de tramas CAN, ejemplo"><tbody><tr><td>0x123 · velocidad / RPM</td><td>${s.age}</td></tr><tr><td>0x124 · estado aplicado</td><td>${s.status}</td></tr><tr><td>Errores RX / TX</td><td>0 / 0 · ejemplo</td></tr></tbody></table><div class="kf-footnote">STM: dev4 de referencia · firmware ESP: sin identificar</div>`;
+    if(page==='SD') { const val=st.sdOverride||s.sd; return `<div class="kf-sd"><div><div class="kf-sub">Registro en tarjeta · ejemplo</div><div class="kf-value">${val}</div><div>Filas: ${s.rows} · último error: ${s.error}</div><div class="kf-footnote">${s.error?'Error de disco · tarjeta no confirmada':'Estado de muestra, sin escritura real'}</div></div><div><button type="button" class="kf-action" data-retry>${['ABRIENDO','GRABANDO'].includes(val)?'Pedir pausa':'Solicitar registro'}</button><div class="kf-footnote">Solicitud local de demo</div></div></div>`; }
+    if(page==='BMS') return `<div class="kf-blank"><span class="kf-value">Datos sin validar</span><span>SOC -- % · temperatura -- °C</span><span class="kf-sub">Confirmar protocolo y configuración del BMS</span></div>`;
+    return '';
+  }
+  function render(el) {
+    const key=el.dataset.design,st=states[key],s=scenarios[st.scenario];
+    el.querySelector('.kf-banner b').textContent=s.title;
+    el.querySelector('.kf-banner span').textContent=s.detail;
+    el.querySelectorAll('[data-page]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.page===st.page)));
+    let content=common(st.page,s,st);
+    if(st.page==='Resumen' && key==='estado') content=`<div class="kf-summary"><div class="kf-speed"><b>${s.speed}</b><span>km/h · ${s.gear}</span><span class="kf-sub">${s.speed==='--'?'Sin dato reciente':'Vel. recibida'}</span></div><div class="kf-modes"><div class="kf-pair"><span class="kf-sub">Solicitado</span><strong>${s.req}</strong></div><div class="kf-pair"><span class="kf-sub">Recibido</span><strong>${s.rec}</strong></div><div class="kf-pair kf-applied"><span>Aplicado</span><strong>${s.applied}</strong></div></div><div class="kf-signals"><div>START <b>petición ON</b></div><div>Freno <b>${s.gear==='D'?'NO':'SÍ'}</b></div><div>SD <b>${s.sd}</b></div><div>BMS <b>sin validar</b></div></div></div>`;
+    if(st.page==='Resumen' && key==='mapa') {
+      const wheelValues=['--','--',s.rpm,s.rpm];
+      const wheels=wheelValues.map((v,i)=>`<button type="button" class="kf-wheel" data-wheel="${i}" aria-label="${names[i]}: ${v} RPM" aria-pressed="${st.wheel===i}" style="grid-column:${i%2===0?1:3};grid-row:${i<2?1:2}"><span class="kf-sub">${['DI','DD','TI','TD'][i]}</span><b>${v}</b></button>`).join('');
+      content=`<div class="kf-map-layout"><div class="kf-car" aria-label="Esquema de cuatro ruedas; valores de ejemplo"><div class="kf-axle"></div>${wheels}<div class="kf-center"><span class="kf-sub">FRENTE ↑</span><b>${s.gear}</b><span class="kf-sub">RPM</span></div></div><div class="kf-map-detail"><b>${names[st.wheel]}</b><div class="kf-value">${wheelValues[st.wheel]} RPM</div><span class="kf-sub">${st.wheel<2?'Validez Hall pendiente':s.rpm==='--'?'Dato CAN caducado':'Feedback de ejemplo'}</span><div class="kf-pair"><span>Modo aplicado</span><b>${s.applied}</b></div><div class="kf-pair"><span>Giro / MPU</span><b>${s.mpu}</b></div></div></div>`;
+    }
+    el.querySelector('.kf-content').innerHTML=content;
+    el.querySelectorAll('[data-retry]').forEach(b=>b.addEventListener('click',()=>{st.sdOverride=['ABRIENDO','GRABANDO'].includes(st.sdOverride||s.sd)?'PAUSA PEDIDA':'ABRIENDO';render(el);save(key);}));
+    el.querySelectorAll('[data-wheel]').forEach(b=>b.addEventListener('click',()=>{st.wheel=Number(b.dataset.wheel);render(el);save(key);}));
+  }
+  restore(window.openai?.widgetState);
+  panels.forEach(el=>{
+    const key=el.dataset.design;
+    el.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>{states[key].page=b.dataset.page;render(el);save(key);}));
+    render(el);
+    if(globalThis.Tweak){const tweak=new Tweak({container:el,onChange:()=>{states[key].sdOverride=null;render(el);save(key);}});tweak.addSelect(states[key],'scenario',{label:'Escenario de ejemplo',options:Object.keys(scenarios)});}
+  });
+  window.addEventListener('openai:set_globals',event=>{
+    if(event.detail?.globals?.widgetState){ const incoming=event.detail.globals.widgetState; panels.forEach(el=>{const key=el.dataset.design,next=incoming.privateContent?.[key];if(next){if(scenarios[next.scenario])states[key].scenario=next.scenario;if(['Resumen','Entradas','CAN','SD','BMS'].includes(next.page))states[key].page=next.page;if(Number.isInteger(next.wheel)&&next.wheel>=0&&next.wheel<4)states[key].wheel=next.wheel;render(el);}}); }
+  });
+})();
+</script>

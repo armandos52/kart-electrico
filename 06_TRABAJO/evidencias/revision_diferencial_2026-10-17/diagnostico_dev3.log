@@ -1,0 +1,22 @@
+RAMP gear=1 left=0.002631579 right=0.002631579 expected_ratio=0.754403591 actual_ratio=1.000000000
+FAIL propuesta: conservar reparto geometrico durante arranque D/R
+OK control positivo: reparto geometrico despues de rampa D/R
+RAMP gear=2 left=0.002631579 right=0.002631579 expected_ratio=0.754403591 actual_ratio=1.000000000
+FAIL propuesta: conservar reparto geometrico durante arranque D/R
+OK control positivo: reparto geometrico despues de rampa D/R
+COAST mode=0 speed=19.500000 left=0.002631579 right=0.002631579 inhibit=none
+FAIL propuesta: exceso a pedal libre memoriza corte hasta <=19
+OK control positivo: una rueda a 50 corta ambos mandos en R
+OK control positivo: histeresis con pedal sostenido
+OK control positivo: velocidad invalida inhibe y exige rearme
+COAST mode=1 speed=19.500000 left=0.002631579 right=0.002631579 inhibit=none
+FAIL propuesta: exceso a pedal libre memoriza corte hasta <=19
+OK control positivo: una rueda a 50 corta ambos mandos en R
+OK control positivo: histeresis con pedal sostenido
+OK control positivo: velocidad invalida inhibe y exige rearme
+COAST mode=2 speed=19.500000 left=0.002631579 right=0.002631579 inhibit=none
+FAIL propuesta: exceso a pedal libre memoriza corte hasta <=19
+OK control positivo: una rueda a 50 corta ambos mandos en R
+OK control positivo: histeresis con pedal sostenido
+OK control positivo: velocidad invalida inhibe y exige rearme
+TOTAL 16; FALLOS 5 (requisitos propuestos no implementados)

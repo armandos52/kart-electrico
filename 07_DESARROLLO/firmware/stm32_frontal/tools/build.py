@@ -38,7 +38,7 @@ def main():
     common=['-mcpu=cortex-m7','-mthumb','-mfpu=fpv5-sp-d16','-mfloat-abi=hard','-Os','-g3','-DUSE_HAL_DRIVER','-DUSE_BPP=16','-DSTM32F746xx','-DDEBUG','-ffunction-sections','-fdata-sections','-Wall','-Wextra','-fstack-usage','--specs=nano.specs']+include_flags
     # Un cambio de cabecera invalida toda la caché (incluye dependencias y protocolo común).
     headers=hashlib.sha256()
-    for p in sorted(list(ROOT.rglob('*.h'))+list(ROOT.rglob('*.hpp'))+list((ROOT.parent/'common').glob('*.h'))):headers.update(p.read_bytes())
+    for p in sorted(list(ROOT.rglob('*.h'))+list(ROOT.rglob('*.hpp'))+list(ROOT.rglob('*.inc'))+list((ROOT.parent/'common').glob('*.h'))):headers.update(p.read_bytes())
     digest=headers.hexdigest()+json.dumps(common)+subprocess.check_output([gcc,'-dumpversion'],text=True)
     def compile_one(source):
         key=hashlib.sha256(str(source.relative_to(ROOT)).encode()).hexdigest()[:16]

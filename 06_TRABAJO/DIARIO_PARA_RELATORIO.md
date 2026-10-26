@@ -1,10 +1,14 @@
 ---
 estado: vigente
-actualizado: 2026-10-15
+actualizado: 2026-10-23
 resumen: Índice y diario de evidencias para el relatório final de ingeniería del kart.
 ---
 
 # Diario para el relatório final
+
+## PUB-0002 / PROB-0007 / PROB-0017 · Corte del 26-10-2026
+
+Petición de Armando: publicar todo el desarrollo y evidencias acumulados y ordenar hallazgo del condensador/búsqueda IMU. [Síntesis con cronología, configuración, procedimiento propuesto y limitaciones](AVANCES_2026-10-26.md); [registro de publicación y verificaciones](PUBLICACION_2026-10-26.md). Base local `f9f66a7`, cambios previos conservados. No se modifica hardware ni se instala firmware en esta sesión. El diagnóstico del condensador y pérdida de medio rango son declaraciones, sin nuevas medidas. Pruebas locales y diagnóstico de traducciones registrados en PUB-0002: se añaden 30 claves IMU y tres mensajes del historial en ES/PT/EN tras fallo reproducido; repetición 33/33. Sin cambios de lógica de control. Se actualizan estado, tareas y problemas; no se cierra lectura de originales ni se afirma copia independiente.
 
 ## APR-PID-IMU / PROB-0017 · Aprendizaje de PID e IMU y simulador · 23-10-2026
 
@@ -13,6 +17,100 @@ Objetivo: fase de aprendizaje solicitada por Armando para preparar la futura IMU
 Resultado de la revisión de código (análisis, no ensayo): el ESC v1.3 equivale a un control **P** (Kp 1/200 por °/s, zona muerta 2 °/s, tope ±10 % × esfuerzo base), sin I ni D. La consigna `v·tan δ/L` no está limitada por adherencia: a 10 m/s y 20° pide ≈160 °/s, ≈2,85 g, frente a ≈56 °/s físicamente posibles con μ≈1. Signo de montaje del MPU y periodo real del lazo, pendientes.
 
 Simulador: modelo de bicicleta plano con neumáticos saturables. Masa, inercia, rigideces y fuerza por rueda **supuestas**; geometría del firmware. Comprobaciones automáticas en el navegador (sintéticas): en círculo, firmware 6,4 °/s de error medio, P 6,2, PI 0,6 a 20 s; con *windup*, integral 4,63 sin anti-windup frente a 0,24 con él. Negativos corregidos durante la prueba: el ángulo de dirección no llegaba a la física, la brújula usaba otro origen y el escenario de motor débil en recta producía un error <1 °/s, poco didáctico (se sustituyó por el círculo). Las ganancias no son transferibles al kart. Siguiente: PROB-0017 en banco con el módulo fuera del kart; medir sesgo/ruido/signo y `dt`; diseñar el PI con Armando antes de tocar el firmware.
+
+## ENS-0029 / DEC-0011 / PROB-0013/0018 · Instalación y ensayo SD · 23-10-2026
+
+Armando autoriza implementar el plan y cargar/comprobar la placa. [ENS-0029](ensayos/ENS-0029_instalacion_historial_sd.md) registra configuración, procedimiento, fallos y límites; [evidencias con hashes](evidencias/instalacion_dev11_2026-10-23/manifest.json). Respaldo íntegro identifica dev9; dev11 grabada/verificada presenta FatFs 1/HAL 0x10 TX_UNDERRUN. Corrección DMA con caché y búfer exclusivo produce **dev12-log instalada**, oscura, botón global y sesiones automáticas. Relectura interna/QSPI cero diferencias, HEX `a887b993f9733d45e6710770cc4b1c19d4d83b8b965ece9bd3b70ba8ad23ec1d`. ESP32 conservado. PC frontal 170/0, dashboard 163/0, SWD 3/0 y regresión existente panel 35/0.
+
+Real: primera sesión 920 filas; serie SWD 1.198 muestras/59,996 s cubre sesión 2 y cierre en 1.184 filas, pérdidas/errores cero; sesión 3 termina en 989 filas/Guardado, sin pérdidas ni error SD. Máximo acumulado de llamada SD 203 ms, no latencia de control. Segunda serie abortada por D en una muestra; después aparecen 53 errores ADC y lectura actual válida, sin atribuir causa. Usuario confirma acciones táctiles; framebuffer final Entradas. Sin ensayo de motores. Usuario sin lector: archivos reales/replay, persistencia independiente y fallos físicos SD pendientes. Final Guardado/OFF/N. Consultar ficha para negativas de herramientas, fuentes y próximos pasos.
+
+## PROB-0015 · Rectificación de filtrado · 23-10-2026
+
+Armando corrige la propuesta a **solo pasabajos para el ruido general**. Se actualizan investigación, problema, tareas y estado; se conserva la mención previa a pasaaltos como historia, no como propuesta vigente. [Registro técnico](INVESTIGACION_ADC_DIRECCION_2026-10-23.md). Corte/orden/componentes y eficacia pendientes de caracterización; preservar continua y respuesta útil. Misma configuración documental, sin cambio de código/binario/placa ni ensayo nuevo. Continúan mejoras de arquitectura, GND y retornos.
+
+
+## PROB-0015 / PCB-EMI · Ampliación de investigación · 23-10-2026
+
+Armando declara ruido general, además del recorrido del potenciómetro, y ausencia de GND extendido en las placas realizadas. Pide conservar para el informe filtrado pasaaltos/pasabajos y posterior mejora de placas, arquitectura y pistas con propósito eléctrico. [Detalle, limitaciones y procedimiento antes/después](INVESTIGACION_ADC_DIRECCION_2026-10-23.md#ampliación-para-el-informe-ruido-general-filtrado-y-placas--23-10-2026). Se registra como propuesta, sin verificar layout ni atribuir causalidad definitiva. Se precisa conservar continua de posición, elegir filtro por banda útil y estudiar retornos/desacoplo; cobre GND no garantiza eliminación total. Misma configuración de referencia de INV-ADC-20261023; no nueva identificación, versión, binario, ensayo ni modificación de hardware/código. Siguiente: caracterización y revisión de esquemas/PCB antes de dimensionar; documentar trazas, revisiones y efectos favorables/adversos. Actualizados informe, problema, tareas y estado.
+
+## INV-ADC-20261023 / PROB-0007 / PROB-0015 · Dirección, recorrido y divisor · 23-10-2026
+
+[Investigación, tabla y siguiente ensayo](INVESTIGACION_ADC_DIRECCION_2026-10-23.md), [fuentes preservadas/hashes/cálculos](evidencias/adc_direccion_2026-10-23/README.md). Objetivo: contrastar hipótesis de Armando, que declara ≈1–casi 2 V en osciloscopio y atribuye ruido a recorrido limitado/divisor incorrecto. No entrega trazas ni punto de medida. Revisión estática dev9 preservada y fuente actual dev11-log, sobre HEAD bebe452 con cambios previos; última configuración física acreditada dev9/ESP32 v1.2 (ENS-0026), no reconectada hoy. No se modifica código/binario ni se prueba hardware.
+
+Resultado positivo: límites 1042/3313, margen 100, ADC3 CH8 PF10, 12 bits y escalado confirmados en fuentes; tabla ideal con VREF supuesto 3,3 V. Limitaciones/negativos: divisor, VREF real y ruido no medidos; ≈1 V no concuerda directamente con ADC 813 previo. Recorrido reducido compatible, causalidad no confirmada. Fuente local más avanzada que el estado inicial, sin atribuir instalación. Opciones registradas: mejorar acoplamiento/calibración o estudiar sensor con mayor sensibilidad angular y adaptación eléctrica. Próximo: medir antes/después del divisor, centro/topes, ruido y referencia, conservando brutos por Wi-Fi; USB ESP32 solo fuera del kart.
+
+Consulta focalizada catálogo/fichas, notas y DOC-0042 PDF 28 vía buscador; DOC-0014 únicamente localizado, sin análisis de hoja ni cierre de lectura. Dos búsquedas iniciales usaron rutas inexistentes (sensores*/App), corregidas localizando los archivos reales. Verificación documental y cálculos, no pruebas automáticas de comportamiento. Sin commit/push ni copia externa nueva.
+
+## PLAN-SD / DEC-0011 / PROB-0013 / PROB-0018 · Historial y oscuro fijo · 22-10-2026
+
+**Aclaración posterior del mismo día:** Armando responde «Sí, microSD en la pantalla y panel del portátil» a la pregunta sobre STM32 y panel 3D. Se actualizan plan, estado, tareas y problemas: soporte/ubicación/aplicación confirmados por declaración; capacidad/formato pendientes. No es aprobación del plan ni de autograbación; sin cambios de código ni nueva prueba física. El párrafo siguiente conserva el contexto previo a la respuesta.
+
+Armando solicita retirar claro/oscuro, usar el botón para grabar y conservar/reproducir todas las pruebas en la aplicación existente. Declara memoria disponible/instalada, con denominación micro USB/microSD ambigua; se consulta soporte, ubicación y capacidad. **Pide plan antes de implementar**. Hipótesis explícita: microSD de F746 y panel local 3D. [Plan y criterios de aceptación](PLAN_HISTORIAL_SD_Y_PANTALLA_2026-10-22.md), [DEC-0011](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0011_oscuro_fijo_y_acceso_grabacion.md), [PROB-0018](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0018_historial_sd_y_reproduccion_incompletos.md).
+
+Revisión estática de fuentes de trabajo, ensayos, catálogo/ficha DOC-0034 y texto PDF 21/29 vía buscador. HEAD `bebe4528747bc6e05dc1ba244cd3ce9a090a7942` con cambios previos; [hashes](evidencias/plan_historial_sd_2026-10-22/fuentes.json) y [estado anterior](evidencias/plan_historial_sd_2026-10-22/git_status_antes.txt). Última configuración física según ENS-0026: F746 dev9-ui/ESP32 v1.2; fuente frontal dev10 local sin instalar. Sin conexión SWD/Wi-Fi, compilación ni nuevo ensayo físico/automático de comportamiento. Se corrige la vigencia de estado/tareas, que aún encabezaban dev8, a partir de ENS-0026/0027, no por suponer instalado el código más reciente.
+
+Resultado: existe grabación CSV nominal 5 Hz y JSONL Wi-Fi; faltan sesiones inequívocas, biblioteca/replay y señales traseras para cobertura autónoma. `get_fattime=0`, exFAT/nombres largos deshabilitados y detección SD constante requieren tratamiento explícito. Orden propuesto: SD fiable/sesiones y UI → historial/replay → ampliar diagnóstico CAN → aceptación integral. Autograbación y 50 Hz local son propuestas, no resultados ni parámetros aprobados. Memoria/fecha/validez/cobertura no identificadas se mostrarán como desconocidas. PROB-0013 continúa abierto; no se garantiza pérdida cero al cortar energía.
+
+Incidencias de revisión: alias `python` de WindowsApps inaccesible, resuelto usando runtime integrado; búsqueda de dos rutas `fatfs_platform.*` inexistentes, continuada sobre archivos reales `bsp_driver_sd.c`/`fatfs.c`. Sin pérdida de evidencia ni cambios de código. [Verificación documental](evidencias/plan_historial_sd_2026-10-22/README.md): diez hashes de fuente intactos, 278 enlaces locales resueltos y diff sin errores de espacios; no es ensayo de comportamiento. Siguiente: aprobación del plan y confirmación del soporte; después implementar y verificar por entregas. No se configura copia externa ni se cierra lectura L4; figuras/pines no inspeccionados físicamente.
+
+## ENS-0026 / ENS-0027 · Marchas y pedal · 21-10-2026
+
+Enlace de cronología añadido el 22-10 desde fichas existentes: [ENS-0026](ensayos/ENS-0026_diagnostico_bloqueo_marchas.md) contiene mediciones, identificación ESP32 v1.2, respaldo/instalación/relectura dev9 y límites del ensayo posterior. [ENS-0027](ensayos/ENS-0027_pedal_media_ponderada.md) conserva dev10, media ponderada y curva del pedal, resultados PC/compilación y **ausencia de instalación**. Evidencias, binarios/hashes y resultados negativos permanecen en ambos ensayos; no son pruebas repetidas hoy. Sensibilidad, dirección en topes, brownout e IMU pendientes.
+
+## ENS-0025 / PROB-0014 / PROB-0015 · Revisión de diferencial, reversa y ruido · 17-10-2026
+
+Armando solicita revisar arquitectura/matemática DIF/BLQ/ESC y límite R de 20 km/h; informa ≈50 indicados en los tres modos, ruedas siempre elevadas en banco y giro audible rápido. Declara mucho ruido electromagnético que atribuye a los diferenciales, afectando dirección y otros sensores; referencia turbia/inconsistente. Sin trazas, espectro, RPM independiente ni velocidad sobre suelo. Aclara **«dame soluciones, muéstrame el plan y luego implementamos»**: diagnóstico/documentación, sin editar firmware ni instalar.
+
+[ENS-0025](ensayos/ENS-0025_revision_diferencial_y_reversa.md), [plan](REVISION_DIFERENCIAL_Y_REVERSA_2026-10-17.md) y [fuentes/logs/hashes](evidencias/revision_diferencial_2026-10-17/README.md). HEAD `bebe452`, cambios previos conservados; F746 dev8-ui instalada conocida, ESP32 físico sin identificar; se comparan v1.2 `905b09e` y dev3 fuente. MSVC/PC con periféricos simulados: regresión **56/0**, diagnóstico dev3 **16/5** (rampa altera proporción al arrancar D/R y exceso a pedal libre no actualiza memoria en tres modos; 11 controles positivos), v1.2 **3/3 reproducciones de PWM pleno en R** con RPM elevadas. No simulación dinámica ni prueba física nueva. Advertencias del arnés/legado y retorno negativo del diagnóstico conservados; sin corrección pendiente presentada como realizada.
+
+[PROB-0014](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0014_reversa_y_arquitectura_diferencial.md) distingue ausencia de límite en v1.2, supervisor presente en dev3 y duda de versión instalada; los dos hallazgos dev3 no prueban causa del 50 real. [PROB-0015](../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0015_ruido_electromagnetico_sensores.md) registra ruido como declaración, fuente/acoplamiento sin confirmar. Plan: supervisor común R, rampa proporcional, unidades/semántica de modos y telemetría; caracterizar Kelly/Hall/geometría y EMI antes de filtro o ajuste de regulación/ESC. ESC dinámico no validable solo con ruedas elevadas. Próximo: revisar plan con Armando; integrado por Wi-Fi, USB ESP32 solo fuera del kart. Sin nuevas imágenes de placa, commit/push ni respaldo externo; cobertura focalizada registrada, no lectura integral.
+
+## ENS-0024 · BMS visible y preferencia oscuro · 16-10-2026
+
+Armando acepta el diseño instalado («todo funciona bien»), prefiere oscuro y señala SOC/temperatura ocultos. [ENS-0024](ensayos/ENS-0024_bms_visible_diagnostico.md) diferencia tramas CAN recibidas de protocolo validado: el bloqueo visual era `BMS_FORMAT_CONFIRMED=0`. Se conserva ese flag y se muestran candidatos históricos con asterisco y aviso provisional, rango antes de división y edad ≤2000 ms independiente por señal. No se inventan valores ni se cambia control/CSV/calibración.
+
+**Dev8-ui compilada e instalada**, Verified OK y captura real de BMS 87 % / 22 °C, bytes/edades/JSON conservados. PC: 163/0 dashboard (18 nuevas), 150/0 frontal y 124 renders sintéticos; QSPI idéntica a dev7-ui, interna 349.644 B. [Fuentes, logs, capturas y hashes](evidencias/bms_dashboard_2026-10-16/README.md). Dev7-ui/relectura y respaldos completos anteriores conservados. Fuente nueva sobre HEAD `bebe452`, sin commit/push ni copia externa; no nuevo build F411 ni cambio ESP32. Protocolo/modelo/calibración BMS y PROB-0012/0013 pendientes. Revisión focalizada de catálogo/ficha/inventario y búsqueda de referencias, sin lectura nueva integral de originales. Resultado detallado de relectura en ensayo.
+
+## ENS-0023 / B01–B04 · Bugs e instalación del dashboard · 16-10-2026
+
+Armando solicita buscar y corregir fallos reales. [ENS-0023](ensayos/ENS-0023_bugs_e_instalacion_dashboard.md) conserva los cuatro defectos reproducidos en dev6-ui: jitter cancela toques, tráfico CAN ajeno cuenta como error, pulso Hall posterior al reloj de control desborda edad y reintento SD concatena a CSV parcial. Se corrigen en **dev7-ui** con pruebas de límites/recuperación; no cambian calibración, permisos de marcha, START físico ni protocolo CAN. Estado/error CSV nuevo 128 preserva el archivo incompatible; no garantiza detectar toda corrupción.
+
+PC: negativos **140/5 frontal y 144/3 dashboard**; finales **150/0 y 145/0**, banco compartido **204/0** incluye frontal y decodificador SWD **3/0**. F746 y F411 compilados; F411 no grabado. [Fuentes, diff, logs, paquetes y hashes](evidencias/frontal_bugs_2026-10-16/README.md). HEAD base `bebe452`, trabajo local conservado; sin commit/push.
+
+Durante el trabajo el usuario declara pantalla conectada, kart encendido y ruedas levantadas, y autoriza instalar. F746 identificada por UID/ST-LINK; acceso USB ordinario da `open failed`, ampliado funciona. **Respaldo doble completo coincidente**, dev4 previo identificado byte a byte. Dev7-ui grabada 13:27:56–13:29:15, Verified OK, relectura interna/QSPI **0 diferencias**. Tres capturas reales con tick creciente 16.367→271.537 ms, errores CAN/ADC 0; feedback 0x123 presente, 0x124 ausente; pedal 139/139/152 y START/marcha pasan de OFF/N a ON/D por interacción física. No se acredita giro de motores ni relé. Armando confirma «todo funciona bien», prefiere oscuro, considera claro poco legible y señala SOC/temperatura ocultos. Se continúa en ENS-0024. PROB-0012/0013 abiertos; sin lectura integral ni copia externa.
+
+## ENS-0022 / PROB-0012 / PROB-0013 / DEC-0010 · Dashboard claro/oscuro · 15–16-10-2026
+
+Armando acepta la propuesta y solicita implementación, temas claro/oscuro y uso durante pruebas con motores; declara kart suspendido. Confirma **«Todavía no; avanza con el código»** respecto a F746/ST-LINK. Se implementa **stm32_frontal-v1.3-dev6-ui**, sin grabación ni nuevas medidas físicas, sobre HEAD `bebe452` y fuente dev5 local. Otro chat modifica archivos durante la sesión; Armando confirma origen y pide descartarlos. Se conservan en evidencia antes de retomar la base dev5, sin atribuir sus resultados a este ensayo.
+
+[ENS-0022](ensayos/ENS-0022_dashboard_frontal_claro_oscuro.md) detalla objetivo, configuración, fuentes, procedimiento, resultados y límites. Siete páginas en TouchGFX, causa separada del aviso, ADC y condiciones reales de D/R, edades/validez Hall, modos solicitado/recibido/aplicado y estado/petición SD. Tema volátil, oscuro al arrancar. Navegación disponible en marcha; START físico y permisos/calibración/CAN intactos. Snapshot ampliado a 116 bytes, observador SWD compatible con 96/116; CSV conserva esquema 2.
+
+Pruebas PC: **130/0 frontales, 139/0 dashboard, 3/0 SWD; 184/0 banco compartido incluyen las 130**. 120 renders sintéticos revisados por geometría/glifos y galería de siete páginas inspeccionada visualmente en ambos temas. F746 compila ELF/HEX. Fallos conservados: generador sin fontTools resuelto con parser estándar; dos ajustes de API TouchGFX; regresión 130/1 por truncamiento en texto antiguo F411, corregida a 130/0; primer build F411 sin acceso a caché, repetido con acceso al entorno. [Evidencia, fuentes, logs y hashes](evidencias/frontal_dashboard_2026-10-15/README.md), [galería PC](evidencias/frontal_dashboard_2026-10-15/GALERIA.md).
+
+No se acredita rendimiento/táctil/LCD físico ni desaparición del bloqueo del pedal o de la espera SD. ADC sintético 170→108 reproduce bloqueo por pedal; D ya seleccionado admite movimiento y acelerador en la lógica probada. Siguiente: respaldo/instalación cuando esté disponible, medir pedal con ELF correspondiente, identificar ESP32, validar GUI/SD y registrar pruebas de motores por Wi-Fi con operador. F746 conocida sigue dev4, F411 v0.3; ESP32 físico sin identificar. Sin commit/push ni copia externa; consulta focalizada L4 sin nuevas páginas originales ni cierre de lote.
+
+## PROP-FRONTAL / DEC-0010 · Descripción y propuestas de diagnóstico · 15-10-2026
+
+Armando solicita describir el programa de pantalla frontal, identificar mejoras pendientes y mostrar cómo podría quedar. [Análisis y propuesta](PROPUESTA_PANTALLA_FRONTAL_2026-10-15.md) distinguen dev4 documentado en F746, dev5 local sin grabar y ESP32 físico sin identificar. Sesión solo PC sobre HEAD `bebe4528747bc6e05dc1ba244cd3ce9a090a7942`, con cambios anteriores conservados. Sin conexión al kart ni edición de firmware/binarios.
+
+Se consulta el código propio y el framebuffer preservado; se describe adquisición/mando/registro/presentación y se priorizan pedal, estado ESP, SD, sensores/BMS y legibilidad. Dos maquetas navegables: «Estado y causa» y «Kart y señales», con páginas de entradas/CAN/SD/BMS y escenarios sintéticos. Se recomienda combinar resumen y mapa como páginas; es propuesta, no diseño aceptado. Reserva superior de 48 filas y área útil nativa de 480 × 224; vista estrecha adaptada solo para el chat.
+
+[Evidencia, procedimiento y límites](evidencias/propuesta_frontal_2026-10-15/README.md): fuente de maqueta, capturas, navegación, solicitudes SD simuladas, datos caducados y hashes. Comprobaciones en navegador, no pruebas automáticas del firmware ni ensayo físico. Se conserva ajuste de altura de avisos para vista estrecha, negativa de acceso a rutas del conector al guardar capturas (resuelta guardando su retorno por herramientas locales), y regeneración inicial que exigió `--force`. Pendientes implementación TouchGFX, disponibilidad real de señales adicionales, tiempos de ejecución y validación LCD/táctil. No se cierra PROB-0012/0013 ni se acredita nuevo SOC, calibración o comportamiento de motores. Estado/tareas/cobertura actualizados; sin commit/push ni copia independiente nueva.
+
+## ENS-0020 / ENS-0021 / PROB-0012 / PROB-0013 · Retoma y SD local · 15-10-2026
+
+Armando pide revisar lo terminado en otra sesión y continuar; confirma **«Ahora no; continuar con código y pruebas locales»** al consultar disponibilidad para pedal. Se retoma HEAD `bebe452`, preservando diario/herramientas/evidencia anteriores sin commit. ENS-0019 ya cerró las tres mejoras originales en la F746 dev4; relectura y snapshot conservados contrastados, sin nueva observación de placa. [ENS-0020](ensayos/ENS-0020_registro_pedal_f746.md) registra el intento previo de captura `open failed`, sin muestras ni calibración.
+
+[ENS-0021](ensayos/ENS-0021_sd_reintentos_locales.md): dev5 local corrige espera SD desde el final del fallo/cierre, conserva último error durante reintento y comprueba pausa al volver de montaje/apertura/cabecera. Renueva también tiempo de filas/sync tras abrir. Pruebas sintéticas 120/16 antes → 120/0 después; banco compartido 174/0 (incluye las 120), compilaciones F746 y F411 correctas. [Fuentes, negativos/positivos, logs, binarios y hashes](evidencias/sd_reintentos_2026-10-15/README.md). PROB-0013 sigue abierto: no se elimina espera interna de montaje ni se implementa detección física. Sin flasheo, hardware, cambio ADC/START/control/CAN, commit/push ni copia externa. Instalados conocidos: F746 dev4/F411 v0.3; ESP32 sin identificar. Próximo: pedal dedicado y ensayo físico SD con/sin tarjeta. Pantallas finales pendientes para cierre.
+
+## Entorno de programación del frontal · 15-10-2026
+
+Armando pide instalar el software para programar el frontal y elige: compilar/grabar, TouchGFX Designer, STM32CubeIDE + CubeMX y STM32CubeProgrammer + driver ST-LINK.
+
+- **Ya disponible (comprobado, sin instalar):** ARM GNU 14.3.Rel1 portable, OpenOCD xPack 0.12.0 y Python 3.12.10 del venv `kart-esp32`. `tools/build.py` compila `stm32_frontal-v1.3-dev4` con «BUILD OK» (151 unidades, ~15 s con caché; sin grabar). El HEX resultante tiene el mismo SHA-256 que el grabado en ENS-0019 (`b758edd7…0316`), es decir, la compilación es reproducible en este equipo. Es una prueba de compilación, no de hardware.
+- **Añadido:** `tools/compilar_frontal.ps1`, atajo que llama a `build.py`, comprueba rutas e imprime tamaño y SHA-256 del HEX. No graba.
+- **No instalado todavía:** las herramientas oficiales de ST requieren iniciar sesión en st.com y `winget` no las ofrece. Las debe descargar Armando. Versión del proyecto: TouchGFX Designer **4.26.0** (la última publicada es 4.27.0), CubeMX 6.17.0 según el `.ioc`, paquete FW_F7 1.17.4. La página de ST permite elegir versión.
+- **Regla al regenerar:** hacerlo primero en otra copia y revisar el diff, según README_ROBUSTEZ. Sin placa conectada en esta sesión (no hay ST-LINK en USB).
 
 ## ENS-0019 / PROB-0004 / PROB-0011 / PROB-0012 / PROB-0013 · Frontal dev4 en la F746 real · 15-10-2026
 

@@ -1,10 +1,14 @@
 ---
 estado: abierto; correcciones implementadas, contraste físico pendiente
-actualizado: 2026-10-11
+actualizado: 2026-10-17
 resumen: Modos/pantalla poco funcionales declarados por Armando; auditoría v1.2 y frontal con defectos de estados, rampa, ESC y SD.
 ---
 
 # PROB-0008 · Robustez del control, modos y pantalla
+
+## Continuación 17-10 · reversa y arquitectura
+
+[PROB-0014](PROB-0014_reversa_y_arquitectura_diferencial.md) y [ENS-0025](../../06_TRABAJO/ensayos/ENS-0025_revision_diferencial_y_reversa.md) registran ≈50 km/h indicados en R en todos los modos, banco elevado según Armando. V1.2 sin límite reproducida en PC; dev3 sí corta pero presenta dos hallazgos de rampa/histéresis pendientes. ESP32 instalado sin identificar. [Plan](../../06_TRABAJO/REVISION_DIFERENCIAL_Y_REVERSA_2026-10-17.md) antes de implementar por última indicación del usuario; no cambios de firmware en esta sesión. Ruido declarado separado en [PROB-0015](PROB-0015_ruido_electromagnetico_sensores.md). Las actualizaciones siguientes conservan su fecha y alcance histórico.
 
 ## Actualización 11-10 · STOP en lote CAN
 

@@ -1,5 +1,7 @@
 # Dossier para profesores · 13 de octubre de 2026
 
+**Actualización del 26-10-2026:** [avances de estas semanas, pruebas, capturas y prioridades](../06_TRABAJO/AVANCES_2026-10-26.md). El contenido inferior conserva el corte académico anterior.
+
 Este repositorio presenta el trabajo de continuación del kart realizado entre el 28 de septiembre y el 13 de octubre de 2026. La propuesta 2026/27 plantea diferencial electrónico inteligente y estimación de autonomía real hasta febrero de 2027; se solicita orientación para concretar la aportación, el alcance y los criterios de aceptación. [Propuesta y planificación](../06_TRABAJO/INICIO_INVESTIGACION_2026-27.md).
 
 El punto de partida es un vehículo y una documentación de cursos anteriores. Se separan aquí la arquitectura heredada, el nuevo desarrollo y la validación todavía necesaria. La autonomía sigue como objetivo de investigación; no se presenta un estimador de autonomía implementado o validado.

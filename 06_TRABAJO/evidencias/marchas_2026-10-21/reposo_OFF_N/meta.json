@@ -1,0 +1,134 @@
+{
+  "inicio_utc": "2026-10-21T10:10:27.775793+00:00",
+  "etiqueta_operador": "pie_fuera_confirmado_usuario_START_OFF_N",
+  "solo_lectura": true,
+  "elf_sha256": "ec8b3b9dd74297e53f2aa9b7a0c739b46de91ccad94e2b5997708d4e8a892c0d",
+  "version_esperada": "stm32_frontal-v1.3-dev8-ui",
+  "serie_stlink": "0670FF3332584B3043206038",
+  "exige_off_neutro": true,
+  "duracion_plan_s": 30,
+  "abortado": "Se exige START OFF y selector/marcha N; no tocar pedal",
+  "identidad": {
+    "VEC": true,
+    "VER": true
+  },
+  "muestras": 1,
+  "salida_openocd": 0,
+  "fin_utc": "2026-10-21T10:10:28.185800+00:00",
+  "resumen": {
+    "accel_adc": {
+      "n": 1,
+      "min": 259,
+      "max": 259,
+      "media": 259.0,
+      "desv": 0.0,
+      "p1": 259.0,
+      "p5": 259.0,
+      "p50": 259.0,
+      "p95": 259.0,
+      "p99": 259.0
+    },
+    "accel_raw": {
+      "n": 1,
+      "min": 318,
+      "max": 318,
+      "media": 318.0,
+      "desv": 0.0,
+      "p1": 318.0,
+      "p5": 318.0,
+      "p50": 318.0,
+      "p95": 318.0,
+      "p99": 318.0
+    },
+    "steer_adc": {
+      "n": 1,
+      "min": 2006,
+      "max": 2006,
+      "media": 2006.0,
+      "desv": 0.0,
+      "p1": 2006.0,
+      "p5": 2006.0,
+      "p50": 2006.0,
+      "p95": 2006.0,
+      "p99": 2006.0
+    },
+    "can_age": {
+      "n": 1,
+      "min": 170,
+      "max": 170,
+      "media": 170.0,
+      "desv": 0.0,
+      "p1": 170.0,
+      "p5": 170.0,
+      "p50": 170.0,
+      "p95": 170.0,
+      "p99": 170.0
+    },
+    "can_tx_errors": {
+      "n": 1,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "can_rx_errors": {
+      "n": 1,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "adc_errors": {
+      "n": 1,
+      "min": 0,
+      "max": 0,
+      "media": 0.0,
+      "desv": 0.0,
+      "p1": 0.0,
+      "p5": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "pedal_free": {
+      "0": 1
+    },
+    "brake": {
+      "0": 1
+    },
+    "start": {
+      "0": 1
+    },
+    "gear": {
+      "0": 1
+    },
+    "drive_input": {
+      "1": 1
+    },
+    "reverse_input": {
+      "0": 1
+    },
+    "feedback_usable": {
+      "1": 1
+    },
+    "stationary": {
+      "1": 1
+    },
+    "mode_requested": {
+      "0": 1
+    },
+    "input_flags": {
+      "7": 1
+    }
+  }
+}

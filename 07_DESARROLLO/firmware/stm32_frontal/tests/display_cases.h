@@ -64,7 +64,8 @@ static void test_display_developer() {
         char base[5][41]={};Kart_FormatDisplay(&s,base);
         s.ui_notice=(uint8_t)note;Kart_FormatDisplay(&s,lines);
         causes_preserved&=strcmp(base[1],lines[1])==0;
-        notices_visible&=strstr(lines[4],"MODO:")!=nullptr;
+        const char* expected_notice[]={"","MODO: PONER N","PARAR Y SOLTAR PEDAL","MODO: CAN CADUCADO","MODO: VER ENTRADAS"};
+        notices_visible&=strstr(lines[4],expected_notice[note])!=nullptr;
         layout_valid&=display_fits(lines);
     }
     check(causes_preserved,"F03 todos los motivos y el desconocido conservan prioridad");

@@ -1,0 +1,11 @@
+{
+  "version": "stm32_frontal-v1.3-dev8-ui",
+  "base": "dev7-ui instalada y releida en ENS-0023",
+  "qspi_sin_cambios": true,
+  "hex_sha256": "98b89e6db204712845bfb16550ad94a1bc4984aa9a1fe692eb7ace10db872a08",
+  "elf_sha256": "ec8b3b9dd74297e53f2aa9b7a0c739b46de91ccad94e2b5997708d4e8a892c0d",
+  "regiones": {
+    "0x8000000": 349644,
+    "0x90000000": 6351932
+  }
+}
