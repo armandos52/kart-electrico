@@ -6,6 +6,8 @@ resumen: Estado consolidado, configuración y siguiente paso; historia enlazada 
 
 # Estado actual · 26-10-2026
 
+[Galería de pruebas de pantalla publicada](../06_TRABAJO/GALERIA_PRUEBAS_PANTALLA.md): 14 capturas F746 y galerías de banco/PC, enlazadas desde la portada; sin ensayo nuevo.
+
 ## Actualización prioritaria · 26-10-2026
 
 [Resumen de avances al 26-10](../06_TRABAJO/AVANCES_2026-10-26.md): Armando comunica condensador de dirección entre masa y REF en lugar de masa y VCC, con pérdida aproximada de medio rango ADC. Diagnóstico declarado, sin esquema/foto ni medida antes/después aportados; reparación no acreditada. Búsqueda de IMU en curso, sin selección ni modos nuevos validados. Configuración más reciente acreditada: F746 dev12-log (ENS-0029); ESP32 v1.2-diagnostico. Las versiones inferiores describen antecedentes. [Publicación del trabajo acumulado](../06_TRABAJO/PUBLICACION_2026-10-26.md) con comprobaciones locales satisfactorias; no ensayo físico nuevo.

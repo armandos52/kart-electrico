@@ -6,6 +6,8 @@ resumen: Tareas próximas y completadas del proyecto del kart.
 
 # Tareas
 
+- [x] 26-10: reunir y enlazar las capturas de pruebas de pantalla en la [galería pública](GALERIA_PRUEBAS_PANTALLA.md), distinguiendo placa real, banco sintético y renders PC.
+
 ## Prioridad comunicada · 26-10-2026
 
 - [ ] Contrastar condensador masa–REF / masa–VCC y pérdida aproximada de medio rango ADC declarados por Armando: esquema, fotos, componente y medidas antes/después; no dar reparación por realizada.

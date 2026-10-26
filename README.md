@@ -1,5 +1,11 @@
 # Kart eléctrico · revisión académica 2026/27
 
+**[Ver las capturas de las pruebas de pantalla](06_TRABAJO/GALERIA_PRUEBAS_PANTALLA.md)** · Frontal F746, banco F411 y vistas de comprobación en PC.
+
+![Pantalla dev12 durante el ensayo del 23-10](06_TRABAJO/evidencias/instalacion_dev11_2026-10-23/dev12/estado_sd/pantalla.png)
+
+*Captura digital del framebuffer; condiciones y límites en la galería.*
+
 **Avances hasta el 26 de octubre de 2026.** Documentación, software y evidencias de la continuación del Smart Electric Kart: diagnóstico del sistema heredado, telemetría por Wi-Fi, panel del portátil y mejoras de control STM32/ESP32.
 
 **[Empezar por el dossier para profesores](00_INICIO/REVISION_PARA_PROFESORES.md)** · [Estado actual](00_INICIO/ESTADO_ACTUAL.md) · [Dejar una observación](https://github.com/armandos52/kart-electrico/issues/new/choose)

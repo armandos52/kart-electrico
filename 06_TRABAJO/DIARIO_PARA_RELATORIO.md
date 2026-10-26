@@ -6,6 +6,10 @@ resumen: Índice y diario de evidencias para el relatório final de ingeniería 
 
 # Diario para el relatório final
 
+## PUB-0002 · Galería de pantalla · 26-10-2026
+
+Armando solicita publicar las imágenes de las pruebas de pantalla. Los PNG ya estaban versionados; se reúnen 14 capturas F746 del 15 al 23-10 y enlaces a banco F411/PC en la [galería](GALERIA_PRUEBAS_PANTALLA.md), con fecha, procedencia, ensayo y límites. Se añade acceso y captura visible a portada y estado. Base `a329f39`; sin alterar imágenes, firmware, configuración física ni realizar ensayo nuevo. Verificación: destinos locales existentes y comprobador de publicación; integración trazada en la PR de esta galería.
+
 ## PUB-0002 / PROB-0007 / PROB-0017 · Corte del 26-10-2026
 
 Petición de Armando: publicar todo el desarrollo y evidencias acumulados y ordenar hallazgo del condensador/búsqueda IMU. [Síntesis con cronología, configuración, procedimiento propuesto y limitaciones](AVANCES_2026-10-26.md); [registro de publicación y verificaciones](PUBLICACION_2026-10-26.md). Base local `f9f66a7`, cambios previos conservados. No se modifica hardware ni se instala firmware en esta sesión. El diagnóstico del condensador y pérdida de medio rango son declaraciones, sin nuevas medidas. Pruebas locales y diagnóstico de traducciones registrados en PUB-0002: se añaden 30 claves IMU y tres mensajes del historial en ES/PT/EN tras fallo reproducido; repetición 33/33. Sin cambios de lógica de control. Se actualizan estado, tareas y problemas; no se cierra lectura de originales ni se afirma copia independiente.
