@@ -1,10 +1,54 @@
 ---
 estado: vigente
-actualizado: 2026-10-13
+actualizado: 2026-10-16
 resumen: Registro de versiones de firmware del kart (DEC-0001) — qué cambia, si se grabó y con qué ensayo.
 ---
 
 # Versiones de firmware
+
+## Frontal dev12-log instalada · 23-10-2026
+
+Oscuro fijo, botón global, autograbación microSD por sesiones y DMA con caché/búfer dedicado. Incluye filtro/curva de pedal dev10. Dev11 falló con TX_UNDERRUN en placa y se conserva como resultado negativo. Dev12 grabada/verificada y relectura interna/QSPI cero diferencias; sesiones 2/3 cerradas con 1.184/989 filas, sin pérdidas/error SD. [ENS-0029](../../06_TRABAJO/ensayos/ENS-0029_instalacion_historial_sd.md), HEX SHA-256 `a887b993f9733d45e6710770cc4b1c19d4d83b8b965ece9bd3b70ba8ad23ec1d`. 53 errores ADC posteriores pendientes de diagnóstico; no ensayo de tracción. ESP32 conservado; lector SD/replay real pendientes.
+
+## Frontal dev8-ui instalada · 16-10-2026
+
+**`stm32_frontal-v1.3-dev8-ui` grabada, Verified OK y captura real BMS con 87 % / 22 °C provisionales.** [ENS-0024](../../06_TRABAJO/ensayos/ENS-0024_bms_visible_diagnostico.md): mantiene flags BMS sin confirmar; muestra candidatos con rango/caducidad independiente de 2 s. Oscuro preferido por el usuario, claro opcional conservado. 163/0 dashboard, 150/0 frontal, build F746 correcto; interna 349.644 B, QSPI 6.351.932 B sin cambios. HEX SHA-256 `98b89e6db204712845bfb16550ad94a1bc4984aa9a1fe692eb7ace10db872a08`. Sin cambios de control, calibración, CAN o CSV. Dev7-ui/relectura conservadas; F411 último build usa dev7-ui, última imagen física v0.3.
+
+## Frontal dev7-ui instalada · 16-10-2026
+
+**`stm32_frontal-v1.3-dev7-ui` grabada, Verified OK y arranque real observado.** [ENS-0023](../../06_TRABAJO/ensayos/ENS-0023_bugs_e_instalacion_dashboard.md): respaldo doble de interna/QSPI e identidad dev4 anterior confirmada. Cuatro correcciones reproducidas: jitter táctil, contador CAN, edad Hall y protección de CSV parcial. Conserva diseño de siete páginas claro/oscuro, control y calibración. PC 150/0 frontal, 145/0 dashboard, 3/0 SWD y 204/0 compartidas; F746 y F411 compilados, F411 sin grabar. HEX SHA-256 `0aa8b6b7d38791dc4b487092c6f2d07ce0e4aaa11f41c07afddf280cdd503740`; [paquete, logs y capturas](../../06_TRABAJO/evidencias/frontal_bugs_2026-10-16/README.md). ESP32 físico sin identificar, PROB-0012/0013 abiertos. Sin commit/push nuevo; cobertura física exacta en ensayo.
+
+## Frontal dev6-ui local · 15–16-10-2026
+
+**`stm32_frontal-v1.3-dev6-ui` compilado, sin grabar.** [ENS-0022](../../06_TRABAJO/ensayos/ENS-0022_dashboard_frontal_claro_oscuro.md): siete páginas de desarrollo y temas claro/oscuro, fuentes antialias, condiciones reales de D/R y edades/validez Hall. Se conserva control, calibración y CAN; snapshot ampliado 96→116 bytes con decodificador SWD compatible. CSV sigue esquema 2. 130/0 frontal, 139/0 dashboard y 3/0 SWD; 184/0 banco compartido incluyen las 130. [Fuentes, renders, ELF/HEX y hashes](../../06_TRABAJO/evidencias/frontal_dashboard_2026-10-15/README.md). Fuente dev5 base preservada; cambios concurrentes de otro chat apartados por instrucción del usuario, sin mezclarlos con esta versión. F746 física conocida sigue dev4; instalación y ensayo con motores en kart suspendido pendientes por disponibilidad. Sin commit/push nuevo.
+
+## Frontal dev5 local · 15-10-2026
+
+**STM32 v1.3-dev5 compilado, sin grabar**, sobre HEAD `bebe452`; la placa sigue en dev4. [ENS-0021](../../06_TRABAJO/ensayos/ENS-0021_sd_reintentos_locales.md): reintento SD 1 s después del fallo y limpieza, último error visible durante apertura y pausa comprobada antes de continuar escribiendo. 120/0 frontales y 174/0 con banco compartido; F746 y F411 compilados. [ELF/HEX, BIN F411 y SHA-256](../../06_TRABAJO/evidencias/sd_reintentos_2026-10-15/README.md). La fuente F411 sigue 0.4-dev y ahora consume núcleo dev5; su última imagen grabada sigue v0.3. Sin cambios ADC/START/control/CAN; bloqueo interno de SD y pruebas físicas pendientes. Cambios de esta retoma sin commit/push.
+
+## Frontal F746 grabado · 15-10-2026
+
+**Instalado el 15-10 en la F746: STM32 v1.3-dev4**, HEX `b758edd7…0316`, grabado con OpenOCD (interna + QSPI), `Verified OK` y relectura independiente sin diferencias. [ENS-0019](../../06_TRABAJO/ensayos/ENS-0019_frontal_dev4_f746_real.md).
+
+- **Antes:** había el firmware **original de la entrega** (`STM32-final/STM32CubeIDE/Debug/STM32F746G_DISCO.hex`, coincidencia byte a byte), no una v1.3. Respaldo completo en [RESPALDO.md](../respaldos/stm32_f746/2026-10-15/RESPALDO.md).
+- **ESP32 en el bus:** no emite 0x124, compatible con v1.2 o anterior; no identificado.
+- **Comprobado en placa:** dev4 funciona más de 3 h sin reinicios. Se cierran F01–F03 en hardware y se abren [PROB-0012](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0012_pedal_reposo_fuera_de_pedal_libre.md) (pedal) y [PROB-0013](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0013_sd_sin_tarjeta_bloqueo_y_error_invisible.md) (SD).
+
+## Pantalla de desarrollo · 15-10-2026
+
+**STM32 v1.3-dev4**, compilado este día y grabado después en ENS-0019: versión visible/CSV/paquete unificada, limitador R según estado CAN sin umbral supuesto y causas siempre visibles con avisos de modo aparte. [ENS-0018](../../06_TRABAJO/ensayos/ENS-0018_mejoras_pantalla_desarrollo.md): 101 comprobaciones, 13 fallos antes → 0 después; ARM ELF/HEX preservados en `07_DESARROLLO/respaldos/stm32/v1.3-dev4/`, hashes en evidencia. Control y protocolo binario intactos; ESP32 continúa dev3. Cambios locales sobre `43b0c29`, sin commit/push.
+
+**Banco F411 v0.4-dev de fuente**, compilado sin grabar: adapta el formateador compartido y capturador, 155 comprobaciones en PC (incluyen las 101 frontales) y cinco casos de captura con serie falsa. BIN SHA-256 `2647a757e0b878465881f6929851e3f75249beccf5803891f8e6db32ab038a19`. Última imagen grabada/verificada conocida sigue v0.3 del 14-10; no se atribuyen a ella las correcciones nuevas. [DEC-0010](../../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0010_pantallas_desarrollo_y_usuario_final.md): pantallas finales pendientes para cierre del proyecto.
+
+## Revisión frontal · 15-10-2026
+
+Sin nueva versión ni grabación. [ENS-0017](../../06_TRABAJO/ensayos/ENS-0017_revision_preinstalacion_frontal.md): STM32 dev3 recompilado; ELF/HEX idénticos por SHA-256 a los preservados el 13-10, 83 comprobaciones frontales y 56 traseras correctas. Tres casos adicionales de presentación reproducidos en [PROB-0011](../../05_DECISIONES_Y_PROBLEMAS/problemas/PROB-0011_presentacion_frontal_preinstalacion.md). Ajustes y validación F746 pendientes; no inferir firmware físico del rótulo DEV2 mostrado por este código.
+
+## Banco Nucleo F411 · 14-10-2026
+
+**Actual en banco: v0.3 visual**, binario `vistas_v0.3_02.bin`, SHA-256 `fbf86237a4888b81c80508a69d8648d6ae25fa0596848108d972be4f159031a1`, grabado y verificado. Diez escenas adaptadas del frontal, B1 navega, 137 comprobaciones sin fallos, capturas GRAM con confirmación por fila/CRC. [ENS-0016](../../06_TRABAJO/ensayos/ENS-0016_vistas_frontal_nucleo.md). Primera compilación v0.3 y v0.2 quedan conservadas; no cambia firmware de producción F746/ESP32. Trabajo local sin nuevo commit/etiqueta.
+
+**Antecedente, destino separado del kart.** Firmware previo conservado en tres lecturas idénticas. Diagnóstico `v0.1`: LCD MCUFRIEND ILI9341 (`0x9341`). Banco **v0.2**, después sustituido por v0.3: 83 comprobaciones de funciones frontal/trasera dev3 en F411 sin fallos, periféricos simulados, LCD/B1 físicos y visual/START ON–OFF confirmados por Armando. [ENS-0015](../../06_TRABAJO/ensayos/ENS-0015_nucleo_f411_pantalla_banco.md), [proyecto](nucleo_f411_banco/README.md), [respaldo previo](../respaldos/nucleo_f411/2026-10-14/RESPALDO.md). BIN/ELF, fuentes y hashes conservados; sin nuevo commit/etiqueta. No se grabaron las placas del kart ni se migró TouchGFX.
 
 ## Entrega pública · 13-10-2026
 

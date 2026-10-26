@@ -7,6 +7,7 @@ Entrega para revisión académica del 13-10-2026. Los ensayos automáticos sigui
 | Panel Python + JavaScript | [README y arranque](panel_local/README.md) | 0.4.0; diagnóstico, gráficas, registro y calibración visual |
 | ESP32 / PlatformIO | [README](firmware/esp32_trasero/README.md) | v1.3-dev3; compilado, aceptación física pendiente |
 | STM32 / TouchGFX | [README](firmware/stm32_frontal/README_ROBUSTEZ.md) | v1.3-dev3; compilado con dependencias locales; instalado sin identificar |
+| Banco Nucleo F411 / MCUFRIEND | [README](firmware/nucleo_f411_banco/README.md) | v0.3 grabado; diez escenas/B1, 137 comprobaciones con periféricos simulados y capturas del LCD |
 | CAN y telemetría | [Contrato v1.3](firmware/common/PROTOCOLO_V13.md), [protocolo del panel](panel_local/PROTOCOLO.md) | Unidades, validez y límites del contrato |
 | Investigación 2026/27 | [Propuesta](propuesta_2026-27/Proposta_Smart_Electric_Kart_V2_2026-27.docx), [cronograma resumido](propuesta_2026-27/Cronograma_Smart_Electric_Kart_proposta_resumida.docx) | Alcance y criterios a acordar con orientadores |
 

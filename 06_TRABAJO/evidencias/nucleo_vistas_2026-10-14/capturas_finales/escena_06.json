@@ -1,0 +1,15 @@
+{
+  "scene": 5,
+  "state": "VIEW v=0.3 id=5 name=LIMITE REVERSA tick_sim=1220 speed=20 speed_valid=1 gear=2 start=1 brake=0 requested=0 received=0 applied=0 inhibit=17 feedback_fresh=1 status_fresh=1 sd=0 sd_error=0 sd_rows=0 bms_valid=0",
+  "utc": "2026-10-14T19:45:04.942102+00:00",
+  "source": "ILI9341_GRAM",
+  "format": "RGB565LE",
+  "flow": "ROWACK",
+  "width": 320,
+  "height": 240,
+  "bytes": 153600,
+  "crc32": "B17EE2BE",
+  "sha256_rgb565": "9b009cba6a20f655270216dbefef1167b5fed4145c129b7ff2215a7ca1361283",
+  "sha256_png": "d30a1dd693ec8829c321a2dd7b48f9ab97dbf657ea77fd94015dfafa577cc76d",
+  "binary_version": "v0.3"
+}

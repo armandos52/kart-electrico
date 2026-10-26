@@ -1,0 +1,73 @@
+      -------------------------------------------------------------------
+                       STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : 0672FF564881774867244057
+ST-LINK FW  : V2J46M33
+Board       : NUCLEO-F411RE
+Voltage     : 3.24V
+SWD freq    : 950 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x431
+Revision ID : Rev A
+Device name : STM32F411xC/E
+NVM size    : 512 KBytes
+Device type : MCU
+Device CPU  : Cortex-M4
+BL Version  : 0xD0
+
+Core is running
+
+UPLOADING ...
+  File          : C:\kart proyecto\07_DESARROLLO\respaldos\nucleo_f411\2026-10-14\flash_cubeprogrammer.bin
+  Size          : 524288 Bytes
+  Address:      : 0x8000000
+Read progress:
+�������������������������������������������������� 0%
+�������������������������������������������������� 100%
+
+Data read successfully
+Time elapsed during read operation is: 00:00:08.922
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x40023c14 
+  Size          : 8 Bytes
+
+�������������������������������������������������� 50%
+�������������������������������������������������� 100%
+
+
+OPTION BYTES BANK: 0
+
+   Read Out Protection:
+
+     RDP          : 0xAA (Level 0, no protection) 
+
+   PCROP Protection:
+
+     SPRMOD       : 0x0 (PCROP disabled. nWPRi bits used for Write protection on sector i) 
+
+   BOR Level:
+
+     BOR_LEV      : 0x3 (BOR  OFF    reset threshold level from 1.80 to 2.10 V) 
+
+   User Configuration:
+
+     WDG_SW       : 0x1 (Software watchdog) 
+     nRST_STOP    : 0x1 (No reset generated) 
+     nRST_STDBY   : 0x1 (No reset generated) 
+
+   Write Protection:
+
+     WRP0         : 0x1 (Write protection not active) 
+     WRP1         : 0x1 (Write protection not active) 
+     WRP2         : 0x1 (Write protection not active) 
+     WRP3         : 0x1 (Write protection not active) 
+     WRP4         : 0x1 (Write protection not active) 
+     WRP5         : 0x1 (Write protection not active) 
+     WRP6         : 0x1 (Write protection not active) 
+     WRP7         : 0x1 (Write protection not active) 
+Core is running

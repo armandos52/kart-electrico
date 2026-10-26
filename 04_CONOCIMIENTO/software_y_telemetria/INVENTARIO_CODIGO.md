@@ -1,10 +1,12 @@
 ---
 estado: vigente
-actualizado: 2026-10-08
+actualizado: 2026-10-17
 resumen: Inventario del código entregado por sistema y versión (Arduino 23/24, STM32 24/25 y 25/26, ESP32 25/26), su estructura y la lista de mejoras candidatas para analizar.
 ---
 
 # Inventario del código del kart
+
+**Actualización focalizada 17-10-2026:** [revisión de diferencial/reversa](../../06_TRABAJO/REVISION_DIFERENCIAL_Y_REVERSA_2026-10-17.md) contrasta v1.2/dev3 y frontend dev8-ui. F746 dev8-ui instalada y verificada en ENS-0024; ESP32 físico aún sin identificar. Supervisor de R existe en dev3, no en v1.2; rampa e histéresis con nuevos casos pendientes. [ENS-0025](../../06_TRABAJO/ensayos/ENS-0025_revision_diferencial_y_reversa.md). Este inventario conserva abajo el corte histórico: sus afirmaciones de frontal sin identificar y control original no describen el estado actual. Revisión integral de sus secciones sigue pendiente.
 
 **Vigencia:** el cuerpo de este inventario describe la entrega y la revisión del 30-09. Para el ESP32 de trabajo v1.2 y sus funciones efectivas, consultar la [revisión del 08-10](../../06_TRABAJO/REVISION_CODIGO_V12_2026-10-08.md), con fuentes/hashes y 19 casos aislados. Desde octubre ya hay dependencias fijadas, compilación/grabación y telemetría con motivo de reset; «no se ha compilado» y «faltan librerías» se conservan como situación histórica. El binario frontal instalado sigue sin identificar. Se precisan abajo corte por freno, watchdogs, bus-off y significado de ceros para no perpetuar conclusiones incorrectas.
 

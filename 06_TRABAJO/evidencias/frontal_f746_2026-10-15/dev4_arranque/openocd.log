@@ -1,0 +1,27 @@
+xPack Open On-Chip Debugger 0.12.0+dev-02228-ge5888bda3-dirty (2025-10-04-22:44)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : STLINK V2J47M34 (API v2) VID:PID 0483:374B
+Info : Target voltage: 3.215748
+Info : clock speed 1800 kHz
+Info : SWD DPIDR 0x5ba02477
+Info : [stm32f7x.cpu] Cortex-M7 r0p1 processor detected
+Warn : [stm32f7x.cpu] Erratum 702596: single stepping may enter pending exception handler!
+Warn : [stm32f7x.cpu] Erratum 3092511: Cortex-M7 can halt in an incorrect address when breakpoint and exception occurs simultaneously
+Info : [stm32f7x.cpu] The erratum 3092511 workaround will resume after an incorrect halt
+Info : [stm32f7x.cpu] target has 8 breakpoints, 4 watchpoints
+Info : [stm32f7x.cpu] Examination succeed
+Info : [stm32f7x.cpu] gdb port disabled
+L1CR=0x00000001
+L1WHPCR=0x02150036
+L1WVPCR=0x011B000C
+L1PFCR=0x00000002
+L1CFBAR=0xC0000000
+L1CFBLR=0x03C003C3
+L1CFBLNR=0x00000110
+LTDC_GCR=0x00002221
+UWTICK_A=0x00004E11
+UWTICK_B=0x0000500E
+FIN
+shutdown command invoked

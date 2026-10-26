@@ -1,0 +1,15 @@
+{
+  "scene": 4,
+  "state": "VIEW v=0.3 id=4 name=MARCHA ESC tick_sim=1220 speed=22 speed_valid=1 gear=1 start=1 brake=0 requested=1 received=1 applied=1 inhibit=0 feedback_fresh=1 status_fresh=1 sd=1 sd_error=0 sd_rows=1 bms_valid=0",
+  "utc": "2026-10-14T19:44:50.849055+00:00",
+  "source": "ILI9341_GRAM",
+  "format": "RGB565LE",
+  "flow": "ROWACK",
+  "width": 320,
+  "height": 240,
+  "bytes": 153600,
+  "crc32": "16A3D2F7",
+  "sha256_rgb565": "420ec64c136a1371f06d0196a7cc6a9c6d883b6155eabbb5b6c5d0249168415a",
+  "sha256_png": "6c4370109ac7a6f1dd63fb11e7d0f810a036e169243e6873329eaf8cc81c1422",
+  "binary_version": "v0.3"
+}

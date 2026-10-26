@@ -1,0 +1,170 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.35
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+dashboard_test.cpp
+dashboard_test.cpp(92): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+PASS Arranque oscuro en resumen
+PASS Liberacion aislada no cambia modo
+PASS Tema cambia sin emitir accion de control
+PASS Siete paginas navegables sin accion de control
+PASS Arrastrar o cancelar anula el gesto
+PASS Salir del boton cancela modo
+PASS Un toque completo produce una sola solicitud de modo
+PASS B01 oscilacion de un pixel no pierde el toque
+PASS B01 tolerancia de ocho pixeles en cada eje
+PASS B01 desplazamiento grande sin muestras intermedias tampoco activa
+PASS B01 desplazamiento acumulado cancela aunque regrese al origen
+PASS B01 salir de la zona cancela incluso dentro de la tolerancia
+PASS Boton SD solicita grabacion o pausa
+PASS Todo el boton Marcha corresponde a su area tactil
+PASS Seleccion de rueda sin efectos en control
+PASS Franja superior sin accion
+PASS Gesto en franja descartado
+PASS Salida de evidencia disponible
+PASS Geometria y glifos caso=0 tema=0 pagina=0 rueda=0
+PASS Geometria y glifos caso=0 tema=0 pagina=1 rueda=0
+PASS Geometria y glifos caso=0 tema=0 pagina=2 rueda=0
+PASS Geometria y glifos caso=0 tema=0 pagina=3 rueda=0
+PASS Geometria y glifos caso=0 tema=0 pagina=3 rueda=1
+PASS Geometria y glifos caso=0 tema=0 pagina=3 rueda=2
+PASS Geometria y glifos caso=0 tema=0 pagina=3 rueda=3
+PASS Geometria y glifos caso=0 tema=0 pagina=4 rueda=0
+PASS Geometria y glifos caso=0 tema=0 pagina=5 rueda=0
+PASS Geometria y glifos caso=0 tema=0 pagina=6 rueda=0
+PASS Geometria y glifos caso=0 tema=1 pagina=0 rueda=0
+PASS Geometria y glifos caso=0 tema=1 pagina=1 rueda=0
+PASS Geometria y glifos caso=0 tema=1 pagina=2 rueda=0
+PASS Geometria y glifos caso=0 tema=1 pagina=3 rueda=0
+PASS Geometria y glifos caso=0 tema=1 pagina=3 rueda=1
+PASS Geometria y glifos caso=0 tema=1 pagina=3 rueda=2
+PASS Geometria y glifos caso=0 tema=1 pagina=3 rueda=3
+PASS Geometria y glifos caso=0 tema=1 pagina=4 rueda=0
+PASS Geometria y glifos caso=0 tema=1 pagina=5 rueda=0
+PASS Geometria y glifos caso=0 tema=1 pagina=6 rueda=0
+PASS Geometria y glifos caso=1 tema=0 pagina=0 rueda=0
+PASS Geometria y glifos caso=1 tema=0 pagina=1 rueda=0
+PASS Geometria y glifos caso=1 tema=0 pagina=2 rueda=0
+PASS Geometria y glifos caso=1 tema=0 pagina=3 rueda=0
+PASS Geometria y glifos caso=1 tema=0 pagina=3 rueda=1
+PASS Geometria y glifos caso=1 tema=0 pagina=3 rueda=2
+PASS Geometria y glifos caso=1 tema=0 pagina=3 rueda=3
+PASS Geometria y glifos caso=1 tema=0 pagina=4 rueda=0
+PASS Geometria y glifos caso=1 tema=0 pagina=5 rueda=0
+PASS Geometria y glifos caso=1 tema=0 pagina=6 rueda=0
+PASS Geometria y glifos caso=1 tema=1 pagina=0 rueda=0
+PASS Geometria y glifos caso=1 tema=1 pagina=1 rueda=0
+PASS Geometria y glifos caso=1 tema=1 pagina=2 rueda=0
+PASS Geometria y glifos caso=1 tema=1 pagina=3 rueda=0
+PASS Geometria y glifos caso=1 tema=1 pagina=3 rueda=1
+PASS Geometria y glifos caso=1 tema=1 pagina=3 rueda=2
+PASS Geometria y glifos caso=1 tema=1 pagina=3 rueda=3
+PASS Geometria y glifos caso=1 tema=1 pagina=4 rueda=0
+PASS Geometria y glifos caso=1 tema=1 pagina=5 rueda=0
+PASS Geometria y glifos caso=1 tema=1 pagina=6 rueda=0
+PASS Geometria y glifos caso=2 tema=0 pagina=0 rueda=0
+PASS Geometria y glifos caso=2 tema=0 pagina=1 rueda=0
+PASS Geometria y glifos caso=2 tema=0 pagina=2 rueda=0
+PASS Geometria y glifos caso=2 tema=0 pagina=3 rueda=0
+PASS Geometria y glifos caso=2 tema=0 pagina=3 rueda=1
+PASS Geometria y glifos caso=2 tema=0 pagina=3 rueda=2
+PASS Geometria y glifos caso=2 tema=0 pagina=3 rueda=3
+PASS Geometria y glifos caso=2 tema=0 pagina=4 rueda=0
+PASS Geometria y glifos caso=2 tema=0 pagina=5 rueda=0
+PASS Geometria y glifos caso=2 tema=0 pagina=6 rueda=0
+PASS Geometria y glifos caso=2 tema=1 pagina=0 rueda=0
+PASS Geometria y glifos caso=2 tema=1 pagina=1 rueda=0
+PASS Geometria y glifos caso=2 tema=1 pagina=2 rueda=0
+PASS Geometria y glifos caso=2 tema=1 pagina=3 rueda=0
+PASS Geometria y glifos caso=2 tema=1 pagina=3 rueda=1
+PASS Geometria y glifos caso=2 tema=1 pagina=3 rueda=2
+PASS Geometria y glifos caso=2 tema=1 pagina=3 rueda=3
+PASS Geometria y glifos caso=2 tema=1 pagina=4 rueda=0
+PASS Geometria y glifos caso=2 tema=1 pagina=5 rueda=0
+PASS Geometria y glifos caso=2 tema=1 pagina=6 rueda=0
+PASS Geometria y glifos caso=3 tema=0 pagina=0 rueda=0
+PASS Geometria y glifos caso=3 tema=0 pagina=1 rueda=0
+PASS Geometria y glifos caso=3 tema=0 pagina=2 rueda=0
+PASS Geometria y glifos caso=3 tema=0 pagina=3 rueda=0
+PASS Geometria y glifos caso=3 tema=0 pagina=3 rueda=1
+PASS Geometria y glifos caso=3 tema=0 pagina=3 rueda=2
+PASS Geometria y glifos caso=3 tema=0 pagina=3 rueda=3
+PASS Geometria y glifos caso=3 tema=0 pagina=4 rueda=0
+PASS Geometria y glifos caso=3 tema=0 pagina=5 rueda=0
+PASS Geometria y glifos caso=3 tema=0 pagina=6 rueda=0
+PASS Geometria y glifos caso=3 tema=1 pagina=0 rueda=0
+PASS Geometria y glifos caso=3 tema=1 pagina=1 rueda=0
+PASS Geometria y glifos caso=3 tema=1 pagina=2 rueda=0
+PASS Geometria y glifos caso=3 tema=1 pagina=3 rueda=0
+PASS Geometria y glifos caso=3 tema=1 pagina=3 rueda=1
+PASS Geometria y glifos caso=3 tema=1 pagina=3 rueda=2
+PASS Geometria y glifos caso=3 tema=1 pagina=3 rueda=3
+PASS Geometria y glifos caso=3 tema=1 pagina=4 rueda=0
+PASS Geometria y glifos caso=3 tema=1 pagina=5 rueda=0
+PASS Geometria y glifos caso=3 tema=1 pagina=6 rueda=0
+PASS Geometria y glifos caso=4 tema=0 pagina=0 rueda=0
+PASS Geometria y glifos caso=4 tema=0 pagina=1 rueda=0
+PASS Geometria y glifos caso=4 tema=0 pagina=2 rueda=0
+PASS Geometria y glifos caso=4 tema=0 pagina=3 rueda=0
+PASS Geometria y glifos caso=4 tema=0 pagina=3 rueda=1
+PASS Geometria y glifos caso=4 tema=0 pagina=3 rueda=2
+PASS Geometria y glifos caso=4 tema=0 pagina=3 rueda=3
+PASS Geometria y glifos caso=4 tema=0 pagina=4 rueda=0
+PASS Geometria y glifos caso=4 tema=0 pagina=5 rueda=0
+PASS Geometria y glifos caso=4 tema=0 pagina=6 rueda=0
+PASS Geometria y glifos caso=4 tema=1 pagina=0 rueda=0
+PASS Geometria y glifos caso=4 tema=1 pagina=1 rueda=0
+PASS Geometria y glifos caso=4 tema=1 pagina=2 rueda=0
+PASS Geometria y glifos caso=4 tema=1 pagina=3 rueda=0
+PASS Geometria y glifos caso=4 tema=1 pagina=3 rueda=1
+PASS Geometria y glifos caso=4 tema=1 pagina=3 rueda=2
+PASS Geometria y glifos caso=4 tema=1 pagina=3 rueda=3
+PASS Geometria y glifos caso=4 tema=1 pagina=4 rueda=0
+PASS Geometria y glifos caso=4 tema=1 pagina=5 rueda=0
+PASS Geometria y glifos caso=4 tema=1 pagina=6 rueda=0
+PASS Geometria y glifos caso=5 tema=0 pagina=0 rueda=0
+PASS Geometria y glifos caso=5 tema=0 pagina=1 rueda=0
+PASS Geometria y glifos caso=5 tema=0 pagina=2 rueda=0
+PASS Geometria y glifos caso=5 tema=0 pagina=3 rueda=0
+PASS Geometria y glifos caso=5 tema=0 pagina=3 rueda=1
+PASS Geometria y glifos caso=5 tema=0 pagina=3 rueda=2
+PASS Geometria y glifos caso=5 tema=0 pagina=3 rueda=3
+PASS Geometria y glifos caso=5 tema=0 pagina=4 rueda=0
+PASS Geometria y glifos caso=5 tema=0 pagina=5 rueda=0
+PASS Geometria y glifos caso=5 tema=0 pagina=6 rueda=0
+PASS Geometria y glifos caso=5 tema=1 pagina=0 rueda=0
+PASS Geometria y glifos caso=5 tema=1 pagina=1 rueda=0
+PASS Geometria y glifos caso=5 tema=1 pagina=2 rueda=0
+PASS Geometria y glifos caso=5 tema=1 pagina=3 rueda=0
+PASS Geometria y glifos caso=5 tema=1 pagina=3 rueda=1
+PASS Geometria y glifos caso=5 tema=1 pagina=3 rueda=2
+PASS Geometria y glifos caso=5 tema=1 pagina=3 rueda=3
+PASS Geometria y glifos caso=5 tema=1 pagina=4 rueda=0
+PASS Geometria y glifos caso=5 tema=1 pagina=5 rueda=0
+PASS Geometria y glifos caso=5 tema=1 pagina=6 rueda=0
+PASS BMS recibido sin confirmar muestra valores con marca provisional
+PASS BMS provisional visible y completo en resumen/BMS y ambos temas
+PASS BMS provisional visible y completo en resumen/BMS y ambos temas
+PASS BMS provisional visible y completo en resumen/BMS y ambos temas
+PASS BMS provisional visible y completo en resumen/BMS y ambos temas
+PASS BMS admite limite exacto de 2000 ms
+PASS BMS SOC caduca sin ocultar temperatura reciente
+PASS BMS caducado no conserva porcentajes ni temperaturas
+PASS BMS rechaza SOC 10001 antes de truncar a porcentaje entero
+PASS BMS SOC cero recibido no se confunde con ausencia
+PASS BMS limites superiores plausibles caben sin recorte
+PASS BMS rechaza 1501 decimas antes de truncar
+PASS BMS rechaza menos 501 decimas
+PASS BMS acepta limite inferior con signo
+PASS BMS confirmado no se etiqueta provisional
+PASS BMS flags confirmados no reviven una muestra caducada
+PASS BMS nunca recibido oculta bytes residuales
+PASS Resumen admite extremos y aviso provisional sin recorte
+PASS Feedback legado no inventa estado aplicado
+PASS Causa, aviso y velocidad invalida permanecen diferenciados
+PASS Hall sin pulsos no se presenta como cero medido
+PASS Fallo SD no se confunde con grabacion solicitada
+PASS B04 CSV incompleto visible sin ocultar causa ni recortar textos
+PASS BMS ausente permanece desconocido
+PASS Todas las causas y avisos caben simultaneamente
+TOTAL 163; FALLOS 0

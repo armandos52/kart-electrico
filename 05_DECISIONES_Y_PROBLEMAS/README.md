@@ -1,6 +1,6 @@
 # Decisiones y problemas
 
-Índice al 13-10-2026. Las fichas distinguen declaración, hecho reproducido, hipótesis y comprobación pendiente. Una corrección de software no cierra por sí sola un problema físico.
+Índice al 15-10-2026. Las fichas distinguen declaración, hecho reproducido, hipótesis y comprobación pendiente. Una corrección de software no cierra por sí sola un problema físico.
 
 
 ## Decisiones
@@ -13,6 +13,8 @@
 - [DEC-0006 · Robustez v1.3 y marcha atrás](decisiones/DEC-0006_robustez_v13_y_limite_marcha_atras.md)
 - [DEC-0007 · Colocar y medir como acciones separadas](decisiones/DEC-0007_calibracion_con_medicion_explicita.md)
 - [DEC-0008 · START/STOP por pulsación, con memoria y antirrebote](decisiones/DEC-0008_start_momentaneo_con_memoria.md)
+- [DEC-0009 · Banco Nucleo F411 independiente del frontal F746](decisiones/DEC-0009_banco_nucleo_f411.md)
+- [DEC-0010 · Pantallas de desarrollo ahora; usuario final al terminar proyecto](decisiones/DEC-0010_pantallas_desarrollo_y_usuario_final.md)
 
 ## Problemas
 
@@ -26,3 +28,6 @@
 - [PROB-0008 · Robustez del control, modos y pantalla](problemas/PROB-0008_robustez_control_modos_y_pantalla.md)
 - [PROB-0009 · Relé entra y sale al pulsar START](problemas/PROB-0009_start_pulsador_momentaneo.md)
 - [PROB-0010 · Identidad y carga de batería 16S](problemas/PROB-0010_identificacion_y_carga_bateria_16s.md)
+- [PROB-0011 · Presentación del frontal antes de instalar](problemas/PROB-0011_presentacion_frontal_preinstalacion.md): cerrado F01–F03 en hardware (ENS-0019)
+- [PROB-0012 · Pedal en reposo fuera de «pedal libre»](problemas/PROB-0012_pedal_reposo_fuera_de_pedal_libre.md)
+- [PROB-0013 · SD sin tarjeta: intento bloqueante y error casi invisible](problemas/PROB-0013_sd_sin_tarjeta_bloqueo_y_error_invisible.md)

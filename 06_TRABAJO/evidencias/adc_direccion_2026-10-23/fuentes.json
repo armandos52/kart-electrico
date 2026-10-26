@@ -1,0 +1,42 @@
+[
+  {
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/main.c",
+    "copia": "00_main.c",
+    "sha256": "1d2275cbe045ad9e032277b311aea36c44cfd1f65d96f2feb1c0a679956a5d5b"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c",
+    "copia": "01_kart_frontend.c",
+    "sha256": "fb7bb91fc0ee9b8b07b24b55a13b623c6f9b18cb37c6d1b291171379477e3f41"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/stm32f7xx_hal_msp.c",
+    "copia": "02_stm32f7xx_hal_msp.c",
+    "sha256": "ad7423fba6beba685673c2ff2edaab08b6486e0e6f25415463d6a7e5c6d67c66"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/stm32f7xx_hal_conf.h",
+    "copia": "03_stm32f7xx_hal_conf.h",
+    "sha256": "50378ed25336e65582dc73bfe1bb19f34502b979de347dd4687d79c3e82d21bb"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h",
+    "copia": "04_kart_frontend.h",
+    "sha256": "1314cc6e4d0b12c0a2ead570f2147a150055d7c0ec13921aae1adb3800728180"
+  },
+  {
+    "path": "07_DESARROLLO/firmware/esp32_trasero/src/legacy_v12.cpp",
+    "copia": "05_legacy_v12.cpp",
+    "sha256": "7f453c7ce46db6832698e777712da10ad7f55d866b3dba5f1bcf44baee2daf5d"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/marchas_2026-10-21/despues/Core/Src/kart_frontend.c",
+    "copia": "06_kart_frontend.c",
+    "sha256": "616771067d7e7f6c19a02597e2e260b9b9c8ef69e2c53bb5d417be74babe2501"
+  },
+  {
+    "path": "06_TRABAJO/evidencias/marchas_2026-10-21/despues/Core/Inc/kart_frontend.h",
+    "copia": "07_kart_frontend.h",
+    "sha256": "07bf85df8980e5feef549b999288fc60cd30f2aeacf21f5aaf4878b79e112079"
+  }
+]

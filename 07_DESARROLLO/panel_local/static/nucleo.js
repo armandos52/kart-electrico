@@ -31,6 +31,7 @@ export const TEXT = new Set(['gear','mode','control_state','drive_direction','dr
 
 export function f(value, digits=1) { return Number(value).toLocaleString(idioma.locale,{maximumFractionDigits:digits}); }
 export function activeSignals() {
+  if(app.replay)return app.state?.signals || {};
   if(app.demo)return app.demoFrame?.signals || {};
   const elapsed=Date.now()-app.stateReceivedAt;
   const signals=Object.fromEntries(Object.entries(app.state?.signals || {}).map(([key,s])=>{
@@ -115,3 +116,5 @@ export function saved(name, fallback) { try { const v=localStorage.getItem('kart
 export function save(name, value) { try { localStorage.setItem('kart.'+name, JSON.stringify(value)); } catch {} }
 export function normalize(text) { return String(text).normalize('NFD').replace(/\p{Diacritic}/gu,'').toLocaleLowerCase(idioma.locale); }
 export function ago(ms) { return ms===null||ms===undefined?'':ms<1000?`${Math.round(ms)} ms`:`${f(ms/1000,1)} s`; }
+
+export const chartNow=()=>app.replay?app.replay.epoch+(app.replay.renderedAt||0):Date.now();

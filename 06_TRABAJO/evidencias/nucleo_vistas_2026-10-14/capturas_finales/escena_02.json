@@ -1,0 +1,15 @@
+{
+  "scene": 1,
+  "state": "VIEW v=0.3 id=1 name=PRECARGA tick_sim=1120 speed=0 speed_valid=1 gear=0 start=1 brake=1 requested=0 received=0 applied=255 inhibit=5 feedback_fresh=1 status_fresh=1 sd=0 sd_error=0 sd_rows=0 bms_valid=0",
+  "utc": "2026-10-14T19:44:08.486990+00:00",
+  "source": "ILI9341_GRAM",
+  "format": "RGB565LE",
+  "flow": "ROWACK",
+  "width": 320,
+  "height": 240,
+  "bytes": 153600,
+  "crc32": "DC6B1CBF",
+  "sha256_rgb565": "6d731a1386e982cee0b2a41063f988a3c5dde43a2894d6e658636b668952dfd1",
+  "sha256_png": "6860d2a51087285b165ee60a41a29d7ecdebbbfd00c1fdde32aa556bba468fd5",
+  "binary_version": "v0.3"
+}

@@ -1,0 +1,15 @@
+{
+  "scene": 0,
+  "state": "VIEW v=0.3 id=0 name=REPOSO tick_sim=1000 speed=0 speed_valid=1 gear=0 start=0 brake=1 requested=0 received=0 applied=255 inhibit=4 feedback_fresh=1 status_fresh=1 sd=0 sd_error=0 sd_rows=0 bms_valid=0",
+  "utc": "2026-10-14T19:43:54.385738+00:00",
+  "source": "ILI9341_GRAM",
+  "format": "RGB565LE",
+  "flow": "ROWACK",
+  "width": 320,
+  "height": 240,
+  "bytes": 153600,
+  "crc32": "5865F83C",
+  "sha256_rgb565": "385980d9c17ec1366611d592aeaff13c535a6bd61408cb2b559e0aef3bf97d1a",
+  "sha256_png": "1eda750bde7fd4f54027abc15f3ed226ee2ec22c8b5ba93551ccb7dcdfec7f85",
+  "binary_version": "v0.3"
+}

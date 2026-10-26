@@ -1,0 +1,41 @@
+{
+  "0x8000000": {
+    "bytes": 353084,
+    "diferencias": 0,
+    "sha256": "f44aa663217f6acefdcde9fb789cd890e39be4498a48c5d3339d72e37f540e7f"
+  },
+  "0x90000000": {
+    "bytes": 6351932,
+    "diferencias": 0,
+    "sha256": "2ce6a7a77f798369f56a84c961f50e07a2dd0eb2a8c6ce2bd4e7e60c3f5378f4"
+  }
+}
+{
+  "tipo": "medicion SWD, no lector microSD",
+  "muestras": 1198,
+  "duracion_host_s": 59.996,
+  "sesiones": [
+    "2"
+  ],
+  "estados": {
+    "1": 378,
+    "5": 820
+  },
+  "maximos": {
+    "sd_dropped": 0,
+    "sd_error": 0,
+    "sd_max_call_ms": 203,
+    "can_tx_errors": 0,
+    "can_rx_errors": 0,
+    "adc_errors": 0,
+    "sd_queued": 3
+  },
+  "cierre": {
+    "sd_session": "2",
+    "sd_rows": "1184",
+    "sd_state": "5",
+    "sd_elapsed_ms": "23665",
+    "sd_last_save": "61880",
+    "sd_queued": "0"
+  }
+}

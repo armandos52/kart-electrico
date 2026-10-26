@@ -1,0 +1,8 @@
+test_dashboard (test_observar_swd.SnapshotTests.test_dashboard) ... ok
+test_legacy (test_observar_swd.SnapshotTests.test_legacy) ... ok
+test_unknown_layout (test_observar_swd.SnapshotTests.test_unknown_layout) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

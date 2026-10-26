@@ -1,0 +1,254 @@
+[
+  {
+    "sha256": "d2edb6baafa21afe1a468d3ef66d790d338dab650bcb8b2f14cd794b7662bb22",
+    "path": "07_DESARROLLO/firmware/common\\kart_protocol.h"
+  },
+  {
+    "sha256": "b735ca6b471b800b6a941d8af68288fb7d8b9663bc24c778e6ff986e91b10064",
+    "path": "07_DESARROLLO/panel_local\\tests\\test_robustez.py"
+  },
+  {
+    "sha256": "f14f68662e2ebcf667ed179ec4518d4380d60ae1c2f6cb77ffcae317a04d116d",
+    "path": "07_DESARROLLO/panel_local\\tests\\test_reader.py"
+  },
+  {
+    "sha256": "0870015067b76dffbb5aff56f19d39c7e82426163ff82601106eeb458cc14ca1",
+    "path": "07_DESARROLLO/panel_local\\tests\\test_guided_calibration.py"
+  },
+  {
+    "sha256": "40390e6e6b1cdac7f6835b323156575bed8e377eafbaf0bd2d23f6eee79410a7",
+    "path": "07_DESARROLLO/panel_local\\tests\\test_calibration.py"
+  },
+  {
+    "sha256": "e69d72c4917b2c1c5920651b636dbfc1f7b3ef62e8d6bd81dd1980b215257dee",
+    "path": "07_DESARROLLO/panel_local\\static\\vista_kart.js"
+  },
+  {
+    "sha256": "4f479ffd3a4088c3041167a814d9c7a46414b065ad3c9dd16bf7703801683d7e",
+    "path": "07_DESARROLLO/firmware/esp32_trasero/include\\telemetria.h"
+  },
+  {
+    "sha256": "1a2e99feea42baf0eafaba433f464eaf0443130d28efdcd54d4713fb9d062581",
+    "path": "07_DESARROLLO/firmware/esp32_trasero/include\\secretos.example.h"
+  },
+  {
+    "sha256": "443b785ab89c2f491c80f2190b6bffe5167dbf4cdfdde309dc1116d928af5f15",
+    "path": "07_DESARROLLO/firmware/esp32_trasero/include\\hardware_kart.h"
+  },
+  {
+    "sha256": "5a4218fd711f831f7cc004342c751918f03d3d8b4957e1736d007abce0139996",
+    "path": "07_DESARROLLO/panel_local\\static\\esquema_kart.js"
+  },
+  {
+    "sha256": "6f93784ff8ca3904db72b1f9d6b72573d370bcec4e4606921bb46a6509d6a170",
+    "path": "07_DESARROLLO/panel_local\\static\\escena_kart.js"
+  },
+  {
+    "sha256": "ba6d886cb3cdffe6bc3fc6ea59096713010ce8d30295902ef019ca9903d22b74",
+    "path": "07_DESARROLLO/panel_local\\static\\canales.js"
+  },
+  {
+    "sha256": "5bd9f8e49661e7270c0e9a07cf3fe0579da415d892e57915031096c830ae8986",
+    "path": "07_DESARROLLO/panel_local\\static\\calibracion.js"
+  },
+  {
+    "sha256": "11e15509c9ba4e69d2c3787652cde3d397185d6397ab3feaa4c058b08e1d835f",
+    "path": "07_DESARROLLO/panel_local\\static\\app.js"
+  },
+  {
+    "sha256": "8f08700ae382957e4441451b25985463b9b45234914445ea10780d49dc0edc3b",
+    "path": "07_DESARROLLO/panel_local\\server.py"
+  },
+  {
+    "sha256": "2bfdaa17226beb1846fde035bbb7882e7014dbead898ff5b762dadeada3b6d3f",
+    "path": "07_DESARROLLO/panel_local\\static\\textos.js"
+  },
+  {
+    "sha256": "ae39ba2ba145b808eeee929ad4fe2f93a45a68f8fee292a47c3063030c47fcfa",
+    "path": "07_DESARROLLO/panel_local\\static\\style.css"
+  },
+  {
+    "sha256": "7add862ecb319099b586b7dadd6b18333718b410edb543b540e70d75c8835f72",
+    "path": "07_DESARROLLO/panel_local\\static\\nucleo.js"
+  },
+  {
+    "sha256": "82be9740892e16de2c7121119d1ffc78cb714257dd00f2902d5d1d13aad3bbb1",
+    "path": "07_DESARROLLO/panel_local\\static\\modelo_kart.js"
+  },
+  {
+    "sha256": "f2e409e40435732922dc0254a61a6e5d268406d83db13a309c18f1ee0186bd0c",
+    "path": "07_DESARROLLO/panel_local\\static\\index.html"
+  },
+  {
+    "sha256": "1a6757f9ab52d61a2c6227ecbdd53b45cf4aaab934da20b2485e39b60d1fdc2b",
+    "path": "07_DESARROLLO/panel_local\\static\\i18n.js"
+  },
+  {
+    "sha256": "3dcad7e645710a99173f32dbbd3d094624f4399ab71fe07910e00b7725d41a86",
+    "path": "07_DESARROLLO/panel_local\\static\\graficas.js"
+  },
+  {
+    "sha256": "b573d406b53923e3a0a8aec1aa1c13ce44a80e05644501d4363f822c0c044c29",
+    "path": "07_DESARROLLO/panel_local\\calibracion.py"
+  },
+  {
+    "sha256": "ef9cdad1aa7578762299cb8e9b047d5f4a5b43abdae671cc4908a5586a8498fa",
+    "path": "07_DESARROLLO/panel_local\\qa\\reproducir_sesion.py"
+  },
+  {
+    "sha256": "cb29ad23bb0ba8666daaf26536adbc723bee6bbaebd50d9ae2171b6aae579a8d",
+    "path": "07_DESARROLLO/panel_local\\qa\\extraer_mensajes.py"
+  },
+  {
+    "sha256": "9287822ef060cebc8385165ee64342e123837b05cd1cbc1b8d60dd8ca0b59887",
+    "path": "07_DESARROLLO/panel_local\\qa\\calibration_fixture.py"
+  },
+  {
+    "sha256": "771af49521260cead9b399e9a2fcc347b1d745e3adf21cf5b0431cff0c04bc54",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\test_observar_swd.py"
+  },
+  {
+    "sha256": "72f836da05424bf2b161d65fc89a1faf7468ef2db057a63a2144a066e72660f4",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\stubs\\main.h"
+  },
+  {
+    "sha256": "081144072f64234e05e747e84f052776e318d27c3193443fc5c123dbc60564e1",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\stubs\\fatfs.h"
+  },
+  {
+    "sha256": "aecb9819eb04bf5ad6cd2535cfac9b1bed5ef7946e551eff2224759862e16294",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\stubs\\cmsis_os.h"
+  },
+  {
+    "sha256": "0fae1a45ec406a98ef3ce2bb5bb8cefdb4775703ccf425b845c14a68e15f8f85",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\sd_cases.h"
+  },
+  {
+    "sha256": "2be39f1ea6432edb5cefa909055f63a3e52ac9ff2ec240e00ad32809a8d7df0a",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\pedal_filter_cases.h"
+  },
+  {
+    "sha256": "e965c2c3ee8ef518a3987b500208a5d9ec6b5b535eeec071a598c9b9584dc055",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\pedal_cases.h"
+  },
+  {
+    "sha256": "cc78228a9ce0769bbcd1b966dd0f02ca3d6fb244f7a589f684650a24a55b7588",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\frontend_test.cpp"
+  },
+  {
+    "sha256": "758733f07ad8c88ca8f69063aa7d1294d365a9e00086a60500cbecec715f999a",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\display_cases.h"
+  },
+  {
+    "sha256": "79e08cda5c69ae287a31f90c6c6a03733914b88132270ed477d55ec5fb75c42f",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\dashboard_test.cpp"
+  },
+  {
+    "sha256": "7315f505380489b65a4a11604d5a41153653e1c98768e4d059294b24f2dad231",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\dashboard_snapshot_cases.h"
+  },
+  {
+    "sha256": "ca81768911ebfc117d9d7ece1265d3a364abb52189ed5aa30c4ffdb84108c681",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\compilar_dashboard.cmd"
+  },
+  {
+    "sha256": "e94725019f1a30ab2390a507051ee4164762ec1e4cd3c1a0d65be55d99924a05",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\compilar.cmd"
+  },
+  {
+    "sha256": "5206131a435d4ceca2cef9169390598d38a937f239c021170538e9313d42c303",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\bugfix_cases.h"
+  },
+  {
+    "sha256": "25d55841f3ad22628cb79f86628dc66b03bdcfeb209ce8b41d37101c76e74c3e",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/tests\\bms_dashboard_cases.h"
+  },
+  {
+    "sha256": "83d40d43ca8bee4a323b6a4d09f02cf0dcd38b55004a86c58ba32a39f1bce7b4",
+    "path": "07_DESARROLLO/firmware/esp32_trasero/src\\telemetria.cpp"
+  },
+  {
+    "sha256": "3fe44d3a8c84565a560d3a3c667e0693ed6882f2af20f1e5bc7d7a352130bcc1",
+    "path": "07_DESARROLLO/firmware/esp32_trasero/src\\main.cpp"
+  },
+  {
+    "sha256": "c27a2b342389abd924246edb9ac8c15538b1e0fc32937117f595e8fb55cdbcb0",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\system_stm32f7xx.c"
+  },
+  {
+    "sha256": "3b01acf6471c3f68e1dc594567825b1e36bdf0eefeaa1a8ff6e256b747d6fdf2",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\stm32f7xx_it.c"
+  },
+  {
+    "sha256": "dc6267847d44758630d8ad294cd346000f6882a3e3ba48a64c578e436fbc7b72",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\stm32f7xx_hal_timebase_tim.c"
+  },
+  {
+    "sha256": "ad7423fba6beba685673c2ff2edaab08b6486e0e6f25415463d6a7e5c6d67c66",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\stm32f7xx_hal_msp.c"
+  },
+  {
+    "sha256": "1d2275cbe045ad9e032277b311aea36c44cfd1f65d96f2feb1c0a679956a5d5b",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\main.c"
+  },
+  {
+    "sha256": "4ac3387984c58037bc6665fcbd3ba7c1c40dbb121188544cf02195e91c16dba8",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\kart_ui_font_data.c"
+  },
+  {
+    "sha256": "0868d6d06a6ac07729ec342e1d9e0d8914a4700a8afa0fd9497ae5ec1dac573e",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\kart_ui_font.c"
+  },
+  {
+    "sha256": "2172d5d1bf17b6938d91a3b342d64ea822e2d4796f105ba7964c0c41d5296f14",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\kart_frontend.c"
+  },
+  {
+    "sha256": "3bfa370a42b4c5d813ab322f4ac16c4bbd984d521415b1bd436163e9b219023e",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\kart_display.c"
+  },
+  {
+    "sha256": "29f3fe24277b2b198aafcecb74aedb1eea34461b648f516bc6f5bb966222d930",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\kart_dashboard.c"
+  },
+  {
+    "sha256": "5f8bb0275d6748b26916b509def320f8bb951b8f114a791ce69ddb51659c8c56",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Src\\freertos.c"
+  },
+  {
+    "sha256": "b42af52b8c81688a18417be0fff3aa28dc38531ea639b71d69bb59545d89b501",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\stm32f7xx_it.h"
+  },
+  {
+    "sha256": "50378ed25336e65582dc73bfe1bb19f34502b979de347dd4687d79c3e82d21bb",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\stm32f7xx_hal_conf.h"
+  },
+  {
+    "sha256": "debe0dc2c9879039bb5656bdac3b6582938fa28c6cc4debbeb31bfad83374e62",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\RTE_Components.h"
+  },
+  {
+    "sha256": "e439ea42acd53e11e1a957fc8f4d1f81237f88aa1cebe17c975761e870c55cd3",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\main.h"
+  },
+  {
+    "sha256": "ef3c9eb9766b30933ab803c14365845146c8d2b60527b369f2a36f0766310efa",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\kart_ui_font.h"
+  },
+  {
+    "sha256": "9c98a66514974e19404adf9d22563c579cdfe48b3b3f42fc8c7fdb5df1c3c7c0",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\kart_frontend.h"
+  },
+  {
+    "sha256": "03b1075bc2ef43d466e483339841706a7c09a8c71a43e2c92068e105b9616b6b",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\kart_display.h"
+  },
+  {
+    "sha256": "936a7dab1aeaa1e496c439bac9fb93a2289397d41cec78f143f32c88a8b9f3d1",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\kart_dashboard.h"
+  },
+  {
+    "sha256": "14c948914c0a973f08dbc0e3e3cfa8491b1959cbce9c5afb73749880d8f50fa4",
+    "path": "07_DESARROLLO/firmware/stm32_frontal/Core\\Inc\\FreeRTOSConfig.h"
+  }
+]

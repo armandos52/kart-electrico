@@ -60,6 +60,7 @@ extern uint32_t SystemCoreClock,tick,adc_channel;
 extern uint16_t adc_accel_value,adc_steer_value;
 extern int adc_ok,pins[4],mailboxes,tx_ok,tx_count,rx_pending,wd_refresh;
 extern uint8_t sent_command[8],sent_health[8],rx_bytes[8];extern CAN_RxHeaderTypeDef rx_header;
+extern void (*tx_hook)(uint32_t);
 inline uint32_t __get_PRIMASK(){return 0;}inline void __disable_irq(){}inline void __set_PRIMASK(uint32_t){}inline void __NOP(){}
 inline uint32_t HAL_GetTick(){return tick;}
 inline unsigned HAL_CAN_GetRxFifoFillLevel(CAN_HandleTypeDef*,int){return rx_pending;}
@@ -70,7 +71,7 @@ inline int HAL_ADC_PollForConversion(ADC_HandleTypeDef*,int){return adc_ok?0:1;}
 inline uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef*){return adc_channel==0?adc_accel_value:adc_steer_value;}
 inline int HAL_ADC_Stop(ADC_HandleTypeDef*){return 0;}
 inline unsigned HAL_CAN_GetTxMailboxesFreeLevel(CAN_HandleTypeDef*){return mailboxes;}
-inline int HAL_CAN_AddTxMessage(CAN_HandleTypeDef*,CAN_TxHeaderTypeDef* h,uint8_t* b,uint32_t*){memcpy(h->StdId==0x100?sent_command:sent_health,b,8);tx_count++;return tx_ok?0:1;}
+inline int HAL_CAN_AddTxMessage(CAN_HandleTypeDef*,CAN_TxHeaderTypeDef* h,uint8_t* b,uint32_t*){memcpy(h->StdId==0x100?sent_command:sent_health,b,8);tx_count++;if(tx_hook)tx_hook(h->StdId);return tx_ok?0:1;}
 inline int HAL_CAN_AbortTxRequest(CAN_HandleTypeDef*,int){mailboxes=3;return 0;}
 inline int HAL_CAN_ConfigFilter(CAN_HandleTypeDef*,CAN_FilterTypeDef*){return 0;}
 inline int HAL_CAN_Start(CAN_HandleTypeDef*){return 0;}

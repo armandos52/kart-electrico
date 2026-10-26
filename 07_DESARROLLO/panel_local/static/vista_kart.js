@@ -16,7 +16,7 @@ export const parts = {
   battery: piece('battery', ['battery_v','battery_a','soc_pct','battery_temp_c']),
   can: piece('can', ['can_rx_age_ms','can_rx_count','accelerator_raw','steer_raw','gear','mode']),
   power: piece('power', ['relay1','relay2','relay_seq','charger_connected']),
-  imu: piece('imu', ['yaw_dps','mpu_ok','steer_deg','mode']),
+  imu: piece('imu', ['yaw_dps','mpu_ok','steer_deg','mode','sim_yaw_ideal_dps','sim_lat_g','sim_long_g','sim_esc_corr_pct']),
 };
 export let selected = 'esp32';
 let model = null, fallo3d = null;
@@ -125,17 +125,21 @@ export function initMap(onPick) {
   }
   $('modelo-pieza').addEventListener('change',event=>{selectPart(event.target.value);onPick?.(event.target.value);});
   function setView(view) {
-    $('modelo-3d').hidden=view!=='3d'; $('kart').hidden=view==='3d';
+    $('modelo-3d').hidden=view!=='3d'; $('kart').hidden=view!=='esquema'; $('vista-imu').hidden=view!=='imu';
     // SVG no implementa de forma uniforme HTMLElement.hidden.
-    $('kart').style.display=view==='3d'?'none':'';
+    $('kart').style.display=view==='esquema'?'':'none';
     $('ver-3d').setAttribute('aria-pressed',String(view==='3d'));
-    $('ver-esquema').setAttribute('aria-pressed',String(view!=='3d'));
-    $('foto-superior').hidden=view==='3d';
-    history.replaceState(null,'',view==='3d'?'#3d':'#esquema');
+    $('ver-esquema').setAttribute('aria-pressed',String(view==='esquema'));
+    $('ver-imu').setAttribute('aria-pressed',String(view==='imu'));
+    $('foto-superior').hidden=view!=='esquema';
+    history.replaceState(null,'','#'+view);
+    app.view=view;document.dispatchEvent(new CustomEvent('kart-vista',{detail:view}));
     model?.resize();
   }
+  const fromHash=()=>({'#esquema':'esquema','#imu':'imu'})[location.hash]||'3d';
   $('ver-3d').addEventListener('click',()=>setView('3d'));
   $('ver-esquema').addEventListener('click',()=>setView('esquema'));
+  $('ver-imu').addEventListener('click',()=>setView('imu'));
   for (const img of $('fotos-kart').querySelectorAll('img')) {
     const missing = () => {
       img.hidden = true;
@@ -157,15 +161,15 @@ export function initMap(onPick) {
     $('ampliar-modelo').setAttribute('aria-pressed',String(full));
     $('ampliar-modelo').textContent=full?t('btn.reducir'):t('btn.ampliar');
   });
-  setView(location.hash==='#esquema'?'esquema':'3d');
-  window.addEventListener('hashchange',()=>setView(location.hash==='#esquema'?'esquema':'3d'));
+  setView(fromHash());
+  window.addEventListener('hashchange',()=>setView(fromHash()));
   // Fallar WebGL o un recurso 3D no debe interrumpir la telemetría/calibración.
   import('./escena_kart.js').then(({createKartScene})=>{
     model=createKartScene(part=>{selectPart(part);onPick?.(part);});model.select(selected);
   }).catch(error=>{
     fallo3d=error.message;
     $('modelo-status').textContent=t('m3d.no_disponible');
-    $('ver-3d').disabled=true;setView('esquema');
+    $('ver-3d').disabled=true;if(app.view==='3d')setView('esquema');
     $('ver-esquema').title=t('m3d.no_disponible_titulo',{error:error.message});
     const notice=document.createElement('p');notice.className='modelo-error';notice.dataset.i18n='m3d.no_disponible_aviso';notice.textContent=t('m3d.no_disponible_aviso');$('kart').before(notice);
   });

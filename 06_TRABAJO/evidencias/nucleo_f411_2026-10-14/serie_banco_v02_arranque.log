@@ -1,0 +1,141 @@
+# UTC=2026-10-14T13:35:37.764668+00:00 port=COM5 baud=115200 RX_only
+    2.797s DIAG_v0.1 ID=0x9341 REG00=0x4141BENCH_F411_v0.2 ID=9341 cpu_hz=100000000 HAL_CAN_ADC_SD=SIMULATED
+    3.360s LCD_CONFIG width=320 height=240 rotation=1
+    3.422s LCD_PIXEL expected=F800 actual=F800 pass=1
+    3.422s LCD_PIXEL expected=07E0 actual=07E0 pass=1
+    3.438s LCD_PIXEL expected=001F actual=001F pass=1
+    3.438s PASS Pulsador sostenido al encender no solicita START
+    3.438s PASS Liberacion inicial menor de 40 ms no habilita START
+    3.438s PASS START espera 40 ms continuos, no solo un flanco
+    3.453s PASS START estable llega a CAN y snapshot
+    3.453s PASS Mantener pulsado no repite ni apaga
+    3.453s PASS Soltar pulsador mantiene START enclavado por software
+    3.469s PASS Rebotes al soltar no generan una segunda pulsacion
+    3.469s PASS Segunda pulsacion pide STOP en primera lectura, sin 40 ms
+    3.469s PASS Mantener STOP no vuelve a arrancar
+    3.469s PASS Rebotes despues de STOP no rearman START
+    3.485s PASS Soltar estable y pulsar otra vez permite nuevo START
+    3.485s PASS STOP llega aun con ADC invalido
+    3.500s PASS Cien pulsos de 5 ms no acumulan tiempo para arrancar
+    3.500s PASS Despues del ruido un START estable funciona
+    3.500s PASS Reinicializar borra memoria y exige soltar el pulsador
+    3.516s PASS Liberacion funciona cruzando desbordamiento del tick
+    3.516s PASS Antirrebote START funciona cruzando desbordamiento del tick
+    3.516s PASS STOP conserva bits de modo CAN
+    3.516s TRACE tick_ms=1000 raw=0 start=0 relay=0 inhibit=start_off
+    3.532s TRACE tick_ms=1600 raw=0 start=0 relay=0 inhibit=start_off
+    3.532s TRACE tick_ms=1600 raw=1 start=0 relay=0 inhibit=start_off
+    3.547s TRACE tick_ms=1640 raw=1 start=1 relay=1 inhibit=relays
+    3.547s PASS Integracion: pulsacion estable inicia precarga
+    3.547s TRACE tick_ms=1645 raw=0 start=1 relay=1 inhibit=relays
+    3.547s PASS Integracion: soltar no cancela precarga
+    3.563s TRACE tick_ms=1650 raw=1 start=1 relay=1 inhibit=relays
+    3.563s TRACE tick_ms=1655 raw=0 start=1 relay=1 inhibit=relays
+    3.563s TRACE tick_ms=1695 raw=0 start=1 relay=1 inhibit=relays
+    3.578s PASS Integracion: rebotes de liberacion no ciclan rele
+    3.578s TRACE tick_ms=3695 raw=0 start=1 relay=2 inhibit=relays
+    3.578s PASS Integracion: precarga completa llega a solapamiento
+    3.578s TRACE tick_ms=4695 raw=0 start=1 relay=3 inhibit=brake
+    3.578s PASS Integracion: rele queda listo con pulsador suelto
+    3.594s TRACE tick_ms=4700 raw=1 start=0 relay=0 inhibit=start_off
+    3.610s PASS Integracion: siguiente pulsacion corta reles y consignas
+    3.610s TRACE tick_ms=4705 raw=0 start=0 relay=0 inhibit=start_off
+    3.610s TRACE tick_ms=4710 raw=1 start=0 relay=0 inhibit=start_off
+    3.610s TRACE tick_ms=4910 raw=1 start=0 relay=0 inhibit=start_off
+    3.625s PASS Integracion: rebote tras STOP no reinicia precarga
+    3.625s TRACE tick_ms=4910 raw=0 start=0 relay=0 inhibit=start_off
+    3.641s TRACE tick_ms=4950 raw=0 start=0 relay=0 inhibit=start_off
+    3.641s TRACE tick_ms=4950 raw=1 start=0 relay=0 inhibit=start_off
+    3.641s TRACE tick_ms=4990 raw=1 start=1 relay=1 inhibit=relays
+    3.641s PASS Integracion: nuevo ciclo deliberado permite precarga
+    3.657s TRACE tick_ms=4990 raw=0 start=1 relay=1 inhibit=relays
+    3.657s TRACE tick_ms=5030 raw=0 start=1 relay=1 inhibit=relays
+    3.657s TRACE tick_ms=5035 raw=1 start=0 relay=0 inhibit=start_off
+    3.672s PASS Integracion: segunda pulsacion para tambien durante precarga
+    3.672s TRACE tick_ms=5035 raw=0 start=0 relay=0 inhibit=start_off
+    3.672s TRACE tick_ms=5075 raw=0 start=0 relay=0 inhibit=start_off
+    3.688s TRACE tick_ms=5075 raw=1 start=0 relay=0 inhibit=start_off
+    3.688s TRACE tick_ms=5115 raw=1 start=1 relay=1 inhibit=relays
+    3.688s TRACE tick_ms=5120 raw=1 start=1 relay=0 inhibit=can_fault
+    3.703s TRACE tick_ms=5125 raw=0 start=1 relay=0 inhibit=relays
+    3.703s TRACE tick_ms=5165 raw=0 start=1 relay=0 inhibit=relays
+    3.703s PASS Integracion: recuperacion CAN no reutiliza START para arrancar
+    3.719s TRACE tick_ms=5165 raw=1 start=0 relay=0 inhibit=start_off
+    3.719s TRACE tick_ms=5170 raw=0 start=0 relay=0 inhibit=start_off
+    3.719s TRACE tick_ms=5210 raw=0 start=0 relay=0 inhibit=start_off
+    3.735s TRACE tick_ms=5210 raw=1 start=0 relay=0 inhibit=start_off
+    3.735s TRACE tick_ms=5250 raw=1 start=1 relay=1 inhibit=relays
+    3.735s PASS Integracion: tras fallo se exige OFF y START deliberados
+    3.750s PASS Sin feedback transmite N freno pedal cero
+    3.750s PASS ADC validos y CAN fresco
+    3.750s PASS Ext 0x101 conserva ADC fisico
+    3.750s PASS Secuencia avanza por muestra
+    3.750s PASS D exige freno quietud pedal libre
+    3.750s PASS Pedal superior normalizado
+    3.766s PASS D a R con movimiento pasa N, no conserva D
+    3.766s PASS Fallo conversion ADC inhibe y publica centinela
+    3.766s PASS ADC fuera de plausibilidad se rechaza
+    3.782s PASS D R simultaneos invalidos
+    3.782s PASS Modo avanza parado en N
+    3.782s PASS Modo con D se rechaza visible
+    3.782s PASS 0 km/h entero no acredita quietud
+    3.782s PASS Estado extendido caducado no vuelve a legado
+    3.782s PASS Feedback caduca
+    3.782s PASS DLC incorrecto contado
+    3.797s PASS Buzones llenos abortan y cuentan
+    3.797s PASS Errores TX visibles
+    3.797s PASS SD abre al solicitar grabacion
+    3.797s PASS CSV versionado con cabeceras reales
+    3.813s PASS Primera fila registrada
+    3.813s PASS Pausa sincroniza y cierra
+    3.813s PASS Reanudar vuelve a montar y abrir
+    3.813s PASS Fallo montaje visible
+    3.813s PASS Fallo SD no reintenta en bucle rapido
+    3.828s PASS SD puede recuperar al reinsertar
+    3.828s PASS Escritura parcial es error y no fila valida
+    3.828s PASS Error sync cierra y se publica
+    3.828s PASS Error cierre no se oculta como pausa
+    3.844s PASS Hall usa periodo real a traves de wrap DWT
+    3.844s PASS Hall no revive por wrap DWT sin pulsos
+    3.844s PASS Pantalla no inventa modo ni bateria ni CAN
+    3.844s PASS Limite R y fallo SD visibles
+    3.844s PASS Motivo cabe en pantalla
+    3.860s PASS Motivo cabe en pantalla
+    3.860s PASS Motivo cabe en pantalla
+    3.860s PASS Motivo cabe en pantalla
+    3.860s PASS Motivo cabe en pantalla
+    3.860s PASS Motivo cabe en pantalla
+    3.860s PASS Motivo cabe en pantalla
+    3.875s PASS Motivo cabe en pantalla
+    3.875s PASS Motivo cabe en pantalla
+    3.875s PASS Motivo cabe en pantalla
+    3.875s PASS Motivo cabe en pantalla
+    3.875s PASS Motivo cabe en pantalla
+    3.875s PASS Motivo cabe en pantalla
+    3.875s PASS Motivo cabe en pantalla
+    3.891s PASS Motivo cabe en pantalla
+    3.891s PASS Motivo cabe en pantalla
+    3.891s PASS Motivo cabe en pantalla
+    3.891s PASS Motivo cabe en pantalla
+    3.891s PASS Motivo cabe en pantalla
+    3.907s PASS Motivo cabe en pantalla
+    3.907s PASS Motivo cabe en pantalla
+    3.907s TOTAL 83; FALLOS 0
+    3.907s READY: B1 fisico; bus CAN y reles SIMULADOS. No tactil configurado.
+    3.907s STATE ms=4453 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+    4.907s STATE ms=5454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+    5.907s STATE ms=6454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+    6.907s STATE ms=7454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+    7.907s STATE ms=8454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+    8.907s STATE ms=9454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+    9.907s STATE ms=10454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   10.907s STATE ms=11454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   11.907s STATE ms=12454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   12.907s STATE ms=13454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   13.907s STATE ms=14454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   14.907s STATE ms=15454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   15.907s STATE ms=16454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   16.907s STATE ms=17454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   17.922s STATE ms=18454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   18.907s STATE ms=19454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0
+   19.922s STATE ms=20454 raw=0 start=0 relay=0 inhibit=4 checks=83 failures=0

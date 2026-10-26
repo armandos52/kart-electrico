@@ -1,0 +1,79 @@
+{
+ "muestras": 160,
+ "validas": 160,
+ "incoherentes": 0,
+ "sin_accel_ok": 0,
+ "ticks_repetidos": 0,
+ "adc_errors_inicio_fin": [
+  0,
+  0
+ ],
+ "guarda_s": 1.0,
+ "por_fase": {
+  "prueba_reposo": {
+   "toca_pedal": "no",
+   "adc": {
+    "n": 140,
+    "min": 178,
+    "max": 229,
+    "media": 204.96,
+    "desv": 9.07,
+    "p1": 184.2,
+    "p5": 189.9,
+    "p50": 206.0,
+    "p95": 217.0,
+    "p99": 227.6
+   },
+   "norm": {
+    "n": 140,
+    "min": 127,
+    "max": 247,
+    "media": 190.39,
+    "desv": 21.38,
+    "p1": 141.7,
+    "p5": 154.9,
+    "p50": 193.0,
+    "p95": 219.0,
+    "p99": 243.8
+   },
+   "pedal_libre_dev4_pct": 0.0,
+   "adc_todas_min": 178,
+   "adc_todas_max": 231
+  }
+ },
+ "agregados": {
+  "reposo_pie_fuera": {
+   "adc": {
+    "n": 140,
+    "min": 178,
+    "max": 229,
+    "media": 204.96,
+    "desv": 9.07,
+    "p1": 184.2,
+    "p5": 189.9,
+    "p50": 206.0,
+    "p95": 217.0,
+    "p99": 227.6
+   },
+   "pedal_libre_dev4_pct": 0.0
+  }
+ },
+ "ruido": {
+  "reposo_pie_fuera": {
+   "desv_intrafase_media": 9.07,
+   "desv_intrafase_max": 9.07,
+   "dif_consecutiva": {
+    "n": 139,
+    "min": 0,
+    "max": 50,
+    "media": 9.96,
+    "desv": 7.34,
+    "p1": 0.4,
+    "p5": 1.0,
+    "p50": 9.0,
+    "p95": 22.2,
+    "p99": 27.6
+   }
+  }
+ }
+}

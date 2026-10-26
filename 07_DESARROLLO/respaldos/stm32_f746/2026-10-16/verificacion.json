@@ -1,0 +1,13 @@
+{
+  "flash_interna": {
+    "bytes": 1048576,
+    "sha256": "91a9a63a33ded0cd08a9a74f7ffe13dd95d03e5349e5284bfafedc20d9620f91",
+    "lecturas_identicas": 2
+  },
+  "qspi": {
+    "bytes": 16777216,
+    "sha256": "2285da63bfd381a58ad3e29601021430e3d407c1b88f38def657d39188eb42a6",
+    "lecturas_identicas": 2
+  },
+  "firmware_identificado": "stm32_frontal-v1.3-dev4; coincidencia byte a byte en ambas regiones HEX"
+}

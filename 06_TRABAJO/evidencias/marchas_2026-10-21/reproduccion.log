@@ -1,0 +1,26 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.35
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+reproducir_bloqueo.cpp
+C:\kart proyecto\07_DESARROLLO\firmware\stm32_frontal\tests\../Core/Src/kart_frontend.c(82): warning C4459: declaration of 'tick' hides global declaration
+C:\kart proyecto\06_TRABAJO\evidencias\marchas_2026-10-21\../../../07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp(7): note: see declaration of 'tick'
+C:\kart proyecto\06_TRABAJO\evidencias\marchas_2026-10-21\../../../07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp(23): warning C4244: '=': conversion from 'uint32_t' to 'uint16_t', possible loss of data
+kart_control.cpp
+Generating Code...
+PASS ADC observado: D bloqueada incluso con freno y CAN correctos
+PASS Mismo ADC: cambio DIF/ESC/BLQ bloqueado en N
+ADC=178 normalizado=127 marcha=0 modo=0 aviso=2
+PASS ADC observado: D bloqueada incluso con freno y CAN correctos
+PASS Mismo ADC: cambio DIF/ESC/BLQ bloqueado en N
+ADC=190 normalizado=155 marcha=0 modo=0 aviso=2
+PASS ADC observado: D bloqueada incluso con freno y CAN correctos
+PASS Mismo ADC: cambio DIF/ESC/BLQ bloqueado en N
+ADC=206 normalizado=193 marcha=0 modo=0 aviso=2
+PASS ADC observado: D bloqueada incluso con freno y CAN correctos
+PASS Mismo ADC: cambio DIF/ESC/BLQ bloqueado en N
+ADC=229 normalizado=247 marcha=0 modo=0 aviso=2
+PASS Control positivo: D entra con ADC 141 y freno
+PASS Limite: ADC 142 bloquea D
+PASS Sin freno D sigue bloqueada aunque pedal sea libre
+TOTAL 11; FALLOS 0

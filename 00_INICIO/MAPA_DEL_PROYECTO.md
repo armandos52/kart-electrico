@@ -1,6 +1,6 @@
 ---
 estado: vigente
-actualizado: 2026-10-13
+actualizado: 2026-10-23
 resumen: Mapa de la bóveda del kart: por dónde empezar y dónde guardar cada cosa.
 ---
 
@@ -10,11 +10,16 @@ Esta base reúne el conocimiento y el trabajo del kart. La entrega histórica es
 
 ## Para empezar
 
+- [Frontal dev4 en la F746 real](../06_TRABAJO/ensayos/ENS-0019_frontal_dev4_f746_real.md): respaldo e identificación del firmware previo, dev4 grabado y probado en placa (pantalla, táctil, START, CAN, SD, franja). Correcciones de software en [ENS-0018](../06_TRABAJO/ensayos/ENS-0018_mejoras_pantalla_desarrollo.md). Pantallas de usuario final pendientes para el cierre según [DEC-0010](../05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0010_pantallas_desarrollo_y_usuario_final.md).
+
+- [Banco Nucleo F411 + pantalla MCUFRIEND](../07_DESARROLLO/firmware/nucleo_f411_banco/README.md): preparación/respaldo en ENS-0015; diez vistas, navegación B1 y capturas del LCD en [ENS-0016](../06_TRABAJO/ensayos/ENS-0016_vistas_frontal_nucleo.md). No sustituye al frontal F746 del kart.
+
 - [Dossier para profesores](REVISION_PARA_PROFESORES.md): avances al 13-10, evidencias, límites y preguntas de revisión.
 - [Índice de ensayos](../06_TRABAJO/ensayos/README.md) y [guía de desarrollo](../07_DESARROLLO/README.md): datos y reproducción en PC.
 
 - [Panel del portátil · Wi-Fi/USB y modelo 3D](../07_DESARROLLO/panel_local/README.md): lectura, kart basado en fotos, calibración visual por pasos ([ENS-0012](../06_TRABAJO/ensayos/ENS-0012_calibracion_por_pasos.md)), consola y gráficas. [Modelo y pruebas](../06_TRABAJO/ensayos/ENS-0006_modelo_visual_fotografias.md); [velocidad visual de ruedas](../06_TRABAJO/ensayos/ENS-0010_velocidad_visual_ruedas.md); cotas y validación física pendientes. USB solo con módulo fuera del kart; iPad aplazado.
 - [Aprender el kart: historia, funcionamiento y mejoras](../06_TRABAJO/GUIA_DE_ESTUDIO_DEL_KART.md): guía personal del 07-10, con explicaciones, fuentes, ejercicios y preguntas del montaje.
+- [Guía de PID e IMU](../04_CONOCIMIENTO/software_y_telemetria/GUIA_PID_E_IMU.md) (vigente, 23-10): PID, anti-windup, sintonía, filtros de orientación y lectura del ESC v1.3 como control P; con [simulador del kart en vista superior](../04_CONOCIMIENTO/software_y_telemetria/simulador_pid_imu.html) (modelo didáctico, valores supuestos).
 
 - [Inicio de tu investigación 2026/27](../06_TRABAJO/INICIO_INVESTIGACION_2026-27.md): cronograma personal incorporado, análisis y organización recomendada.
 

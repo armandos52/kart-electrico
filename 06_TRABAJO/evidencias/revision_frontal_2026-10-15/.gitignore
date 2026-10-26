@@ -1,0 +1,5 @@
+# Ejecutables/objetos del arnés y binarios de firmware conservados solo localmente.
+*.exe
+*.obj
+/compilacion/*.elf
+/compilacion/*.hex

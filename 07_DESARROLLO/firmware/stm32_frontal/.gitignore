@@ -19,6 +19,10 @@ TouchGFX/generated/*
 !tools/**
 !tests/
 !tests/**
+!assets/
+assets/*
+!assets/dashboard/
+!assets/dashboard/**
 !Drivers/
 Drivers/*
 !Drivers/STM32F7xx_HAL_Driver/
@@ -34,3 +38,12 @@ Drivers/STM32F7xx_HAL_Driver/Src/*
 **/*.obj
 **/*.exe
 **/__pycache__/
+
+# Adaptador SD propio ENS-0028, reproducible sobre dependencias conservadas.
+!FATFS/
+FATFS/*
+!FATFS/Target/
+FATFS/Target/*
+!FATFS/Target/sd_diskio.c
+!FATFS/Target/sd_poll.inc
+!FATFS/Target/bsp_driver_sd.c

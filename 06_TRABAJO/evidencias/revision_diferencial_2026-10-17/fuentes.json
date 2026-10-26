@@ -1,0 +1,42 @@
+{
+  "head": "bebe4528747bc6e05dc1ba244cd3ce9a090a7942",
+  "tipo": "PC; fuentes, sin hardware ni modelo dinamico",
+  "fuentes": [
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h",
+      "sha256": "026c9555b49fc08c8f68524bb8b0420d6c1093219cf66b6355dbd841b9835132"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp",
+      "sha256": "69101897723d487c66b31c812bc5a31cbdfd145ef6f6168190f674c80e43ebc1"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/tests/control_test.cpp",
+      "sha256": "8629f3da72906b4951717c716989e7f9e79e3e14d9bac61b2ce2864d86bb549c"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/src/main.cpp",
+      "sha256": "3fe44d3a8c84565a560d3a3c667e0693ed6882f2af20f1e5bc7d7a352130bcc1"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/include/hardware_kart.h",
+      "sha256": "443b785ab89c2f491c80f2190b6bffe5167dbf4cdfdde309dc1116d928af5f15"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/esp32_trasero/platformio.ini",
+      "sha256": "89dee3720f08bc59c8af9e0279a17cc3efd32d4ef0e617d5a86477d1978f4484"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c",
+      "sha256": "fe8f8e584bfccbe20a95e94c2693a3bebb4a5efb2826d214837ed559fc25b71b"
+    },
+    {
+      "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/main.c",
+      "sha256": "1d2275cbe045ad9e032277b311aea36c44cfd1f65d96f2feb1c0a679956a5d5b"
+    },
+    {
+      "path": "git:905b09e:ESP32-final.ino",
+      "sha256": "b39f5164e06957cb91bb564b7e217c98bd6446bb718e4d9a42af6f8022370f5c"
+    }
+  ]
+}

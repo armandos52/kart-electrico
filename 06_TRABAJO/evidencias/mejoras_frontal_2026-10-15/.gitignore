@@ -1,0 +1,5 @@
+*.exe
+*.obj
+/compilacion/*.elf
+/compilacion/*.hex
+/compilacion/*.bin

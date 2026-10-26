@@ -1,0 +1,17 @@
+ M .gitignore
+ M 00_INICIO/ESTADO_ACTUAL.md
+ M 00_INICIO/MAPA_DEL_PROYECTO.md
+ M 05_DECISIONES_Y_PROBLEMAS/README.md
+ M 06_TRABAJO/DIARIO_PARA_RELATORIO.md
+ M 06_TRABAJO/PLAN_DE_LECTURA.md
+ M 06_TRABAJO/TAREAS.md
+ M 06_TRABAJO/ensayos/README.md
+ M 07_DESARROLLO/README.md
+ M 07_DESARROLLO/firmware/VERSIONES.md
+?? 05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0009_banco_nucleo_f411.md
+?? 06_TRABAJO/ensayos/ENS-0015_nucleo_f411_pantalla_banco.md
+?? 06_TRABAJO/ensayos/ENS-0016_vistas_frontal_nucleo.md
+?? 06_TRABAJO/evidencias/nucleo_f411_2026-10-14/
+?? 06_TRABAJO/evidencias/nucleo_vistas_2026-10-14/
+?? 07_DESARROLLO/firmware/nucleo_f411_banco/
+?? 07_DESARROLLO/respaldos/nucleo_f411/

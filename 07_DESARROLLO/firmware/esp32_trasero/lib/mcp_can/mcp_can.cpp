@@ -1369,3 +1369,14 @@ INT8U MCP_CAN::getGPI(void)
 /*********************************************************************************************************
   END FILE
 *********************************************************************************************************/
+
+// ENS-0028: single attempt, no busy loop and no ACK wait. Original API unchanged.
+INT8U MCP_CAN::trySendMsgBuf(INT32U id, INT8U len, INT8U *buf) {
+    if (id > 0x7ff || len > 8) return CAN_FAILTX;
+    INT8U address;
+    if (mcp2515_getNextFreeTXBuf(&address) == MCP_ALLTXBUSY) return CAN_GETTXBFTIMEOUT;
+    setMsg(id, 0, 0, len, buf);
+    mcp2515_write_canMsg(address);
+    mcp2515_modifyRegister(address-1, MCP_TXB_TXREQ_M, MCP_TXB_TXREQ_M);
+    return CAN_OK;
+}

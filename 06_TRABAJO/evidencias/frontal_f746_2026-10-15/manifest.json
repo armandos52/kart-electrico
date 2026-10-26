@@ -1,0 +1,688 @@
+{
+ "generado_local": "2026-10-15T16:59:52",
+ "ensayo": "ENS-0019",
+ "fuentes_y_binario_grabado": {
+  "07_DESARROLLO/respaldos/stm32/v1.3-dev4/stm32_frontal-v1.3-dev4.hex": "b758edd7d09f8a651b5111b7854037b5869d3f5960e4e48fc6b8636c65f10316",
+  "07_DESARROLLO/respaldos/stm32/v1.3-dev4/stm32_frontal-v1.3-dev4.elf": "5878e195c60631893ef0cbf6968a1f5ce02e50c093bb8c3b569d78238f20069a",
+  "07_DESARROLLO/firmware/stm32_frontal/tools/observar_swd.py": "430701ea62d9f6dfe767e4bb0f60dcda8e727065965ad9ed6ec07b1360ef745c",
+  "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c": "4c352bc56a37bde849d071a6184fe0d7b73fcf14f3d6c377ce453d21ddd30a84",
+  "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c": "d82cdc1feb1923a43f1afe38f7fa3f66e1ba210dd19354c5c97749a761f3cd4d",
+  "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h": "6fa02b99ecde70c354cbd93d7a74b61506e49d7043b14145c52fdfaba1fc5ab7"
+ },
+ "evidencias": {
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/antes_original/estado_can.log": {
+   "bytes": 1134,
+   "sha256": "28156ac4916727fe714a0a556ac649a4decfdc34fc0805d86198544b7c8d6a84"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/antes_original/framebuffer.raw": {
+   "bytes": 261120,
+   "sha256": "4f0a13cdd1694cddb9842cb295124f4c22fa0578579408685a3ec2b4f8582a26"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/antes_original/observacion.json": {
+   "bytes": 504,
+   "sha256": "8749ffb8cfe16f11f895c73b3af3e5dc8008eb28a150ec48fdea6dda1c2f0c46"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/antes_original/observar.cfg": {
+   "bytes": 1243,
+   "sha256": "1e31b1ab227a55bcd9bc432320caa5946e1f4f476a0184e6a4fa00bcca085fcf"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/antes_original/openocd.log": {
+   "bytes": 1069,
+   "sha256": "54c70f07d6d626377297dd372c4288dcd76d9c1c82629997bd36832706cc899a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/antes_original/pantalla.png": {
+   "bytes": 39356,
+   "sha256": "08c9206b95fe0d7bb362775ac520d0f0c1d070bea142287b794a9c2eb0d079a4"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/antes_original/sym_uwTick.bin": {
+   "bytes": 4,
+   "sha256": "4e2dd6051e796924e733c1bb2b3234720655e9329e4cda540c0579da15dac501"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/conservar.py": {
+   "bytes": 1402,
+   "sha256": "d391565a265f607b0f8221c219a6cd6d30cbaa35456f0df9ba02e56b637f15cd"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/estado_can.log": {
+   "bytes": 1134,
+   "sha256": "8eb34e445cae641959ba440d2eff05654cdfe00878927f07abfc79082d09e0d8"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/framebuffer.raw": {
+   "bytes": 261120,
+   "sha256": "c846bcf5bb08e5de6b04d84e1659b5cdc54096556ab4a9829e0840ba870242a9"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/observacion.json": {
+   "bytes": 1822,
+   "sha256": "0bbe97266baaad712b2ef6839c19070db222347aeb106c9bd8a9047a26a652fa"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/observar.cfg": {
+   "bytes": 2587,
+   "sha256": "0f6ab79604038592a363cae3db10464b57eb8bfab95d4d38c0465a381065e6cb"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/openocd.log": {
+   "bytes": 1069,
+   "sha256": "6235ebd22e79424e508c1503d321afe416fbb6b1f4efa9761cf2c591c1a47cf3"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/pantalla.png": {
+   "bytes": 4814,
+   "sha256": "1cdbde5dd2f805359a86b59a5f490e905534c886e4ccf2af9a31b485202c2d73"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_initialized.bin": {
+   "bytes": 1,
+   "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_notice.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_notice_tick.bin": {
+   "bytes": 4,
+   "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_received.bin": {
+   "bytes": 56,
+   "sha256": "d4817aa5497628e7c77e6b606107042bbba3130888c5f47a375e6179be789fbb"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_sd_error.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_sd_open.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_sd_state.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_selected_gear.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_selected_mode.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_ui.bin": {
+   "bytes": 96,
+   "sha256": "bc3f951bbb751c43ac1e24870a4fd502c837ccde63f4323b96154ab6c705d5b4"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_uwTick.bin": {
+   "bytes": 4,
+   "sha256": "f203d6eec0ccd829146ddcc316ca0c96b39b23c7e961d8f38ecf5152c0d325ef"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_arranque/sym_watchdog_ready.bin": {
+   "bytes": 1,
+   "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/framebuffer.raw": {
+   "bytes": 261120,
+   "sha256": "704a9b6d6db171dd3d356d3c4bac29e9d38223d9a7ba20672e5468e7704acaef"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/observacion.json": {
+   "bytes": 1838,
+   "sha256": "f2e30d98aee2e3fb2266d0e3564a02473d33b36c13ee133127de4ddf9c485409"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/observar.cfg": {
+   "bytes": 2548,
+   "sha256": "b87f0469c967c63400cb93f956290ae47c1c0e0e4cb875d9a90209f9ed6b62ab"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/openocd.log": {
+   "bytes": 1069,
+   "sha256": "851aa0e06a384d9346d90c9cfdb5918523042b02707c692b7fdc0e587af8f16a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/pantalla.png": {
+   "bytes": 5406,
+   "sha256": "688609fcc5b1e80414ceb363b69b85db1b56a0e60c081305ef3240df0115e189"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_initialized.bin": {
+   "bytes": 1,
+   "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_notice.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_notice_tick.bin": {
+   "bytes": 4,
+   "sha256": "2bb6c952804fee198b6a8a4ad27458da0fd61664880aaac3e8cee6826f201e6c"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_received.bin": {
+   "bytes": 56,
+   "sha256": "a11ecd0d6e9bbe76fb14370bb18faf91f3a46c7bf3c2d7c8ea28fd590cb9cba8"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_sd_error.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_sd_open.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_sd_state.bin": {
+   "bytes": 1,
+   "sha256": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_selected_gear.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_selected_mode.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_ui.bin": {
+   "bytes": 96,
+   "sha256": "db3aebc45150180de056550a739679ba942ff65a79779f8fe5f2f78acd345647"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_uwTick.bin": {
+   "bytes": 4,
+   "sha256": "9bbfb993d09484c12a0754810243f1ab8f83df388e603fb3e92e83898c50bbea"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/sym_watchdog_ready.bin": {
+   "bytes": 1,
+   "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/framebuffer.raw": {
+   "bytes": 261120,
+   "sha256": "cc1df2311364862bbba1684d2c7d7edfdc0a2e1ffac5c3820392ec789e299eb3"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/observacion.json": {
+   "bytes": 1839,
+   "sha256": "2cd40ccb360001df132b051148b308d4ae20707ec3e2dd322d8838728c18d414"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/observar.cfg": {
+   "bytes": 2626,
+   "sha256": "19d5d206dc904878d9c6832fd216a411f2f9e29a59a6891b0bf6a7954b6e7955"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/openocd.log": {
+   "bytes": 1069,
+   "sha256": "c0fc4d61ba148ce930f367602e6a9d46f6a6156c9eaed400ff65a4e6778c7098"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/pantalla.png": {
+   "bytes": 5413,
+   "sha256": "fef65c2a4ebccd2c882accd8774499e73f7df4653e79f5890e701989d9cfbc1b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_initialized.bin": {
+   "bytes": 1,
+   "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_notice.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_notice_tick.bin": {
+   "bytes": 4,
+   "sha256": "1d4a892cd9e1830da3a5c7829484effc546884fa15918c88c4b4990bd9bd00cf"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_received.bin": {
+   "bytes": 56,
+   "sha256": "32636b6dfaeb0ea9b4e41db19dc886b525865e67a95f5228c45e7f63971fc937"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_sd_error.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_sd_open.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_sd_state.bin": {
+   "bytes": 1,
+   "sha256": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_selected_gear.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_selected_mode.bin": {
+   "bytes": 1,
+   "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_ui.bin": {
+   "bytes": 96,
+   "sha256": "cdf3ed98443de5bb9994dd5e23af00cd0adea99b9eb672a257c99fd4c29a26a2"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_uwTick.bin": {
+   "bytes": 4,
+   "sha256": "efd433385390d4ff5c7755b1f576474703b688a2031d2e052ed0356623d0480a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_tras_toques/sym_watchdog_ready.bin": {
+   "bytes": 1,
+   "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/estado_can.cfg": {
+   "bytes": 733,
+   "sha256": "ad51ed7c80ff53fa9ad00349374392114b64c09d138c90cbf5a12d1f0cef52ac"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/franja/fb_patron_2s.png": {
+   "bytes": 5380,
+   "sha256": "3df64ca933f24bf5642a425bf3fb6f1ba7963bc2dc49fed072d7b078559ec127"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/franja/fb_patron_2s.raw": {
+   "bytes": 261120,
+   "sha256": "8bcf4ab567a0f468454ef9f3803bbeadd4013aee224d5f71f6912631837de862"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/franja/patron.log": {
+   "bytes": 927,
+   "sha256": "4a3cb4c7e4f4584f3c931466b3b61f0cbbd11830486f289f49dd417c93d716b6"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/franja/restaurar.log": {
+   "bytes": 885,
+   "sha256": "4a39ecaf2dcab0efca23113839a31a9d7f61e66db077ff87ca4336bec37f608f"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/franja_fina/registro.log": {
+   "bytes": 3694,
+   "sha256": "e112338347930432e7dc7743bb4a18c1a9e96be62ad435bfb78143086ec6dad3"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/franja_fina_y_tactil.cfg": {
+   "bytes": 1483,
+   "sha256": "649e5228a336ac8ad3bc1fca9c3082e7a4f806231b615cdb6f664b1d9b0b3cd1"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/frontend_host_dev4.log": {
+   "bytes": 8009,
+   "sha256": "6e41eb15e15c81862ba330efd52f5cf5d639082d35fac9ae99ba88d224c40f35"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/grabacion_dev4.log": {
+   "bytes": 1802,
+   "sha256": "d5f10589ca63d79312b52288facb82581d20fe0814107379c8a774f11fa1e6b6"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/grabar_dev4.cfg": {
+   "bytes": 1100,
+   "sha256": "f29ca758a477302f83e5edd19d6fb2f2bec192ad6bd4caf2bec5dc1c11e1008b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/hashes_respaldo.txt": {
+   "bytes": 1076,
+   "sha256": "cf9ae071e4013cd52e86b67f759b9d0a8639aba6887c0e7277e0068c94c86c46"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/identificacion_openocd.log": {
+   "bytes": 1332,
+   "sha256": "c493bf0dc41f95f8753086511ef3a1da51e03431574664f1b234106d11860261"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/identificacion_tras_fallo.log": {
+   "bytes": 1332,
+   "sha256": "c493bf0dc41f95f8753086511ef3a1da51e03431574664f1b234106d11860261"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/identificar.cfg": {
+   "bytes": 1199,
+   "sha256": "e83a248d7cea443e3ebeef27c9ccaf0a75efda910509c96a70504227677840d6"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/muestrear_ft5336.cfg": {
+   "bytes": 1396,
+   "sha256": "c171a84ab7a9ff6b5b7788fe01417987eef7c3066e9aab612405b4c8668aa862"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/patron_franja.cfg": {
+   "bytes": 975,
+   "sha256": "9f0c3b22d091e0de62760ee366848fe8c867ec9cf25ba35e5c41579db63367c0"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/README.md": {
+   "bytes": 3228,
+   "sha256": "62ffaf42a74da2253c82cb615254508b85ae1c884448864cb2e64af1be6c6618"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/relectura/comparacion.txt": {
+   "bytes": 106,
+   "sha256": "6eb1082ca7b92a3892a1cc0941f0b1ff53d72147b6f9835413e49a33cee005d1"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/relectura/hashes.txt": {
+   "bytes": 287,
+   "sha256": "8b605017a352ce25f16e65601654ccc533ad4950e065df8e51297c94a301f762"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/relectura_dev4.log": {
+   "bytes": 888,
+   "sha256": "38432872347b3ea27fb8ae7cdfdb1b60887fbb545246c33af06988952a1af150"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/releer_dev4.cfg": {
+   "bytes": 719,
+   "sha256": "a96414e3943d8dcf63dddb4404d499e329c1fa5283c7043d8e805c1b4170c7c7"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/respaldar.cfg": {
+   "bytes": 1533,
+   "sha256": "8b520bbf081ccfc7279c7d81e93134b9f834770ad912a34477c9c79128c39f41"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/respaldar_qspi.cfg": {
+   "bytes": 1274,
+   "sha256": "a8a3f405ff96e65ff72c6154a34454d6e26562312bb59b9d7766811e7dc4ace8"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/respaldo_openocd_intento1.log": {
+   "bytes": 1313,
+   "sha256": "703a7a159631763b1d383ee34269f08c5bd6e38c1ff27801787530801fd20db8"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/respaldo_qspi_repeticion.log": {
+   "bytes": 953,
+   "sha256": "2ed897956bb4f11f30489c868b4fbfc9678ef0eab12ec18059653889cf681e33"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/restaurar_franja.cfg": {
+   "bytes": 520,
+   "sha256": "0e22ed6a4d9686340c0505fc424d09daef59d8000bd5e33b31e7418cb3879a76"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/seguir_tactil.cfg": {
+   "bytes": 1936,
+   "sha256": "e587267a78b81944b5e2a601aa562c3ce97a0ee60fe946832f208bcc454a40d8"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/seguir_tactil2.cfg": {
+   "bytes": 1937,
+   "sha256": "647c7b310d32a1858913407de7b5ac520919e68463800823ed74e51e4ea6ddb4"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_01_t000016.png": {
+   "bytes": 4800,
+   "sha256": "217807582d72155cd939736a400bd1e0e0533f3f079fd2e33a3b2742d129145b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_01_t000016.raw": {
+   "bytes": 261120,
+   "sha256": "b9c23b14be46b25166eba785587061534412c68b5d39298e81bd533b14d9293b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_02_t067178.png": {
+   "bytes": 4800,
+   "sha256": "217807582d72155cd939736a400bd1e0e0533f3f079fd2e33a3b2742d129145b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_02_t067178.raw": {
+   "bytes": 261120,
+   "sha256": "b9c23b14be46b25166eba785587061534412c68b5d39298e81bd533b14d9293b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_03_t069808.png": {
+   "bytes": 4800,
+   "sha256": "217807582d72155cd939736a400bd1e0e0533f3f079fd2e33a3b2742d129145b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_03_t069808.raw": {
+   "bytes": 261120,
+   "sha256": "b9c23b14be46b25166eba785587061534412c68b5d39298e81bd533b14d9293b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_04_t097187.png": {
+   "bytes": 4800,
+   "sha256": "217807582d72155cd939736a400bd1e0e0533f3f079fd2e33a3b2742d129145b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_04_t097187.raw": {
+   "bytes": 261120,
+   "sha256": "b9c23b14be46b25166eba785587061534412c68b5d39298e81bd533b14d9293b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_05_t099905.png": {
+   "bytes": 4800,
+   "sha256": "217807582d72155cd939736a400bd1e0e0533f3f079fd2e33a3b2742d129145b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_05_t099905.raw": {
+   "bytes": 261120,
+   "sha256": "b9c23b14be46b25166eba785587061534412c68b5d39298e81bd533b14d9293b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_06_t157331.png": {
+   "bytes": 5406,
+   "sha256": "688609fcc5b1e80414ceb363b69b85db1b56a0e60c081305ef3240df0115e189"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_06_t157331.raw": {
+   "bytes": 261120,
+   "sha256": "704a9b6d6db171dd3d356d3c4bac29e9d38223d9a7ba20672e5468e7704acaef"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_07_t159964.png": {
+   "bytes": 5406,
+   "sha256": "688609fcc5b1e80414ceb363b69b85db1b56a0e60c081305ef3240df0115e189"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_07_t159964.raw": {
+   "bytes": 261120,
+   "sha256": "704a9b6d6db171dd3d356d3c4bac29e9d38223d9a7ba20672e5468e7704acaef"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_08_t178314.png": {
+   "bytes": 5504,
+   "sha256": "4e9087680c25ea13f33eb92fb6841b517eb7e9da35324972d6c1123d5ae2fb04"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_08_t178314.raw": {
+   "bytes": 261120,
+   "sha256": "be170a984711ec7bf19c5f1ee8875f8c0e31cf677b5c8a49d0d61bce515e57e9"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_09_t180939.png": {
+   "bytes": 5504,
+   "sha256": "4e9087680c25ea13f33eb92fb6841b517eb7e9da35324972d6c1123d5ae2fb04"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_09_t180939.raw": {
+   "bytes": 261120,
+   "sha256": "be170a984711ec7bf19c5f1ee8875f8c0e31cf677b5c8a49d0d61bce515e57e9"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_10_t183564.png": {
+   "bytes": 5406,
+   "sha256": "688609fcc5b1e80414ceb363b69b85db1b56a0e60c081305ef3240df0115e189"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_10_t183564.raw": {
+   "bytes": 261120,
+   "sha256": "704a9b6d6db171dd3d356d3c4bac29e9d38223d9a7ba20672e5468e7704acaef"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_11_t187196.png": {
+   "bytes": 5410,
+   "sha256": "5df2d26ede906db56eab3e293e73f7a6f3599fe6dec45401de18cfbe6bdcce60"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_11_t187196.raw": {
+   "bytes": 261120,
+   "sha256": "3aea291c823d5316fb9811c88322b8424f25266f772296ec20bb3dda0c163862"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_12_t217427.png": {
+   "bytes": 5406,
+   "sha256": "688609fcc5b1e80414ceb363b69b85db1b56a0e60c081305ef3240df0115e189"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_12_t217427.raw": {
+   "bytes": 261120,
+   "sha256": "704a9b6d6db171dd3d356d3c4bac29e9d38223d9a7ba20672e5468e7704acaef"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_13_t220059.png": {
+   "bytes": 5414,
+   "sha256": "2002e375d1558290dcf6aceea53122a7d4bcff2484c5277de04b4580d1fa8e0e"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_13_t220059.raw": {
+   "bytes": 261120,
+   "sha256": "957c7390fcac554d365566476e7707c3fe573982bf25328df089c685fb0836b3"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_14_t307563.png": {
+   "bytes": 5416,
+   "sha256": "a8fd035f5b0ebecce712e25783f464aab948ce3433b195b2e70fbc7c217b8401"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_14_t307563.raw": {
+   "bytes": 261120,
+   "sha256": "b1f32f5e7442b5874e34416204c6dcce8c14c7452cffa291fa276ccf7607f7e4"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_15_t310196.png": {
+   "bytes": 5404,
+   "sha256": "c5340d645e252bf6e3459946f0919888585c3b3652916567f62da8ea566a8f69"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_15_t310196.raw": {
+   "bytes": 261120,
+   "sha256": "4267606acc72d60deda2fa59d84ee9fa3eee658989c3109db4fe87be482bef28"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_16_t367676.png": {
+   "bytes": 5406,
+   "sha256": "688609fcc5b1e80414ceb363b69b85db1b56a0e60c081305ef3240df0115e189"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/fb_16_t367676.raw": {
+   "bytes": 261120,
+   "sha256": "704a9b6d6db171dd3d356d3c4bac29e9d38223d9a7ba20672e5468e7704acaef"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/ft5336.log": {
+   "bytes": 17001,
+   "sha256": "e6882735e5a4a82dd5ed2b1766d704cdc56eabf4695e31f08942f0d8c6aae69e"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/seguimiento.log": {
+   "bytes": 5418,
+   "sha256": "487d5c9e89ae339d97fb8a41cbed731251ee6e91da255912f45680751b48431b"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil/seguimiento_fallo_sin_init.log": {
+   "bytes": 341,
+   "sha256": "bbef344501491fc2eeff9671138b444a4f3cc9a1cdbc25f2c6c1feb222c7f72d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_01_t000015.png": {
+   "bytes": 5380,
+   "sha256": "3df64ca933f24bf5642a425bf3fb6f1ba7963bc2dc49fed072d7b078559ec127"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_01_t000015.raw": {
+   "bytes": 261120,
+   "sha256": "8bcf4ab567a0f468454ef9f3803bbeadd4013aee224d5f71f6912631837de862"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_02_t002604.png": {
+   "bytes": 5322,
+   "sha256": "f408a5aea1ff1092686aa963f1ee47f9e4112e17c9d7c38a361727d11913a132"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_02_t002604.raw": {
+   "bytes": 261120,
+   "sha256": "7838d000402ee757cf924a4c87858ccfb480f835a3941972ca9c1e017b118367"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_03_t008234.png": {
+   "bytes": 5377,
+   "sha256": "efa564658bca55544a4559a32a3c5756f78bce7b8ed5e1180f30fd69fe875e55"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_03_t008234.raw": {
+   "bytes": 261120,
+   "sha256": "a592f6c73bdfaee7fd8fc1d93bcc3ae492790b8fd52c326e78906e4d23a4a7b5"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_04_t011002.png": {
+   "bytes": 5380,
+   "sha256": "3df64ca933f24bf5642a425bf3fb6f1ba7963bc2dc49fed072d7b078559ec127"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_04_t011002.raw": {
+   "bytes": 261120,
+   "sha256": "8bcf4ab567a0f468454ef9f3803bbeadd4013aee224d5f71f6912631837de862"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_05_t122656.png": {
+   "bytes": 5408,
+   "sha256": "1efcdd6b965a6a14d5d88cbf3d0c3e2f8659d26565bc38ecb605072a11010bb9"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_05_t122656.raw": {
+   "bytes": 261120,
+   "sha256": "0767fffe7fb24ec37e9c505dc32164a3e05e78f08b8405f7d014b554beb1b32d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_06_t125592.png": {
+   "bytes": 5485,
+   "sha256": "19a43e67a4e57a2486f63cf2c117b721184dc06df593dd97145755203e1f1a87"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_06_t125592.raw": {
+   "bytes": 261120,
+   "sha256": "65077c0ee85eb01ca87d8776d7b1ddb3e605edf0ccd1622f923e796aec4d1149"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_07_t128187.png": {
+   "bytes": 5396,
+   "sha256": "e1cf07f3b392304e9e9db4c0ea45b78770bb754088dde8b76aec4eedbb4eb151"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_07_t128187.raw": {
+   "bytes": 261120,
+   "sha256": "d418d8f6fa5e4ccf6d376bf56907a4833f7b1d1cecb3b77bef8545f810ec977d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_08_t130772.png": {
+   "bytes": 5476,
+   "sha256": "e123ead1ae2b3d8c98cfb52e7f130a45b5bc13d6f48865037ca9f571edefa32f"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_08_t130772.raw": {
+   "bytes": 261120,
+   "sha256": "ae8aa2124bed96eb1d4d5803aecf0aebaa28e9bbacd45b0421e3c087920b9074"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_09_t133369.png": {
+   "bytes": 5478,
+   "sha256": "cc101eac8f6d2477b933563525257cd8211705ed61e63c56fb82d4a76d93296c"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_09_t133369.raw": {
+   "bytes": 261120,
+   "sha256": "87a226482d23a2c55dc4a5b272a5852569b5cc4467e006b5cff4a0b024a98f9d"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_10_t137488.png": {
+   "bytes": 5417,
+   "sha256": "a2fdbed06c803df88214b8fcd96ff7228d56c3aa33bd8f50e1fb98ce0eb34735"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_10_t137488.raw": {
+   "bytes": 261120,
+   "sha256": "8347a22d752e565d0333f3d91b41ef75bdd4215c404cc408430bcd7ef842623f"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_11_t141282.png": {
+   "bytes": 5477,
+   "sha256": "de6bb6a763419783feeb5c571297a2a99bf387a5d7ea0154bd2138dbe5d047b3"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_11_t141282.raw": {
+   "bytes": 261120,
+   "sha256": "8ca4ae850d7ab0d115890a354411c213fb8744b827a90fae97863edabcc3908c"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_12_t145053.png": {
+   "bytes": 6017,
+   "sha256": "3ee095de18bbbf343663dd38b36cd9906fb6503c2ea7a3b23c0abb44018043f6"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_12_t145053.raw": {
+   "bytes": 261120,
+   "sha256": "3ab52fe8429ccf242dd4cf1a0cbbf0fa6c87b070a390307703e5815db9e21ecb"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_13_t147649.png": {
+   "bytes": 6017,
+   "sha256": "3ee095de18bbbf343663dd38b36cd9906fb6503c2ea7a3b23c0abb44018043f6"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_13_t147649.raw": {
+   "bytes": 261120,
+   "sha256": "3ab52fe8429ccf242dd4cf1a0cbbf0fa6c87b070a390307703e5815db9e21ecb"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_14_t163500.png": {
+   "bytes": 6058,
+   "sha256": "4192f32abacd7a8b4c57843dda82b5d862b7c2d9d4b6701316b6f764fb29b53e"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_14_t163500.raw": {
+   "bytes": 261120,
+   "sha256": "261d29e3f07bd42c70f3b498d852d013f322a3b36bc288cb023c9c7545392e8e"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_15_t166085.png": {
+   "bytes": 5961,
+   "sha256": "173c2f7524590d53bcc6325ed76bb9ef5d5913b9c74669ef50f8e33ed9866b7f"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_15_t166085.raw": {
+   "bytes": 261120,
+   "sha256": "d618572a24c267d35b4476ae3132bd53da21f1590b7199463ef0118151668a42"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_16_t170515.png": {
+   "bytes": 6051,
+   "sha256": "de01dc10a5f606c7d748a4af55d15ebb01cbe1abca1345740f1071c40151add5"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/fb_16_t170515.raw": {
+   "bytes": 261120,
+   "sha256": "21e83616be5737caed0279e49c30f7c171814e925f3d5e46414f88d611cdaaa1"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/montaje_avisos_modos.png": {
+   "bytes": 15694,
+   "sha256": "75e6ab58ecc9cba086c82f5e0ea7c7368f2bd0c3f6b61084f60d3d00660fccaf"
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/tactil2/seguimiento.log": {
+   "bytes": 6210,
+   "sha256": "8f84c37ff2e8518ca8edddf4bf5ff6263adfeba2ce2634724067de7af81ed612"
+  }
+ },
+ "respaldos_locales": {
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/flash_interna_lectura1.bin": {
+   "bytes": 1048576,
+   "sha256": "23779871036d65106712829c8a88d86526604a8e3daa76c6c07e427c2dfd8855"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/flash_interna_lectura2.bin": {
+   "bytes": 1048576,
+   "sha256": "23779871036d65106712829c8a88d86526604a8e3daa76c6c07e427c2dfd8855"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/option_bytes_lectura.bin": {
+   "bytes": 32,
+   "sha256": "f737c160b297f470cb35621361e026a80c3fd1a197436b9d38d74903207c5602"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/otp_lectura.bin": {
+   "bytes": 1056,
+   "sha256": "cfb8375808408fa803db5b09ab90086eb9fab195ae5b14a2084b1c66f9e567d2"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/qspi_lectura1.bin": {
+   "bytes": 16777216,
+   "sha256": "323636a3f8ec570ae952559c0e6a688c33f7d699b91cf61f1d8676c19a358247"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/qspi_lectura2.bin": {
+   "bytes": 16777216,
+   "sha256": "323636a3f8ec570ae952559c0e6a688c33f7d699b91cf61f1d8676c19a358247"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/qspi_lectura2_interrumpida.bin": {
+   "bytes": 2289664,
+   "sha256": "02cc3e3622615ad35349366e6b8605ea3cb4b8cbcca50b86359dbee18e51fbbd"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/qspi_lectura3.bin": {
+   "bytes": 16777216,
+   "sha256": "323636a3f8ec570ae952559c0e6a688c33f7d699b91cf61f1d8676c19a358247"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/relectura_dev4/interna_0x08000000.bin": {
+   "bytes": 248868,
+   "sha256": "01f710c1cd3a888d94290c6604ac5e0287cd0c2823385ca08e36613501ecf7c9"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/relectura_dev4/qspi_0x90000000.bin": {
+   "bytes": 6351932,
+   "sha256": "2ce6a7a77f798369f56a84c961f50e07a2dd0eb2a8c6ce2bd4e7e60c3f5378f4"
+  },
+  "07_DESARROLLO/respaldos/stm32_f746/2026-10-15/RESPALDO.md": {
+   "bytes": 4121,
+   "sha256": "0d67eef084faed2499134e7075bb41df626e3b88322e99bde7bb4257bad2d929"
+  }
+ }
+}

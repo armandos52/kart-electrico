@@ -1,0 +1,18 @@
+{
+  "07_DESARROLLO/respaldos/stm32/v1.3-dev4/stm32_frontal-v1.3-dev4.elf": {
+    "sha256": "5878e195c60631893ef0cbf6968a1f5ce02e50c093bb8c3b569d78238f20069a",
+    "coincide_ENS0019": true
+  },
+  "07_DESARROLLO/respaldos/stm32/v1.3-dev4/stm32_frontal-v1.3-dev4.hex": {
+    "sha256": "b758edd7d09f8a651b5111b7854037b5869d3f5960e4e48fc6b8636c65f10316",
+    "coincide_ENS0019": true
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/relectura/comparacion.txt": {
+    "sha256": "6eb1082ca7b92a3892a1cc0941f0b1ff53d72147b6f9835413e49a33cee005d1",
+    "coincide_ENS0019": true
+  },
+  "06_TRABAJO/evidencias/frontal_f746_2026-10-15/dev4_final/observacion.json": {
+    "sha256": "f2e30d98aee2e3fb2266d0e3564a02473d33b36c13ee133127de4ddf9c485409",
+    "coincide_ENS0019": true
+  }
+}

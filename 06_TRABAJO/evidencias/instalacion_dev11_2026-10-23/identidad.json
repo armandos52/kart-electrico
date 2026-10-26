@@ -1,0 +1,9 @@
+{
+  "version": "stm32_frontal-v1.3-dev11-log",
+  "elf_sha256": "d3eb490400817e03d35996af22adfe528b5f704fd285e4adaa6fca68b1a16682",
+  "hex_sha256": "d08dff586291218197861f9b7b025d29dea29aa867faf77d2ea30cdc038ef3c8",
+  "regiones": {
+    "0x8000000": 352684,
+    "0x90000000": 6351932
+  }
+}

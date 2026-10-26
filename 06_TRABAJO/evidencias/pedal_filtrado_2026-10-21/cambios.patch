@@ -1,0 +1,284 @@
+--- dev9/stm32_frontal\tests\dashboard_snapshot_cases.h
++++ dev10/stm32_frontal\tests\dashboard_snapshot_cases.h
+@@ -4,7 +4,7 @@
+     check(!ui.feedback_usable && ui.front_left_age==UINT32_MAX && !ui.front_left_valid && ui.relay_state==255,
+           "Dashboard: ausencia CAN/Hall explicita");
+     feedback();pins[2]=1;adc_accel_value=400;Kart_ControlTick();
+-    check(ui.accel_raw>0 && !ui.pedal_free && ui.drive_input && !ui.reverse_input && ui.gear==0,
++    check(!ui.pedal_free && ui.drive_input && !ui.reverse_input && ui.gear==0,
+           "Dashboard: pedal fuera de zona cero bloquea entrada D");
+     adc_accel_value=124;Kart_ControlTick();
+     check(ui.pedal_free && ui.stationary && ui.feedback_usable && ui.gear==1 && ui.relay_state==3,
+--- dev9/stm32_frontal\tests\dashboard_test.cpp
++++ dev10/stm32_frontal\tests\dashboard_test.cpp
+@@ -34,7 +34,7 @@
+     KartUiSnapshot s={};
+     s.can_age=s.status_age=s.bms_soc_age=s.bms_temp_age=s.front_left_age=s.front_right_age=UINT32_MAX;
+     s.mode_received=s.mode_applied=s.relay_state=s.backend_gear=255;
+-    s.accel_adc=400;s.accel_raw=212;s.steer_adc=2177;s.steer_raw=2048;s.input_flags=7;s.brake=1;
++    s.accel_adc=400;s.accel_raw=381;s.steer_adc=2177;s.steer_raw=2048;s.input_flags=7;s.brake=1;
+     if(scenario==0)return s;
+     s.feedback_fresh=s.feedback_usable=1;s.can_age=10;s.stationary=1;
+     if(scenario==1){s.drive_input=1;return s;} // Compatible con ESP legado; no estado 0x124.
+@@ -43,7 +43,7 @@
+     s.gear=s.drive_input=s.backend_gear=1;s.brake=s.stationary=0;s.inhibit=0;s.backend_flags=12;
+     s.speed_kph=23;s.rpm_left=355;s.rpm_right=359;s.rpm_front_left=350;s.rpm_front_right=352;
+     s.front_left_valid=s.front_right_valid=1;s.front_left_age=20;s.front_right_age=19;
+-    s.accel_adc=500;s.accel_raw=478;s.yaw_deci_dps=-24;s.sd_requested=1;s.sd_state=KART_SD_RECORDING;s.sd_rows=12345;
++    s.accel_adc=500;s.accel_raw=857;s.yaw_deci_dps=-24;s.sd_requested=1;s.sd_state=KART_SD_RECORDING;s.sd_rows=12345;
+     if(scenario==3)return s;
+     if(scenario==4){s.input_flags=0;s.accel_adc=s.steer_adc=65535;s.feedback_usable=s.status_fresh=s.front_left_valid=s.front_right_valid=0;s.status_age=350;s.reverse_input=1;s.ui_notice=KART_UI_INPUT_BAD;return s;}
+     s.speed_kph=200;s.rpm_left=s.rpm_right=s.rpm_front_left=s.rpm_front_right=2000;s.accel_adc=s.steer_adc=4095;s.accel_raw=s.steer_raw=4095;
+--- dev9/stm32_frontal\tests\display_cases.h
++++ dev10/stm32_frontal\tests\display_cases.h
+@@ -64,7 +64,8 @@
+         char base[5][41]={};Kart_FormatDisplay(&s,base);
+         s.ui_notice=(uint8_t)note;Kart_FormatDisplay(&s,lines);
+         causes_preserved&=strcmp(base[1],lines[1])==0;
+-        notices_visible&=strstr(lines[4],"MODO:")!=nullptr;
++        const char* expected_notice[]={"","MODO: PONER N","PARAR Y SOLTAR PEDAL","MODO: SIN CAN RECIENTE","MODO: REVISAR ENTRADAS"};
++        notices_visible&=strstr(lines[4],expected_notice[note])!=nullptr;
+         layout_valid&=display_fits(lines);
+     }
+     check(causes_preserved,"F03 todos los motivos y el desconocido conservan prioridad");
+--- dev9/stm32_frontal\tests\frontend_test.cpp
++++ dev10/stm32_frontal\tests\frontend_test.cpp
+@@ -102,8 +102,10 @@
+ #include "dashboard_snapshot_cases.h"
+ #include "bugfix_cases.h"
+ #include "pedal_cases.h"
++#include "pedal_filter_cases.h"
+ int main(){
+     test_pedal_zero();
++    test_pedal_filter();
+     test_start_stop();
+     test_display_developer();
+     test_sd_retries();
+@@ -114,7 +116,7 @@
+     check(sent_health[0]==1 && sent_health[1]==7 && kart_u16be(sent_health+2)==124,"Ext 0x101 conserva ADC fisico");
+     const uint16_t seq=kart_u16be(sent_health+6);Kart_ControlTick();check(kart_u16be(sent_health+6)==uint16_t(seq+1),"Secuencia avanza por muestra");
+     pins[2]=1;Kart_ControlTick();check(sent_command[5]==1 && ui.gear==1,"D exige freno quietud pedal libre");
+-    pins[0]=1;adc_accel_value=1861;Kart_ControlTick();check(kart_u16be(sent_command)==4095,"Pedal superior normalizado");
++    pins[0]=1;adc_accel_value=1861;for(unsigned i=0;i<4;i++)Kart_ControlTick();check(kart_u16be(sent_command)==4095,"Pedal superior normalizado tras cuatro muestras");
+     received.status[4]=4;received.left=100;received.right=100;pins[2]=0;pins[3]=1;Kart_ControlTick();
+     check(ui.gear==0 && !sent_command[5] && !sent_command[6],"D a R con movimiento pasa N, no conserva D");
+     reset();feedback();adc_ok=0;Kart_ControlTick();check(ui.input_flags==4 && ui.accel_adc==65535 && sent_command[4]==1,"Fallo conversion ADC inhibe y publica centinela");
+--- dev9/stm32_frontal\tests\pedal_cases.h
++++ dev10/stm32_frontal\tests\pedal_cases.h
+@@ -40,7 +40,8 @@
+         adc_accel_value=(uint16_t)adc;Kart_ControlTick();
+         monotonic &= ui.gear==1 && ui.accel_raw>=previous;previous=ui.accel_raw;
+     }
+-    check(monotonic && previous==4095,"Pedal: recorrido continuo creciente conserva marcha seleccionada y fondo");
++    for(unsigned i=0;i<3;i++)Kart_ControlTick();
++    check(monotonic && ui.accel_raw==4095,"Pedal: recorrido continuo creciente conserva marcha seleccionada y fondo tras asentarse");
+     adc_accel_value=245;Kart_ControlTick();
+     check(ui.gear==1 && ui.accel_raw==0 && kart_u16be(sent_command)==0,"Pedal: retorno medido corta mando en la misma muestra, sin cola de filtro");
+     adc_ok=0;Kart_ControlTick();
+--- dev9/stm32_frontal\tests\pedal_filter_cases.h
++++ dev10/stm32_frontal\tests\pedal_filter_cases.h
+@@ -0,0 +1,63 @@
++// ENS-0027: requisitos temporales y de mando con ADC/GPIO/CAN simulados.
++static void pedal_sample(uint16_t adc,uint32_t dt=5){
++    tick+=dt;feedback();adc_accel_value=adc;Kart_ControlTick();
++}
++static void test_pedal_filter(){
++    reset();feedback();pedal_sample(1000);
++    check(ui.accel_raw==2065 && !ui.pedal_free && ui.gear==0,
++          "Filtro: arranque con pedal pisado no inventa reposo ni entra D");
++    const uint16_t expected[]={2442,2725,2913,3008};
++    bool weighted=true;
++    for(unsigned i=0;i<4;i++){pedal_sample(1400);weighted &= ui.accel_raw==expected[i];}
++    check(weighted,"Filtro: escalon usa pesos 4/3/2/1 y se asienta en cuatro muestras");
++    check(ui.accel_adc==1400 && kart_u16be(sent_health+2)==1400,
++          "Filtro: snapshot y trama de salud conservan ADC fisico sin filtrar");
++    pedal_sample(200);
++    check(ui.accel_raw==0 && ui.pedal_free && kart_u16be(sent_command)==0,
++          "Filtro: soltar corta en primera muestra, sin cola de aceleracion");
++    pedal_sample(321);pins[2]=1;Kart_ControlTick();
++    check(ui.accel_raw==0 && !ui.pedal_free && ui.gear==0,
++          "Filtro: promedio todavia bajo no permite D si lectura actual supera cero");
++    pedal_sample(200);pedal_sample(800);
++    check(ui.accel_raw==571,"Filtro: volver a pisar no reutiliza el historial de aceleracion anterior");
++    pedal_sample(4095);
++    check(!(ui.input_flags&KART_INPUT_ACCEL_OK) && ui.gear==0 && !ui.pedal_free && kart_u16be(sent_command)==0,
++          "Filtro: una sola muestra invalida inhibe inmediatamente sin promediarla");
++    pedal_sample(1400);
++    check(ui.accel_raw==3008 && !ui.pedal_free && ui.gear==0,
++          "Filtro: recuperacion con pedal pisado no hereda ceros ni reengancha D");
++    adc_ok=0;Kart_ControlTick();
++    check(ui.accel_adc==65535 && !(ui.input_flags&1) && kart_u16be(sent_command)==0,
++          "Filtro: fallo HAL corta aun con historial elevado");
++    adc_ok=1;pedal_sample(200);pedal_sample(1400);Kart_Init();pedal_sample(800);
++    check(ui.accel_raw==1593,"Filtro: reinicializar elimina memoria anterior");
++    pedal_sample(1400,20);pedal_sample(800,20);
++    check(ui.accel_raw==1593,"Filtro: hueco de 20 ms descarta muestras viejas");
++    reset();tick=0xfffffff0u;pedal_sample(1000,0);
++    weighted=true;
++    for(unsigned i=0;i<4;i++){pedal_sample(1400);weighted &= ui.accel_raw==expected[i];}
++    check(weighted,"Filtro: pesos y memoria funcionan al desbordar el reloj");
++    reset();pedal_sample(1000);uint16_t lowest=4095,highest=0;
++    for(unsigned i=0;i<40;i++){
++        pedal_sample(i%2?1040:960);
++        if(i>=4){if(ui.accel_raw<lowest)lowest=ui.accel_raw;if(ui.accel_raw>highest)highest=ui.accel_raw;}
++    }
++    check(highest-lowest==38,"Filtro: ruido alterno sintetico de 80 ADC baja a 16 ADC, sin afirmar EMI real");
++    bool continuous=true,legacy=true;uint16_t last=0;
++    for(unsigned adc=24;adc<=1961;adc++) {
++        reset();pedal_sample((uint16_t)adc);
++        continuous &= ui.accel_raw>=last && ui.accel_raw-last<=5;
++        last=ui.accel_raw;
++        if(adc>=512)legacy &= ui.accel_raw==(adc>=1861?4095:(adc-124)*4095/1737);
++    }
++    check(continuous && last==4095,"Curva: recorrido estable monotono sin saltos mayores a 5/4095 por cuenta ADC");
++    check(legacy,"Curva: respuesta estable identica a dev8 desde ADC 512 hasta fondo");
++    reset();pedal_sample(800);check(ui.accel_raw==1593,"Curva: ADC 800 recupera 38,9 % de mando anterior");
++    reset();pedal_sample(400);check(ui.accel_raw==381,"Curva: ADC 400 entrega 9,3 %, sin salto al salir de cero");
++    reset();pedal_sample(200);pins[2]=1;Kart_ControlTick();pedal_sample(1400);
++    adc_steer_value=813;Kart_ControlTick();
++    check(ui.input_flags==5 && ui.gear==0 && kart_u16be(sent_command)==0,
++          "Direccion: lectura 813 del tope sigue detectada, filtro pedal no oculta el fallo");
++    reset();arm_button();press_start();pedal_sample(1400);arm_button();button(1,0);
++    check(!ui.start && !start_sent(),"Filtro: historial del pedal no retrasa STOP");
++}
+--- dev9/stm32_frontal\Core\Inc\kart_frontend.h
++++ dev10/stm32_frontal\Core\Inc\kart_frontend.h
+@@ -5,10 +5,13 @@
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+-#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev9-ui"
++#define KART_FRONTEND_VERSION "stm32_frontal-v1.3-dev10-ui"
+ // ENS-0026, banco 21-10: reposo observado hasta 302 ADC; margen provisional 18.
+-// Zona cero fija, sin autoajuste al arrancar ni filtrado que retrase soltar.
++// Zona cero fija; soltar dentro de ella corta sin esperar al filtro.
+ #define KART_ACCEL_ZERO_ADC 320u
++// ENS-0027: union continua con la curva historica. Parametro de desarrollo,
++// no un punto medido del pedal; por encima se recupera exactamente dev8.
++#define KART_ACCEL_LEGACY_JOIN_ADC 512u
+ // El permiso de marcha y el mando CAN comparten exactamente el mismo cero.
+ #define KART_PEDAL_FREE_MAX 0u
+ #define KART_FEEDBACK_MAX_AGE_MS 500u
+--- dev9/stm32_frontal\Core\Src\kart_dashboard.c
++++ dev10/stm32_frontal\Core\Src\kart_dashboard.c
+@@ -114,7 +114,7 @@
+ }
+ static void draw_inputs(const KartUiSnapshot* s,const KartDashboardPainter* p,const Palette* c){
+     char v[64];
+-    txt(p,10,111,214,KART_FONT_SMALL,c->muted,"Pedal · ADC físico / normalizado");
++    txt(p,10,111,214,KART_FONT_SMALL,c->muted,"Pedal · ADC físico / mando filtrado");
+     if(s->input_flags&KART_INPUT_ACCEL_OK)snprintf(v,sizeof(v),"%u / %u",s->accel_adc,s->accel_raw);else snprintf(v,sizeof(v),"Inválido (ADC %u)",s->accel_adc);
+     txt(p,10,129,218,KART_FONT_VALUE,c->text,v);
+     box(p,10,158,216,5,c->panel);if(s->input_flags&KART_INPUT_ACCEL_OK)box(p,10,158,(int)((uint32_t)s->accel_raw*216/4095),5,c->active);
+--- dev9/stm32_frontal\Core\Src\kart_display.c
++++ dev10/stm32_frontal\Core\Src\kart_display.c
+@@ -7,7 +7,7 @@
+         "PREPARANDO RELES","CARGADOR CONECTADO","REARME: N FRENO PEDAL LIBRE","FRENO","PEDAL LIBRE","NEUTRO",
+         "PARAR PARA CAMBIAR SENTIDO","PARAR EN N PARA CAMBIAR MODO","VELOCIDAD INVALIDA","REVISAR HALL","MPU NO DISPONIBLE",
+         "ENTRADAS FRONTALES INVALIDAS","LIMITE R ACTIVO","FALLO SALIDA","FALLO CAN","CONFIGURACION INVALIDA"};
+-    static const char* notices[]={"","MODO: PONER N","MODO:PARAR/SOLTAR PEDAL","MODO: SIN CAN RECIENTE","MODO: REVISAR ENTRADAS"};
++    static const char* notices[]={"","MODO: PONER N","PARAR Y SOLTAR PEDAL","MODO: SIN CAN RECIENTE","MODO: REVISAR ENTRADAS"};
+     snprintf(lines[0],41,"SOL:%s REC:%s APL:%s",Kart_ModeName(s->mode_requested),Kart_ModeName(s->mode_received),Kart_ModeName(s->mode_applied));
+     const char* reason=!s->feedback_fresh?"SIN DATOS CAN RECIENTES":!s->status_fresh?"ESP SIN ESTADO RECIENTE":s->inhibit<21?causes[s->inhibit]:"ESTADO DESCONOCIDO";
+     // La causa nunca se sustituye por un aviso de interaccion del desarrollador.
+--- dev9/stm32_frontal\Core\Src\kart_frontend.c
++++ dev10/stm32_frontal\Core\Src\kart_frontend.c
+@@ -13,6 +13,9 @@
+ #define STEER_MIN 1042u
+ #define STEER_MAX 3313u
+ #define ADC_MARGIN 100u
++#if KART_ACCEL_ZERO_ADC <= ACCEL_MIN || KART_ACCEL_LEGACY_JOIN_ADC <= KART_ACCEL_ZERO_ADC || KART_ACCEL_LEGACY_JOIN_ADC >= ACCEL_MAX
++#error "Referencias de pedal incoherentes"
++#endif
+ #define FEEDBACK_MAX_AGE KART_FEEDBACK_MAX_AGE_MS
+ #define STATUS_MAX_AGE KART_STATUS_MAX_AGE_MS
+ #define BMS_MAX_AGE KART_BMS_MAX_AGE_MS
+@@ -62,6 +65,9 @@
+ static uint8_t notice=KART_UI_OK;
+ static IWDG_HandleTypeDef watchdog;
+ static uint8_t initialized=0,watchdog_ready=0;
++// Media movil ponderada de cuatro lecturas validas a 5 ms. La mas reciente
++// pesa 4, las anteriores 3/2/1; memoria finita, sin autoaprender el cero.
++static struct {uint16_t samples[4];uint32_t tick;uint8_t ready;} pedal_filter;
+ static FATFS sd_fs;
+ static FIL sd_file;
+ static uint8_t sd_open=0,sd_state=KART_SD_STOPPED,sd_error=0;
+@@ -126,7 +132,7 @@
+ void HAL_CAN_ErrorCallback(CAN_HandleTypeDef* hcan) {
+     if(hcan->Instance==CAN1)received.rx_errors++;
+ }
+-static uint8_t read_adc(uint32_t channel,uint16_t* raw,uint16_t low,uint16_t high,uint16_t zero,uint16_t* normalized) {
++static uint8_t read_adc(uint32_t channel,uint16_t* raw,uint16_t low,uint16_t high,uint16_t* normalized) {
+     ADC_ChannelConfTypeDef conf={0};conf.Channel=channel;conf.Rank=ADC_REGULAR_RANK_1;conf.SamplingTime=ADC_SAMPLETIME_28CYCLES;
+     uint8_t ok=HAL_ADC_ConfigChannel(&hadc3,&conf)==HAL_OK;
+     if(ok)ok=HAL_ADC_Start(&hadc3)==HAL_OK;
+@@ -135,10 +141,35 @@
+     if(ok) *raw=(uint16_t)HAL_ADC_GetValue(&hadc3);
+     if(HAL_ADC_Stop(&hadc3)!=HAL_OK)ok=0;
+     if(!ok || *raw<low-ADC_MARGIN || *raw>high+ADC_MARGIN) {adc_errors++;return 0;}
+-    // Plausibilidad electrica historica independiente de la zona cero: no ocultar
+-    // desconexion/saturacion ni rechazar el reposo antiguo por desplazar el cero.
+-    uint16_t bounded=*raw;if(bounded<zero)bounded=zero;if(bounded>high)bounded=high;
+-    *normalized=(uint16_t)(((uint32_t)(bounded-zero)*4095u)/(high-zero));return 1;
++    uint16_t bounded=*raw;if(bounded<low)bounded=low;if(bounded>high)bounded=high;
++    *normalized=(uint16_t)(((uint32_t)(bounded-low)*4095u)/(high-low));return 1;
++}
++static uint16_t pedal_command(uint16_t raw,uint8_t valid) {
++    // Validar cada muestra ANTES de promediar: un fallo no queda disimulado.
++    if(!valid) {pedal_filter.ready=0;return 0;}
++    const uint32_t now=HAL_GetTick();
++    if(!pedal_filter.ready || now-pedal_filter.tick>=20u || raw<=KART_ACCEL_ZERO_ADC) {
++        for(unsigned i=0;i<4;i++)pedal_filter.samples[i]=raw;
++        pedal_filter.ready=1;
++    } else {
++        for(unsigned i=3;i>0;i--)pedal_filter.samples[i]=pedal_filter.samples[i-1];
++        pedal_filter.samples[0]=raw;
++    }
++    pedal_filter.tick=now;
++    // Retorno a reposo: cero inmediato y sin muestras antiguas al volver a pisar.
++    if(raw<=KART_ACCEL_ZERO_ADC)return 0;
++    uint32_t filtered=0;
++    for(unsigned i=0;i<4;i++)filtered+=(4u-i)*pedal_filter.samples[i];
++    filtered/=10u;
++    if(filtered<=KART_ACCEL_ZERO_ADC)return 0;
++    if(filtered>=ACCEL_MAX)return 4095;
++    // Rampa continua desde cero hasta la curva anterior; evita un salto del
++    // 11 % al salir de la zona cero y recupera la respuesta media/alta dev8.
++    if(filtered<KART_ACCEL_LEGACY_JOIN_ADC)
++        return (uint16_t)((filtered-KART_ACCEL_ZERO_ADC)*
++            (KART_ACCEL_LEGACY_JOIN_ADC-ACCEL_MIN)*4095u/
++            ((KART_ACCEL_LEGACY_JOIN_ADC-KART_ACCEL_ZERO_ADC)*(ACCEL_MAX-ACCEL_MIN)));
++    return (uint16_t)((filtered-ACCEL_MIN)*4095u/(ACCEL_MAX-ACCEL_MIN));
+ }
+ static void transmit(uint32_t id,uint8_t bytes[8]) {
+     CAN_TxHeaderTypeDef header={0};uint32_t mailbox=0;
+@@ -147,6 +178,7 @@
+ }
+ void Kart_Init(void) {
+     memset(&start_button,0,sizeof(start_button));
++    memset(&pedal_filter,0,sizeof(pedal_filter));
+     memset(&ui,0,sizeof(ui));ui.mode_applied=255;ui.can_age=ui.status_age=UINT32_MAX;
+     CAN_FilterTypeDef filter={0};filter.FilterBank=0;filter.FilterMode=CAN_FILTERMODE_IDMASK;
+     filter.FilterScale=CAN_FILTERSCALE_32BIT;filter.FilterFIFOAssignment=CAN_RX_FIFO0;filter.FilterActivation=ENABLE;filter.SlaveStartFilterBank=14;
+@@ -168,8 +200,9 @@
+     KartUiSnapshot next={0};CanData rx;
+     uint32_t key=lock_data();memcpy(&rx,(const void*)&received,sizeof(rx));next.sd_state=sd_state;next.sd_error=sd_error;next.sd_rows=sd_rows;unlock_data(key);
+     uint32_t now=HAL_GetTick();
+-    next.input_flags=read_adc(ADC_CHANNEL_0,&next.accel_adc,ACCEL_MIN,ACCEL_MAX,KART_ACCEL_ZERO_ADC,&next.accel_raw)?KART_INPUT_ACCEL_OK:0;
+-    if(read_adc(ADC_CHANNEL_8,&next.steer_adc,STEER_MIN,STEER_MAX,STEER_MIN,&next.steer_raw))next.input_flags|=KART_INPUT_STEER_OK;
++    next.input_flags=read_adc(ADC_CHANNEL_0,&next.accel_adc,ACCEL_MIN,ACCEL_MAX,&next.accel_raw)?KART_INPUT_ACCEL_OK:0;
++    next.accel_raw=pedal_command(next.accel_adc,next.input_flags&KART_INPUT_ACCEL_OK);
++    if(read_adc(ADC_CHANNEL_8,&next.steer_adc,STEER_MIN,STEER_MAX,&next.steer_raw))next.input_flags|=KART_INPUT_STEER_OK;
+     next.brake=HAL_GPIO_ReadPin(BRAKE_GPIO_Port,BRAKE_Pin)==GPIO_PIN_RESET;
+     const uint8_t start_pressed=HAL_GPIO_ReadPin(START_STOP_GPIO_Port,START_STOP_Pin)==GPIO_PIN_SET;
+     next.start=read_start_button(start_pressed,HAL_GetTick());
+@@ -185,7 +218,8 @@
+     // Si hay estado extendido, se exige siempre fresco. Cero entero km/h nunca basta.
+     const uint8_t feedback_ok=next.feedback_fresh && (!rx.status_seen || (next.status_fresh && (next.backend_flags&KART_STATUS_SPEED_VALID)));
+     const uint8_t stationary=feedback_ok && (rx.status_seen?(next.backend_flags&KART_STATUS_STATIONARY):(!rx.left&&!rx.right));
+-    const uint8_t pedal_free=(next.input_flags&KART_INPUT_ACCEL_OK) && next.accel_raw<=KART_PEDAL_FREE_MAX;
++    const uint8_t pedal_free=(next.input_flags&KART_INPUT_ACCEL_OK) &&
++        next.accel_adc<=KART_ACCEL_ZERO_ADC && next.accel_raw<=KART_PEDAL_FREE_MAX;
+     // Observabilidad: se publican las mismas condiciones usadas abajo, sin alterar permisos.
+     next.drive_input=drive;next.reverse_input=reverse;next.start_input=start_pressed;
+     next.pedal_free=pedal_free;next.stationary=stationary;next.feedback_usable=feedback_ok;

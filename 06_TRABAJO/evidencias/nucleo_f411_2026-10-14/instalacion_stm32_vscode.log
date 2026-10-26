@@ -1,0 +1,18 @@
+Installing extensions...
+(node:9828) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `Code --trace-deprecation ...` to show where the warning was created)
+Installing extension 'stmicroelectronics.stm32-vscode-extension'...
+Extension 'stmicroelectronics.stm32-vscode-extension' v3.11.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-registers' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-clangd' v1.1.0 was successfully installed.
+Extension 'eclipse-cdt.serial-monitor' v2.0.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-debug-stlink-gdbserver' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-rtos' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-debug-jlink-gdbserver' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-build-cmake' v1.47.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-build-analyzer' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-project-manager' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-debug-generic-gdbserver' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-core' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-bundles-manager' v1.5.0 was successfully installed.
+Extension 'stmicroelectronics.stm32cube-ide-debug-core' v1.5.0 was successfully installed.

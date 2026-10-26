@@ -1,0 +1,58 @@
+Do you want to install the following bundles or show the license(s): ["stlink-gdbserver@7.14.0+st.2", "programmer@2.23.0"] (yes, no, show)?
+Answered 'Yes' automatically
+Need to download the following bundles:
+    Name             : Platform             Version
+    -----------------------------------------------
+    programmer       : x86_64-windows       ["2.23.0"]
+    stlink-gdbserver : x86_64-windows       ["7.14.0+st.2"]
+Total download size is 34.12 MiB, total approximate install size is 104.69 MiB
+Downloading stlink-gdbserver@7.14.0+st.2 to 'C:\Users\nandi\AppData\Local\stm32cube\bundles\stlink-gdbserver\7.14.0+st.2'...
+Downloading https://developer.st.com/bundles/s/stlink-gdbserver-7.14.0+st.2-x86_64-windows.bundle
+Downloading https://developer.st.com/bundles/s/stlink-gdbserver-7.14.0+st.2-x86_64-windows.bundle: 1026 KiB / 1473 KiB 69% @ 8552 KiB/s
+Downloading https://developer.st.com/bundles/s/stlink-gdbserver-7.14.0+st.2-x86_64-windows.bundle: 1473 KiB / 1473 KiB 100% @ 11249 KiB/s
+Downloading https://developer.st.com/bundles/s/stlink-gdbserver-7.14.0+st.2-x86_64-windows.bundle: 1473 KiB / 1473 KiB 100%. Done, 1509013 bytes downloaded.
+Installing stlink-gdbserver@7.14.0+st.2...
+Installed stlink-gdbserver@7.14.0+st.2 successfully, 3.45 MiB used
+Downloading programmer@2.23.0 to 'C:\Users\nandi\AppData\Local\stm32cube\bundles\programmer\2.23.0'...
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 1026 KiB / 33463 KiB 3% @ 5403 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 2050 KiB / 33463 KiB 6% @ 9672 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 3078 KiB / 33463 KiB 9% @ 13044 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 4096 KiB / 33463 KiB 12% @ 16065 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 5120 KiB / 33463 KiB 15% @ 15423 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 6148 KiB / 33463 KiB 18% @ 15970 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 7172 KiB / 33463 KiB 21% @ 17886 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 8200 KiB / 33463 KiB 24% @ 19160 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 9218 KiB / 33463 KiB 27% @ 20762 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 10242 KiB / 33463 KiB 30% @ 21383 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 11270 KiB / 33463 KiB 33% @ 21386 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 12288 KiB / 33463 KiB 36% @ 21943 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 13312 KiB / 33463 KiB 39% @ 22913 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 14340 KiB / 33463 KiB 42% @ 23821 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 15364 KiB / 33463 KiB 45% @ 24583 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 16392 KiB / 33463 KiB 48% @ 25258 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 17410 KiB / 33463 KiB 52% @ 25566 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 18434 KiB / 33463 KiB 55% @ 26222 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 19462 KiB / 33463 KiB 58% @ 26919 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 20480 KiB / 33463 KiB 61% @ 26948 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 21504 KiB / 33463 KiB 64% @ 27394 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 22532 KiB / 33463 KiB 67% @ 28095 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 23552 KiB / 33463 KiB 70% @ 28652 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 24584 KiB / 33463 KiB 73% @ 29197 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 25604 KiB / 33463 KiB 76% @ 29532 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 26626 KiB / 33463 KiB 79% @ 30361 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 27654 KiB / 33463 KiB 82% @ 29704 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 28672 KiB / 33463 KiB 85% @ 29992 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 29696 KiB / 33463 KiB 88% @ 30395 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 30724 KiB / 33463 KiB 91% @ 30390 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 31748 KiB / 33463 KiB 94% @ 30853 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 32776 KiB / 33463 KiB 97% @ 30776 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 33463 KiB / 33463 KiB 100% @ 31013 KiB/s
+Downloading https://developer.st.com/bundles/p/programmer-2.23.0-x86_64-windows.bundle: 33463 KiB / 33463 KiB 100%. Done, 34266490 bytes downloaded.
+Installing programmer@2.23.0...
+Installed programmer@2.23.0 successfully, 101.25 MiB used
+
+Installed 2 bundle(s)
+Installation has been completed.
+To check the terms for these bundles run: "cube bundle license stlink-gdbserver@7.14.0+st.2 programmer@2.23.0"
+

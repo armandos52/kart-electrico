@@ -1,0 +1,15 @@
+{
+  "scene": 0,
+  "state": "VIEW v=0.3 id=0 synthetic=1",
+  "utc": "2026-10-15T09:24:29.241371+00:00",
+  "source": "ILI9341_GRAM",
+  "format": "RGB565LE",
+  "flow": "ROWACK",
+  "width": 320,
+  "height": 240,
+  "bytes": 153600,
+  "crc32": "066E64A1",
+  "sha256_rgb565": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+  "sha256_png": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+  "binary_version": "v0.3"
+}

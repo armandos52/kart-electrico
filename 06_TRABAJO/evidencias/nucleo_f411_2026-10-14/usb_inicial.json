@@ -1,0 +1,32 @@
+[
+  {
+    "Status": "OK",
+    "Class": "DiskDrive",
+    "FriendlyName": "MBED microcontroller USB Device",
+    "InstanceId": "USBSTOR\\DISK&VEN_MBED&PROD_MICROCONTROLLER&REV_1.0\\7&20988ADC&0&0672FF564881774867244057&0"
+  },
+  {
+    "Status": "OK",
+    "Class": "USB",
+    "FriendlyName": "USB Mass Storage Device",
+    "InstanceId": "USB\\VID_0483&PID_374B&MI_01\\6&15E8C06A&0&0001"
+  },
+  {
+    "Status": "OK",
+    "Class": "USB",
+    "FriendlyName": "USB Composite Device",
+    "InstanceId": "USB\\VID_0483&PID_374B\\0672FF564881774867244057"
+  },
+  {
+    "Status": "OK",
+    "Class": "Ports",
+    "FriendlyName": "STMicroelectronics STLink Virtual COM Port (COM5)",
+    "InstanceId": "USB\\VID_0483&PID_374B&MI_02\\6&15E8C06A&0&0002"
+  },
+  {
+    "Status": "OK",
+    "Class": "USBDevice",
+    "FriendlyName": "ST-Link Debug",
+    "InstanceId": "USB\\VID_0483&PID_374B&MI_00\\6&15E8C06A&0&0000"
+  }
+]

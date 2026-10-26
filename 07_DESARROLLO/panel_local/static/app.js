@@ -5,6 +5,7 @@ import {SPACES, WINDOW_MS, layout, signal, nature, shortName, record, clearHisto
 import {buildCharts, drawCharts} from './graficas.js';
 import {partOf, selectPart, selected, renderInspector, renderMap, animate, initMap} from './vista_kart.js';
 import {initCalibration, renderCalibration} from './calibracion.js';
+import {initHistory,replayTick} from './historial.js';
 
 let lastMessage = 0, apiBusy = false, rates = [];
 // Demo sintética: pedal 100 % ≈ 550 RPM de rueda ≈ 50 km/h con el Ø 0,48 m que usa el firmware (pendiente de contraste).
@@ -12,6 +13,7 @@ const DEMO_RPM_POR_PCT = 5.5, DEMO_KMH_POR_RPM = Math.PI*.48*60/1000;
 
 function diagnostic() {
   const signals=activeSignals(), inhibit=fresh('drive_inhibit'), phase=fresh('control_state'), state=app.state;
+  if(app.replay)return ['Reproducción histórica · '+app.replay.manifest.title,'demo'];
   if(app.demo)return [t('diag.demo'),'demo'];
   if(!app.backendOK)return [t('diag.servicio'),'aviso'];
   if(state?.status!=='connected')return [t('diag.sin_conexion'),''];
@@ -61,6 +63,13 @@ function renderHeader() {
   else if (!app.backendOK) $('connection-info').textContent=t('info.sin_servicio');
   else $('connection-info').textContent=state?.error || (connected ? `${t(wifi?'info.lectura_tcp':'info.lectura_serie',{puerto:state.port})} ${state.stats.valid_frames ? t('info.telemetria_ok') : t('info.sin_tramas')}`:wifi?t('info.wifi_listo'):t('info.usb_listo'));
   $('session-info').textContent=state?.log_error?t('sesion.error_registro',{error:state.log_error}):state?.session_file?t('sesion.activa',{archivo:state.session_file,rechazadas:state.stats.invalid_frames,saltos:state.stats.sequence_gaps}):t('sesion.sin');
+  if(app.replay){
+    for(const id of ['connect','demo','port','bench','refresh'])$(id).disabled=true;
+    $('mode-badge').textContent='REPRODUCCIÓN';$('mode-badge').className='demo';
+    $('connection-info').textContent='Datos de una prueba guardada · tiempo de reproducción independiente';
+    $('session-info').textContent=app.replay.manifest.title;
+    $('download').hidden=true;
+  }
   const [message,severity]=diagnostic();
   $('diagnostic').textContent=message;$('diagnostic').className='diagnostic '+severity;
   const node=state?.nodes?.esp32, rate=receptionRate(), phase=fresh('control_state'), inhibit=fresh('drive_inhibit');
@@ -120,6 +129,8 @@ async function poll(){
     const response=await fetch('/api/state',{cache:'no-store',signal:abort.signal});if(!response.ok)throw new Error('Estado no disponible');
     const next=await response.json();
     if(app.state?.calibration?.active?.id!==next.calibration?.active?.id){clearHistory();chartsKey='';}
+    app.liveState=next;app.token=next.token;
+    if(app.replay)return;
     app.state=next;app.stateReceivedAt=Date.now();app.token=app.state.token;app.backendOK=true;
   }catch{
     app.backendOK=false;
@@ -169,7 +180,8 @@ let lastAnimation=performance.now(), lastDemoRender=0;
 function loop(now){
   const dt=Math.min((now-lastAnimation)/1000,.1);lastAnimation=now;
   if(app.demo&&now-lastDemoRender>180){makeDemo();render();lastDemoRender=now;}
-  animate(dt);
+  replayTick(now);
+  animate(app.replay?(app.replay.clock.playing?dt*app.replay.clock.speed:0):dt);
   requestAnimationFrame(loop);
 }
 function toggleDrawer(which) {
@@ -182,6 +194,7 @@ function toggleDrawer(which) {
 initIdioma();
 initMap(()=>{});
 initCalibration(poll);
+initHistory(refresh,poll);
 initStrip({onSpace:refresh,onChange:refresh,partOf,onPart:key=>{const part=partOf(key);if(part)selectPart(part.id);}});
 initPalette();
 // Cambio de idioma: lo que se construye por código se rehace; el resto lo cubre applyDom() en i18n.js.
@@ -192,7 +205,7 @@ onIdioma(()=>{
   if(app.demo)makeDemo();
   refresh();
 });
-$('demo').addEventListener('click',()=>{if(app.state?.status==='connected')return;app.demo=!app.demo;clearHistory();if(app.demo)makeDemo();else app.demoFrame=null;render();});
+$('demo').addEventListener('click',()=>{if(app.replay||app.state?.status==='connected')return;app.demo=!app.demo;clearHistory();if(app.demo)makeDemo();else app.demoFrame=null;render();});
 $('demo-pedal').addEventListener('input',()=>{makeDemo();render();});$('demo-steer').addEventListener('input',()=>{makeDemo();render();});
 $('demo-gear').addEventListener('change',()=>{makeDemo();render();});
 // Giro de ruedas: real 1:1 por defecto; «Lento» conserva el 3 % anterior. Preferencia local del navegador.

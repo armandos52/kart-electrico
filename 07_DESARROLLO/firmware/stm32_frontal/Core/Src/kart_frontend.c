@@ -13,10 +13,13 @@ extern CAN_HandleTypeDef hcan1;
 #define STEER_MIN 1042u
 #define STEER_MAX 3313u
 #define ADC_MARGIN 100u
-#define FEEDBACK_MAX_AGE 500u
-#define STATUS_MAX_AGE 300u
-#define BMS_MAX_AGE 2000u
-// Hasta verificar protocolo del BMS instalado, conservar bytes y ocultar valores no acreditados.
+#if KART_ACCEL_ZERO_ADC <= ACCEL_MIN || KART_ACCEL_LEGACY_JOIN_ADC <= KART_ACCEL_ZERO_ADC || KART_ACCEL_LEGACY_JOIN_ADC >= ACCEL_MAX
+#error "Referencias de pedal incoherentes"
+#endif
+#define FEEDBACK_MAX_AGE KART_FEEDBACK_MAX_AGE_MS
+#define STATUS_MAX_AGE KART_STATUS_MAX_AGE_MS
+#define BMS_MAX_AGE KART_BMS_MAX_AGE_MS
+// Flags sin confirmar hasta contrastar el BMS; el dashboard distingue lectura provisional.
 #define BMS_FORMAT_CONFIRMED 0
 // Pulsador momentaneo activo alto, confirmado por Armando (13-10-2026).
 // Valores de desarrollo: contrastar rebotes y latencias reales en banco.
@@ -62,20 +65,20 @@ static uint32_t adc_errors=0,tx_errors=0,notice_tick=0;
 static uint8_t notice=KART_UI_OK;
 static IWDG_HandleTypeDef watchdog;
 static uint8_t initialized=0,watchdog_ready=0;
-static FATFS sd_fs;
-static FIL sd_file;
-static uint8_t sd_open=0,sd_state=KART_SD_STOPPED,sd_error=0;
-static uint32_t sd_last_try=0,sd_last_log=0,sd_last_sync=0,sd_rows=0;
-
+// Media movil ponderada de cuatro lecturas validas a 5 ms. La mas reciente
+// pesa 4, las anteriores 3/2/1; memoria finita, sin autoaprender el cero.
+static struct {uint16_t samples[4];uint32_t tick;uint8_t ready;} pedal_filter;
+static KartLogReceiver log_receiver;
 static uint32_t lock_data(void) {uint32_t key=__get_PRIMASK();__disable_irq();return key;}
 static void unlock_data(uint32_t key) {__set_PRIMASK(key);}
+#include "kart_logger.inc"
+
 static uint32_t age(uint8_t seen,uint32_t now,uint32_t then) {return seen?now-then:UINT32_MAX;}
 void Kart_CopySnapshot(KartUiSnapshot* destination) {
     if(!destination)return;
     uint32_t key=lock_data();*destination=ui;unlock_data(key);
 }
 void Kart_RequestNextMode(void) {mode_click=1;}
-void Kart_ToggleRecording(void) {uint32_t key=lock_data();record_request=!record_request;unlock_data(key);}
 void Kart_HallEdge(uint16_t pin) {
     // DWT a frecuencia SystemCoreClock, sin sondeo cada 5 ms; 4 pulsos/vuelta históricos.
     const uint32_t now=DWT->CYCCNT;
@@ -98,9 +101,13 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan) {
     for(unsigned i=0;i<3 && HAL_CAN_GetRxFifoFillLevel(hcan,CAN_RX_FIFO0)>0;i++) {
         CAN_RxHeaderTypeDef header={0};uint8_t bytes[8]={0};
         if(HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&header,bytes)!=HAL_OK) {received.rx_errors++;break;}
-        if(header.IDE!=CAN_ID_STD || header.RTR!=CAN_RTR_DATA || header.DLC!=8) {received.rx_errors++;continue;}
+        // El filtro físico recibe todo el bus. Solo validar el formato de los IDs consumidos.
+        if(header.IDE!=CAN_ID_STD || (header.StdId!=KART_CAN_FEEDBACK && header.StdId!=KART_CAN_STATUS && header.StdId!=KART_CAN_LOG && header.StdId!=0x355 && header.StdId!=0x356))continue;
+        if(header.RTR!=CAN_RTR_DATA || header.DLC!=8) {received.rx_errors++;continue;}
         const uint32_t now=HAL_GetTick();
-        if(header.StdId==KART_CAN_FEEDBACK) {
+        if(header.StdId==KART_CAN_LOG){
+            if(kart_log_receive(&log_receiver,bytes,now)<0)received.rx_errors++;
+        } else if(header.StdId==KART_CAN_FEEDBACK) {
             const int16_t speed=(int16_t)kart_u16be(bytes),left=(int16_t)kart_u16be(bytes+2),right=(int16_t)kart_u16be(bytes+4);
             if(speed<0 || speed>200 || left<0 || right<0 || left>2000 || right>2000) {received.rx_errors++;continue;}
             received.speed=speed;received.left=left;received.right=right;received.yaw=(int16_t)kart_u16be(bytes+6);
@@ -136,13 +143,42 @@ static uint8_t read_adc(uint32_t channel,uint16_t* raw,uint16_t low,uint16_t hig
     uint16_t bounded=*raw;if(bounded<low)bounded=low;if(bounded>high)bounded=high;
     *normalized=(uint16_t)(((uint32_t)(bounded-low)*4095u)/(high-low));return 1;
 }
+static uint16_t pedal_command(uint16_t raw,uint8_t valid) {
+    // Validar cada muestra ANTES de promediar: un fallo no queda disimulado.
+    if(!valid) {pedal_filter.ready=0;return 0;}
+    const uint32_t now=HAL_GetTick();
+    if(!pedal_filter.ready || now-pedal_filter.tick>=20u || raw<=KART_ACCEL_ZERO_ADC) {
+        for(unsigned i=0;i<4;i++)pedal_filter.samples[i]=raw;
+        pedal_filter.ready=1;
+    } else {
+        for(unsigned i=3;i>0;i--)pedal_filter.samples[i]=pedal_filter.samples[i-1];
+        pedal_filter.samples[0]=raw;
+    }
+    pedal_filter.tick=now;
+    // Retorno a reposo: cero inmediato y sin muestras antiguas al volver a pisar.
+    if(raw<=KART_ACCEL_ZERO_ADC)return 0;
+    uint32_t filtered=0;
+    for(unsigned i=0;i<4;i++)filtered+=(4u-i)*pedal_filter.samples[i];
+    filtered/=10u;
+    if(filtered<=KART_ACCEL_ZERO_ADC)return 0;
+    if(filtered>=ACCEL_MAX)return 4095;
+    // Rampa continua desde cero hasta la curva anterior; evita un salto del
+    // 11 % al salir de la zona cero y recupera la respuesta media/alta dev8.
+    if(filtered<KART_ACCEL_LEGACY_JOIN_ADC)
+        return (uint16_t)((filtered-KART_ACCEL_ZERO_ADC)*
+            (KART_ACCEL_LEGACY_JOIN_ADC-ACCEL_MIN)*4095u/
+            ((KART_ACCEL_LEGACY_JOIN_ADC-KART_ACCEL_ZERO_ADC)*(ACCEL_MAX-ACCEL_MIN)));
+    return (uint16_t)((filtered-ACCEL_MIN)*4095u/(ACCEL_MAX-ACCEL_MIN));
+}
 static void transmit(uint32_t id,uint8_t bytes[8]) {
     CAN_TxHeaderTypeDef header={0};uint32_t mailbox=0;
     header.StdId=id;header.IDE=CAN_ID_STD;header.RTR=CAN_RTR_DATA;header.DLC=8;header.TransmitGlobalTime=DISABLE;
     if(HAL_CAN_GetTxMailboxesFreeLevel(&hcan1)==0 || HAL_CAN_AddTxMessage(&hcan1,&header,bytes,&mailbox)!=HAL_OK)tx_errors++;
 }
 void Kart_Init(void) {
+    logger_init();memset(&log_receiver,0,sizeof(log_receiver));
     memset(&start_button,0,sizeof(start_button));
+    memset(&pedal_filter,0,sizeof(pedal_filter));
     memset(&ui,0,sizeof(ui));ui.mode_applied=255;ui.can_age=ui.status_age=UINT32_MAX;
     CAN_FilterTypeDef filter={0};filter.FilterBank=0;filter.FilterMode=CAN_FILTERMODE_IDMASK;
     filter.FilterScale=CAN_FILTERSCALE_32BIT;filter.FilterFIFOAssignment=CAN_RX_FIFO0;filter.FilterActivation=ENABLE;filter.SlaveStartFilterBank=14;
@@ -162,9 +198,11 @@ void Kart_Init(void) {
 void Kart_ControlTick(void) {
     if(!initialized)return;
     KartUiSnapshot next={0};CanData rx;
-    uint32_t key=lock_data();memcpy(&rx,(const void*)&received,sizeof(rx));next.sd_state=sd_state;next.sd_error=sd_error;next.sd_rows=sd_rows;unlock_data(key);
+    uint32_t key=lock_data();memcpy(&rx,(const void*)&received,sizeof(rx));logger_status(&next);
+    memcpy(next.log_words,log_receiver.published,sizeof(next.log_words));next.log_age=age(log_receiver.seen,HAL_GetTick(),log_receiver.received);unlock_data(key);
     uint32_t now=HAL_GetTick();
     next.input_flags=read_adc(ADC_CHANNEL_0,&next.accel_adc,ACCEL_MIN,ACCEL_MAX,&next.accel_raw)?KART_INPUT_ACCEL_OK:0;
+    next.accel_raw=pedal_command(next.accel_adc,next.input_flags&KART_INPUT_ACCEL_OK);
     if(read_adc(ADC_CHANNEL_8,&next.steer_adc,STEER_MIN,STEER_MAX,&next.steer_raw))next.input_flags|=KART_INPUT_STEER_OK;
     next.brake=HAL_GPIO_ReadPin(BRAKE_GPIO_Port,BRAKE_Pin)==GPIO_PIN_RESET;
     const uint8_t start_pressed=HAL_GPIO_ReadPin(START_STOP_GPIO_Port,START_STOP_Pin)==GPIO_PIN_SET;
@@ -181,7 +219,13 @@ void Kart_ControlTick(void) {
     // Si hay estado extendido, se exige siempre fresco. Cero entero km/h nunca basta.
     const uint8_t feedback_ok=next.feedback_fresh && (!rx.status_seen || (next.status_fresh && (next.backend_flags&KART_STATUS_SPEED_VALID)));
     const uint8_t stationary=feedback_ok && (rx.status_seen?(next.backend_flags&KART_STATUS_STATIONARY):(!rx.left&&!rx.right));
-    const uint8_t pedal_free=next.accel_raw<=40;
+    const uint8_t pedal_free=(next.input_flags&KART_INPUT_ACCEL_OK) &&
+        next.accel_adc<=KART_ACCEL_ZERO_ADC && next.accel_raw<=KART_PEDAL_FREE_MAX;
+    // Observabilidad: se publican las mismas condiciones usadas abajo, sin alterar permisos.
+    next.drive_input=drive;next.reverse_input=reverse;next.start_input=start_pressed;
+    next.pedal_free=pedal_free;next.stationary=stationary;next.feedback_usable=feedback_ok;
+    next.relay_state=next.status_fresh?rx.status[5]:255;
+    next.backend_gear=next.status_fresh?rx.status[6]:255;
     if((drive && selected_gear==2) || (reverse && selected_gear==1))selected_gear=0;
     if(next.input_flags!=7 || !feedback_ok || (!drive&&!reverse))selected_gear=0;
     else if(drive && selected_gear!=1 && next.brake && pedal_free && stationary)selected_gear=1;
@@ -211,9 +255,12 @@ void Kart_ControlTick(void) {
     key=lock_data();
     const uint32_t tick_l=hall_l_tick,tick_r=hall_r_tick,period_l=hall_l_period,period_r=hall_r_period;
     const uint8_t seen_l=hall_l_seen,seen_r=hall_r_seen;
+    // Un EXTI puede haber llegado después de `now`, durante la transmisión CAN.
+    const uint32_t hall_now=HAL_GetTick();
     unlock_data(key);
-    if(seen_l && period_l && now-tick_l<=500){uint32_t rpm=(uint32_t)((uint64_t)SystemCoreClock*15u/period_l);next.rpm_front_left=rpm<=2000?(int16_t)rpm:0;}
-    if(seen_r && period_r && now-tick_r<=500){uint32_t rpm=(uint32_t)((uint64_t)SystemCoreClock*15u/period_r);next.rpm_front_right=rpm<=2000?(int16_t)rpm:0;}
+    next.front_left_age=age(seen_l,hall_now,tick_l);next.front_right_age=age(seen_r,hall_now,tick_r);
+    if(seen_l && period_l && next.front_left_age<=500){uint32_t rpm=(uint32_t)((uint64_t)SystemCoreClock*15u/period_l);next.rpm_front_left=rpm<=2000?(int16_t)rpm:0;next.front_left_valid=rpm<=2000;}
+    if(seen_r && period_r && next.front_right_age<=500){uint32_t rpm=(uint32_t)((uint64_t)SystemCoreClock*15u/period_r);next.rpm_front_right=rpm<=2000?(int16_t)rpm:0;next.front_right_valid=rpm<=2000;}
     next.bms_soc_age=age(rx.soc_seen,now,rx.soc_tick);next.bms_temp_age=age(rx.temp_seen,now,rx.temp_tick);
     memcpy(next.bms355,rx.soc,8);memcpy(next.bms356,rx.temp,8);
     const uint16_t soc=(uint16_t)(((uint16_t)rx.soc[5]<<8)|rx.soc[4]);
@@ -222,54 +269,8 @@ void Kart_ControlTick(void) {
     next.temp_valid=BMS_FORMAT_CONFIRMED && next.bms_temp_age<=BMS_MAX_AGE && temp>=-500 && temp<=1500;
     next.soc_pct=soc/100;next.battery_temp_c=temp/10;
     next.can_rx_errors=rx.rx_errors;next.can_tx_errors=tx_errors;next.adc_errors=adc_errors;next.sd_requested=record_request;
-    key=lock_data();ui=next;unlock_data(key);
+    logger_capture(&next);key=lock_data();logger_status(&next);ui=next;unlock_data(key);
     if(watchdog_ready && HAL_IWDG_Refresh(&watchdog)!=HAL_OK)Kart_Fatal();
-}
-static void sd_publish(uint8_t state,uint8_t error) {
-    uint32_t key=lock_data();sd_state=state;sd_error=error;unlock_data(key);
-}
-static void sd_close(void) {
-    if(sd_open) {FRESULT sync=f_sync(&sd_file),close=f_close(&sd_file);sd_open=0;
-        if(sync!=FR_OK || close!=FR_OK)sd_publish(KART_SD_ERROR,(uint8_t)(sync!=FR_OK?sync:close));}
-    f_mount(NULL,"",0);
-}
-static uint8_t sd_write(const char* text) {
-    UINT actual=0;const UINT expected=(UINT)strlen(text);
-    FRESULT result=f_write(&sd_file,text,expected,&actual);
-    if(result!=FR_OK || actual!=expected) {sd_publish(KART_SD_ERROR,(uint8_t)(result!=FR_OK?result:FR_DISK_ERR));return 0;}
-    return 1;
-}
-void Kart_SdTick(void) {
-    const uint32_t now=HAL_GetTick();
-    if(!record_request) {if(sd_open)sd_close();if(sd_state!=KART_SD_ERROR)sd_publish(KART_SD_STOPPED,0);return;}
-    if(!sd_open) {
-        if(sd_state==KART_SD_ERROR && now-sd_last_try<1000)return;
-        sd_last_try=now;sd_publish(KART_SD_OPENING,0);
-        FRESULT result=f_mount(&sd_fs,"",1);
-        if(result==FR_OK)result=f_open(&sd_file,"kart_v13.csv",FA_OPEN_APPEND|FA_WRITE);
-        if(result!=FR_OK) {f_mount(NULL,"",0);sd_publish(KART_SD_ERROR,(uint8_t)result);return;}
-        sd_open=1;
-        if(f_size(&sd_file)==0 && !sd_write("# firmware=" KART_FRONTEND_VERSION ",schema=2,BMS_format_confirmed=0\r\nFirmware,Tick_ms,AccelADC,SteerADC,AccelCAN,SteerCAN,InputFlags,Brake,Start,GearReq,ModeReq,ModeRecv,ModeApplied,Inhibit,BackendFlags,Vel_kmh,RpmFL,RpmFR,RpmRL,RpmRR,Yaw_deci_dps,CanAge_ms,StatusAge_ms,SOC_valid,SOC_pct,Temp_valid,Temp_C,BMS355Age_ms,BMS356Age_ms,BMS355_hex,BMS356_hex,CanTxErr,CanRxErr,AdcErr\r\n")) {sd_close();return;}
-        sd_publish(KART_SD_RECORDING,0);sd_last_log=now-200;sd_last_sync=now;
-    }
-    if(now-sd_last_log>=200) {
-        sd_last_log=now;KartUiSnapshot snapshot;Kart_CopySnapshot(&snapshot);
-        char raw355[17],raw356[17],line[512];
-        for(unsigned i=0;i<8;i++){snprintf(raw355+i*2,3,"%02X",snapshot.bms355[i]);snprintf(raw356+i*2,3,"%02X",snapshot.bms356[i]);}
-        const int n=snprintf(line,sizeof(line),KART_FRONTEND_VERSION ",%lu,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%d,%d,%d,%d,%d,%d,%lu,%lu,%u,%u,%u,%d,%lu,%lu,%s,%s,%lu,%lu,%lu\r\n",
-            (unsigned long)snapshot.tick,snapshot.accel_adc,snapshot.steer_adc,snapshot.accel_raw,snapshot.steer_raw,snapshot.input_flags,snapshot.brake,snapshot.start,
-            snapshot.gear,snapshot.mode_requested,snapshot.mode_received,snapshot.mode_applied,snapshot.inhibit,snapshot.backend_flags,snapshot.speed_kph,
-            snapshot.rpm_front_left,snapshot.rpm_front_right,snapshot.rpm_left,snapshot.rpm_right,snapshot.yaw_deci_dps,
-            (unsigned long)snapshot.can_age,(unsigned long)snapshot.status_age,snapshot.soc_valid,snapshot.soc_pct,snapshot.temp_valid,snapshot.battery_temp_c,
-            (unsigned long)snapshot.bms_soc_age,(unsigned long)snapshot.bms_temp_age,raw355,raw356,(unsigned long)snapshot.can_tx_errors,(unsigned long)snapshot.can_rx_errors,(unsigned long)snapshot.adc_errors);
-        if(n<0 || n>=(int)sizeof(line)){sd_publish(KART_SD_ERROR,FR_INT_ERR);sd_close();return;}
-        if(!sd_write(line)){sd_close();return;}
-        uint32_t key=lock_data();sd_rows++;unlock_data(key);
-    }
-    if(now-sd_last_sync>=1000) {
-        sd_last_sync=now;FRESULT result=f_sync(&sd_file);
-        if(result!=FR_OK){sd_publish(KART_SD_ERROR,(uint8_t)result);sd_close();}
-    }
 }
 void Kart_Fatal(void) {
     // Parar la emisión hace expirar 0x100 en el ESP32. No continuar tras init fallida.

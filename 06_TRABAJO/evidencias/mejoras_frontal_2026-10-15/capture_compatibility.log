@@ -1,0 +1,6 @@
+PASS old: version/metadatos/240 filas/CRC
+PASS new: version/metadatos/240 filas/CRC
+PASS unknown: Version incorrecta: VIEW v=9.9 id=0 synthetic=1
+PASS mixed_header: CAPTURE_BEGIN v=0.3 scene=0 w=320 h=240 bytes=153600 format=RGB565LE source=ILI9341_GRAM flow=ROWACK
+PASS mixed_state: Escena/version inesperada: VIEW v=0.3 id=0 synthetic=1
+TOTAL 5; FALLOS 0; TRANSPORTE SIMULADO, SIN HARDWARE

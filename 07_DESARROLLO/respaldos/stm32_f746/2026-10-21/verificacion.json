@@ -1,0 +1,27 @@
+{
+  "firmware": "stm32_frontal-v1.3-dev8-ui, coincidencia byte a byte regiones HEX",
+  "interna_dos_lecturas_iguales": true,
+  "qspi_igual_respaldo_completo_16_oct": true,
+  "archivos": {
+    "flash_interna_lectura1.bin": {
+      "bytes": 1048576,
+      "sha256": "45da45f01ac0edf56057526a6d98dccacf0d286aa5191e8fd28e1318881ad1fa"
+    },
+    "flash_interna_lectura2.bin": {
+      "bytes": 1048576,
+      "sha256": "45da45f01ac0edf56057526a6d98dccacf0d286aa5191e8fd28e1318881ad1fa"
+    },
+    "option_bytes_lectura.bin": {
+      "bytes": 32,
+      "sha256": "f737c160b297f470cb35621361e026a80c3fd1a197436b9d38d74903207c5602"
+    },
+    "otp_lectura.bin": {
+      "bytes": 1056,
+      "sha256": "cfb8375808408fa803db5b09ab90086eb9fab195ae5b14a2084b1c66f9e567d2"
+    },
+    "qspi_lectura1.bin": {
+      "bytes": 16777216,
+      "sha256": "2285da63bfd381a58ad3e29601021430e3d407c1b88f38def657d39188eb42a6"
+    }
+  }
+}

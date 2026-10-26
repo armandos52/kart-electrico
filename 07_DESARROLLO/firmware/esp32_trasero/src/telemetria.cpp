@@ -237,3 +237,7 @@ void telemetria_publicar(const MuestraKart &m) {
     uint32_t coste = micros() - t0;
     if (coste > publicar_max_us) publicar_max_us = coste;
 }
+
+void telemetria_log_stats(uint32_t* loop_us,uint32_t* cost_us,uint32_t* dropped,uint8_t* clients,uint8_t* ap){
+    *loop_us=periodo_max_us;*cost_us=publicar_max_us;*dropped=descartadas_cola+descartadas_red;*clients=clientes_activos;*ap=estado_ap;
+}

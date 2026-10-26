@@ -38,9 +38,10 @@ export function allKeys() { return [...Object.keys(app.state?.signals || activeS
 export function currentKeys() { return layout.lists[layout.active] || SPACES[layout.active].keys; }
 
 const history = new Map(), lastId = new Map();
-export function getHistory(key) { return history.get(key) || []; }
+export function getHistory(key) { if(app.replay)return (app.replay.history.get(key)||[]).filter(p=>p.t<=app.replay.epoch+(app.replay.renderedAt||0));return history.get(key) || []; }
 export function clearHistory() { history.clear(); lastId.clear(); }
 export function record(now=Date.now()) {
+  if(app.replay)return;
   const signals=activeSignals();
   for(const key of allKeys()) {
     if(TEXT.has(key))continue;

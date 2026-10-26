@@ -1,0 +1,56 @@
+{
+  "n": 61,
+  "sesiones": [
+    "6fc7b05399a0f013"
+  ],
+  "estados": {
+    "gear": {
+      "R": 61
+    },
+    "mode": {
+      "DIF": 61
+    },
+    "drive_inhibit": {
+      "none": 61
+    },
+    "brake": {
+      "0": 61
+    },
+    "start_requested": {
+      "1": 61
+    },
+    "mpu_ok": {
+      "0": 61
+    }
+  },
+  "rangos": {
+    "accelerator_raw": [
+      871,
+      4095
+    ],
+    "accelerator_pct": [
+      21,
+      100
+    ],
+    "rpm_rl": [
+      0,
+      447
+    ],
+    "rpm_rr": [
+      8,
+      652
+    ],
+    "pwm_left_raw": [
+      0,
+      204
+    ],
+    "pwm_right_raw": [
+      0,
+      200
+    ],
+    "can_rx_age_ms": [
+      4,
+      4
+    ]
+  }
+}

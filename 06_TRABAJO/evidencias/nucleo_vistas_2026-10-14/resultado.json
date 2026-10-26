@@ -1,0 +1,103 @@
+{
+  "utc": "2026-10-14T20:59:18.862194+00:00",
+  "test": "ENS-0016",
+  "firmware": "F411 banco v0.3 / compilacion_02",
+  "base_git_commit": "43b0c299af47e30aabcf9b5acd7677b86754a00b",
+  "checks": 137,
+  "failures": 0,
+  "original_checks": 83,
+  "new_checks": 54,
+  "rgb_matches": 3,
+  "captures_complete": 10,
+  "capture_bytes_each": 153600,
+  "capture_source": "ILI9341_GRAM",
+  "repeated_scene_03_identical": true,
+  "final_transfer_has_restart": false,
+  "physical_button_events": [
+    {
+      "log": "arranque_v03_02.log",
+      "scene": 1,
+      "uptime_ms": 9542
+    },
+    {
+      "log": "arranque_v03_02.log",
+      "scene": 2,
+      "uptime_ms": 10576
+    },
+    {
+      "log": "arranque_v03_02.log",
+      "scene": 3,
+      "uptime_ms": 11535
+    },
+    {
+      "log": "arranque_v03_02.log",
+      "scene": 4,
+      "uptime_ms": 13012
+    },
+    {
+      "log": "arranque_v03_02.log",
+      "scene": 5,
+      "uptime_ms": 14200
+    }
+  ],
+  "physical_wrap_10_to_1_observed": false,
+  "interrupted_capture": {
+    "bytes_received": 124513,
+    "expected": 153600,
+    "restart_text_found": true,
+    "user_statement": "Sí, pulsé RESET o desconecté USB",
+    "spontaneous_usb_loss_proven": false
+  },
+  "source_hashes": {
+    "07_DESARROLLO/firmware/stm32_frontal/tests/frontend_test.cpp": "4907b4e5e0c74ad2500440e127230b37eac68922481552c310cbda9e67941af2",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/main.h": "79bb935a5d536495e13604aa07f27388a32a884b6a27488bbd0d453afbaa6125",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/fatfs.h": "02968e08d899bb4e4033f7c6507fa0460c05092fb6a8a5fa55818621bf5fc3a2",
+    "07_DESARROLLO/firmware/stm32_frontal/tests/stubs/cmsis_os.h": "aecb9819eb04bf5ad6cd2535cfac9b1bed5ef7946e551eff2224759862e16294",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c": "4c352bc56a37bde849d071a6184fe0d7b73fcf14f3d6c377ce453d21ddd30a84",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_display.c": "2727188b6fa0bbad050164d2d7e2a12803a53491a363df0462cfb23898d2287f",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h": "8633cf132addbb9ea14d79d13957fc83c9e53ef1708e279013e9554d48204ddc",
+    "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_display.h": "03b1075bc2ef43d466e483339841706a7c09a8c71a43e2c92068e105b9616b6b",
+    "07_DESARROLLO/firmware/common/kart_protocol.h": "d2edb6baafa21afe1a468d3ef66d790d338dab650bcb8b2f14cd794b7662bb22",
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.cpp": "69101897723d487c66b31c812bc5a31cbdfd145ef6f6168190f674c80e43ebc1",
+    "07_DESARROLLO/firmware/esp32_trasero/lib/kart_control/kart_control.h": "026c9555b49fc08c8f68524bb8b0420d6c1093219cf66b6355dbd841b9835132",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/screen1_screen/Screen1View.cpp": "9fcaa61d439b83fb06ce25c8734c1a645a25c2dc77ccef38766264cfd9eed474",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/gui/src/common/KartStatus.cpp": "f38682f755b69628beb5795a2facff078d7f033c0b7f727aa9538d41cd90ac60",
+    "07_DESARROLLO/firmware/stm32_frontal/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp": "42f57fe474d8a620b25c224c07f98f7baf1b46b8dce8915fa69dfcd92e442bf4"
+  },
+  "binaries": {
+    "vistas_v0.3_01.bin": {
+      "bytes": 56604,
+      "sha256": "037625f5775685604eaf384db2bf4bce34e5e6dee4246d0669caa9068e9d1255"
+    },
+    "vistas_v0.3_01.elf": {
+      "bytes": 106584,
+      "sha256": "17c08e169ebceae21d08f442ce12c1551a6f09438d5c988849de901454427b43"
+    },
+    "vistas_v0.3_02.bin": {
+      "bytes": 56724,
+      "sha256": "fbf86237a4888b81c80508a69d8648d6ae25fa0596848108d972be4f159031a1"
+    },
+    "vistas_v0.3_02.elf": {
+      "bytes": 106584,
+      "sha256": "117d28fd70b3f49356cce15b9e47cbfa7adf90b206224a3a83dc529537060b00"
+    }
+  },
+  "limitations": [
+    "Datos y perifericos del kart simulados",
+    "Escenas estaticas, no dinamica fisica",
+    "GRAM no es fotografia ni medida de luminancia",
+    "Sin prueba de CAN electrico, SD fisica o motores"
+  ],
+  "user_visual_confirmation": {
+    "fecha": "2026-10-14",
+    "ensayo": "ENS-0016",
+    "configuracion": "NUCLEO-F411RE + ILI9341, banco visual v0.3 compilacion_02",
+    "tipo_evidencia": "Declaracion del usuario sobre comprobacion visual y manual",
+    "pregunta": "Ya puedes probar B1: pulsa y suelta para recorrer las diez escenas. ¿Se leen bien y puedes volver de 10/10 a 01/10 sin que una pulsación salte varias pantallas?",
+    "respuesta_literal": "Sí, se leen bien y el recorrido funciona",
+    "legibilidad_confirmada": true,
+    "recorrido_10_a_01_sin_saltos_confirmado": true,
+    "nuevo_registro_serie_del_recorrido": false,
+    "cambio_de_firmware": false
+  }
+}

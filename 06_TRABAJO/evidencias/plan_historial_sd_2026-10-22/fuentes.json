@@ -1,0 +1,48 @@
+{
+  "base_commit": "bebe4528747bc6e05dc1ba244cd3ce9a090a7942",
+  "type": "revision_estatica_sin_ensayo",
+  "dirty_worktree": true,
+  "files": [
+    {
+      "sha256": "9c98a66514974e19404adf9d22563c579cdfe48b3b3f42fc8c7fdb5df1c3c7c0",
+      "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Inc/kart_frontend.h"
+    },
+    {
+      "sha256": "2172d5d1bf17b6938d91a3b342d64ea822e2d4796f105ba7964c0c41d5296f14",
+      "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_frontend.c"
+    },
+    {
+      "sha256": "29f3fe24277b2b198aafcecb74aedb1eea34461b648f516bc6f5bb966222d930",
+      "path": "07_DESARROLLO/firmware/stm32_frontal/Core/Src/kart_dashboard.c"
+    },
+    {
+      "sha256": "f0d5b46f3bff431428c11f59c5e8a117bbcb2600e622ac51ffed32da449169b5",
+      "path": "07_DESARROLLO/firmware/stm32_frontal/FATFS/Target/bsp_driver_sd.c"
+    },
+    {
+      "sha256": "05520a184063bf1f89590676ae459a14cccff7bb91d34a88b152bd77b94283f9",
+      "path": "07_DESARROLLO/firmware/stm32_frontal/FATFS/Target/ffconf.h"
+    },
+    {
+      "sha256": "12605169bed679d240c49f6e342e41a9c283b54d570d0eb696b27633b5326ac6",
+      "path": "07_DESARROLLO/firmware/stm32_frontal/FATFS/App/fatfs.c"
+    },
+    {
+      "sha256": "8f08700ae382957e4441451b25985463b9b45234914445ea10780d49dc0edc3b",
+      "path": "07_DESARROLLO/panel_local/server.py"
+    },
+    {
+      "sha256": "7add862ecb319099b586b7dadd6b18333718b410edb543b540e70d75c8835f72",
+      "path": "07_DESARROLLO/panel_local/static/nucleo.js"
+    },
+    {
+      "sha256": "11e15509c9ba4e69d2c3787652cde3d397185d6397ab3feaa4c058b08e1d835f",
+      "path": "07_DESARROLLO/panel_local/static/app.js"
+    },
+    {
+      "sha256": "ef9cdad1aa7578762299cb8e9b047d5f4a5b43abdae671cc4908a5586a8498fa",
+      "path": "07_DESARROLLO/panel_local/qa/reproducir_sesion.py"
+    }
+  ],
+  "date": "2026-10-22"
+}

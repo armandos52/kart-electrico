@@ -1,0 +1,7 @@
+V12 mode=0 reverse_pin=1 pwm_left=0 pwm_right=0 (0=pleno,255=cero)
+{"case":"reproduccion: R a velocidad elevada conserva PWM pleno","reproduced":true,"pwm_left":0,"pwm_right":0,"inhibit":"none"}
+V12 mode=1 reverse_pin=1 pwm_left=0 pwm_right=0 (0=pleno,255=cero)
+{"case":"reproduccion: R a velocidad elevada conserva PWM pleno","reproduced":true,"pwm_left":0,"pwm_right":0,"inhibit":"none"}
+V12 mode=2 reverse_pin=1 pwm_left=0 pwm_right=0 (0=pleno,255=cero)
+{"case":"reproduccion: R a velocidad elevada conserva PWM pleno","reproduced":true,"pwm_left":0,"pwm_right":0,"inhibit":"none"}
+TOTAL 3; DISCREPANCIAS 0 (reproducir defecto no es aprobar firmware)

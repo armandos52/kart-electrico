@@ -1,0 +1,1282 @@
+C:\kart proyecto\07_DESARROLLO\panel_local\historial.py:134: SyntaxWarning: invalid escape sequence '\.'
+  bundles=[files] if modern else [{n:i} for n,i in files.items() if PurePosixPath(n).suffix.lower() in ('.csv','.jsonl') and not re.fullmatch('E[0-9]{7}\.CSV',PurePosixPath(n).name.upper())]
+C:\kart proyecto\07_DESARROLLO\panel_local\historial.py:163: SyntaxWarning: invalid escape sequence '\.'
+  if bn in ('META.TXT','END.TXT') or re.fullmatch('E[0-9]{7}\.CSV',bn):continue
+C:\kart proyecto\07_DESARROLLO\panel_local\historial.py:236: SyntaxWarning: invalid escape sequence '\.'
+  parts=sum(bool(re.fullmatch('D[0-9]{7}\.CSV',PurePosixPath(n).name.upper())) for n in files)
+test_active_profile_requires_confirmation_and_is_invalidated_on_loss (test_calibration.CalibrationTests.test_active_profile_requires_confirmation_and_is_invalidated_on_loss) ... ERROR
+test_active_profile_requires_confirmation_and_is_invalidated_on_loss (test_calibration.CalibrationTests.test_active_profile_requires_confirmation_and_is_invalidated_on_loss) ... ERROR
+test_capture_counts_original_frames_not_browser_polls_and_keeps_noise (test_calibration.CalibrationTests.test_capture_counts_original_frames_not_browser_polls_and_keeps_noise) ... ERROR
+test_capture_counts_original_frames_not_browser_polls_and_keeps_noise (test_calibration.CalibrationTests.test_capture_counts_original_frames_not_browser_polls_and_keeps_noise) ... ERROR
+test_complete_profiles_asymmetry_persistence_and_export_originals (test_calibration.CalibrationTests.test_complete_profiles_asymmetry_persistence_and_export_originals) ... ERROR
+test_complete_profiles_asymmetry_persistence_and_export_originals (test_calibration.CalibrationTests.test_complete_profiles_asymmetry_persistence_and_export_originals) ... ERROR
+test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) ... 
+  test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='disconnect') ... ERROR
+  test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='stale') ... ERROR
+  test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='gap') ... ERROR
+  test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='duplicate') ... ERROR
+  test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='reset') ... ERROR
+  test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='missing') ... ERROR
+  test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='can_stopped') ... ERROR
+  test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='can_backwards') ... ERROR
+test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) ... ERROR
+test_integer_valued_float_can_counter_does_not_break_capture (test_calibration.CalibrationTests.test_integer_valued_float_can_counter_does_not_break_capture) ... ERROR
+test_integer_valued_float_can_counter_does_not_break_capture (test_calibration.CalibrationTests.test_integer_valued_float_can_counter_does_not_break_capture) ... ERROR
+test_no_save_with_nonfinite_criteria_and_no_path_escape (test_calibration.CalibrationTests.test_no_save_with_nonfinite_criteria_and_no_path_escape) ... ERROR
+test_no_save_with_nonfinite_criteria_and_no_path_escape (test_calibration.CalibrationTests.test_no_save_with_nonfinite_criteria_and_no_path_escape) ... ERROR
+test_reverse_sensor_and_independent_angular_references (test_calibration.CalibrationTests.test_reverse_sensor_and_independent_angular_references) ... ERROR
+test_reverse_sensor_and_independent_angular_references (test_calibration.CalibrationTests.test_reverse_sensor_and_independent_angular_references) ... ERROR
+test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save (test_calibration.CalibrationTests.test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save) ... ERROR
+test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save (test_calibration.CalibrationTests.test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save) ... ERROR
+test_all_positions_require_explicit_confirmation_with_jitter (test_guided_calibration.GuidedTests.test_all_positions_require_explicit_confirmation_with_jitter) ... ERROR
+test_all_positions_require_explicit_confirmation_with_jitter (test_guided_calibration.GuidedTests.test_all_positions_require_explicit_confirmation_with_jitter) ... ERROR
+test_cancel_preserves_readings_and_prevents_measuring (test_guided_calibration.GuidedTests.test_cancel_preserves_readings_and_prevents_measuring) ... ERROR
+test_cancel_preserves_readings_and_prevents_measuring (test_guided_calibration.GuidedTests.test_cancel_preserves_readings_and_prevents_measuring) ... ERROR
+test_connection_loss_keeps_steps_but_new_session_requires_restart (test_guided_calibration.GuidedTests.test_connection_loss_keeps_steps_but_new_session_requires_restart) ... ERROR
+test_connection_loss_keeps_steps_but_new_session_requires_restart (test_guided_calibration.GuidedTests.test_connection_loss_keeps_steps_but_new_session_requires_restart) ... ERROR
+test_limit_retries_only_current_step_and_keeps_original (test_guided_calibration.GuidedTests.test_limit_retries_only_current_step_and_keeps_original) ... ERROR
+test_limit_retries_only_current_step_and_keeps_original (test_guided_calibration.GuidedTests.test_limit_retries_only_current_step_and_keeps_original) ... ERROR
+test_movement_before_confirmation_does_not_abort_or_save (test_guided_calibration.GuidedTests.test_movement_before_confirmation_does_not_abort_or_save) ... ERROR
+test_movement_before_confirmation_does_not_abort_or_save (test_guided_calibration.GuidedTests.test_movement_before_confirmation_does_not_abort_or_save) ... ERROR
+test_noise_has_bounded_end_and_never_saves_unstable_center (test_guided_calibration.GuidedTests.test_noise_has_bounded_end_and_never_saves_unstable_center) ... ERROR
+test_noise_has_bounded_end_and_never_saves_unstable_center (test_guided_calibration.GuidedTests.test_noise_has_bounded_end_and_never_saves_unstable_center) ... ERROR
+test_sequence_gap_during_measurement_cannot_be_accepted (test_guided_calibration.GuidedTests.test_sequence_gap_during_measurement_cannot_be_accepted) ... ERROR
+test_sequence_gap_during_measurement_cannot_be_accepted (test_guided_calibration.GuidedTests.test_sequence_gap_during_measurement_cannot_be_accepted) ... ERROR
+test_sparse_but_fresh_data_has_bounded_sample_timeout (test_guided_calibration.GuidedTests.test_sparse_but_fresh_data_has_bounded_sample_timeout) ... ERROR
+test_sparse_but_fresh_data_has_bounded_sample_timeout (test_guided_calibration.GuidedTests.test_sparse_but_fresh_data_has_bounded_sample_timeout) ... ERROR
+test_wrong_side_can_be_repositioned_without_losing_previous (test_guided_calibration.GuidedTests.test_wrong_side_can_be_repositioned_without_losing_previous) ... ERROR
+test_wrong_side_can_be_repositioned_without_losing_previous (test_guided_calibration.GuidedTests.test_wrong_side_can_be_repositioned_without_losing_previous) ... ERROR
+test_diagnostic_fields_and_reset_are_preserved (test_reader.DiagnosticTests.test_diagnostic_fields_and_reset_are_preserved) ... ok
+test_invalid_reset_metadata_cannot_invalidate_previous_boot (test_reader.DiagnosticTests.test_invalid_reset_metadata_cannot_invalidate_previous_boot) ... ok
+test_new_boot_waiting_for_can_does_not_keep_motor_measurements (test_reader.DiagnosticTests.test_new_boot_waiting_for_can_does_not_keep_motor_measurements) ... ok
+test_fragmented_lines_and_oversize_recovery_without_transmission (test_reader.ReaderTests.test_fragmented_lines_and_oversize_recovery_without_transmission) ... ok
+test_invalid_frame_is_atomic_and_console_text_is_not_measurement (test_reader.ReaderTests.test_invalid_frame_is_atomic_and_console_text_is_not_measurement) ... ok
+test_invalid_new_boot_cannot_clear_previous_samples (test_reader.ReaderTests.test_invalid_new_boot_cannot_clear_previous_samples) ... ok
+test_new_boot_invalidates_previous_fields_and_sequence_rollover_is_allowed (test_reader.ReaderTests.test_new_boot_invalidates_previous_fields_and_sequence_rollover_is_allowed) ... ok
+test_nonfinite_boolean_duplicate_and_out_of_order_are_rejected (test_reader.ReaderTests.test_nonfinite_boolean_duplicate_and_out_of_order_are_rejected) ... ok
+test_partial_telemetry_does_not_refresh_an_older_field (test_reader.ReaderTests.test_partial_telemetry_does_not_refresh_an_older_field) ... ok
+test_registers_received_telemetry_with_origin_tick (test_reader.ReaderTests.test_registers_received_telemetry_with_origin_tick) ... ERROR
+test_firmware_v1_frame_is_fully_known (test_reader.WifiTests.test_firmware_v1_frame_is_fully_known) ... ok
+test_tcp_source_reads_lines_never_transmits_and_detects_disconnection (test_reader.WifiTests.test_tcp_source_reads_lines_never_transmits_and_detects_disconnection) ... ERROR
+test_wifi_url_accepts_only_private_socket_addresses (test_reader.WifiTests.test_wifi_url_accepts_only_private_socket_addresses) ... ok
+test_all_new_inhibits_and_modes (test_robustez.RobustezTests.test_all_new_inhibits_and_modes) ... ok
+test_calibration_rejects_bad_frontend (test_robustez.RobustezTests.test_calibration_rejects_bad_frontend) ... ok
+test_full_v13_field_budget (test_robustez.RobustezTests.test_full_v13_field_budget) ... ok
+test_legacy_mpu_label_remains_startup (test_robustez.RobustezTests.test_legacy_mpu_label_remains_startup) ... ok
+test_sensor_failure_masks_old_readings (test_robustez.RobustezTests.test_sensor_failure_masks_old_readings) ... ok
+
+======================================================================
+ERROR: test_active_profile_requires_confirmation_and_is_invalidated_on_loss (test_calibration.CalibrationTests.test_active_profile_requires_confirmation_and_is_invalidated_on_loss)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpk4ax3738\\calibraciones\\397cc38363be4e289acee2f6045faf6d'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 138, in test_active_profile_requires_confirmation_and_is_invalidated_on_loss
+    self.complete()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 40, in complete
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpk4ax3738\\calibraciones'
+
+======================================================================
+ERROR: test_active_profile_requires_confirmation_and_is_invalidated_on_loss (test_calibration.CalibrationTests.test_active_profile_requires_confirmation_and_is_invalidated_on_loss)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpk4ax3738'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpk4ax3738'
+
+======================================================================
+ERROR: test_capture_counts_original_frames_not_browser_polls_and_keeps_noise (test_calibration.CalibrationTests.test_capture_counts_original_frames_not_browser_polls_and_keeps_noise)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp_jro9kpj\\calibraciones\\87825930fb874c589817ec390871fb16'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 57, in test_capture_counts_original_frames_not_browser_polls_and_keeps_noise
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp_jro9kpj\\calibraciones'
+
+======================================================================
+ERROR: test_capture_counts_original_frames_not_browser_polls_and_keeps_noise (test_calibration.CalibrationTests.test_capture_counts_original_frames_not_browser_polls_and_keeps_noise)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp_jro9kpj'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp_jro9kpj'
+
+======================================================================
+ERROR: test_complete_profiles_asymmetry_persistence_and_export_originals (test_calibration.CalibrationTests.test_complete_profiles_asymmetry_persistence_and_export_originals)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpz0culc3f\\calibraciones\\15477000868540f3ad5185cdac63f41e'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 68, in test_complete_profiles_asymmetry_persistence_and_export_originals
+    self.complete()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 40, in complete
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpz0culc3f\\calibraciones'
+
+======================================================================
+ERROR: test_complete_profiles_asymmetry_persistence_and_export_originals (test_calibration.CalibrationTests.test_complete_profiles_asymmetry_persistence_and_export_originals)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpz0culc3f'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpz0culc3f'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='disconnect')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones\\a3474c3ee3f34ed9bea0e3a4ec42e600'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 106, in test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='stale')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones\\3688180e13c54ae8980335513df6651e'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 106, in test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='gap')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones\\eb412b1b5277441d968025d82b470521'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 106, in test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='duplicate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones\\92979d4efa894a4f84f120e8d207dcee'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 106, in test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='reset')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones\\64ca49e97eb04941a4eee700a395410f'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 106, in test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='missing')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones\\b68eb459354c444fa83ba95bf8a72543'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 106, in test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='can_stopped')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones\\f576c2cb27a34ed9b63b5faff472af95'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 106, in test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt) (scenario='can_backwards')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones\\ce04c4091cb44497b644fe6929fc6136'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 106, in test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0\\calibraciones'
+
+======================================================================
+ERROR: test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt (test_calibration.CalibrationTests.test_disconnect_stale_can_sequence_gap_duplicate_and_reset_reject_attempt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjas9t3r0'
+
+======================================================================
+ERROR: test_integer_valued_float_can_counter_does_not_break_capture (test_calibration.CalibrationTests.test_integer_valued_float_can_counter_does_not_break_capture)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp9aw8klx3\\calibraciones\\6b6ca7cfb259426292a3b9c5d18369e7'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 122, in test_integer_valued_float_can_counter_does_not_break_capture
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp9aw8klx3\\calibraciones'
+
+======================================================================
+ERROR: test_integer_valued_float_can_counter_does_not_break_capture (test_calibration.CalibrationTests.test_integer_valued_float_can_counter_does_not_break_capture)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp9aw8klx3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp9aw8klx3'
+
+======================================================================
+ERROR: test_no_save_with_nonfinite_criteria_and_no_path_escape (test_calibration.CalibrationTests.test_no_save_with_nonfinite_criteria_and_no_path_escape)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpidarjg34\\calibraciones\\f3be74f15755453d84f84d6c627bbe5a'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 152, in test_no_save_with_nonfinite_criteria_and_no_path_escape
+    self.complete()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 40, in complete
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpidarjg34\\calibraciones'
+
+======================================================================
+ERROR: test_no_save_with_nonfinite_criteria_and_no_path_escape (test_calibration.CalibrationTests.test_no_save_with_nonfinite_criteria_and_no_path_escape)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpidarjg34'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpidarjg34'
+
+======================================================================
+ERROR: test_reverse_sensor_and_independent_angular_references (test_calibration.CalibrationTests.test_reverse_sensor_and_independent_angular_references)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjd2n44bi\\calibraciones\\c247687dcf9243b581e6312da73b431d'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 94, in test_reverse_sensor_and_independent_angular_references
+    self.complete(reverse=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 40, in complete
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjd2n44bi\\calibraciones'
+
+======================================================================
+ERROR: test_reverse_sensor_and_independent_angular_references (test_calibration.CalibrationTests.test_reverse_sensor_and_independent_angular_references)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjd2n44bi'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpjd2n44bi'
+
+======================================================================
+ERROR: test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save (test_calibration.CalibrationTests.test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmphi26ritb\\calibraciones\\d59831acc8da4aeeb822bcc402f746db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 128, in test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save
+    self.begin()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_calibration.py", line 37, in begin
+    self.monitor.calibrate("begin",{"prepared":True,"configuration":"SINT�TICO", "alignment":"Referencia simulada", "conditions":"Sin hardware"})
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 310, in calibrate
+    self.calibration.begin(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmphi26ritb\\calibraciones'
+
+======================================================================
+ERROR: test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save (test_calibration.CalibrationTests.test_tolerances_saturation_invalid_angles_and_incomplete_run_block_save)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmphi26ritb'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmphi26ritb'
+
+======================================================================
+ERROR: test_all_positions_require_explicit_confirmation_with_jitter (test_guided_calibration.GuidedTests.test_all_positions_require_explicit_confirmation_with_jitter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpwj93rmt4\\calibraciones\\205d6397d76246a4ac00f46b9e0d8364'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpwj93rmt4\\calibraciones'
+
+======================================================================
+ERROR: test_all_positions_require_explicit_confirmation_with_jitter (test_guided_calibration.GuidedTests.test_all_positions_require_explicit_confirmation_with_jitter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpwj93rmt4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpwj93rmt4'
+
+======================================================================
+ERROR: test_cancel_preserves_readings_and_prevents_measuring (test_guided_calibration.GuidedTests.test_cancel_preserves_readings_and_prevents_measuring)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp9ohtrh7i\\calibraciones\\8b7baade4f51423ea027e061d60b011b'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp9ohtrh7i\\calibraciones'
+
+======================================================================
+ERROR: test_cancel_preserves_readings_and_prevents_measuring (test_guided_calibration.GuidedTests.test_cancel_preserves_readings_and_prevents_measuring)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp9ohtrh7i'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp9ohtrh7i'
+
+======================================================================
+ERROR: test_connection_loss_keeps_steps_but_new_session_requires_restart (test_guided_calibration.GuidedTests.test_connection_loss_keeps_steps_but_new_session_requires_restart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpsbhx2szt\\calibraciones\\6e75c774110b4c7d86045a1e126c1ff2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpsbhx2szt\\calibraciones'
+
+======================================================================
+ERROR: test_connection_loss_keeps_steps_but_new_session_requires_restart (test_guided_calibration.GuidedTests.test_connection_loss_keeps_steps_but_new_session_requires_restart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpsbhx2szt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpsbhx2szt'
+
+======================================================================
+ERROR: test_limit_retries_only_current_step_and_keeps_original (test_guided_calibration.GuidedTests.test_limit_retries_only_current_step_and_keeps_original)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpu72uqw81\\calibraciones\\98abead3299748d68be1deec01c2a5e6'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpu72uqw81\\calibraciones'
+
+======================================================================
+ERROR: test_limit_retries_only_current_step_and_keeps_original (test_guided_calibration.GuidedTests.test_limit_retries_only_current_step_and_keeps_original)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpu72uqw81'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpu72uqw81'
+
+======================================================================
+ERROR: test_movement_before_confirmation_does_not_abort_or_save (test_guided_calibration.GuidedTests.test_movement_before_confirmation_does_not_abort_or_save)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp17qfdols\\calibraciones\\d6a5b7c0c2dc4983ba94eaa41217e5e2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp17qfdols\\calibraciones'
+
+======================================================================
+ERROR: test_movement_before_confirmation_does_not_abort_or_save (test_guided_calibration.GuidedTests.test_movement_before_confirmation_does_not_abort_or_save)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp17qfdols'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp17qfdols'
+
+======================================================================
+ERROR: test_noise_has_bounded_end_and_never_saves_unstable_center (test_guided_calibration.GuidedTests.test_noise_has_bounded_end_and_never_saves_unstable_center)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp8a9ksn69\\calibraciones\\8126b012ce1f47039e3726d65a2b2fb2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp8a9ksn69\\calibraciones'
+
+======================================================================
+ERROR: test_noise_has_bounded_end_and_never_saves_unstable_center (test_guided_calibration.GuidedTests.test_noise_has_bounded_end_and_never_saves_unstable_center)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp8a9ksn69'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp8a9ksn69'
+
+======================================================================
+ERROR: test_sequence_gap_during_measurement_cannot_be_accepted (test_guided_calibration.GuidedTests.test_sequence_gap_during_measurement_cannot_be_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpboce_pyg\\calibraciones\\b16868e271f44225850c6ffcbef6aeeb'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpboce_pyg\\calibraciones'
+
+======================================================================
+ERROR: test_sequence_gap_during_measurement_cannot_be_accepted (test_guided_calibration.GuidedTests.test_sequence_gap_during_measurement_cannot_be_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpboce_pyg'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpboce_pyg'
+
+======================================================================
+ERROR: test_sparse_but_fresh_data_has_bounded_sample_timeout (test_guided_calibration.GuidedTests.test_sparse_but_fresh_data_has_bounded_sample_timeout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpgnlwzbrn\\calibraciones\\44249b0aecbc448f9ed384d243b83b7f'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpgnlwzbrn\\calibraciones'
+
+======================================================================
+ERROR: test_sparse_but_fresh_data_has_bounded_sample_timeout (test_guided_calibration.GuidedTests.test_sparse_but_fresh_data_has_bounded_sample_timeout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpgnlwzbrn'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpgnlwzbrn'
+
+======================================================================
+ERROR: test_wrong_side_can_be_repositioned_without_losing_previous (test_guided_calibration.GuidedTests.test_wrong_side_can_be_repositioned_without_losing_previous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp8__vg70x\\calibraciones\\afc623c5f9474c0db7886deaacff3608'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 24, in setUp
+    self.action('guided-begin',prepared=True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_guided_calibration.py", line 34, in action
+    return self.monitor.calibrate(action,data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 300, in calibrate
+    self.calibration.begin_guided(data)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 252, in begin_guided
+    self.begin({"prepared":True,
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\calibracion.py", line 241, in begin
+    directory.mkdir(parents=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1315, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp8__vg70x\\calibraciones'
+
+======================================================================
+ERROR: test_wrong_side_can_be_repositioned_without_losing_previous (test_guided_calibration.GuidedTests.test_wrong_side_can_be_repositioned_without_losing_previous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp8__vg70x'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmp8__vg70x'
+
+======================================================================
+ERROR: test_registers_received_telemetry_with_origin_tick (test_reader.ReaderTests.test_registers_received_telemetry_with_origin_tick)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_reader.py", line 94, in test_registers_received_telemetry_with_origin_tick
+    with target.open("w",encoding="utf-8") as log:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpu8ke8uby\\session.jsonl'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpu8ke8uby'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_reader.py", line 92, in test_registers_received_telemetry_with_origin_tick
+    with tempfile.TemporaryDirectory() as directory:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 950, in __exit__
+    self.cleanup()
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpu8ke8uby'
+
+======================================================================
+ERROR: test_tcp_source_reads_lines_never_transmits_and_detects_disconnection (test_reader.WifiTests.test_tcp_source_reads_lines_never_transmits_and_detects_disconnection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\.vendor\serial\urlhandler\protocol_socket.py", line 63, in open
+    self._socket = socket.create_connection(self.from_url(self.portstr), timeout=POLL_TIMEOUT)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socket.py", line 865, in create_connection
+    raise exceptions[0]
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socket.py", line 850, in create_connection
+    sock.connect(sa)
+PermissionError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_reader.py", line 162, in test_tcp_source_reads_lines_never_transmits_and_detects_disconnection
+    monitor.connect(url, True)
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\server.py", line 350, in connect
+    handle.open()
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\.vendor\serial\urlhandler\protocol_socket.py", line 66, in open
+    raise SerialException("Could not open port {}: {}".format(self.portstr, msg))
+serial.serialutil.SerialException: Could not open port socket://127.0.0.1:51269: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpo0571zho'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\kart proyecto\07_DESARROLLO\panel_local\tests\test_reader.py", line 159, in test_tcp_source_reads_lines_never_transmits_and_detects_disconnection
+    with tempfile.TemporaryDirectory() as directory:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 950, in __exit__
+    self.cleanup()
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\nandi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\nandi\\AppData\\Local\\Packages\\sandbox.{e2947055-e52e-4370-90d3-9ed0a19f37b3}\\AC\\Temp\\tmpo0571zho'
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.319s
+
+FAILED (errors=43)

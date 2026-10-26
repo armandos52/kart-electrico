@@ -1,0 +1,15 @@
+{
+  "scene": 7,
+  "state": "VIEW v=0.3 id=7 name=PERDIDA CAN tick_sim=1721 speed=24 speed_valid=0 gear=0 start=1 brake=0 requested=0 received=255 applied=255 inhibit=255 feedback_fresh=0 status_fresh=0 sd=0 sd_error=0 sd_rows=0 bms_valid=0",
+  "utc": "2026-10-14T19:45:33.116938+00:00",
+  "source": "ILI9341_GRAM",
+  "format": "RGB565LE",
+  "flow": "ROWACK",
+  "width": 320,
+  "height": 240,
+  "bytes": 153600,
+  "crc32": "3E7CF2A7",
+  "sha256_rgb565": "7dc6b69c35fff24d2e009baa1a1d946e562a94b3655845f0c23cca66debffec1",
+  "sha256_png": "d0cfe35c374ac8b05009a0878fb8bffa37e17dd1cd3947306609f4026beb6295",
+  "binary_version": "v0.3"
+}

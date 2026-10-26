@@ -1,0 +1,18 @@
+{
+  "local_links_checked": 320,
+  "missing": [],
+  "files": [
+    "00_INICIO/ESTADO_ACTUAL.md",
+    "00_INICIO/MAPA_DEL_PROYECTO.md",
+    "06_TRABAJO/DIARIO_PARA_RELATORIO.md",
+    "06_TRABAJO/TAREAS.md",
+    "06_TRABAJO/PLAN_DE_LECTURA.md",
+    "06_TRABAJO/ensayos/README.md",
+    "06_TRABAJO/ensayos/ENS-0016_vistas_frontal_nucleo.md",
+    "07_DESARROLLO/README.md",
+    "07_DESARROLLO/firmware/VERSIONES.md",
+    "07_DESARROLLO/firmware/nucleo_f411_banco/README.md",
+    "05_DECISIONES_Y_PROBLEMAS/decisiones/DEC-0009_banco_nucleo_f411.md",
+    "06_TRABAJO/evidencias/nucleo_vistas_2026-10-14/GALERIA.md"
+  ]
+}

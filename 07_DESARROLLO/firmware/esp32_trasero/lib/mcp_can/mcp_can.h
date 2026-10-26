@@ -116,6 +116,7 @@ public:
     INT8U init_Filt(INT8U num, INT32U ulData);                          // Initialize Filter(s)
     void setSleepWakeup(INT8U enable);                                  // Enable or disable the wake up interrupt (If disabled the MCP2515 will not be woken up by CAN bus activity)
     INT8U setMode(INT8U opMode);                                        // Set operational mode
+    INT8U trySendMsgBuf(INT32U id, INT8U len, INT8U *buf); // diagnostics only, no wait
     INT8U sendMsgBuf(INT32U id, INT8U ext, INT8U len, INT8U *buf);      // Send message to transmit buffer
     INT8U sendMsgBuf(INT32U id, INT8U len, INT8U *buf);                 // Send message to transmit buffer
     INT8U readMsgBuf(INT32U *id, INT8U *ext, INT8U *len, INT8U *buf);   // Read message from receive buffer

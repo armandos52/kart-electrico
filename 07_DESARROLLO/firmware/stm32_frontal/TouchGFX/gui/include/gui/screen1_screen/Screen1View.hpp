@@ -2,7 +2,7 @@
 #define SCREEN1VIEW_HPP
 #include <gui_generated/screen1_screen/Screen1ViewBase.hpp>
 #include <gui/screen1_screen/Screen1Presenter.hpp>
-#include <gui/common/KartStatus.hpp>
+#include <gui/common/KartDashboard.hpp>
 class Screen1View : public Screen1ViewBase {
 public:
     Screen1View() {}
@@ -11,7 +11,6 @@ public:
     virtual void modoTextClick() override {Kart_RequestNextMode();}
     virtual void onPlayPauseClick() override {Kart_ToggleRecording();}
 private:
-    KartStatus status;
-    KartStatus units;
+    KartDashboard dashboard;
 };
 #endif

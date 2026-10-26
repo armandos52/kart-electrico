@@ -16,6 +16,7 @@ import threading
 import time
 from urllib.parse import urlsplit, parse_qs
 from calibracion import SteeringCalibration
+from historial import History, MAX_FILE
 
 BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE / ".vendor"))
@@ -93,7 +94,7 @@ DISCRETE = {"brake", "relay1", "relay2", "charger_connected", "sd_ready", "pwm_l
 
 DISCRETE.update({'can_tx_errors', 'frontend_health_seen', 'accelerator_adc_physical', 'speed_valid', 'watchdog_ok', 'reverse_limited', 'frontend_health_ok', 'steer_adc_physical', 'mpu_errors', 'can_error_flags', 'mode_applied', 'can_rx_invalid', 'rearm_required'})
 
-STATIC_MODULES = ("app.js", "nucleo.js", "i18n.js", "textos.js", "canales.js", "graficas.js", "vista_kart.js", "calibracion.js",
+STATIC_MODULES = ("historial.js", "replay.js", "app.js", "nucleo.js", "i18n.js", "textos.js", "canales.js", "graficas.js", "vista_kart.js", "calibracion.js",
                   "modelo_kart.js", "escena_kart.js", "esquema_kart.js", "vendor/three.module.min.js",
                   "vendor/three.core.min.js", "vendor/OrbitControls.js")
 
@@ -449,6 +450,21 @@ class Handler(BaseHTTPRequestHandler):
             data = self.server.monitor.snapshot()
             data["token"] = self.server.token
             return self._respond(200, data)
+        if path.startswith("/api/history/"):
+            query = parse_qs(urlsplit(self.path).query)
+            sid = query.get("id", [None])[0]
+            try:
+                history = self.server.history
+                action = path.rsplit("/", 1)[-1]
+                if action == "list": return self._respond(200, {"sessions": history.list()})
+                if action == "manifest": return self._respond(200, history.manifest(sid))
+                if action == "state": return self._respond(200, history.state(sid, query.get("at", [0])[0]))
+                if action == "window": return self._respond(200, history.window(sid, query.get("start", [0])[0], query.get("end", [60000])[0]))
+                if action == "events": return self._respond(200, history.events(sid, query.get("after", [0])[0]))
+                if action == "export": return self._respond(200, history.export(sid), "application/zip")
+                return self._respond(404, {"error": "Ruta de historial desconocida"})
+            except (ValueError, OSError, KeyError) as exc:
+                return self._respond(400, {"error": str(exc)})
         if path == "/api/ports":
             return self._respond(200, {"ports": port_inventory(), "serial_available": serial is not None})
         if path == "/api/download":
@@ -481,6 +497,14 @@ class Handler(BaseHTTPRequestHandler):
         if origin and origin not in {f"http://127.0.0.1:{self.server.server_port}", f"http://localhost:{self.server.server_port}"}:
             return self._respond(403, {"error": "Origen no autorizado"})
         try:
+            path = urlsplit(self.path).path
+            if path == "/api/history/upload":
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= MAX_FILE: raise ValueError("Archivo mayor de 32 MiB o vacío")
+                query = parse_qs(urlsplit(self.path).query)
+                content = self.rfile.read(length)
+                if len(content) != length: raise ValueError("Carga incompleta")
+                return self._respond(200, self.server.history.upload(query.get("batch", [None])[0], query.get("name", [""])[0], content))
             length = int(self.headers.get("Content-Length", "0"))
             if not 0 < length <= 4096:
                 raise ValueError("Petición excesiva o vacía")
@@ -488,7 +512,13 @@ class Handler(BaseHTTPRequestHandler):
             if not isinstance(data, dict):
                 raise ValueError("Objeto requerido")
             path = urlsplit(self.path).path
-            if path == "/api/connect":
+            if path == "/api/history/start":
+                return self._respond(200, self.server.history.start())
+            elif path == "/api/history/finish":
+                return self._respond(200, self.server.history.finish(data.get("batch")))
+            elif path == "/api/history/annotate":
+                return self._respond(200, self.server.history.annotate(data.get("id"), data))
+            elif path == "/api/connect":
                 self.server.monitor.connect(data.get("port"), data.get("bench_ready"))
             elif path == "/api/disconnect":
                 self.server.monitor.disconnect()
@@ -525,6 +555,7 @@ def main():
     monitor = Monitor()
     server = PanelHTTPServer(("127.0.0.1", args.port), Handler)
     server.monitor = monitor
+    server.history = History(BASE / "sesiones" / "historial", SIGNALS)
     server.token = secrets.token_urlsafe(32)
     print(f"Panel local: http://127.0.0.1:{server.server_port}/ — lectura sin TX; sin puerto serie abierto", flush=True)
     try:

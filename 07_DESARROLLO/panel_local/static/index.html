@@ -18,7 +18,8 @@
     </div>
     <button id="buscar" type="button" title="Buscar señal (Ctrl+K)" data-i18n-title="buscar.titulo"><span data-i18n="buscar">Buscar señal</span> <kbd>Ctrl K</kbd></button>
     <button id="abrir-calibracion" type="button" data-i18n="calibrar">Calibrar dirección</button>
-    <button id="demo" type="button" aria-pressed="false">Demostración</button>
+    <button id="history-toggle" type="button">Historial</button>
+      <button id="demo" type="button" aria-pressed="false">Demostración</button>
     <span id="mode-badge">Sin conexión</span>
   </div>
 </header>
@@ -27,6 +28,22 @@
   <div id="indicadores" class="indicadores"></div>
   <div id="connection-info" class="nota">No hay ningún puerto abierto. Esta versión no envía comandos al micro.</div>
 </div>
+<section id="history-panel" class="history-panel" hidden aria-label="Historial de pruebas">
+  <h2>Historial de pruebas</h2>
+  <p>Importa la carpeta de una sesión de la microSD, o archivos CSV / JSONL. Conservamos los originales y sus hashes.</p>
+  <div class="history-tools"><label>Carpeta microSD <input id="history-folder" type="file" webkitdirectory multiple></label><label>Archivos <input id="history-files" type="file" accept=".csv,.jsonl,.txt" multiple></label></div>
+  <div class="history-tools"><select id="history-list" aria-label="Prueba guardada"></select><button id="history-open" type="button">Abrir prueba</button><button id="history-refresh" type="button">Actualizar lista</button><a id="history-export" hidden download="ensayo-kart.zip">Exportar originales y notas</a></div>
+  <p id="history-message" role="status"></p><pre id="history-warnings"></pre>
+  <details><summary>Notas del ensayo</summary><div class="history-notes">
+  <label>Título <input id="history-title"></label><label>Fecha declarada <input id="history-date" placeholder="Sin confirmar"></label><label>Objetivo <textarea id="history-objective"></textarea></label><label>Condiciones <textarea id="history-conditions"></textarea></label><label>Notas <textarea id="history-notes"></textarea></label><button id="history-save" type="button">Guardar notas</button></div></details>
+  <details><summary>Eventos de la prueba</summary><div id="history-events"></div><button id="history-more" type="button" hidden>Más eventos</button></details>
+  <details><summary>Muestra original del instante seleccionado</summary><pre id="history-raw"></pre></details>
+</section>
+<section id="replay-controls" class="replay-controls" hidden aria-label="Reproducción histórica">
+  <strong>REPRODUCCIÓN · <span id="replay-title"></span></strong><span id="replay-date"></span>
+  <div class="history-tools"><button id="replay-play" type="button">Reproducir</button><button id="replay-step" type="button">+20 ms</button><select id="replay-rate" aria-label="Velocidad de reproducción"><option value="0.25">0,25×</option><option value="0.5">0,5×</option><option value="1" selected>1× · tiempo registrado</option><option value="2">2×</option><option value="4">4×</option></select><output id="replay-time"></output><button id="replay-exit" type="button">Salir de reproducción</button></div>
+  <input id="replay-seek" type="range" min="0" max="0" step="1" value="0" aria-label="Instante de la prueba">
+</section>
 <main class="tablero">
   <aside class="tira" aria-label="Canales fijados" data-i18n-aria="tira.aria">
     <div id="espacios" class="espacios" role="tablist" aria-label="Espacios de trabajo" data-i18n-aria="espacios.aria"></div>
@@ -34,7 +51,7 @@
     <div class="tira-pie"><span class="leyenda"><i class="l-medida"></i><span data-i18n="leyenda.medido">medido</span> <i class="l-orden"></i><span data-i18n="leyenda.orden">orden</span> <i class="l-estimacion"></i><span data-i18n="leyenda.estimacion">estimación</span></span><button id="restablecer" type="button" class="enlace" data-i18n="restablecer">Restablecer</button></div>
   </aside>
   <section class="vista" aria-label="Vista del kart" data-i18n-aria="vista.aria">
-    <div class="vista-cab"><div><strong data-i18n="vista.titulo">El kart · modelo visual</strong><span class="modelo-sub" data-i18n="vista.sub">3D y esquema basados en tus 4 fotografías</span></div><div class="vista-acciones"><button id="ver-3d" type="button" aria-pressed="true">3D</button><button id="ver-esquema" type="button" aria-pressed="false" data-i18n="btn.esquema">Esquema</button><button id="foto-superior" type="button" hidden data-i18n="btn.foto_sup">Foto superior</button><button id="ver-fotos" type="button" data-i18n="btn.fotos">Fotos</button><button id="ampliar-modelo" type="button" aria-pressed="false">Ampliar</button><button id="motion" type="button" aria-pressed="false">Pausar animación</button><label class="giro-escala"><span data-i18n="giro.etiqueta">Giro de ruedas</span><select id="giro-escala" aria-label="Velocidad del giro de las ruedas" data-i18n-aria="giro.aria"><option value="1" data-i18n="giro.real">Real 1:1</option><option value="0.03" data-i18n="giro.lento">Lento 3 %</option></select></label></div></div>
+    <div class="vista-cab"><div><strong data-i18n="vista.titulo">El kart · modelo visual</strong><span class="modelo-sub" data-i18n="vista.sub">3D y esquema basados en tus 4 fotografías</span></div><div class="vista-acciones"><button id="ver-3d" type="button" aria-pressed="true">3D</button><button id="ver-esquema" type="button" aria-pressed="false" data-i18n="btn.esquema">Esquema</button><button id="ver-imu" type="button" aria-pressed="false" data-i18n="btn.imu">IMU</button><button id="foto-superior" type="button" hidden data-i18n="btn.foto_sup">Foto superior</button><button id="ver-fotos" type="button" data-i18n="btn.fotos">Fotos</button><button id="ampliar-modelo" type="button" aria-pressed="false">Ampliar</button><button id="motion" type="button" aria-pressed="false">Pausar animación</button><label class="giro-escala"><span data-i18n="giro.etiqueta">Giro de ruedas</span><select id="giro-escala" aria-label="Velocidad del giro de las ruedas" data-i18n-aria="giro.aria"><option value="1" data-i18n="giro.real">Real 1:1</option><option value="0.03" data-i18n="giro.lento">Lento 3 %</option></select></label></div></div>
     <div id="demo-banner" hidden data-i18n="demo.banner">Demostración · datos sintéticos · sin conexión con el hardware</div>
     <div class="lamina">
     <div id="modelo-3d" aria-label="Modelo tridimensional del kart" data-i18n-aria="m3d.aria">
@@ -45,8 +62,34 @@
       <div class="modelo-pie"><span id="modelo-status" role="status">Preparando vista 3D…</span><span id="modelo-steering">Dirección sin datos</span><small data-i18n="m3d.nota1">Giro real 1:1 con desenfoque de movimiento · sentido según marcha ordenada</small><small data-i18n="m3d.nota2">Arrastra para girar · rueda para acercar · pulsa una rueda o la pantalla</small></div>
     </div>
     <svg id="kart" role="group" aria-labelledby="kart-title kart-desc"></svg>
+    <div id="vista-imu" hidden aria-label="IMU simulada en vista superior" data-i18n-aria="imu.aria">
+      <canvas id="imu-pista"></canvas>
+      <div class="imu-rotulo"><strong data-i18n="imu.titulo">IMU simulada · vista superior</strong><span data-i18n="imu.sub">Modelo didáctico con valores supuestos · datos sintéticos</span></div>
+      <div class="imu-leyenda"><span><i style="background:#2e7d32"></i><span data-i18n="imu.ley.traccion">tracción</span></span><span><i style="background:#d97706"></i><span data-i18n="imu.ley.lateral">fuerza lateral</span></span><span><i style="background:#c62828"></i><span data-i18n="imu.ley.imu">aceleración IMU</span></span><span><i style="background:#1c5ea6"></i><span data-i18n="imu.ley.vel">velocidad</span></span><span><i style="background:#7b1fa2"></i><span data-i18n="imu.ley.giro">guiñada</span></span></div>
+      <canvas id="imu-gg" class="imu-mini" title="Círculo de adherencia: lo que mide el acelerómetro" data-i18n-title="imu.gg.titulo"></canvas>
+      <canvas id="imu-brujula" class="imu-mini" title="Rumbo real (rojo) frente al integrado del giróscopo (violeta)" data-i18n-title="imu.rumbo.titulo"></canvas>
+      <dl id="imu-lecturas" class="imu-lecturas"></dl>
+      <p id="imu-avisos" class="imu-avisos" role="status"></p>
+      <div id="imu-requiere" class="imu-requiere" hidden><p data-i18n="imu.requiere">La IMU simulada funciona dentro de la demostración. No mezcla datos con una conexión real.</p><button id="imu-activar" type="button" class="primary" data-i18n="imu.activar">Activar demostración con IMU</button></div>
     </div>
-    <div id="demo-controls" hidden><label><span data-i18n="demo.marcha">Marcha de ejemplo</span><select id="demo-gear"><option value="D" data-i18n="demo.D">D · Adelante</option><option value="R" data-i18n="demo.R">R · Atrás</option></select></label><label><span data-i18n="demo.pedal">Pedal de ejemplo</span> <input id="demo-pedal" type="range" min="0" max="100" value="32"><output id="demo-pedal-value">32 %</output></label><label><span data-i18n="demo.direccion">Dirección de ejemplo</span> <input id="demo-steer" type="range" min="-20" max="20" value="8"><output id="demo-steer-value">8°</output></label><p class="rodadura-nota" data-i18n="demo.nota">Giro real: las ruedas dan las vueltas que indican las RPM. A mucha velocidad el dibujo se difumina y la marca clara deja una estela más larga. 100 % de pedal ≈ 50 km/h (Ø 0,48 m, referencia del firmware).</p></div>
+    </div>
+    <div id="demo-controls" hidden><label><span data-i18n="demo.marcha">Marcha de ejemplo</span><select id="demo-gear"><option value="D" data-i18n="demo.D">D · Adelante</option><option value="R" data-i18n="demo.R">R · Atrás</option></select></label><label><span data-i18n="demo.pedal">Pedal de ejemplo</span> <input id="demo-pedal" type="range" min="0" max="100" value="32"><output id="demo-pedal-value">32 %</output></label><label><span data-i18n="demo.direccion">Dirección de ejemplo</span> <input id="demo-steer" type="range" min="-20" max="20" value="8"><output id="demo-steer-value">8°</output></label><label class="demo-fisica"><span><input id="demo-fisica" type="checkbox"> <span data-i18n="demo.fisica">Dinámica e IMU simuladas</span></span></label>
+    <div id="imu-controles" hidden>
+      <label><span data-i18n="imu.modo">Control del diferencial</span><select id="imu-modo"><option value="dif" data-i18n="imu.modo.dif">DIF · reparto geométrico</option><option value="fw" selected data-i18n="imu.modo.fw">ESC v1.3 · P con zona muerta</option><option value="pid" data-i18n="imu.modo.pid">ESC PI(D) · guía</option><option value="equal" data-i18n="imu.modo.equal">Igual en ambas ruedas</option></select></label>
+      <label><span data-i18n="imu.mu">Adherencia μ</span><input id="imu-mu" type="range" min="0.3" max="1.2" step="0.05" value="0.9"><output id="imu-mu-v"></output></label>
+      <label><span data-i18n="imu.cmax">Corrección máxima</span><input id="imu-cmax" type="range" min="0.05" max="0.5" step="0.01" value="0.10"><output id="imu-cmax-v"></output></label>
+      <label class="imu-pid"><span>Kp</span><input id="imu-kp" type="range" min="0" max="0.04" step="0.0005" value="0.006"><output id="imu-kp-v"></output></label>
+      <label class="imu-pid"><span>Ki</span><input id="imu-ki" type="range" min="0" max="0.08" step="0.001" value="0.02"><output id="imu-ki-v"></output></label>
+      <label class="imu-pid"><span>Kd</span><input id="imu-kd" type="range" min="0" max="0.002" step="0.00005" value="0"><output id="imu-kd-v"></output></label>
+      <div class="imu-opciones">
+        <label class="imu-pid"><input id="imu-aw" type="checkbox" checked> <span data-i18n="imu.aw">Anti-windup</span></label>
+        <label><input id="imu-cap" type="checkbox"> <span data-i18n="imu.cap">Limitar consigna por adherencia</span></label>
+        <label><input id="imu-ruido-dir" type="checkbox"> <span data-i18n="imu.ruido_dir">Ruido del ADC de dirección</span></label>
+        <label><input id="imu-debil" type="checkbox"> <span data-i18n="imu.debil">Motor izquierdo al 80 %</span></label>
+        <label><span data-i18n="imu.sesgo">Sesgo del giróscopo</span> <input id="imu-sesgo" type="range" min="-3" max="3" step="0.1" value="0.8"><output id="imu-sesgo-v"></output></label>
+      </div>
+      <div class="imu-botones"><button id="imu-empujon" type="button" data-i18n="imu.empujon">Empujón de guiñada</button><button id="imu-calibrar" type="button" data-i18n="imu.calibrar">Calibrar giróscopo en reposo</button><button id="imu-reiniciar" type="button" data-i18n="imu.reiniciar">Reiniciar simulación</button><span class="imu-teclas" data-i18n="imu.teclas">En la vista IMU: ↑/↓ pedal, ←/→ dirección, espacio freno</span></div>
+    </div><p class="rodadura-nota" data-i18n="demo.nota">Giro real: las ruedas dan las vueltas que indican las RPM. A mucha velocidad el dibujo se difumina y la marca clara deja una estela más larga. 100 % de pedal ≈ 50 km/h (Ø 0,48 m, referencia del firmware).</p></div>
     <div class="inspector" aria-label="Datos de la pieza seleccionada" data-i18n-aria="insp.aria">
       <label class="selector-pieza" for="modelo-pieza"><span data-i18n="insp.selector">Inspeccionar componente</span><select id="modelo-pieza"></select></label>
       <div class="insp-cab"><h2 id="selection-title">ESP32</h2><span id="selection-tag">Unidad trasera</span></div>

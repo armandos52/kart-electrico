@@ -7,6 +7,7 @@
 #include "kart_control.h"
 #include "hardware_kart.h"
 #include "telemetria.h"
+#include "log_can.h"
 #include "../../common/kart_protocol.h"
 #include <algorithm>
 #include <math.h>
@@ -200,6 +201,7 @@ void publish(uint32_t now) {
     m.frontend_health_seen=health_seen;m.frontend_health_ok=sensors.frontend_ok;m.watchdog_ok=watchdog_ok;
     m.can_rx_invalid=controller.rejected()+can_rx_errors;m.can_tx_errors=can_tx_errors;m.can_error_flags=can_errors;m.mpu_errors=mpu_errors;
     m.accel_adc=adc_accel;m.steer_adc=adc_steer;
+    log_can_snapshot(m,3);
     telemetria_publicar(m);
 }
 }
@@ -255,5 +257,6 @@ void loop() {
     }
     if(can_ready) transmitCan(now);
     if(telemetria_toca(millis())) publish(millis());
+    log_can_service(can,millis(),can_ready);
     delay(1);
 }

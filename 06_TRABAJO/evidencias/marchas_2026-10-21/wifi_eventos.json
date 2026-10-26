@@ -1,0 +1,22 @@
+[
+  {
+    "utc": "2026-10-21T10:06:43.219382+00:00",
+    "evento": "Connection request was completed successfully."
+  },
+  {
+    "utc": "2026-10-21T10:06:46.374603+00:00",
+    "evento": "TCP conectado; solo recv, ningún envío"
+  },
+  {
+    "utc": "2026-10-21T10:06:58.547064+00:00",
+    "evento": "Captura terminada"
+  },
+  {
+    "utc": "2026-10-21T10:06:59.061126+00:00",
+    "evento": "Restauración: Connection request was completed successfully."
+  },
+  {
+    "utc": "2026-10-21T10:07:04.467013+00:00",
+    "evento": "eduroam presente en estado final: True"
+  }
+]

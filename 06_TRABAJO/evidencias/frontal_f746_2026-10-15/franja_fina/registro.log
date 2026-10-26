@@ -1,0 +1,57 @@
+xPack Open On-Chip Debugger 0.12.0+dev-02228-ge5888bda3-dirty (2025-10-04-22:44)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : STLINK V2J47M34 (API v2) VID:PID 0483:374B
+Info : Target voltage: 3.214173
+Info : clock speed 1800 kHz
+Info : SWD DPIDR 0x5ba02477
+Info : [stm32f7x.cpu] Cortex-M7 r0p1 processor detected
+Warn : [stm32f7x.cpu] Erratum 702596: single stepping may enter pending exception handler!
+Warn : [stm32f7x.cpu] Erratum 3092511: Cortex-M7 can halt in an incorrect address when breakpoint and exception occurs simultaneously
+Info : [stm32f7x.cpu] The erratum 3092511 workaround will resume after an incorrect halt
+Info : [stm32f7x.cpu] target has 8 breakpoints, 4 watchpoints
+Info : [stm32f7x.cpu] Examination succeed
+Info : [stm32f7x.cpu] gdb port disabled
+PATRON_FINO=16:36:44
+CAMBIO 16:36:44 t=16 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:36:57 t=12620 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x2 sderr=0x1 filas=0
+CAMBIO 16:36:57 t=12669 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+LATIDO t=15020
+LATIDO t=30033
+CAMBIO 16:37:27 t=42697 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x2 sderr=0x1 filas=0
+CAMBIO 16:37:27 t=42745 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+LATIDO t=45065
+LATIDO t=60076
+CAMBIO 16:37:57 t=72762 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x2 sderr=0x1 filas=0
+CAMBIO 16:37:57 t=72812 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+LATIDO t=75112
+CAMBIO 16:38:13 t=88375 toques=0x1 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+LATIDO t=90126
+CAMBIO 16:38:18 t=93325 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:18 t=93821 toques=0x1 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:21 t=96594 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:21 t=96838 toques=0x1 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:21 t=97043 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:22 t=97144 toques=0x1 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:22 t=97241 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:22 t=97341 toques=0x1 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:22 t=97486 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:22 t=97593 toques=0x1 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:22 t=97880 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:22 t=98075 toques=0x1 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:23 t=98926 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:24 t=99171 toques=0x1 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:24 t=99724 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+CAMBIO 16:38:27 t=102792 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x2 sderr=0x1 filas=0
+CAMBIO 16:38:27 t=102838 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+LATIDO t=105156
+LATIDO t=120173
+CAMBIO 16:38:57 t=132855 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x2 sderr=0x1 filas=0
+CAMBIO 16:38:57 t=132905 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+LATIDO t=135222
+LATIDO t=150239
+CAMBIO 16:39:27 t=162885 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x2 sderr=0x1 filas=0
+CAMBIO 16:39:27 t=162932 toques=0x0 sol=0x0 aviso=0x0 sdreq=0x1 sd=0x3 sderr=0x0 filas=0
+LATIDO t=165283
+DETENIDO manualmente 16:39:40 al terminar las pruebas (solo lectura)

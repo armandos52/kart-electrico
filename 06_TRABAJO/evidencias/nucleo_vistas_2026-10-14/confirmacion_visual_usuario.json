@@ -1,0 +1,12 @@
+{
+  "fecha": "2026-10-14",
+  "ensayo": "ENS-0016",
+  "configuracion": "NUCLEO-F411RE + ILI9341, banco visual v0.3 compilacion_02",
+  "tipo_evidencia": "Declaracion del usuario sobre comprobacion visual y manual",
+  "pregunta": "Ya puedes probar B1: pulsa y suelta para recorrer las diez escenas. ¿Se leen bien y puedes volver de 10/10 a 01/10 sin que una pulsación salte varias pantallas?",
+  "respuesta_literal": "Sí, se leen bien y el recorrido funciona",
+  "legibilidad_confirmada": true,
+  "recorrido_10_a_01_sin_saltos_confirmado": true,
+  "nuevo_registro_serie_del_recorrido": false,
+  "cambio_de_firmware": false
+}

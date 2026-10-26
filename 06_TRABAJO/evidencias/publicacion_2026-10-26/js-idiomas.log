@@ -1,0 +1,27 @@
+node:internal/child_process:1143
+    result.error = new ErrnoException(result.error, 'spawnSync ' + options.file);
+                   ^
+
+<ref *1> Error: spawnSync python EACCES
+    at Object.spawnSync (node:internal/child_process:1143:20)
+    at spawnSync (node:child_process:911:24)
+    at execFileSync (node:child_process:954:15)
+    at file:///C:/kart%20proyecto/07_DESARROLLO/panel_local/qa/check-idiomas.mjs:47:27 {
+  errno: -4092,
+  code: 'EACCES',
+  syscall: 'spawnSync python',
+  path: 'python',
+  spawnargs: [
+    '-I',
+    'C:\\kart proyecto\\07_DESARROLLO\\panel_local\\qa\\extraer_mensajes.py'
+  ],
+  error: [Circular *1],
+  status: null,
+  signal: null,
+  output: null,
+  pid: 0,
+  stdout: undefined,
+  stderr: undefined
+}
+
+Node.js v24.15.0
